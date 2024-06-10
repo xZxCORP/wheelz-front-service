@@ -1,0 +1,4 @@
+{
+  "root": true,
+  "extends": ["@zcorp/eslint-config/react"]
+}
