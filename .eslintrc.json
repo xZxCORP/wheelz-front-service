@@ -1,4 +1,5 @@
 {
   "root": true,
-  "extends": ["@zcorp/eslint-config/react"]
+  "extends": ["@zcorp/eslint-config/react", "plugin:tailwindcss/recommended"],
+  "plugins": ["tailwindcss"]
 }

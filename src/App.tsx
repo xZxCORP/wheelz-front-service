@@ -1,11 +1,7 @@
-import './App.css'
-
-const App = () => {
+export const App = () => {
   return (
-    <div>
+    <div className="bg-red-500">
       <h2>Wheelz</h2>
     </div>
   )
 }
-
-export default App
