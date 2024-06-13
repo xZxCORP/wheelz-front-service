@@ -39,3 +39,8 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
+      - name: Trigger webhook
+        run: |
+          curl -X PUT https://webhook.zcorp.ovh/webhook/docker-service \
+          -H 'Content-Type: application/json' \
+          -d '{"service": "wheelz", "secret": "${{ secrets.WEBHOOK_SECRET }}"}'
