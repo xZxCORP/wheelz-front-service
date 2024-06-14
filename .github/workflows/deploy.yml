@@ -42,11 +42,10 @@ jobs:
       - name: Trigger webhook
         uses: fjogeleit/http-request-action@v1
         with:
-          url: https://webhook.zcorp.ovh/webhook/docker-service
-          method: PUT
-          headers: |
-            Content-Type: application/json
-          body: |
+          url: "https://webhook.zcorp.ovh/webhook/docker-service"
+          method: "PUT"
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: |
             {
               "service": "wheelz",
               "secret": "${{ secrets.WEBHOOK_SECRET }}"
