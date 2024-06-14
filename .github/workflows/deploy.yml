@@ -45,6 +45,7 @@ jobs:
           url: "https://webhook.zcorp.ovh/webhook/docker-service"
           method: "PUT"
           customHeaders: '{"Content-Type": "application/json"}'
+          preventFailureOnNoResponse: true
           data: |
             {
               "service": "wheelz_front",
