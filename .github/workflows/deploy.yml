@@ -48,6 +48,6 @@ jobs:
           data: |
             {
               "service": "wheelz_front",
-              "image": "${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:latest"
+              "image": "${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:latest",
               "secret": "${{ secrets.WEBHOOK_SECRET }}"
             }
