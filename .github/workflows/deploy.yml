@@ -47,6 +47,7 @@ jobs:
           customHeaders: '{"Content-Type": "application/json"}'
           data: |
             {
-              "service": "wheelz",
+              "service": "wheelz_front",
+              "image": "${{ secrets.DOCKER_USERNAME }}/${{ vars.IMAGE_NAME }}:latest"
               "secret": "${{ secrets.WEBHOOK_SECRET }}"
             }
