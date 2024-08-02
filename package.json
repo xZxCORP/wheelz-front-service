@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.25.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
@@ -21,12 +22,12 @@
     "@zcorp/prettier-config": "^1.0.4",
     "@zcorp/shared-typing-wheelz": "^1.0.0",
     "@zcorp/tsconfig": "^1.0.4",
-    "eslint-plugin-tailwindcss": "^3.17.3",
-    "prettier-plugin-tailwindcss": "^0.6.2",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
-    "prettier": "^3.3.1",
+    "eslint-plugin-tailwindcss": "^3.17.3",
     "postcss": "^8.4.38",
+    "prettier": "^3.3.1",
+    "prettier-plugin-tailwindcss": "^0.6.2",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
