@@ -1,21 +1,21 @@
-import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
+import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
 
-export default function ErrorPage() {
-  const error: unknown = useRouteError()
-  let errorStatus: number = 500
-  let errorMessage: string = ''
+const ErrorPage = () => {
+  const error: unknown = useRouteError();
+  let errorStatus: number = 500;
+  let errorMessage = '';
 
   if (isRouteErrorResponse(error)) {
     // error is type `ErrorResponse`
-    errorStatus = error.status
-    errorMessage = error.data.toString() || error.statusText
+    errorStatus = error.status;
+    errorMessage = error.data.toString() || error.statusText;
   } else if (error instanceof Error) {
-    errorMessage = error.message
+    errorMessage = error.message;
   } else if (typeof error === 'string') {
-    errorMessage = error
+    errorMessage = error;
   } else {
-    console.error(error)
-    errorMessage = 'Unknown error'
+    console.error(error);
+    errorMessage = 'Unknown error';
   }
 
   function DetailedError() {
@@ -24,7 +24,7 @@ export default function ErrorPage() {
         <h1 className="m-4 text-8xl">{errorStatus}</h1>
         <p>{errorMessage}</p>
       </>
-    )
+    );
   }
 
   function UnknownError() {
@@ -34,7 +34,7 @@ export default function ErrorPage() {
         <h1>Oops!</h1>
         <p>Sorry, an unexpected error has occurred.</p>
       </>
-    )
+    );
   }
 
   return errorStatus < 500 ? (
@@ -45,5 +45,7 @@ export default function ErrorPage() {
     <div id="error-page" className="flex w-full flex-col items-center justify-center">
       <UnknownError />
     </div>
-  )
-}
+  );
+};
+
+export default ErrorPage;

@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
 
 const IdentifyPage = () => {
   return (
@@ -24,6 +24,6 @@ const IdentifyPage = () => {
         <Outlet />
       </div>
     </>
-  )
-}
-export default IdentifyPage
+  );
+};
+export default IdentifyPage;

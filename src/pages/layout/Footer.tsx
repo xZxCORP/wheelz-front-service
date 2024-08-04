@@ -1,8 +1,9 @@
-export default function Footer() {
-    return (
-        <div id='footer' className='border-2 w-full flex justify-center align-center'>
-            ©xZxCORP 2024 - All rights reserved
-            {/* Socials */}
-        </div>
-    );
-}
+const Footer = () => {
+  return (
+    <div id="footer" className="flex w-full justify-center border-2">
+      ©xZxCORP 2024 - All rights reserved
+      {/* Socials */}
+    </div>
+  );
+};
+export default Footer;

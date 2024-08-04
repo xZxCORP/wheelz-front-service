@@ -1,8 +1,9 @@
+import { useEffect } from 'react';
+
 const Root = () => {
-  return (
-    <>
-      <div>[TEMP] HOME (root)</div>
-    </>
-  )
-}
-export default Root
+  useEffect(() => {
+    console.log('yo');
+  }, []);
+  return <div>[TEMP] HOME (root)</div>;
+};
+export default Root;

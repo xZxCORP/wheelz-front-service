@@ -1,14 +1,15 @@
-import { Navigate } from 'react-router-dom'
-import useApp from '../stores/useApp'
+import { Navigate } from 'react-router-dom';
 
-export const PrivateRoute = ({ elem: Elem }: { elem: () => JSX.Element }) => {
-  const { appState } = useApp()
+import useApp from '../stores/useApp';
 
-  return appState === 'logged' ? <Elem /> : <Navigate to="/" />
-}
+export const PrivateRoute = ({ elem: Element_ }: { elem: () => JSX.Element }) => {
+  const { appState } = useApp();
 
-export const OnlyPublicRoute = ({ elem: Elem }: { elem: () => JSX.Element }) => {
-  const { appState } = useApp()
+  return appState === 'logged' ? <Element_ /> : <Navigate to="/" />;
+};
 
-  return appState === 'unlogged' ? <Elem /> : <Navigate to="/" />
-}
+export const OnlyPublicRoute = ({ elem: Element_ }: { elem: () => JSX.Element }) => {
+  const { appState } = useApp();
+
+  return appState === 'unlogged' ? <Element_ /> : <Navigate to="/" />;
+};
