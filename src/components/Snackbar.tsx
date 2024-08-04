@@ -26,7 +26,7 @@ export const Snackbar = ({
     return () => {
       clearTimeout(dismissReference.current);
     };
-  }, []);
+  }, [duration, onClose]);
 
   // progressBar
   const progressBarReference = useRef<ReturnType<typeof setInterval>>();
@@ -43,7 +43,7 @@ export const Snackbar = ({
     return () => {
       clearInterval(progressBarReference.current);
     };
-  }, []);
+  }, [duration]);
 
   return (
     <div
@@ -64,9 +64,9 @@ export const Snackbar = ({
         {closeLabel}
       </button>
       {!!duration && (
-        <div className="bg-primary-50 absolute bottom-0 left-0 h-1 w-full rounded-lg">
+        <div className="absolute bottom-0 left-0 h-1 w-full rounded-lg bg-primary-50">
           <span
-            className="bg-primary-300 absolute inset-y-0 left-0 h-full rounded-lg transition-all duration-75"
+            className="absolute inset-y-0 left-0 h-full rounded-lg bg-primary-300 transition-all duration-75"
             style={{ width: `${progress}%` }}
           />
         </div>

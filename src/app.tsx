@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useCallback, useLayoutEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
 import LoadingAnimation from './components/LoadingAnimation';
@@ -13,7 +13,7 @@ const App = () => {
   const { appState } = useApp();
   const { snacks, removeSnack, addSnack } = useSnackbar();
 
-  const init = async () => {
+  const init = useCallback(async () => {
     try {
       const refreshToken = localStorage.getItem('refreshToken');
 
@@ -23,11 +23,11 @@ const App = () => {
     } catch (error) {
       console.warn(error);
     }
-  };
+  }, [addSnack]);
 
   useLayoutEffect(() => {
     init();
-  }, []);
+  }, [init]);
 
   return (
     <div className="h-screen w-screen" tabIndex={-1}>

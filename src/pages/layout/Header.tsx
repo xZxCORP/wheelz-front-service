@@ -38,8 +38,8 @@ const Header = () => {
  *  Opens/closes dropdown menu based on clicked button
  * @param {Event} e - Triggered event
  */
-const toggleDropdown = (e: Event) => {
-  const button: EventTarget | null = e?.target;
+const toggleDropdown = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const button: EventTarget | null = event?.target;
   if (button instanceof HTMLElement) {
     const dropdownId: string | undefined = button?.dataset['dropdownToggle'];
     const dropwdownMenu: HTMLElement | null = document.querySelector('#' + dropdownId);
