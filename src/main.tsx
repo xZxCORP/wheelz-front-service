@@ -1,29 +1,28 @@
-import './index.css';
+import './index.css'
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-//import { App } from './app';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Root from './routes/root';
-import ErrorPage from './pages/error-page';
-import Report from './routes/report';
-import IdentifyPage from './pages/identify-page';
-import Layout from './components/Layout';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+import ErrorPage from './pages/Error'
+import IdentifyPage from './pages/Identify'
+import Layout from './pages/layout/Layout'
+import Root from './router/root'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
   },
   {
     path: 'identify',
-    element: <IdentifyPage />
+    element: <IdentifyPage />,
   },
   {
-    path: 'report/:vim',
-    element: <Report />
-  }
+    path: 'report/:vin',
+    element: <Report />,
+  },
 ])
 
 ReactDOM.createRoot(document.querySelector('#root')!).render(

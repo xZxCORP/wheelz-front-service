@@ -1,7 +1,8 @@
-export default function Root() {
+const Root = () => {
   return (
     <>
       <div>[TEMP] HOME (root)</div>
     </>
-  );
+  )
 }
+export default Root
