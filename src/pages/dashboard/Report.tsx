@@ -1,5 +1,5 @@
 const Report = () => {
-  return <></>;
+  return <>Salu</>;
 };
 
 export default Report;
