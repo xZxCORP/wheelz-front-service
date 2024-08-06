@@ -1,6 +1,6 @@
 import { IVehicle } from '../../types/vehicle';
 
-const cars: IVehicle[] = [
+export const cars: IVehicle[] = [
   {
     constructor: 'ford',
     model: 'Fusion',
