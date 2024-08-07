@@ -14,11 +14,11 @@ const Report = () => {
   }, [vehicle]);
 
   return (
-    <div className="bg-primary-100 flex size-full justify-center">
+    <div className="bg-secondary-50 flex size-full justify-center">
       {vehicle ? (
         <div className="w-1/2 flex-row space-y-5">
           <div
-            className="bg-primary-30  mt-10 w-full rounded-lg p-2
+            className="bg-white  mt-10 w-full rounded-lg p-2
         "
           >
             <div className="mb-5 flex w-full space-x-2">
