@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FaCarCrash } from 'react-icons/fa';
+import { GiCrossedChains } from 'react-icons/gi';
 
 import { cars } from '../../assets/faker/cars';
 import LoadingAnimation from '../../components/LoadingAnimation';
@@ -8,6 +9,33 @@ import { IVehicle } from '../../types/vehicle';
 
 const Report = () => {
   const [vehicle, setVehicle] = useState<IVehicle | null>(null);
+  const REPORT_CARDS = [
+    {
+      title: 'Damage',
+      Icon: FaCarCrash,
+      warning: true,
+    },
+    {
+      title: 'Damage',
+      Icon: FaCarCrash,
+      warning: true,
+    },
+    {
+      title: 'Damage',
+      Icon: FaCarCrash,
+      warning: true,
+    },
+    {
+      title: 'Damage',
+      Icon: FaCarCrash,
+      warning: false,
+    },
+    {
+      title: 'Damage',
+      Icon: FaCarCrash,
+      warning: true,
+    },
+  ];
 
   useEffect(() => {
     setVehicle(cars[0]);
@@ -16,12 +44,12 @@ const Report = () => {
   return (
     <div className="bg-primary-100 flex size-full justify-center">
       {vehicle ? (
-        <div className="w-screen md:w-4/5 flex-row space-y-5">
+        <div className="w-screen flex-row space-y-5 md:w-4/5">
           <div
-            className="bg-primary-30 md:mt-10 w-full rounded-lg p-4
+            className="bg-primary-30 w-full rounded-lg p-4 md:mt-10
         "
           >
-            <div className="mb-5 w-full space-x-2 md:flex justify-start">
+            <div className="mb-5 w-full justify-start space-x-2 md:flex">
               <div className="flex size-40 items-center bg-slate-200 text-center font-bold">
                 <p className="w-full">CAR PICTURE</p>
               </div>
@@ -41,12 +69,22 @@ const Report = () => {
               </div>
             </div>
             <div className="flex h-1/2 w-full flex-wrap justify-around gap-2">
-              <NoticeCard title={'Damage'} Icon={FaCarCrash} warning={true} />
-              <NoticeCard title={'Damage'} Icon={FaCarCrash} warning={false} />
-              <NoticeCard title={'Damage'} Icon={FaCarCrash} warning={true} />
-              <NoticeCard title={'Damage'} Icon={FaCarCrash} warning={true} />
-              <NoticeCard title={'Damage'} Icon={FaCarCrash} warning={true} />
+              {REPORT_CARDS.map((element) => (
+                <NoticeCard
+                  key={element.title}
+                  title={element.title}
+                  Icon={element.Icon}
+                  warning={element.warning}
+                />
+              ))}
             </div>
+          </div>
+          <div
+            className="flex bg-primary-30 w-full h-fit rounded-lg p-2 space-x-2 items-center md:mt-10
+        "
+          >
+            <GiCrossedChains size={40} />
+            <h3 className="font-medium">Verified information by cross-sources</h3>
           </div>
         </div>
       ) : (
