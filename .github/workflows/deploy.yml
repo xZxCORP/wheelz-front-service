@@ -7,7 +7,7 @@ on:
 
 jobs:
   lint-and-test:
-    uses: ./.github/workflows/lint-test.yml
+    uses: ./.github/workflows/lint.yml
 
   build-and-push:
     needs: lint-and-test
