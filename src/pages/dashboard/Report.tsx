@@ -42,12 +42,10 @@ const Report = () => {
   }, [vehicle]);
 
   return (
-    <div className="bg-secondary-50 flex size-full justify-center">
+    <div className="flex size-full justify-center bg-secondary-50">
       {vehicle ? (
         <div className="w-screen flex-row space-y-5 md:w-4/5">
-          <div
-            className="bg-primary-30 w-full rounded-lg p-4 md:mt-10"
-          >
+          <div className="w-full rounded-lg bg-primary-50 p-4 md:mt-10">
             <div className="mb-5 w-full justify-start space-x-2 md:flex">
               <div className="flex size-40 items-center bg-slate-200 text-center font-bold">
                 <p className="w-full">CAR PICTURE</p>
@@ -78,10 +76,7 @@ const Report = () => {
               ))}
             </div>
           </div>
-          <div
-            className="flex bg-primary-30 w-full h-fit rounded-lg p-2 space-x-2 items-center md:mt-10
-        "
-          >
+          <div className="flex h-fit w-full items-center space-x-2 rounded-lg bg-primary-50 p-2 md:mt-10">
             <GiCrossedChains size={40} />
             <h3 className="font-medium">Verified information by cross-sources</h3>
           </div>

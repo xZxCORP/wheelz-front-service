@@ -1,5 +1,8 @@
 {
   "root": true,
   "extends": ["@zcorp/eslint-config/react", "plugin:tailwindcss/recommended"],
-  "plugins": ["tailwindcss"]
+  "plugins": ["tailwindcss"],
+  "rules": {
+    "unicorn/no-null": "off"
+  }
 }
