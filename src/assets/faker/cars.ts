@@ -1,0 +1,63 @@
+import { IVehicle } from '../../types/vehicle';
+
+export const cars: IVehicle[] = [
+  {
+    constructor: 'ford',
+    model: 'Fusion',
+    year: 2009,
+    risks: { exterior: ['REAR_WINDSHIELD'], mechanical: ['ENGINE_FAILURE'], generic: [] },
+    sinisters: [
+      {
+        'Year': 2013,
+        'Month': 2,
+        'Day': 7,
+        'Weekend?': 'Weekend',
+        'Hour': 1300,
+        'Collision Type': '2-Car',
+        'Injury Type': 'Non-incapacitating',
+        'Primary Factor': 'UNSAFE BACKING',
+        'Reported_Location': 'COLLEGE MALL RD',
+        'Latitude': 39.157_62,
+        'Longitude': -86.497_882,
+      },
+    ],
+    vin: 'KWWSFP1NMLY227506',
+    issues: { exterior: ['REAR_WINDSHIELD'], mechanical: [], generic: ['PAINT_SCRATCHES'] },
+  },
+  {
+    constructor: 'koda',
+    model: 'Fabia',
+    year: 2016,
+    risks: { exterior: ['REAR_BUMPER', 'PAINT_SCRATCHES'], mechanical: [], generic: [] },
+    sinisters: [
+      {
+        'Year': 2020,
+        'Month': 9,
+        'Day': 7,
+        'Weekend?': 'Weekend',
+        'Hour': 100,
+        'Collision Type': '2-Car',
+        'Injury Type': 'No injury/unknown',
+        'Primary Factor': 'FOLLOWING TOO CLOSELY',
+        'Reported_Location': 'N MONROE & W 11TH ST',
+        'Latitude': 39.173_344,
+        'Longitude': -86.547_104,
+      },
+      {
+        'Year': 2017,
+        'Month': 4,
+        'Day': 6,
+        'Weekend?': 'Weekday',
+        'Hour': 900,
+        'Collision Type': '3+ Cars',
+        'Injury Type': 'No injury/unknown',
+        'Primary Factor': 'OTHER (DRIVER) - EXPLAIN IN NARRATIVE',
+        'Reported_Location': '2ND ST & COLLEGE',
+        'Latitude': 39.161_38,
+        'Longitude': -86.534_912_69,
+      },
+    ],
+    vin: 'C79W6PKKT8F1CR1E0',
+    issues: { exterior: [], mechanical: ['STEERING_FAILURE', 'STARTER_PROBLEM'], generic: [] },
+  },
+];
