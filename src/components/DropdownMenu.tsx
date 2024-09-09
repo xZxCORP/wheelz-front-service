@@ -1,69 +1,68 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 
-/**
- *  Opens/closes dropdown menu based on clicked button
- * @param {Event} e - Triggered event
- */
-const toggleDropdown = (event: React.MouseEvent<HTMLButtonElement>) => {
-  const button: EventTarget | null = event?.target;
-  if (button instanceof HTMLElement) {
-    const dropdownId: string | undefined = button?.dataset['dropdownToggle'];
-    const dropdownMenu: HTMLElement | null = document.querySelector('#' + dropdownId);
-
-    // Show/hide dropdown menu with transition effect
-    if (dropdownMenu?.classList.contains('hidden')) {
-      // Show dropdown
-      dropdownMenu.classList.remove('hidden');
-      setTimeout(() => {
-        dropdownMenu.classList.remove('opacity-0', 'scale-95');
-        dropdownMenu.classList.add('opacity-100', 'scale-100');
-      }, 10);
-    } else {
-      // Hide dropdown
-      dropdownMenu?.classList.remove('opacity-100', 'scale-100');
-      dropdownMenu?.classList.add('opacity-0', 'scale-95');
-      setTimeout(() => {
-        dropdownMenu?.classList.add('hidden');
-      }, 300);
-    }
-  }
-};
 
 const DropdownMenu = ({
   title,
-  links,
-  dropdownId,
+  links
 }: {
   title: string;
   links?: string[][];
-  dropdownId: string;
 }) => {
+
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Toggle dropdown visibility when button is clicked
+  const handleButtonClick = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // Close dropdown if clicked outside
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
+  // Add event listener to detect clicks outside the dropdown
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('click', handleClickOutside);
+    } else {
+      document.removeEventListener('click', handleClickOutside);
+    }
+
+    // Cleanup event listener when the component unmounts or dropdown closes
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
-        onClick={toggleDropdown}
-        id="dropdownDefaultButton"
-        data-dropdown-toggle={dropdownId}
+        onClick={handleButtonClick}
         type="button"
       >
         {title}
       </button>
-      <div id={dropdownId} className="absolute left-0 top-12 hidden rounded-md bg-white p-2 shadow-lg transition-all duration-300 opacity-0 transform scale-95">
-        <ul className="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
+      <div className={`absolute mt-2 bg-white border rounded-lg shadow-lg transform transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
+        <ul className="py-4 px-2 text-sm" aria-labelledby="dropdownDefaultButton">
           {links &&
             links.length > 0 &&
             links.map((link) => (
               <Link
                 key={link[0]}
                 to={link[1]}
-                className="block rounded-3xl px-4 py-2 text-lg hover:bg-primary-700 hover:text-white"
+                className="block rounded-xl px-4 py-2 text-lg hover:bg-primary-200"
               >
                 {link[0]}
               </Link>
             ))}
         </ul>
       </div>
-    </div>
+    </div >
   );
 };
 

@@ -4,9 +4,11 @@ import Footer from '../layout/Footer';
 
 const Dashboard = () => {
   return (
-    <div className="h-screen w-screen">
+    <div className="w-screen">
       <Header />
-      <Outlet />
+      <div className="min-h-[84vh]">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

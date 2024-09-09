@@ -2,28 +2,26 @@ import DropdownMenu from '../../components/DropdownMenu';
 
 const Header = () => {
   return (
-    <div id="header" className="flex w-full justify-between items-center bg-secondary-200 p-4 text-lg">
-      <h1 className="text-3xl text-primary">WheelZ</h1>
+    <div id="header" className="flex w-full justify-between items-center bg-secondary-100 p-4 text-lg">
+      <h1 className="text-3xl text-primary-500">WheelZ</h1>
       <nav className="flex w-2/3 justify-around items-center">
         <DropdownMenu
           title="Rapports"
           links={[
             ['Lien 1', '#'],
             ['Lien 2', '#'],
-            ['c', '#'],
+            ['a', '#'],
             ['Lien 3 (looooooooooooong)', '#'],
           ]}
-          dropdownId="dropdown-1"
         />
         <DropdownMenu
           title="Ressources"
           links={[
             ['Lien 1', '#'],
             ['Lien 2', '#'],
-            ['c', '#'],
+            ['b', '#'],
             ['Lien 3 (looooooooooooong)', '#'],
           ]}
-          dropdownId="dropdown-2"
         />
         <DropdownMenu
           title="Professionnels"
@@ -31,19 +29,16 @@ const Header = () => {
             ['Lien 1', '#'],
             ['Lien 2', '#'],
             ['c', '#'],
-            ['Lien 3 (looooooooooooong)', '#'],
           ]}
-          dropdownId="dropdown-3"
         />
         <DropdownMenu
           title="Entreprise"
           links={[
             ['Lien 1', '#'],
             ['Lien 2', '#'],
-            ['c', '#'],
+            ['d', '#'],
             ['Lien 3 (looooooooooooong)', '#'],
           ]}
-          dropdownId="dropdown-4"
         />
       </nav>
       <span>[TEMP] Profile</span>
