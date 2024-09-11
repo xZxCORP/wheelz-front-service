@@ -1,10 +1,13 @@
 import DropdownMenu from '../../components/DropdownMenu';
+import BurgerMenu from '../../components/BurgerMenu';
+import { CgProfile } from "react-icons/cg";
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  return (
-    <div id="header" className="flex w-full justify-between items-center bg-secondary-100 p-4 text-lg">
-      <h1 className="text-3xl text-primary-500">WheelZ</h1>
-      <nav className="flex w-2/3 justify-around items-center">
+
+  const links = () => {
+    return (
+      <>
         <DropdownMenu
           title="Rapports"
           links={[
@@ -40,9 +43,27 @@ const Header = () => {
             ['Lien 3 (looooooooooooong)', '#'],
           ]}
         />
+      </>
+    )
+  }
+
+
+  return (
+    <div id="header" className="flex w-full justify-between items-center bg-secondary-100 p-4 text-lg">
+      <h1 className="text-3xl text-primary-500">WheelZ</h1>
+
+      <nav className="hidden md:flex w-2/3 justify-around items-center">
+        {links()}
       </nav>
-      <span>[TEMP] Profile</span>
-      {/* <Link to='..' relative='path' className=''>Profile</Link> */}
+
+      <BurgerMenu content={links()} classes={"ml-auto mr-6"} />
+
+      <Link
+        to='#'
+        className="text-3xl"
+      >
+        <CgProfile />
+      </Link>
     </div>
   );
 };
