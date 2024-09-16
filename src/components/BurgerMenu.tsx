@@ -1,42 +1,34 @@
-import { useEffect, useRef, useState } from 'react';
+import { ReactNode, useRef, useState } from 'react';
+import { useClickOutside } from '../hooks/useClickOutside';
 import { CiMenuBurger } from "react-icons/ci";
+import { RxCross1 } from "react-icons/rx";
+
+interface Props {
+    children?: ReactNode;
+    classes?: string;
+}
 
 const BurgerMenu = ({
-    content,
+    children,
     classes
-}: {
-    content?: any; // REVOIR TYPE
-    classes?: string;
-}) => {
+}: Props) => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const burgerRef = useRef<HTMLDivElement>(null);
+    const burgerRef = useRef<HTMLDivElement>(null); //ok
 
-    // Toggles burger menu visibility when button is clicked
-    const handleButtonClick = () => {
-        setIsOpen(!isOpen);
-    };
+    const handleClickOutside = () => {
+        // Your custom logic here
+        console.log('clicked outside')
+        setIsOpen(false);
+    }
 
-    // Closes dropdown if clicked outside
-    const handleClickOutside = (event: MouseEvent) => {
-        if (burgerRef.current && !burgerRef.current.contains(event.target as Node)) {
-            setIsOpen(false);
-        }
-    };
+    const handleClickInside = () => {
+        // Your custom logic here
+        console.log('clicked inside')
+        setIsOpen(true);
+    }
 
-    // Adds event listener to detect clicks outside the burger menu
-    useEffect(() => {
-        if (isOpen) {
-            document.addEventListener('click', handleClickOutside);
-        } else {
-            document.removeEventListener('click', handleClickOutside);
-        }
-
-        // Cleanup event listener when the component unmounts or burger menu closes
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
-    }, [isOpen]);
+    useClickOutside(burgerRef, handleClickOutside);
 
 
     return (
@@ -45,7 +37,7 @@ const BurgerMenu = ({
             </div>
             <div className={`md:hidden flex justify-center items-center ${classes}`} ref={burgerRef}>
                 <button
-                    onClick={handleButtonClick}
+                    onClick={handleClickInside}
                     type="button"
                     className="text-3xl"
                 >
@@ -53,7 +45,14 @@ const BurgerMenu = ({
                 </button>
 
                 <div className={`absolute right-0 top-0 flex justify-center items-center h-screen bg-white border rounded-s-lg shadow-lg transform transition-all duration-300 ${isOpen ? 'w-1/2' : 'w-0 pointer-events-none'}`}>
-                    <div className={`flex flex-col justify-around border-2 ${isOpen ? 'w-1/2' : 'hidden pointer-events-none'}`}>{content}</div>
+                    <button
+                        onClick={handleClickOutside}
+                        type="button"
+                        className={`text-3xl absolute top-4 left-4 ${isOpen ? 'block' : 'hidden'}`}
+                    >
+                        <RxCross1 />
+                    </button>
+                    <div className={`flex flex-col justify-around border-2 ${isOpen ? 'w-1/2' : 'hidden pointer-events-none'}`}>{children}</div>
                 </div>
             </div >
         </>

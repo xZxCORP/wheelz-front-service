@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
+import { LinkObject } from '../types/linkObject';
 
 
 const DropdownMenu = ({
@@ -7,42 +8,22 @@ const DropdownMenu = ({
   links
 }: {
   title: string;
-  links?: string[][];
+  links?: LinkObject[];
 }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Toggle dropdown visibility when button is clicked
-  const handleButtonClick = () => {
+  // Toggle dropdown visibility when button is entered/left
+  const toggleDropDown = () => {
     setIsOpen(!isOpen);
   };
-
-  // Close dropdown if clicked outside
-  const handleClickOutside = (event: MouseEvent) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-      setIsOpen(false);
-    }
-  };
-
-  // Add event listener to detect clicks outside the dropdown
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('click', handleClickOutside);
-    } else {
-      document.removeEventListener('click', handleClickOutside);
-    }
-
-    // Cleanup event listener when the component unmounts or dropdown closes
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [isOpen]);
 
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        onClick={handleButtonClick}
+        onMouseEnter={toggleDropDown}
+        onMouseLeave={toggleDropDown}
         type="button"
         className="align-center w-full"
       >
@@ -54,11 +35,11 @@ const DropdownMenu = ({
             links.length > 0 &&
             links.map((link) => (
               <Link
-                key={link[0]}
-                to={link[1]}
+                key={link.title}
+                to={link.url}
                 className="block rounded-xl px-4 py-2 text-lg hover:bg-primary-200"
               >
-                {link[0]}
+                {link.title}
               </Link>
             ))}
         </ul>
