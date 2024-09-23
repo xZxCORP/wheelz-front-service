@@ -1,5 +1,8 @@
 {
   "extends": "@zcorp/tsconfig/tsconfig.react.json",
+  "compilerOptions": {
+    "rootDir": "src"
+  },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
