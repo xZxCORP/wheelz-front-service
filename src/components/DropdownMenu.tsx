@@ -1,48 +1,40 @@
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-/**
- *  Opens/closes dropdown menu based on clicked button
- * @param {Event} e - Triggered event
- */
-const toggleDropdown = (event: React.MouseEvent<HTMLButtonElement>) => {
-  const button: EventTarget | null = event?.target;
-  if (button instanceof HTMLElement) {
-    const dropdownId: string | undefined = button?.dataset['dropdownToggle'];
-    const dropwdownMenu: HTMLElement | null = document.querySelector('#' + dropdownId);
-    dropwdownMenu?.classList.toggle('hidden');
-  }
-};
+import { LinkObject } from '../types/linkObject';
 
-const DropdownMenu = ({
-  title,
-  links,
-  dropdownId,
-}: {
-  title: string;
-  links?: string[][];
-  dropdownId: string;
-}) => {
+const DropdownMenu = ({ title, links }: { title: string; links?: LinkObject[] }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownReference = useRef<HTMLDivElement>(null);
+
+  // Toggle dropdown visibility when button is entered/left
+  const toggleDropDown = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownReference}>
       <button
-        onClick={toggleDropdown}
-        id="dropdownDefaultButton"
-        data-dropdown-toggle={dropdownId}
+        onMouseEnter={toggleDropDown}
+        onMouseLeave={toggleDropDown}
         type="button"
+        className="w-full items-center"
       >
         {title}
       </button>
-      <div id={dropdownId} className="absolute left-0 hidden rounded-md bg-secondary-100 p-2">
-        <ul className="py-2 text-sm" aria-labelledby="dropdownDefaultButton">
+      <div
+        className={`absolute z-10 mt-2 rounded-lg border bg-white shadow-lg transition-all duration-300${isOpen ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'}`}
+      >
+        <ul className="px-2 py-4 text-sm" aria-labelledby="dropdownDefaultButton">
           {links &&
             links.length > 0 &&
             links.map((link) => (
               <Link
-                key={link[0]}
-                to={link[1]}
-                className="block rounded-3xl px-4 py-2 hover:bg-primary-700 hover:text-white"
+                key={link.title}
+                to={link.url}
+                className="block rounded-xl px-4 py-2 text-lg hover:bg-primary-200"
               >
-                {link[0]}
+                {link.title}
               </Link>
             ))}
         </ul>

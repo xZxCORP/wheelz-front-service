@@ -1,9 +1,16 @@
 import { Outlet } from 'react-router-dom';
 
+import Footer from '../layout/Footer';
+import Header from '../layout/Header';
+
 const Dashboard = () => {
   return (
-    <div className="h-screen w-screen bg-orange-200">
-      <Outlet />
+    <div id="dashboard" className="w-screen">
+      <Header />
+      <div className="min-h-[84vh]">
+        <Outlet />
+      </div>
+      <Footer />
     </div>
   );
 };
