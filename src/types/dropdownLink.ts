@@ -1,6 +1,6 @@
-import { LinkObject } from "./linkObject";
+import { LinkObject } from './linkObject';
 
 export type DropdownLink = {
-    title: string
-    links: LinkObject[]
+  title: string;
+  links: LinkObject[];
 };
