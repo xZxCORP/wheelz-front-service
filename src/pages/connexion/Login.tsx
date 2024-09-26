@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 
+//interfaces
 interface FormData {
   email: string;
   password: string;
