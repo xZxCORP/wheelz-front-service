@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import { CgChevronDown, CgChevronUp } from 'react-icons/cg';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
-import { LinkObject } from '../types/linkObject';
+import { LinkObject } from '../../types/linkObject';
+import Button from './Button';
 
 interface Props {
   title: string;
@@ -15,18 +16,18 @@ const Accordion = ({ title, links }: Props) => {
 
   return (
     <div className="border-b border-secondary-200">
-      <button
+      <Button
+        variant={isOpen ? 'primary' : 'secondary'}
         className={clsx(
           'flex w-full items-center justify-between px-4 py-3',
-          'text-left text-base font-medium',
-          'focus:outline-none focus:ring-2 focus:ring-primary-500',
+          'text-left',
           isOpen ? 'bg-primary-50 text-primary-700' : 'bg-secondary-50 text-secondary-700'
         )}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {title}
-        {isOpen ? <CgChevronUp size={20} /> : <CgChevronDown size={20} />}
-      </button>
+        <span>{title}</span>
+        {isOpen ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
+      </Button>
       <div
         className={clsx(
           'overflow-hidden transition-all duration-300 ease-in-out',

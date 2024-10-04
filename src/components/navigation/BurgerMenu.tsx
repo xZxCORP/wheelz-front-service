@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { CiMenuBurger } from 'react-icons/ci';
-import { RxCross1 } from 'react-icons/rx';
+import { FaXmark } from 'react-icons/fa6';
 
-import { mainNavLinks } from '../router/MainNavLinks';
-import Accordion from './Accordion';
+import { mainNavLinks } from '../../router/MainNavLinks';
+import Accordion from '../base/Accordion';
 
 interface BurgerMenuProps {
   className?: string;
@@ -30,7 +30,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({ className }) => {
         aria-expanded={isOpen}
         aria-label="Toggle menu"
       >
-        {isOpen ? <RxCross1 className="size-6" /> : <CiMenuBurger className="size-6" />}
+        <CiMenuBurger className="size-6" />
       </button>
 
       <div
@@ -51,7 +51,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({ className }) => {
               className="p-2 text-secondary-700 hover:text-primary-500"
               aria-label="Close menu"
             >
-              <RxCross1 className="size-6" />
+              <FaXmark className="size-6" />
             </button>
           </div>
           <div className="grow overflow-y-auto">

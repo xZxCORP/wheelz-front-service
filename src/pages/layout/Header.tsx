@@ -1,9 +1,9 @@
 import React from 'react';
-import { CgProfile } from 'react-icons/cg';
+import { FaUser } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
-import BurgerMenu from '../../components/BurgerMenu';
-import DropdownMenu from '../../components/DropdownMenu';
+import BurgerMenu from '../../components/navigation/BurgerMenu';
+import DropdownMenu from '../../components/navigation/DropdownMenu';
 import { mainNavLinks } from '../../router/MainNavLinks';
 
 const Header: React.FC = () => {
@@ -29,7 +29,7 @@ const Header: React.FC = () => {
             className="text-2xl text-secondary-700 transition-colors hover:text-primary-500"
             aria-label="Profile"
           >
-            <CgProfile />
+            <FaUser />
           </Link>
 
           <BurgerMenu className="md:hidden"></BurgerMenu>
