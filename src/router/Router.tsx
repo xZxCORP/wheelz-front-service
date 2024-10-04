@@ -13,7 +13,7 @@ const router: RouteObject[] = [
   {
     path: '/',
     errorElement: <ErrorPage />,
-    element: <OnlyPublicRoute elem={Root} />,
+    element: <Navigate to={'/dashboard'} />,
   },
 
   /**
