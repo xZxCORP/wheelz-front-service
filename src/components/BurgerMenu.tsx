@@ -1,7 +1,6 @@
 import { ReactNode, useRef, useState } from 'react';
 import { CiMenuBurger } from 'react-icons/ci';
 import { RxCross1 } from 'react-icons/rx';
-import { useClickOutside } from '../hooks/useClickOutside';
 
 interface Properties {
     children?: ReactNode;
