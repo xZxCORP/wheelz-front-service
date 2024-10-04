@@ -1,37 +1,52 @@
-import { useRef, useState } from 'react';
+import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 
 import { LinkObject } from '../types/linkObject';
 
-const DropdownMenu = ({ title, links }: { title: string; links?: LinkObject[] }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+interface Props {
+  title: string;
+  links?: LinkObject[];
+}
 
-  // Toggle dropdown visibility when button is entered/left
-  const toggleDropDown = () => {
-    setIsOpen(!isOpen);
-  };
-
+const DropdownMenu = ({ title, links }: Props) => {
   return (
-    <div className="relative h-full" ref={dropdownRef} onMouseEnter={toggleDropDown} onMouseLeave={toggleDropDown}>
+    <div className="group relative inline-block">
       <button
         type="button"
-        className="align-center w-full h-full"
+        className={clsx(
+          'px-3 py-2 text-sm md:text-base lg:text-lg',
+          'rounded-md transition-colors duration-200',
+          'focus:outline-none focus:ring-2 focus:ring-primary-500',
+          'text-gray-700 hover:bg-gray-100',
+          'group-hover:bg-primary-100 group-hover:text-primary-700'
+        )}
       >
         {title}
       </button>
-      <div className={`absolute -m-1 bg-white z-10 border rounded-lg shadow-lg transform transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
-        <ul className="py-4 px-2 text-sm" aria-labelledby="dropdownDefaultButton">
+      <div
+        className={clsx(
+          'absolute left-0 z-10 mt-2 w-48 md:w-56 lg:w-64',
+          'rounded-md bg-white shadow-lg',
+          'border border-gray-200',
+          'invisible opacity-0 group-hover:visible group-hover:opacity-100',
+          'transition-all duration-300 ease-in-out'
+        )}
+      >
+        <ul className="py-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
           {links &&
-            links.length > 0 &&
             links.map((link) => (
-              <Link
-                key={link.title}
-                to={link.url}
-                className="block rounded-xl px-4 py-2 text-lg hover:bg-primary-200"
-              >
-                {link.title}
-              </Link>
+              <li key={link.title} role="menuitem">
+                <Link
+                  to={link.url}
+                  className={clsx(
+                    'block px-4 py-2 text-sm md:text-base',
+                    'text-gray-700 hover:bg-primary-50 hover:text-primary-700',
+                    'transition-colors duration-150'
+                  )}
+                >
+                  {link.title}
+                </Link>
+              </li>
             ))}
         </ul>
       </div>

@@ -3,8 +3,7 @@ import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom';
 import Dashboard from '../pages/dashboard/Dashboard';
 import Report from '../pages/dashboard/Report';
 import ErrorPage from '../pages/ErrorPage';
-import { OnlyPublicRoute, PrivateRoute } from './ProtectedRoutes';
-import Root from './Root';
+import { PrivateRoute } from './ProtectedRoutes';
 
 const router: RouteObject[] = [
   /**
@@ -13,7 +12,7 @@ const router: RouteObject[] = [
   {
     path: '/',
     errorElement: <ErrorPage />,
-    element: <OnlyPublicRoute elem={Root} />,
+    element: <Navigate to={'/dashboard'} />,
   },
 
   /**
