@@ -4,10 +4,12 @@ import { GiCrossedChains } from 'react-icons/gi';
 
 import { cars } from '../../assets/faker/cars';
 import LoadingAnimation from '../../components/LoadingAnimation';
+import Modal from '../../components/Modal';
 import NoticeCard from '../../components/report/NoticeCard';
 import { IVehicle } from '../../types/vehicle';
 
 const Report = () => {
+  const [isOpen, setIsOpen] = useState(true);
   const [vehicle, setVehicle] = useState<IVehicle | null>(null);
   const REPORT_CARDS = [
     { title: 'Damage', Icon: FaCarCrash, warning: true },
