@@ -17,7 +17,7 @@ const DropdownMenu = ({ title, links }: Props) => {
           'px-3 py-2 text-sm md:text-base lg:text-lg',
           'rounded-md transition-colors duration-200',
           'focus:outline-none focus:ring-2 focus:ring-primary-500',
-          'text-gray-700 hover:bg-gray-100',
+          'text-secondary-700 hover:bg-secondary-100',
           'group-hover:bg-primary-100 group-hover:text-primary-700'
         )}
       >
@@ -26,8 +26,8 @@ const DropdownMenu = ({ title, links }: Props) => {
       <div
         className={clsx(
           'absolute left-0 z-10 mt-2 w-48 md:w-56 lg:w-64',
-          'rounded-md bg-white shadow-lg',
-          'border border-gray-200',
+          'rounded-md bg-secondary-50 shadow-lg',
+          'border border-secondary-200',
           'invisible opacity-0 group-hover:visible group-hover:opacity-100',
           'transition-all duration-300 ease-in-out'
         )}
@@ -40,7 +40,7 @@ const DropdownMenu = ({ title, links }: Props) => {
                   to={link.url}
                   className={clsx(
                     'block px-4 py-2 text-sm md:text-base',
-                    'text-gray-700 hover:bg-primary-50 hover:text-primary-700',
+                    'text-secondary-700 hover:bg-primary-50 hover:text-primary-700',
                     'transition-colors duration-150'
                   )}
                 >

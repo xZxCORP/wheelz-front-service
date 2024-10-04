@@ -27,7 +27,7 @@ const Header: React.FC = () => {
           <div className="flex items-center space-x-4">
             <Link
               to="/profile"
-              className="text-2xl text-gray-700 transition-colors hover:text-primary-500"
+              className="text-2xl text-secondary-700 transition-colors hover:text-primary-500"
               aria-label="Profile"
             >
               <CgProfile />

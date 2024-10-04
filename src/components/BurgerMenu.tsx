@@ -22,8 +22,8 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({ className }) => {
         type="button"
         className={clsx(
           'rounded-md p-2',
-          'text-gray-700 hover:text-primary-500',
-          'hover:bg-gray-100',
+          'text-secondary-700 hover:text-primary-500',
+          'hover:bg-secondary-100',
           'focus:outline-none focus:ring-2 focus:ring-primary-500',
           'transition-colors duration-200'
         )}
@@ -35,7 +35,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({ className }) => {
 
       <div
         className={clsx(
-          'fixed inset-0 z-50 bg-white',
+          'fixed inset-0 z-50 bg-secondary-100',
           'transition-transform duration-300 ease-in-out',
           {
             'translate-x-0': isOpen,
@@ -48,7 +48,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({ className }) => {
             <button
               onClick={toggleMenu}
               type="button"
-              className="p-2 text-gray-700 hover:text-primary-500"
+              className="p-2 text-secondary-700 hover:text-primary-500"
               aria-label="Close menu"
             >
               <RxCross1 className="size-6" />

@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <div id="dashboard" className="flex min-h-screen w-full flex-col">
       <Header />
-      <main className="grow">
+      <main className="grow p-4">
         <Outlet />
       </main>
       <Footer />

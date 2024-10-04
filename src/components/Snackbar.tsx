@@ -57,10 +57,14 @@ export const Snackbar = ({
               : type === 'success'
                 ? 'bg-success-700'
                 : undefined
-      } relative z-50 flex items-center justify-between rounded-lg px-4 text-white`}
+      } relative z-50 flex items-center justify-between rounded-lg px-4 text-secondary-50`}
     >
       <p>{message}</p>
-      <button className="rounded-lg border border-white px-3 py-1" onClick={onClose} type="button">
+      <button
+        className="rounded-lg border border-secondary-50 px-3 py-1"
+        onClick={onClose}
+        type="button"
+      >
         {closeLabel}
       </button>
       {!!duration && (
