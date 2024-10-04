@@ -1,6 +1,6 @@
 import { DropdownLink } from '../types/dropdownLink';
 
-export const MainNavLinks: DropdownLink[] = [
+export const mainNavLinks: DropdownLink[] = [
   {
     title: 'Rapports',
     links: [

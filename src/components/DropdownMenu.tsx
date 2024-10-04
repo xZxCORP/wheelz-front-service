@@ -5,23 +5,26 @@ import { LinkObject } from '../types/linkObject';
 
 const DropdownMenu = ({ title, links }: { title: string; links?: LinkObject[] }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownReference = useRef<HTMLDivElement>(null);
 
-  // Toggle dropdown visibility when button is entered/left
   const toggleDropDown = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <div className="relative h-full" ref={dropdownRef} onMouseEnter={toggleDropDown} onMouseLeave={toggleDropDown}>
-      <button
-        type="button"
-        className="align-center w-full h-full"
-      >
+    <div
+      className="relative h-full"
+      ref={dropdownReference}
+      onMouseEnter={toggleDropDown}
+      onMouseLeave={toggleDropDown}
+    >
+      <button type="button" className="size-full items-center">
         {title}
       </button>
-      <div className={`absolute -m-1 bg-white z-10 border rounded-lg shadow-lg transform transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
-        <ul className="py-4 px-2 text-sm" aria-labelledby="dropdownDefaultButton">
+      <div
+        className={`absolute z-10 -m-1 rounded-lg border bg-white shadow-lg transition-all duration-300${isOpen ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'}`}
+      >
+        <ul className="px-2 py-4 text-sm" aria-labelledby="dropdownDefaultButton">
           {links &&
             links.length > 0 &&
             links.map((link) => (

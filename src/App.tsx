@@ -30,13 +30,17 @@ const App = () => {
   }, [init]);
 
   return (
-    <div className="h-screen w-screen" tabIndex={-1}>
+    <div className="flex min-h-screen w-full flex-col" tabIndex={-1}>
       {appState === 'loading' ? (
-        <LoadingAnimation />
+        <div className="flex grow items-center justify-center">
+          <LoadingAnimation />
+        </div>
       ) : (
         <>
-          <RouterProvider router={router} />
-          <div className="absolute bottom-0 m-auto flex w-full flex-col items-center justify-center space-y-2 py-1">
+          <div className="grow">
+            <RouterProvider router={router} />
+          </div>
+          <div className="fixed inset-x-0 bottom-0 flex flex-col items-center justify-center space-y-2 p-4 sm:p-6">
             {snacks.map((snack, index) => (
               <Snackbar
                 key={index}

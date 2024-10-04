@@ -5,11 +5,11 @@ import Header from '../layout/Header';
 
 const Dashboard = () => {
   return (
-    <div id="dashboard" className="w-screen">
+    <div id="dashboard" className="flex min-h-screen w-full flex-col">
       <Header />
-      <div className="min-h-[84vh]">
+      <main className="grow">
         <Outlet />
-      </div>
+      </main>
       <Footer />
     </div>
   );
