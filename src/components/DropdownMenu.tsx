@@ -1,16 +1,9 @@
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useState, useRef } from 'react';
+
 import { LinkObject } from '../types/linkObject';
 
-
-const DropdownMenu = ({
-  title,
-  links
-}: {
-  title: string;
-  links?: LinkObject[];
-}) => {
-
+const DropdownMenu = ({ title, links }: { title: string; links?: LinkObject[] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -42,7 +35,7 @@ const DropdownMenu = ({
             ))}
         </ul>
       </div>
-    </div >
+    </div>
   );
 };
 

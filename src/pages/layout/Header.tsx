@@ -1,16 +1,14 @@
-import DropdownMenu from '../../components/DropdownMenu';
-import BurgerMenu from '../../components/BurgerMenu';
-import { CgProfile } from "react-icons/cg";
+import { CgProfile } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
+
+import BurgerMenu from '../../components/BurgerMenu';
+import DropdownMenu from '../../components/DropdownMenu';
 import { MainNavLinks } from '../../router/MainNavLinks';
 
 const Header = () => {
-
-
-  const links = MainNavLinks.map((link) =>
-    <DropdownMenu title={link.title} links={link.links} />
-  );
-
+  const links = MainNavLinks.map((link) => (
+    <DropdownMenu title={link.title} links={link.links} key={link.title} />
+  ));
 
   return (
     <div id="header" className="flex w-full justify-between bg-secondary-100 text-lg">
@@ -20,7 +18,7 @@ const Header = () => {
         {links}
       </nav>
 
-      <BurgerMenu children={links} classes={"ml-auto mr-6"} />
+      <BurgerMenu classes={'ml-auto mr-6'}>{links}</BurgerMenu>
 
       <Link
         to='#'

@@ -1,35 +1,28 @@
 import { ReactNode, useRef, useState } from 'react';
+import { CiMenuBurger } from 'react-icons/ci';
+import { RxCross1 } from 'react-icons/rx';
 import { useClickOutside } from '../hooks/useClickOutside';
-import { CiMenuBurger } from "react-icons/ci";
-import { RxCross1 } from "react-icons/rx";
 
-interface Props {
+interface Properties {
     children?: ReactNode;
     classes?: string;
 }
 
-const BurgerMenu = ({
-    children,
-    classes
-}: Props) => {
-
+const BurgerMenu = ({ children, classes }: Properties) => {
     const [isOpen, setIsOpen] = useState(false);
     const burgerRef = useRef<HTMLDivElement>(null); //ok
 
     const handleClickOutside = () => {
         // Your custom logic here
-        console.log('clicked outside')
+        console.log('clicked outside');
         setIsOpen(false);
-    }
+    };
 
     const handleClickInside = () => {
         // Your custom logic here
-        console.log('clicked inside')
+        console.log('clicked inside');
         setIsOpen(true);
-    }
-
-    useClickOutside(burgerRef, handleClickOutside);
-
+    };
 
     return (
         <>
@@ -57,6 +50,8 @@ const BurgerMenu = ({
             </div >
         </>
     );
-}
+};
+
+
 
 export default BurgerMenu;
