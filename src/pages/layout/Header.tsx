@@ -11,17 +11,19 @@ const Header = () => {
   ));
 
   return (
-    <div
-      id="header"
-      className="flex w-full items-center justify-between bg-secondary-100 p-4 text-lg"
-    >
-      <h1 className="text-3xl text-primary-500">WheelZ</h1>
+    <div id="header" className="flex w-full justify-between bg-secondary-100 text-lg">
+      <h1 className="text-3xl text-primary-500 m-4">WheelZ</h1>
 
-      <nav className="hidden w-2/3 items-center justify-around md:flex">{links}</nav>
+      <nav className="hidden md:flex w-2/3 justify-around">
+        {links}
+      </nav>
 
       <BurgerMenu classes={'ml-auto mr-6'}>{links}</BurgerMenu>
 
-      <Link to="#" className="text-3xl">
+      <Link
+        to='#'
+        className="text-3xl m-4"
+      >
         <CgProfile />
       </Link>
     </div>
