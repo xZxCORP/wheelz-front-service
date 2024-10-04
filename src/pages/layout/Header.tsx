@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 
@@ -7,8 +7,6 @@ import DropdownMenu from '../../components/DropdownMenu';
 import { mainNavLinks } from '../../router/MainNavLinks';
 
 const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const links = mainNavLinks.map((link) => (
     <DropdownMenu title={link.title} links={link.links} key={link.title} />
   ));
@@ -35,13 +33,7 @@ const Header: React.FC = () => {
               <CgProfile />
             </Link>
 
-            <BurgerMenu
-              isOpen={isMenuOpen}
-              toggleMenu={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden"
-            >
-              <nav className="flex flex-col space-y-4 py-4">{links}</nav>
-            </BurgerMenu>
+            <BurgerMenu className="md:hidden"></BurgerMenu>
           </div>
         </div>
       </div>

@@ -1,16 +1,20 @@
 import clsx from 'clsx';
-import React, { ReactNode } from 'react';
+import React, { useState } from 'react';
 import { CiMenuBurger } from 'react-icons/ci';
 import { RxCross1 } from 'react-icons/rx';
 
-interface Props {
-  children: ReactNode;
-  isOpen: boolean;
-  toggleMenu: () => void;
+import { mainNavLinks } from '../router/MainNavLinks';
+import Accordion from './Accordion';
+
+interface BurgerMenuProps {
   className?: string;
 }
 
-const BurgerMenu: React.FC<Props> = ({ children, isOpen, toggleMenu, className }) => {
+const BurgerMenu: React.FC<BurgerMenuProps> = ({ className }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
   return (
     <div className={clsx('relative', className)}>
       <button
@@ -32,7 +36,6 @@ const BurgerMenu: React.FC<Props> = ({ children, isOpen, toggleMenu, className }
       <div
         className={clsx(
           'fixed inset-0 z-50 bg-white',
-          'flex flex-col',
           'transition-transform duration-300 ease-in-out',
           {
             'translate-x-0': isOpen,
@@ -40,24 +43,22 @@ const BurgerMenu: React.FC<Props> = ({ children, isOpen, toggleMenu, className }
           }
         )}
       >
-        <div className="flex items-center justify-between border-b p-4">
-          <h2 className="text-xl font-semibold text-primary-500">WheelZ</h2>
-          <button
-            onClick={toggleMenu}
-            type="button"
-            className="p-2 text-gray-700 transition-colors hover:text-primary-500"
-            aria-label="Close menu"
-          >
-            <RxCross1 className="size-6" />
-          </button>
-        </div>
-
-        <div className="grow overflow-y-auto">
-          <nav className="container mx-auto flex flex-col space-y-4 px-4 py-6">{children}</nav>
-        </div>
-
-        <div className="border-t p-4">
-          <p className="text-center text-sm text-gray-500">© 2024 WheelZ. All rights reserved.</p>
+        <div className="flex h-full flex-col">
+          <div className="flex justify-end p-4">
+            <button
+              onClick={toggleMenu}
+              type="button"
+              className="p-2 text-gray-700 hover:text-primary-500"
+              aria-label="Close menu"
+            >
+              <RxCross1 className="size-6" />
+            </button>
+          </div>
+          <div className="grow overflow-y-auto">
+            {mainNavLinks.map((link) => (
+              <Accordion key={link.title} title={link.title} links={link.links} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
