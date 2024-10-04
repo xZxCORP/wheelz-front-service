@@ -20,16 +20,14 @@ const DropdownMenu = ({
   };
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative h-full" ref={dropdownRef} onMouseEnter={toggleDropDown} onMouseLeave={toggleDropDown}>
       <button
-        onMouseEnter={toggleDropDown}
-        onMouseLeave={toggleDropDown}
         type="button"
-        className="align-center w-full"
+        className="align-center w-full h-full"
       >
         {title}
       </button>
-      <div className={`absolute mt-2 bg-white z-10 border rounded-lg shadow-lg transform transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
+      <div className={`absolute -m-1 bg-white z-10 border rounded-lg shadow-lg transform transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
         <ul className="py-4 px-2 text-sm" aria-labelledby="dropdownDefaultButton">
           {links &&
             links.length > 0 &&

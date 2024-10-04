@@ -13,10 +13,10 @@ const Header = () => {
 
 
   return (
-    <div id="header" className="flex w-full justify-between items-center bg-secondary-100 p-4 text-lg">
-      <h1 className="text-3xl text-primary-500">WheelZ</h1>
+    <div id="header" className="flex w-full justify-between bg-secondary-100 text-lg">
+      <h1 className="text-3xl text-primary-500 m-4">WheelZ</h1>
 
-      <nav className="hidden md:flex w-2/3 justify-around items-center">
+      <nav className="hidden md:flex w-2/3 justify-around">
         {links}
       </nav>
 
@@ -24,7 +24,7 @@ const Header = () => {
 
       <Link
         to='#'
-        className="text-3xl"
+        className="text-3xl m-4"
       >
         <CgProfile />
       </Link>

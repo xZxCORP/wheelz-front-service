@@ -44,7 +44,7 @@ const BurgerMenu = ({
                     <CiMenuBurger />
                 </button>
 
-                <div className={`absolute right-0 top-0 flex justify-center items-center h-screen bg-white border rounded-s-lg shadow-lg transform transition-all duration-300 ${isOpen ? 'w-1/2' : 'w-0 pointer-events-none'}`}>
+                <div className={`absolute right-0 top-0 flex justify-center items-center h-screen bg-white border rounded-s-lg shadow-lg transform transition-all duration-300 ${isOpen ? 'w-full' : 'w-0 pointer-events-none'}`}>
                     <button
                         onClick={handleClickOutside}
                         type="button"
@@ -52,7 +52,7 @@ const BurgerMenu = ({
                     >
                         <RxCross1 />
                     </button>
-                    <div className={`flex flex-col justify-around border-2 ${isOpen ? 'w-1/2' : 'hidden pointer-events-none'}`}>{children}</div>
+                    <div className={`flex flex-col justify-around [&_button]:border-y ${isOpen ? 'w-3/4 h-full' : 'hidden pointer-events-none'}`}>{children}</div>
                 </div>
             </div >
         </>
