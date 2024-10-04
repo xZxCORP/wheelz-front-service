@@ -3,9 +3,10 @@
   "extends": [
     "@zcorp/eslint-config/react",
     "plugin:tailwindcss/recommended",
-    "plugin:@react-three/recommended"
+    "plugin:@react-three/recommended",
+    "plugin:prettier/recommended"
   ],
-  "plugins": ["tailwindcss", "@react-three"],
+  "plugins": ["tailwindcss", "@react-three","prettier"],
   "rules": {
     "unicorn/no-null": "off",
     "unicorn/filename-case": "off",

@@ -14,7 +14,7 @@ const DropdownMenu = ({ title, links }: Props) => {
       <button
         type="button"
         className={clsx(
-          'px-3 py-2 text-sm md:text-base lg:text-lg',
+          'px-3 py-2 text-lg font-medium',
           'rounded-md transition-colors duration-200',
           'focus:outline-none focus:ring-2 focus:ring-primary-500',
           'text-secondary-700 hover:bg-secondary-100',
@@ -25,7 +25,7 @@ const DropdownMenu = ({ title, links }: Props) => {
       </button>
       <div
         className={clsx(
-          'absolute left-0 z-10 mt-2 w-48 md:w-56 lg:w-64',
+          'absolute left-0 z-10 mt-2 w-48',
           'rounded-md bg-secondary-50 shadow-lg',
           'border border-secondary-200',
           'invisible opacity-0 group-hover:visible group-hover:opacity-100',
