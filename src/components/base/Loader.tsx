@@ -22,7 +22,7 @@ const variantClasses: Record<LoaderVariant, string> = {
   danger: 'border-error-500',
 };
 
-const Loader = ({ size = 'md', variant = 'primary', fullScreen = false }: Props) => {
+export const Loader = ({ size = 'md', variant = 'primary', fullScreen = false }: Props) => {
   const loaderClasses = clsx(
     'rounded-full',
     'animate-spin',
@@ -42,5 +42,3 @@ const Loader = ({ size = 'md', variant = 'primary', fullScreen = false }: Props)
     </div>
   );
 };
-
-export default Loader;

@@ -9,7 +9,13 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
 }
 
-const Button = ({ variant = 'primary', size = 'md', className, children, ...props }: Props) => {
+export const Button = ({
+  variant = 'primary',
+  size = 'md',
+  className,
+  children,
+  ...props
+}: Props) => {
   const baseClasses =
     'font-semibold rounded-lg focus:outline-none focus:ring-0 focus:ring-offset-0 transition-colors';
 
@@ -36,5 +42,3 @@ const Button = ({ variant = 'primary', size = 'md', className, children, ...prop
     </button>
   );
 };
-
-export default Button;

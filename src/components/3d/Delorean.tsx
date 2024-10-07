@@ -16,7 +16,7 @@ const Delorean = () => {
   );
 };
 
-const DeloreanScene = () => {
+export const DeloreanScene = () => {
   return (
     <Canvas
       shadows
@@ -36,5 +36,3 @@ const DeloreanScene = () => {
     </Canvas>
   );
 };
-
-export default DeloreanScene;

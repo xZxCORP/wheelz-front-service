@@ -1,12 +1,12 @@
 import { Navigate, RouteObject } from 'react-router-dom';
 
-import Dashboard from '../pages/dashboard/Dashboard';
-import Report from '../pages/dashboard/Report';
-import BaseLayout from '../pages/layout/BaseLayout';
-import ErrorLayout from '../pages/layout/ErrorLayout';
+import { Dashboard } from '../pages/dashboard/Dashboard';
+import { Report } from '../pages/dashboard/Report';
+import { BaseLayout } from '../pages/layout/BaseLayout';
+import { ErrorLayout } from '../pages/layout/ErrorLayout';
 import { PrivateRoute } from './ProtectedRoutes';
 
-const routes: RouteObject[] = [
+export const routes: RouteObject[] = [
   {
     path: '/',
     element: <BaseLayout />,
@@ -27,5 +27,3 @@ const routes: RouteObject[] = [
     ],
   },
 ];
-
-export default routes;

@@ -4,13 +4,13 @@ import { CiMenuBurger } from 'react-icons/ci';
 import { FaXmark } from 'react-icons/fa6';
 
 import { mainNavLinks } from '../../router/MainNavLinks';
-import Accordion from '../base/Accordion';
+import { Accordion } from '../base/Accordion';
 
 interface Props {
   className?: string;
 }
 
-const BurgerMenu = ({ className }: Props) => {
+export const BurgerMenu = ({ className }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -64,5 +64,3 @@ const BurgerMenu = ({ className }: Props) => {
     </div>
   );
 };
-
-export default BurgerMenu;

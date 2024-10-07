@@ -1,14 +1,33 @@
 import { FaUser } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
-import BurgerMenu from '../../components/navigation/BurgerMenu';
-import DropdownMenu from '../../components/navigation/DropdownMenu';
+import { BurgerMenu } from '../../components/navigation/BurgerMenu';
+import { DropdownMenu } from '../../components/navigation/DropdownMenu';
+import { RegisterButtonTrigger } from '../../components/register/RegisterButtonTrigger';
 import { mainNavLinks } from '../../router/MainNavLinks';
+import { useAuthStore } from '../../stores/useAuthStore';
 
-const Header = () => {
+export const Header = () => {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const links = mainNavLinks.map((link) => (
     <DropdownMenu title={link.title} links={link.links} key={link.title} />
   ));
+  const dynamicAccountCell = () => {
+    if (isAuthenticated()) {
+      <Link
+        to="/profile"
+        className="text-2xl transition-colors hover:text-primary-500"
+        aria-label="Profile"
+      >
+        <FaUser />
+      </Link>;
+    }
+    return (
+      <div className="flex gap-2">
+        <RegisterButtonTrigger />
+      </div>
+    );
+  };
 
   return (
     <header className="flex justify-center bg-secondary-100 shadow-md">
@@ -21,21 +40,12 @@ const Header = () => {
         </Link>
 
         <nav className="hidden space-x-6 md:flex">{links}</nav>
+        {dynamicAccountCell()}
 
         <div className="flex items-center space-x-4">
-          <Link
-            to="/profile"
-            className="text-2xl transition-colors hover:text-primary-500"
-            aria-label="Profile"
-          >
-            <FaUser />
-          </Link>
-
           <BurgerMenu className="md:hidden"></BurgerMenu>
         </div>
       </div>
     </header>
   );
 };
-
-export default Header;

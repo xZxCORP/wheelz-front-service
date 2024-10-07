@@ -38,7 +38,7 @@ const getProgressBarColor = (type: SnackbarType) => {
     }
   }
 };
-const SnackbarItem = ({ snackbar, onClose }: Props) => {
+export const SnackbarItem = ({ snackbar, onClose }: Props) => {
   const [progress, setProgress] = useState(100);
 
   useEffect(() => {
@@ -84,5 +84,3 @@ const SnackbarItem = ({ snackbar, onClose }: Props) => {
     </div>
   );
 };
-
-export default SnackbarItem;

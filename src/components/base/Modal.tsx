@@ -1,24 +1,43 @@
-import clsx from 'clsx';
-import { ReactNode, useEffect, useRef } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 import { useClickOutside } from '../../hooks/useClickOutside';
-import Button from './Button';
+import { Button } from './Button';
 
-interface Props {
+interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   extraButtons?: ReactNode[];
   title: string;
   children: ReactNode;
+  overlayClassName?: string;
+  modalClassName?: string;
+  closeOnEscape?: boolean;
+  closeOnOverlayClick?: boolean;
 }
 
-const Modal = ({ isOpen, onClose, extraButtons, title, children }: Props) => {
-  const modalRef = useRef(null);
+export const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  extraButtons,
+  title,
+  children,
+  overlayClassName = '',
+  modalClassName = '',
+  closeOnEscape = true,
+  closeOnOverlayClick = true,
+}) => {
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  useClickOutside(modalRef, onClose);
+  useClickOutside(modalRef, () => {
+    if (closeOnOverlayClick) {
+      onClose();
+    }
+  });
+
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (closeOnEscape && event.key === 'Escape') {
         onClose();
       }
     };
@@ -32,18 +51,16 @@ const Modal = ({ isOpen, onClose, extraButtons, title, children }: Props) => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = '';
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, closeOnEscape]);
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-secondary-950/50">
-      <div ref={modalRef} className="relative m-auto w-full max-w-3xl p-6">
-        <div
-          className={clsx(
-            'flex w-full flex-col rounded-lg bg-secondary-50 shadow-lg',
-            'transition-all duration-300 ease-out',
-            isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-          )}
-        >
+  if (!isOpen) return null;
+
+  const modalContent = (
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-secondary-950/50 ${overlayClassName}`}
+    >
+      <div ref={modalRef} className={`relative m-auto w-full max-w-3xl p-6 ${modalClassName}`}>
+        <div className="flex w-full translate-y-0 flex-col rounded-lg bg-secondary-50 opacity-100 shadow-lg transition-all duration-300 ease-out">
           <div className="flex items-center justify-between border-b border-secondary-200 p-4">
             <h2 id="modal-title" className="text-xl font-semibold text-primary-700">
               {title}
@@ -63,6 +80,6 @@ const Modal = ({ isOpen, onClose, extraButtons, title, children }: Props) => {
       </div>
     </div>
   );
-};
 
-export default Modal;
+  return createPortal(modalContent, document.body);
+};

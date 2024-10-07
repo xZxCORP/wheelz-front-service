@@ -1,7 +1,7 @@
 import { FaArrowLeft, FaTriangleExclamation } from 'react-icons/fa6';
 import { isRouteErrorResponse, Link, useRouteError } from 'react-router-dom';
 
-const ErrorLayout = () => {
+export const ErrorLayout = () => {
   const error = useRouteError();
   let errorMessage: string;
   let errorCode: number | string = '???';
@@ -43,5 +43,3 @@ const ErrorLayout = () => {
     </div>
   );
 };
-
-export default ErrorLayout;

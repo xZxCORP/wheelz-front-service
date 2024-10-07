@@ -2,7 +2,7 @@ import { IconType } from 'react-icons';
 import { FaCheckCircle } from 'react-icons/fa';
 import { FaTriangleExclamation } from 'react-icons/fa6';
 
-const NoticeCard = ({
+export const NoticeCard = ({
   title,
   Icon,
   warning,
@@ -29,5 +29,3 @@ const NoticeCard = ({
     </button>
   );
 };
-
-export default NoticeCard;

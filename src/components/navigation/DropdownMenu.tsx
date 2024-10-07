@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 
 import { LinkObject } from '../../types/linkObject';
-import Button from '../base/Button';
+import { Button } from '../base/Button';
 import { MenuItem } from './MenuItem';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
   links?: LinkObject[];
 }
 
-const DropdownMenu = ({ title, links }: Props) => {
+export const DropdownMenu = ({ title, links }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleDropDown = () => {
@@ -60,5 +60,3 @@ const DropdownMenu = ({ title, links }: Props) => {
     </div>
   );
 };
-
-export default DropdownMenu;

@@ -4,14 +4,14 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
 import { LinkObject } from '../../types/linkObject';
-import Button from './Button';
+import { Button } from './Button';
 
 interface Props {
   title: string;
   links?: LinkObject[];
 }
 
-const Accordion = ({ title, links }: Props) => {
+export const Accordion = ({ title, links }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -48,5 +48,3 @@ const Accordion = ({ title, links }: Props) => {
     </div>
   );
 };
-
-export default Accordion;

@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom';
 
-import Loader from '../../components/base/Loader';
+import { Loader } from '../../components/base/Loader';
 import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';
-import Footer from './Footer';
-import Header from './Header';
+import { Footer } from './Footer';
+import { Header } from './Header';
 
-const BaseLayout = () => {
+export const BaseLayout = () => {
   const isLoading = useGlobalLoadingStore((state) => state.isLoading);
 
   return (
@@ -19,5 +19,3 @@ const BaseLayout = () => {
     </div>
   );
 };
-
-export default BaseLayout;

@@ -2,11 +2,12 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { queryClient } from './clients/api/queryClient';
-import Snackbar from './components/snackbar/Snackbar';
-import routes from './router/Routes';
+import { Snackbar } from './components/snackbar/Snackbar';
+import { routes } from './router/Routes';
+
 const router = createBrowserRouter(routes);
 
-const App = () => {
+export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
@@ -14,4 +15,3 @@ const App = () => {
     </QueryClientProvider>
   );
 };
-export default App;

@@ -1,7 +1,7 @@
 import { useSnackbarStore } from '../../stores/useSnackbar';
-import SnackbarItem from './SnackbarItem';
+import { SnackbarItem } from './SnackbarItem';
 
-const Snackbar = () => {
+export const Snackbar = () => {
   const { snackbars, removeSnackbar } = useSnackbarStore();
 
   return (
@@ -12,5 +12,3 @@ const Snackbar = () => {
     </div>
   );
 };
-
-export default Snackbar;

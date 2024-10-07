@@ -3,11 +3,11 @@ import { FaCarCrash } from 'react-icons/fa';
 import { GiCrossedChains } from 'react-icons/gi';
 
 import { cars } from '../../assets/faker/cars';
-import LoadingAnimation from '../../components/LoadingAnimation';
-import NoticeCard from '../../components/report/NoticeCard';
+import { LoadingAnimation } from '../../components/LoadingAnimation';
+import { NoticeCard } from '../../components/report/NoticeCard';
 import { IVehicle } from '../../types/vehicle';
 
-const Report = () => {
+export const Report = () => {
   const [vehicle, setVehicle] = useState<IVehicle | null>(null);
   const REPORT_CARDS = [
     { title: 'Damage', Icon: FaCarCrash, warning: true },
@@ -66,5 +66,3 @@ const Report = () => {
     </div>
   );
 };
-
-export default Report;
