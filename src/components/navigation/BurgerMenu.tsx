@@ -4,7 +4,10 @@ import { CiMenuBurger } from 'react-icons/ci';
 import { FaXmark } from 'react-icons/fa6';
 
 import { mainNavLinks } from '../../router/MainNavLinks';
+import { useAuthStore } from '../../stores/useAuthStore';
 import { Accordion } from '../base/Accordion';
+import { ProfileButton } from '../profile/ProfileButton';
+import { RegisterButtonTrigger } from '../register/RegisterButtonTrigger';
 
 interface Props {
   className?: string;
@@ -12,6 +15,14 @@ interface Props {
 
 export const BurgerMenu = ({ className }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const AccountCell = () => {
+    if (isAuthenticated()) {
+      return <ProfileButton />;
+    }
+    return <RegisterButtonTrigger />;
+  };
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -43,8 +54,8 @@ export const BurgerMenu = ({ className }: Props) => {
           }
         )}
       >
-        <div className="flex h-full flex-col">
-          <div className="flex justify-end p-4">
+        <div className="flex h-full flex-col p-4">
+          <div className="flex justify-end">
             <button
               onClick={toggleMenu}
               type="button"
@@ -54,10 +65,11 @@ export const BurgerMenu = ({ className }: Props) => {
               <FaXmark className="size-6" />
             </button>
           </div>
-          <div className="grow overflow-y-auto">
+          <div className="flex flex-col gap-4">
             {mainNavLinks.map((link) => (
               <Accordion key={link.title} title={link.title} links={link.links} />
             ))}
+            {AccountCell()}
           </div>
         </div>
       </div>

@@ -29,10 +29,10 @@ export const DropdownMenu = ({ title, links }: Props) => {
         variant="secondary"
         aria-haspopup="true"
         aria-expanded={isOpen}
-        className="flex items-center"
+        icon={<FaChevronDown />}
+        iconPosition="right"
       >
         {title}
-        <FaChevronDown className="ml-1 size-4" />
       </Button>
       {isOpen && (
         <div

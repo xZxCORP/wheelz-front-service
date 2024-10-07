@@ -7,6 +7,8 @@ type ButtonSize = 'sm' | 'md' | 'lg';
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  icon?: React.ReactNode;
+  iconPosition?: 'left' | 'right';
 }
 
 export const Button = ({
@@ -14,10 +16,12 @@ export const Button = ({
   size = 'md',
   className,
   children,
+  icon,
+  iconPosition = 'left',
   ...props
 }: Props) => {
   const baseClasses =
-    'font-semibold rounded-lg focus:outline-none focus:ring-0 focus:ring-offset-0 transition-colors';
+    'flex gap-2 items-center font-semibold rounded-lg focus:outline-none focus:ring-0 focus:ring-offset-0 transition-colors';
 
   const variantClasses: Record<ButtonVariant, string> = {
     primary: 'bg-primary-600 text-white hover:bg-primary-700',
@@ -38,7 +42,9 @@ export const Button = ({
       className={clsx(baseClasses, variantClasses[variant], sizeClasses[size], className)}
       {...props}
     >
+      {icon && iconPosition === 'left' && icon}
       {children}
+      {icon && iconPosition === 'right' && icon}
     </button>
   );
 };
