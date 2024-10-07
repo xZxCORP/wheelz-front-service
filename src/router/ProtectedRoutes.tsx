@@ -9,6 +9,7 @@ interface Props {
 
 export const PrivateRoute = ({ element: RouteComponent }: Props) => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const location = useLocation();
 
   if (!isAuthenticated()) {

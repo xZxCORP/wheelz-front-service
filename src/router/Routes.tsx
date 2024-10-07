@@ -1,4 +1,4 @@
-import { RouteObject } from 'react-router-dom';
+import { Navigate, RouteObject } from 'react-router-dom';
 
 import Dashboard from '../pages/dashboard/Dashboard';
 import Report from '../pages/dashboard/Report';
@@ -14,7 +14,7 @@ const routes: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        element: <Navigate to={'dashboard'} />,
       },
       {
         path: 'dashboard',
