@@ -3,11 +3,11 @@ import { FaCarCrash } from 'react-icons/fa';
 import { GiCrossedChains } from 'react-icons/gi';
 
 import { cars } from '../../assets/faker/cars';
-import LoadingAnimation from '../../components/LoadingAnimation';
-import NoticeCard from '../../components/report/NoticeCard';
+import { LoadingAnimation } from '../../components/LoadingAnimation';
+import { NoticeCard } from '../../components/report/NoticeCard';
 import { IVehicle } from '../../types/vehicle';
 
-const Report = () => {
+export const Report = () => {
   const [vehicle, setVehicle] = useState<IVehicle | null>(null);
   const REPORT_CARDS = [
     { title: 'Damage', Icon: FaCarCrash, warning: true },
@@ -36,11 +36,11 @@ const Report = () => {
                 <span className="capitalize">{vehicle.constructor}</span> {vehicle.model}
               </div>
               <div className="flex flex-wrap gap-2 text-sm">
-                <p className="rounded-md bg-secondary-900 p-2 text-secondary-50">
-                  VIN: <span className="font-mono">{vehicle.vin}</span>
+                <p className="rounded-md bg-secondary-700 p-2 text-secondary-200">
+                  VIN: <span className="font-bold">{vehicle.vin}</span>
                 </p>
-                <p className="rounded-md bg-secondary-900 p-2 text-secondary-50">
-                  Year: {vehicle.year}
+                <p className="rounded-md bg-secondary-700 p-2 font-bold text-secondary-200">
+                  Year: <span className="font-bold">{vehicle.year}</span>
                 </p>
               </div>
             </div>
@@ -66,5 +66,3 @@ const Report = () => {
     </div>
   );
 };
-
-export default Report;

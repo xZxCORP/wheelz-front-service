@@ -1,7 +1,8 @@
 import { IconType } from 'react-icons';
-import { CiCircleCheck, CiWarning } from 'react-icons/ci';
+import { FaCheckCircle } from 'react-icons/fa';
+import { FaTriangleExclamation } from 'react-icons/fa6';
 
-const NoticeCard = ({
+export const NoticeCard = ({
   title,
   Icon,
   warning,
@@ -16,17 +17,15 @@ const NoticeCard = ({
       <h3 className="text-center text-sm font-semibold sm:text-base">{title}</h3>
       {warning ? (
         <div className="flex items-center space-x-1 rounded bg-yellow-300 p-1 text-xs sm:text-sm">
-          <CiWarning className="shrink-0" />
+          <FaTriangleExclamation className="shrink-0" />
           <p>Analyze</p>
         </div>
       ) : (
         <div className="flex items-center space-x-1 rounded bg-success-700 p-1 text-xs sm:text-sm">
-          <CiCircleCheck className="shrink-0" />
+          <FaCheckCircle className="shrink-0" />
           <p>Everything is fine !</p>
         </div>
       )}
     </button>
   );
 };
-
-export default NoticeCard;

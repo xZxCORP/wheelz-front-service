@@ -1,17 +1,28 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { CiMenuBurger } from 'react-icons/ci';
-import { RxCross1 } from 'react-icons/rx';
+import { FaXmark } from 'react-icons/fa6';
 
-import { mainNavLinks } from '../router/MainNavLinks';
-import Accordion from './Accordion';
+import { mainNavLinks } from '../../router/MainNavLinks';
+import { useAuthStore } from '../../stores/useAuthStore';
+import { Accordion } from '../base/Accordion';
+import { ProfileButton } from '../profile/ProfileButton';
+import { RegisterButtonTrigger } from '../register/RegisterButtonTrigger';
 
-interface BurgerMenuProps {
+interface Props {
   className?: string;
 }
 
-const BurgerMenu: React.FC<BurgerMenuProps> = ({ className }) => {
+export const BurgerMenu = ({ className }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const AccountCell = () => {
+    if (isAuthenticated()) {
+      return <ProfileButton />;
+    }
+    return <RegisterButtonTrigger />;
+  };
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -22,7 +33,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({ className }) => {
         type="button"
         className={clsx(
           'rounded-md p-2',
-          'text-secondary-700 hover:text-primary-500',
+          'hover:text-primary-500',
           'hover:bg-secondary-100',
           'focus:outline-none focus:ring-2 focus:ring-primary-500',
           'transition-colors duration-200'
@@ -30,7 +41,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({ className }) => {
         aria-expanded={isOpen}
         aria-label="Toggle menu"
       >
-        {isOpen ? <RxCross1 className="size-6" /> : <CiMenuBurger className="size-6" />}
+        <CiMenuBurger className="size-6" />
       </button>
 
       <div
@@ -43,26 +54,25 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({ className }) => {
           }
         )}
       >
-        <div className="flex h-full flex-col">
-          <div className="flex justify-end p-4">
+        <div className="flex h-full flex-col p-4">
+          <div className="flex justify-end">
             <button
               onClick={toggleMenu}
               type="button"
-              className="p-2 text-secondary-700 hover:text-primary-500"
+              className="p-2 hover:text-primary-500"
               aria-label="Close menu"
             >
-              <RxCross1 className="size-6" />
+              <FaXmark className="size-6" />
             </button>
           </div>
-          <div className="grow overflow-y-auto">
+          <div className="flex flex-col gap-4">
             {mainNavLinks.map((link) => (
               <Accordion key={link.title} title={link.title} links={link.links} />
             ))}
+            {AccountCell()}
           </div>
         </div>
       </div>
     </div>
   );
 };
-
-export default BurgerMenu;

@@ -14,7 +14,6 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
     (event) => {
       const target = event.target as Node;
 
-      // Do nothing if the target is not connected element with document
       if (!target || !target.isConnected) {
         return;
       }
