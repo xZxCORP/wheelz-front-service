@@ -7,7 +7,7 @@ import Lottie from 'react-lottie-player/dist/LottiePlayerLight';
  * @param size Value equals to width and height. Default 80px
  * @returns
  */
-const LoadingAnimation = ({
+export const LoadingAnimation = ({
   className,
   size = 80,
   rgba = { r: 165, g: 153, b: 227, a: 1 },
@@ -27,8 +27,6 @@ const LoadingAnimation = ({
   );
   return lottieReference.current;
 };
-
-export default LoadingAnimation;
 
 const lottie = ({ r = 165, g = 153, b = 227, a = 1 }) => {
   return {
