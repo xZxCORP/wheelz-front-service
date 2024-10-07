@@ -1,16 +1,19 @@
-import { Navigate } from 'react-router-dom';
+import React from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 
-import useApp from '../stores/useApp';
+import { useAuthStore } from '../stores/useAuthStore';
 
-export const PrivateRoute = ({ elem: Element_ }: { elem: () => JSX.Element }) => {
-  //const { appState } = useApp();
-  // Normal flow below
-  //return appState === 'logged' ? <Element_ /> : <Navigate to="/" />;
-  return <Element_ />;
-};
+interface Props {
+  element: React.ComponentType;
+}
 
-export const OnlyPublicRoute = ({ elem: Element_ }: { elem: () => JSX.Element }) => {
-  const { appState } = useApp();
+export const PrivateRoute = ({ element: RouteComponent }: Props) => {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const location = useLocation();
 
-  return appState === 'unlogged' ? <Element_ /> : <Navigate to="/" />;
+  if (!isAuthenticated()) {
+    return <Navigate to="/dashboard" state={{ from: location }} replace />;
+  }
+
+  return <RouteComponent />;
 };

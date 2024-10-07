@@ -1,23 +1,37 @@
+import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 
-import { Snack } from '../types/notification';
+export type SnackbarType = 'success' | 'error' | 'warning' | 'info';
 
-export type SessionState = {
-  snacks: Snack[];
-  addSnack: (type: 'error' | 'info' | 'warning' | 'success', message: string) => void;
-  removeSnack: (index: number) => void;
-};
+export interface ISnackBar {
+  id: string;
+  message: string;
+  type: SnackbarType;
+  duration: number;
+}
 
-const useSnackbar = create<SessionState>((set) => ({
-  snacks: [],
-  addSnack: (type, message) =>
+interface SnackbarState {
+  snackbars: ISnackBar[];
+  addSnackbar: (message: string, type: SnackbarType, duration?: number) => void;
+  removeSnackbar: (id: string) => void;
+}
+
+export const useSnackbarStore = create<SnackbarState>((set) => ({
+  snackbars: [],
+  addSnackbar: (message, type, duration = 5000) => {
+    const id = uuidv4();
     set((state) => ({
-      snacks: [...state.snacks, { type, message, duration: 3000 }],
-    })),
-  removeSnack: (index) =>
+      snackbars: [...state.snackbars, { id, message, type, duration }],
+    }));
+    setTimeout(() => {
+      set((state) => ({
+        snackbars: state.snackbars.filter((snackbar) => snackbar.id !== id),
+      }));
+    }, duration);
+  },
+  removeSnackbar: (id) => {
     set((state) => ({
-      snacks: state.snacks.filter((_, index_) => index_ !== index),
-    })),
+      snackbars: state.snackbars.filter((snackbar) => snackbar.id !== id),
+    }));
+  },
 }));
-
-export default useSnackbar;

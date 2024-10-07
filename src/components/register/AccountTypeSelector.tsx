@@ -11,7 +11,7 @@ export const AccountTypeSelector = ({ onAccountTypeSelected }: Props) => {
       <div className="flex flex-col gap-2">
         {Object.entries(accountTypeLabels).map(([key, label]) => (
           <button
-            className="bg-primary-500 text-secondary-500"
+            className="bg-primary-500"
             onClick={() => onAccountTypeSelected(key as AccountType)}
             key={key}
           >

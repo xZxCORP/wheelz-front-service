@@ -21,7 +21,7 @@ const Accordion = ({ title, links }: Props) => {
         className={clsx(
           'flex w-full items-center justify-between px-4 py-3',
           'text-left',
-          isOpen ? 'bg-primary-50 text-primary-700' : 'bg-secondary-50 text-secondary-700'
+          isOpen ? 'bg-primary-50 text-primary-700' : 'bg-secondary-50'
         )}
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -38,10 +38,7 @@ const Accordion = ({ title, links }: Props) => {
           {links &&
             links.map((link) => (
               <li key={link.title}>
-                <Link
-                  to={link.url}
-                  className="block py-2 text-sm text-secondary-700 hover:text-primary-700"
-                >
+                <Link to={link.url} className="block py-2 text-sm hover:text-primary-700">
                   {link.title}
                 </Link>
               </li>

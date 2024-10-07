@@ -52,9 +52,7 @@ const Modal = ({ isOpen, onClose, extraButtons, title, children }: Props) => {
               X
             </Button>
           </div>
-          <div className="max-h-[calc(100vh-16rem)] grow overflow-y-auto p-6 text-secondary-800">
-            {children}
-          </div>
+          <div className="max-h-[calc(100vh-16rem)] grow overflow-y-auto p-6">{children}</div>
           <div className="flex justify-end gap-2 border-t border-secondary-200 p-4">
             {extraButtons}
             <Button variant="primary" onClick={onClose}>

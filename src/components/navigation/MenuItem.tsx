@@ -13,7 +13,7 @@ export const MenuItem = ({ to, children }: Props) => {
         to={to}
         className={clsx(
           'block px-4 py-2 text-sm md:text-base',
-          'text-secondary-700 hover:bg-primary-50 hover:text-primary-700',
+          'hover:bg-primary-50 hover:text-primary-700',
           'transition-colors duration-150'
         )}
         role="menuitem"

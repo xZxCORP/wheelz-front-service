@@ -15,7 +15,7 @@ const Button = ({ variant = 'primary', size = 'md', className, children, ...prop
 
   const variantClasses: Record<ButtonVariant, string> = {
     primary: 'bg-primary-600 text-white hover:bg-primary-700',
-    secondary: 'bg-secondary-200 text-secondary-800 hover:bg-secondary-300',
+    secondary: 'bg-secondary-200 hover:bg-secondary-300',
     error: 'bg-error-600 text-white hover:bg-error-700',
     success: 'bg-success-600 text-white hover:bg-success-700',
     warning: 'bg-warning-600 text-white hover:bg-warning-700',

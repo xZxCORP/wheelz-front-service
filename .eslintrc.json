@@ -4,7 +4,8 @@
     "@zcorp/eslint-config/react",
     "plugin:tailwindcss/recommended",
     "plugin:@react-three/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:@tanstack/query/recommended"
   ],
   "plugins": ["tailwindcss", "@react-three","prettier","unused-imports"],
   "rules": {

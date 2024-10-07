@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaUser } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
@@ -6,7 +5,7 @@ import BurgerMenu from '../../components/navigation/BurgerMenu';
 import DropdownMenu from '../../components/navigation/DropdownMenu';
 import { mainNavLinks } from '../../router/MainNavLinks';
 
-const Header: React.FC = () => {
+const Header = () => {
   const links = mainNavLinks.map((link) => (
     <DropdownMenu title={link.title} links={link.links} key={link.title} />
   ));
@@ -26,7 +25,7 @@ const Header: React.FC = () => {
         <div className="flex items-center space-x-4">
           <Link
             to="/profile"
-            className="text-2xl text-secondary-700 transition-colors hover:text-primary-500"
+            className="text-2xl transition-colors hover:text-primary-500"
             aria-label="Profile"
           >
             <FaUser />

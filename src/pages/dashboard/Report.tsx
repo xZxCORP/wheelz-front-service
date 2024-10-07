@@ -36,12 +36,10 @@ const Report = () => {
                 <span className="capitalize">{vehicle.constructor}</span> {vehicle.model}
               </div>
               <div className="flex flex-wrap gap-2 text-sm">
-                <p className="rounded-md bg-secondary-900 p-2 text-secondary-50">
+                <p className="rounded-md bg-secondary-900 p-2">
                   VIN: <span className="font-mono">{vehicle.vin}</span>
                 </p>
-                <p className="rounded-md bg-secondary-900 p-2 text-secondary-50">
-                  Year: {vehicle.year}
-                </p>
+                <p className="rounded-md bg-secondary-900 p-2">Year: {vehicle.year}</p>
               </div>
             </div>
           </div>
