@@ -3,11 +3,14 @@ import { useForm } from 'react-hook-form';
 interface FormData {
   email: string;
   password: string;
-  username: string;
   remember: boolean;
 }
 
-const Signup = () => {
+type LoginFormProps = {
+  onSwitchToRegister: () => void;
+};
+
+export const LoginForm = ({ onSwitchToRegister }: LoginFormProps) => {
   const { register, handleSubmit, formState } = useForm<FormData>({
     mode: 'onChange',
   });
@@ -16,13 +19,9 @@ const Signup = () => {
     console.log(data);
   };
 
-
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center">
-      <div className="max-w-md w-full mx-auto">
-        <div className="text-center font-medium text-xl">Wheelz</div>
-        <div className="text-3xl font-bold text-gray-900 mt-2 text-center">Inscription</div>
-      </div>
+    <div className="flex flex-col gap-4">
+      <h2 className="text-2xl font-bold">Se connecter</h2>
       <div className="max-w-md w-full mx-auto mt-4 bg-white p-8 border border-gray-300">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
@@ -40,11 +39,7 @@ const Signup = () => {
               className="w-full p-2 border border-gray-300 rounded mt-1"
               placeholder="Enter your email"
             />
-            {formState.errors.email && (
-          <div className="text-red-500 text-sm mt-1">
-            {formState.errors.email.message}
-          </div>
-        )}
+            {formState.errors.email && <div>Email is invalid</div>}
           </div>
           <div>
             <label htmlFor="password" className="text-sm font-bold text-gray-600 block">
@@ -56,7 +51,7 @@ const Signup = () => {
                 minLength: 6,
                 maxLength: 20,
               })}
-              style={{ borderColor: formState.errors.email ? 'red' : '' }}
+              style={{ borderColor: formState.errors.password ? 'red' : '' }}
               name="password"
               type="password"
               className="w-full p-2 border border-gray-300 rounded mt-1"
@@ -64,26 +59,8 @@ const Signup = () => {
             />
             {formState.errors.password && <div>Password is required</div>}
           </div>
-          <div>
-            <label htmlFor="username" className="text-sm font-bold text-gray-600 block">
-              Username
-            </label>
-            <input
-              {...register('username', {
-                required: true,
-                minLength: 6,
-                maxLength: 20,
-              })}
-              style={{ borderColor: formState.errors.email ? 'red' : '' }}
-              name="username"
-              type="text"
-              className="w-full p-2 border border-gray-300 rounded mt-1"
-              placeholder="Enter your username"
-            />
-            {formState.errors.username && <div>Username is required</div>}
-          </div>
           <div className="flex items-center justify-between">
-            <div className="flex item-center">
+            <div className="flex items-center">
               <input
                 {...register('remember')}
                 name="remember"
@@ -94,26 +71,22 @@ const Signup = () => {
                 Remember me
               </label>
             </div>
-            <div>
-              <a href="" className="font-medium  text-sm text-blue-500">
-                Forgot Password?
-              </a>
-            </div>
           </div>
-          <div>
-            <button type="submit" className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md text-white text-sm">
-              Submit
+          <div className="flex justify-between items-center">
+            <button
+              type="submit"
+              className="w-full py-2 px-4 bg-orange-500 hover:bg-orange-700 rounded-md text-white text-sm"
+            >
+              Se connecter
             </button>
           </div>
-          <div>
-              <a href="/login" className="font-medium  text-sm text-blue-500">
-                j'ai déjà un compte
-              </a>
-            </div>
+          <div className="text-sm">
+            <a href="#" onClick={onSwitchToRegister} className="font-medium text-orange-400">
+              Je n'ai pas de compte - S'inscrire
+            </a>
+          </div>
         </form>
       </div>
     </div>
   );
 };
-
-export default Signup;

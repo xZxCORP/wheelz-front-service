@@ -1,31 +1,47 @@
-import { CgProfile } from 'react-icons/cg';
 import { Link } from 'react-router-dom';
 
-import BurgerMenu from '../../components/BurgerMenu';
-import DropdownMenu from '../../components/DropdownMenu';
-import { MainNavLinks } from '../../router/MainNavLinks';
+import { BurgerMenu } from '../../components/navigation/BurgerMenu';
+import { DropdownMenu } from '../../components/navigation/DropdownMenu';
+import { ProfileButton } from '../../components/profile/ProfileButton';
+import { RegisterButtonTrigger } from '../../components/register/RegisterButtonTrigger';
+import { mainNavLinks } from '../../router/MainNavLinks';
+import { useAuthStore } from '../../stores/useAuthStore';
 
-const Header = () => {
-  const links = MainNavLinks.map((link) => (
+export const Header = () => {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const links = mainNavLinks.map((link) => (
     <DropdownMenu title={link.title} links={link.links} key={link.title} />
   ));
 
+  const AccountCell = () => {
+    if (isAuthenticated()) {
+      return <ProfileButton />;
+    }
+    return <RegisterButtonTrigger />;
+  };
+
   return (
-    <div
-      id="header"
-      className="flex w-full items-center justify-between bg-secondary-100 p-4 text-lg"
-    >
-      <h1 className="text-3xl text-primary-500">WheelZ</h1>
+    <header className="bg-secondary-100 shadow-md">
+      <div className="flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <Link
+          to="/"
+          className="flex items-center text-2xl font-bold text-primary-500 transition-colors hover:text-primary-600 sm:text-3xl"
+        >
+          WheelZ
+        </Link>
 
-      <nav className="hidden w-2/3 items-center justify-around md:flex">{links}</nav>
+        <nav className="mx-auto hidden max-w-4xl grow justify-center space-x-4 lg:flex lg:space-x-6">
+          {links}
+        </nav>
 
-      <BurgerMenu classes={'ml-auto mr-6'}>{links}</BurgerMenu>
-
-      <Link to="#" className="text-3xl">
-        <CgProfile />
-      </Link>
-    </div>
+        <div className="ml-auto flex items-center lg:ml-0">
+          <div className="mr-4 hidden lg:flex">
+            <AccountCell />
+          </div>
+          <BurgerMenu className="flex lg:hidden" />
+        </div>
+      </div>
+    </header>
   );
 };
-
-export default Header;
