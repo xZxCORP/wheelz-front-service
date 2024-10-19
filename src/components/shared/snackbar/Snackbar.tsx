@@ -1,4 +1,4 @@
-import { useSnackbarStore } from '../../stores/useSnackbar';
+import { useSnackbarStore } from '../../../stores/useSnackbar';
 import { SnackbarItem } from './SnackbarItem';
 
 export const Snackbar = () => {

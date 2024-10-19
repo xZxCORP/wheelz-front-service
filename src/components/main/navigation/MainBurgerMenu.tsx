@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import { CiMenuBurger } from 'react-icons/ci';
 import { FaXmark } from 'react-icons/fa6';
 
-import { mainNavLinks } from '../../router/MainNavLinks';
-import { useAuthStore } from '../../stores/useAuthStore';
-import { Accordion } from '../base/Accordion';
-import { Button } from '../base/button/Button';
+import { mainNavLinks } from '../../../router/MainNavLinks';
+import { useAuthStore } from '../../../stores/useAuthStore';
+import { Accordion } from '../../shared/Accordion';
+import { BurgerMenuButton } from '../../shared/BurgerMenuButton';
+import { Button } from '../../shared/button/Button';
 import { ProfileButton } from '../profile/ProfileButton';
 import { RegisterButtonTrigger } from '../register/RegisterButtonTrigger';
 
@@ -14,7 +14,7 @@ interface Props {
   className?: string;
 }
 
-export const BurgerMenu = ({ className }: Props) => {
+export const MainBurgerMenu = ({ className }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
@@ -29,10 +29,7 @@ export const BurgerMenu = ({ className }: Props) => {
 
   return (
     <div className={clsx('relative', className)}>
-      <Button buttonVariant="ghost" buttonStyle={{ rounded: 'lg' }} onClick={toggleMenu}>
-        <CiMenuBurger className="size-6" />
-      </Button>
-
+      <BurgerMenuButton onClick={toggleMenu} />
       <div
         className={clsx(
           'fixed inset-0 z-50 bg-secondary-100',

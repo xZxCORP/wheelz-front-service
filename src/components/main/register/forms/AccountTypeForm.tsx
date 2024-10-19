@@ -1,9 +1,9 @@
-import { AccountType, accountTypeLabels } from '../../../types/account';
-import { Button } from '../../base/button/Button';
+import { AccountType, accountTypeLabels } from '../../../../types/account';
+import { Button } from '../../../shared/button/Button';
 
-type Props = {
+interface Props {
   onAccountTypeSelected: (accountType: AccountType) => void;
-};
+}
 
 export const AccountTypeForm = ({ onAccountTypeSelected }: Props) => {
   return (

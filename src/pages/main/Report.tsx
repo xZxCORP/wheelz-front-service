@@ -3,8 +3,8 @@ import { FaCarCrash } from 'react-icons/fa';
 import { GiCrossedChains } from 'react-icons/gi';
 
 import { cars } from '../../assets/faker/cars';
-import { LoadingAnimation } from '../../components/LoadingAnimation';
-import { NoticeCard } from '../../components/report/NoticeCard';
+import { NoticeCard } from '../../components/main/report/NoticeCard';
+import { LoadingAnimation } from '../../components/shared/LoadingAnimation';
 import { IVehicle } from '../../types/vehicle';
 
 export const Report = () => {

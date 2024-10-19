@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ISnackBar, SnackbarType } from '../../stores/useSnackbar';
+import { ISnackBar, SnackbarType } from '../../../stores/useSnackbar';
 
 interface Props {
   snackbar: ISnackBar;

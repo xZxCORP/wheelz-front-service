@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import { useRef, useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 
-import { LinkObject } from '../../types/linkObject';
-import { Button } from '../base/button/Button';
+import { LinkObject } from '../../../types/linkObject';
+import { Button } from '../../shared/button/Button';
 import { MenuItem } from './MenuItem';
 
 interface Props {
@@ -25,13 +25,9 @@ export const DropdownMenu = ({ title, links }: Props) => {
       onMouseEnter={toggleDropDown}
       onMouseLeave={toggleDropDown}
     >
-      <Button
-        buttonStyle={{ color: 'secondary' }}
-        aria-haspopup="true"
-        aria-expanded={isOpen}
-        rightIcon={<FaChevronDown />}
-      >
+      <Button buttonStyle={{ color: 'secondary' }} aria-haspopup="true" aria-expanded={isOpen}>
         {title}
+        <FaChevronDown />
       </Button>
       {isOpen && (
         <div
