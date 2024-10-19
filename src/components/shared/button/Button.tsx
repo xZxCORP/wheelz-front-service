@@ -1,49 +1,16 @@
-import { forwardRef, useMemo } from 'react';
-import { TbLoader } from 'react-icons/tb';
+import { Slot } from '@radix-ui/react-slot';
+import { forwardRef } from 'react';
 import { VariantProps } from 'tailwind-variants';
 
 import { ghostButton, outlineButton, solidButton } from './styles';
 
-type BaseButtonAttributes = React.ComponentPropsWithoutRef<'button'>;
-
-type Ref = HTMLButtonElement;
-
-interface Props extends BaseButtonAttributes {
-  isLoading?: boolean;
-  disabled?: boolean;
-  leftIcon?: React.ReactElement;
-  rightIcon?: React.ReactElement;
+export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  asChild?: boolean;
   buttonStyle?: VariantProps<typeof solidButton>;
-  className?: string;
   buttonVariant?: 'solid' | 'outline' | 'ghost';
 }
-
-export const Button = forwardRef<Ref, Props>((props, ref) => {
-  const {
-    type,
-    children,
-    buttonStyle,
-    buttonVariant = 'solid',
-    disabled,
-    isLoading,
-    leftIcon,
-    rightIcon,
-    className,
-    ...rest
-  } = props;
-
-  const { newIcon: icon, iconPlacement } = useMemo(() => {
-    let newIcon = rightIcon || leftIcon;
-
-    if (isLoading) {
-      newIcon = <TbLoader className="animate-spin" size={25} />;
-    }
-
-    return {
-      newIcon,
-      iconPlacement: rightIcon ? ('right' as const) : ('left' as const),
-    };
-  }, [isLoading, leftIcon, rightIcon]);
+export const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
+  const { buttonStyle, buttonVariant = 'solid', asChild, className, ...rest } = props;
 
   const renderButtonVariant = () => {
     if (buttonVariant === 'solid') {
@@ -53,30 +20,8 @@ export const Button = forwardRef<Ref, Props>((props, ref) => {
     }
     return ghostButton({ ...buttonStyle, className });
   };
-
-  return (
-    <button
-      className={renderButtonVariant()}
-      {...rest}
-      type={type ? 'submit' : 'button'}
-      ref={ref}
-      disabled={disabled || isLoading}
-    >
-      {icon && iconPlacement === 'left' ? (
-        <span className={`inline-flex shrink-0 self-center ${children && !isLoading && 'mr-2'}`}>
-          {icon}
-        </span>
-      ) : null}
-
-      {!isLoading && children}
-
-      {icon && iconPlacement === 'right' ? (
-        <span className={`inline-flex shrink-0 self-center ${children && !isLoading && 'ml-2'}`}>
-          {icon}
-        </span>
-      ) : null}
-    </button>
-  );
+  const Comp = asChild ? Slot : 'button';
+  return <Comp ref={ref} className={renderButtonVariant()} {...rest} />;
 });
 
 Button.displayName = 'Button';

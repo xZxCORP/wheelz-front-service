@@ -25,13 +25,9 @@ export const DropdownMenu = ({ title, links }: Props) => {
       onMouseEnter={toggleDropDown}
       onMouseLeave={toggleDropDown}
     >
-      <Button
-        buttonStyle={{ color: 'secondary' }}
-        aria-haspopup="true"
-        aria-expanded={isOpen}
-        rightIcon={<FaChevronDown />}
-      >
+      <Button buttonStyle={{ color: 'secondary' }} aria-haspopup="true" aria-expanded={isOpen}>
         {title}
+        <FaChevronDown />
       </Button>
       {isOpen && (
         <div

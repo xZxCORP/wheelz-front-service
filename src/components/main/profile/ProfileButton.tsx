@@ -5,8 +5,11 @@ import { Button } from '../../shared/button/Button';
 
 export const ProfileButton = () => {
   return (
-    <Button leftIcon={<FaUser />}>
-      <Link to="/profile">Profile</Link>
+    <Button asChild>
+      <Link to="/profile">
+        <FaUser />
+        Profile
+      </Link>
       {/* adding user data */}
     </Button>
   );

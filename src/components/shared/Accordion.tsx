@@ -20,9 +20,9 @@ export const Accordion = ({ title, links }: Props) => {
         buttonStyle={{ color: isOpen ? 'primary' : 'secondary', size: 'lg' }}
         className="w-full justify-between"
         onClick={() => setIsOpen(!isOpen)}
-        rightIcon={isOpen ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
       >
         {title}
+        {isOpen ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
       </Button>
       <div
         className={clsx(
