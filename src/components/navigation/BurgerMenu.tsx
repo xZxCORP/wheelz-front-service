@@ -6,6 +6,7 @@ import { FaXmark } from 'react-icons/fa6';
 import { mainNavLinks } from '../../router/MainNavLinks';
 import { useAuthStore } from '../../stores/useAuthStore';
 import { Accordion } from '../base/Accordion';
+import { Button } from '../base/button/Button';
 import { ProfileButton } from '../profile/ProfileButton';
 import { RegisterButtonTrigger } from '../register/RegisterButtonTrigger';
 
@@ -28,21 +29,9 @@ export const BurgerMenu = ({ className }: Props) => {
 
   return (
     <div className={clsx('relative', className)}>
-      <button
-        onClick={toggleMenu}
-        type="button"
-        className={clsx(
-          'rounded-md p-2',
-          'hover:text-primary-500',
-          'hover:bg-secondary-100',
-          'focus:outline-none focus:ring-2 focus:ring-primary-500',
-          'transition-colors duration-200'
-        )}
-        aria-expanded={isOpen}
-        aria-label="Toggle menu"
-      >
+      <Button buttonVariant="ghost" buttonStyle={{ rounded: 'lg' }} onClick={toggleMenu}>
         <CiMenuBurger className="size-6" />
-      </button>
+      </Button>
 
       <div
         className={clsx(
@@ -54,16 +43,11 @@ export const BurgerMenu = ({ className }: Props) => {
           }
         )}
       >
-        <div className="flex h-full flex-col p-4">
+        <div className="flex h-full flex-col gap-2 p-4">
           <div className="flex justify-end">
-            <button
-              onClick={toggleMenu}
-              type="button"
-              className="p-2 hover:text-primary-500"
-              aria-label="Close menu"
-            >
+            <Button onClick={toggleMenu} buttonVariant="ghost">
               <FaXmark className="size-6" />
-            </button>
+            </Button>
           </div>
           <div className="flex flex-col gap-4">
             {mainNavLinks.map((link) => (

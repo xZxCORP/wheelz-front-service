@@ -4,7 +4,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
 import { LinkObject } from '../../types/linkObject';
-import { Button } from './Button';
+import { Button } from './button/Button';
 
 interface Props {
   title: string;
@@ -17,16 +17,12 @@ export const Accordion = ({ title, links }: Props) => {
   return (
     <div className="border-b border-secondary-200">
       <Button
-        variant={isOpen ? 'primary' : 'secondary'}
-        className={clsx(
-          'flex w-full items-center justify-between px-4 py-3',
-          'text-left',
-          isOpen ? 'bg-primary-50 text-primary-700' : 'bg-secondary-50'
-        )}
+        buttonStyle={{ color: isOpen ? 'primary' : 'secondary', size: 'lg' }}
+        className="w-full justify-between"
         onClick={() => setIsOpen(!isOpen)}
+        rightIcon={isOpen ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
       >
-        <span>{title}</span>
-        {isOpen ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
+        {title}
       </Button>
       <div
         className={clsx(
