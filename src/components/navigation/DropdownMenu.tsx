@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 
 import { LinkObject } from '../../types/linkObject';
-import { Button } from '../base/Button';
+import { Button } from '../base/button/Button';
 import { MenuItem } from './MenuItem';
 
 interface Props {
@@ -26,11 +26,10 @@ export const DropdownMenu = ({ title, links }: Props) => {
       onMouseLeave={toggleDropDown}
     >
       <Button
-        variant="secondary"
+        buttonStyle={{ color: 'secondary' }}
         aria-haspopup="true"
         aria-expanded={isOpen}
-        icon={<FaChevronDown />}
-        iconPosition="right"
+        rightIcon={<FaChevronDown />}
       >
         {title}
       </Button>

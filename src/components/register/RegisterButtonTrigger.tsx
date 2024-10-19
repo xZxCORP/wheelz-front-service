@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Button } from '../base/Button';
+import { Button } from '../base/button/Button';
 import { RegisterModal } from './RegisterModal';
 
 export const RegisterButtonTrigger = () => {

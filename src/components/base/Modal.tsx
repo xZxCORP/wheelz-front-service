@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import { useClickOutside } from '../../hooks/useClickOutside';
-import { Button } from './Button';
+import { Button } from './button/Button';
 
 interface ModalProps {
   isOpen: boolean;
@@ -65,16 +65,19 @@ export const Modal: React.FC<ModalProps> = ({
             <h2 id="modal-title" className="text-xl font-semibold text-primary-700">
               {title}
             </h2>
-            <Button variant="secondary" size="sm" onClick={onClose} aria-label="Fermer">
+            <Button
+              buttonStyle={{ color: 'secondary' }}
+              buttonVariant="ghost"
+              onClick={onClose}
+              aria-label="Fermer"
+            >
               X
             </Button>
           </div>
           <div className="max-h-[calc(100vh-16rem)] grow overflow-y-auto p-6">{children}</div>
           <div className="flex justify-end gap-2 border-t border-secondary-200 p-4">
             {extraButtons}
-            <Button variant="primary" onClick={onClose}>
-              Fermer
-            </Button>
+            <Button onClick={onClose}>Fermer</Button>
           </div>
         </div>
       </div>

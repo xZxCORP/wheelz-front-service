@@ -1,7 +1,7 @@
 import { FaArrowLeft, FaTriangleExclamation } from 'react-icons/fa6';
 import { isRouteErrorResponse, Link, useRouteError } from 'react-router-dom';
 
-import { Button } from '../../components/base/Button';
+import { Button } from '../../components/base/button/Button';
 
 export const ErrorLayout = () => {
   const error = useRouteError();
@@ -30,7 +30,7 @@ export const ErrorLayout = () => {
         <p className="mt-2 text-center text-xl font-semibold">Erreur {errorCode}</p>
         <p className="mt-4 text-center">{errorMessage}</p>
         <div className="mt-6 flex justify-center">
-          <Button icon={<FaArrowLeft className="size-5" />}>
+          <Button leftIcon={<FaArrowLeft className="size-5" />}>
             <Link to="/">Retour à l&apos;accueil</Link>
           </Button>
         </div>

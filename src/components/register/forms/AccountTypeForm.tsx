@@ -1,5 +1,5 @@
 import { AccountType, accountTypeLabels } from '../../../types/account';
-import { Button } from '../../base/Button';
+import { Button } from '../../base/button/Button';
 
 type Props = {
   onAccountTypeSelected: (accountType: AccountType) => void;
@@ -12,7 +12,7 @@ export const AccountTypeForm = ({ onAccountTypeSelected }: Props) => {
       <div className="flex flex-col gap-2">
         {Object.entries(accountTypeLabels).map(([key, label]) => (
           <Button
-            variant="secondary"
+            buttonStyle={{ color: 'secondary' }}
             onClick={() => onAccountTypeSelected(key as AccountType)}
             key={key}
           >
