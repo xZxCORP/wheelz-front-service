@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 
-import { Loader } from '../../components/base/Loader';
+import { Header } from '../../components/main/MainHeader';
+import { Loader } from '../../components/shared/Loader';
 import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';
 import { Footer } from './Footer';
-import { Header } from './Header';
 
 export const BaseLayout = () => {
   const isLoading = useGlobalLoadingStore((state) => state.isLoading);

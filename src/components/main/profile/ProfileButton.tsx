@@ -1,7 +1,7 @@
 import { FaUser } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
-import { Button } from '../base/button/Button';
+import { Button } from '../../shared/button/Button';
 
 export const ProfileButton = () => {
   return (

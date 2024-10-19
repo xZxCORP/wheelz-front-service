@@ -1,7 +1,7 @@
 import { FaArrowLeft, FaTriangleExclamation } from 'react-icons/fa6';
 import { isRouteErrorResponse, Link, useRouteError } from 'react-router-dom';
 
-import { Button } from '../../components/base/button/Button';
+import { Button } from '../../components/shared/button/Button';
 
 export const ErrorLayout = () => {
   const error = useRouteError();

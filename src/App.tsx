@@ -2,7 +2,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { queryClient } from './clients/api/queryClient';
-import { Snackbar } from './components/snackbar/Snackbar';
+import { Snackbar } from './components/shared/snackbar/Snackbar';
 import { routes } from './router/Routes';
 
 const router = createBrowserRouter(routes);
