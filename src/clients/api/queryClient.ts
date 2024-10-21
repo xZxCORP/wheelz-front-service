@@ -1,4 +1,4 @@
-import { QueryClient, useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { QueryClient, useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';

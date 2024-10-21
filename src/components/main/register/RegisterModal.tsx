@@ -1,5 +1,5 @@
 import { useRegisterStore } from '../../../stores/useRegisterStore';
-import { AccountType } from '../../../types/account';
+import type { AccountType } from '../../../types/account';
 import { Modal } from '../../shared/Modal';
 import { AccountTypeForm } from './forms/AccountTypeForm';
 import { BusinessInfosForm } from './forms/BusinessInfosForm';

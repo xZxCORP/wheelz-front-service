@@ -1,6 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import { forwardRef } from 'react';
-import { VariantProps } from 'tailwind-variants';
+import type { VariantProps } from 'tailwind-variants';
 
 import { ghostButton, outlineButton, solidButton } from './styles';
 

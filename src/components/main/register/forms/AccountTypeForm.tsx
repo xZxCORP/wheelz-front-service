@@ -1,4 +1,5 @@
-import { AccountType, accountTypeLabels } from '../../../../types/account';
+import type { AccountType } from '../../../../types/account';
+import { accountTypeLabels } from '../../../../types/account';
 import { Button } from '../../../shared/button/Button';
 
 interface Props {

@@ -1,6 +1,6 @@
 import OpenAPIClientAxios from 'openapi-client-axios';
 
-import { Client } from '../../types/user';
+import type { Client } from '../../types/user';
 import { assignTokenInterceptor } from './interceptors';
 
 const userApi = new OpenAPIClientAxios({

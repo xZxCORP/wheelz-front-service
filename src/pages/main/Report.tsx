@@ -5,10 +5,10 @@ import { GiCrossedChains } from 'react-icons/gi';
 import { cars } from '../../assets/faker/cars';
 import { NoticeCard } from '../../components/main/report/NoticeCard';
 import { LoadingAnimation } from '../../components/shared/LoadingAnimation';
-import { IVehicle } from '../../types/vehicle';
+import type { IVehicle } from '../../types/vehicle';
 
 export const Report = () => {
-  const [vehicle, setVehicle] = useState<IVehicle | null>(null);
+  const [vehicle, setVehicle] = useState<IVehicle | undefined>();
   const REPORT_CARDS = [
     { title: 'Damage', Icon: FaCarCrash, warning: true },
     { title: 'Damage', Icon: FaCarCrash, warning: true },
