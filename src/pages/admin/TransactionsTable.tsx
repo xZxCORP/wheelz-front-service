@@ -1,17 +1,12 @@
 import { createColumnHelper } from '@tanstack/react-table';
-import {
-  createTransactionFixture,
-  deleteTransactionFixture,
-  type VehicleTransaction,
-} from '@zcorp/shared-typing-wheelz';
+import { type VehicleTransaction } from '@zcorp/shared-typing-wheelz';
 
+import { transactionTsr } from '../../clients/api/transaction.api';
 import { Table } from '../../components/admin/Table';
 export const TransactionsTable = () => {
-  const data: VehicleTransaction[] = [
-    deleteTransactionFixture,
-    createTransactionFixture,
-    createTransactionFixture,
-  ];
+  const { data } = transactionTsr.transactions.getTransactions.useQuery({
+    queryKey: ['transactions'],
+  });
   const columnHelper = createColumnHelper<VehicleTransaction>();
   const columns = [
     columnHelper.accessor('id', {
@@ -28,7 +23,11 @@ export const TransactionsTable = () => {
     }),
     columnHelper.accessor('timestamp', {
       header: 'Date de création',
-      cell: (info) => info.getValue().toLocaleDateString(),
+      cell: (info) =>
+        new Intl.DateTimeFormat('fr-FR', {
+          dateStyle: 'full',
+          timeStyle: 'long',
+        }).format(new Date(info.getValue())),
     }),
     columnHelper.accessor('dataSignature', {
       header: 'Signature',
@@ -38,7 +37,7 @@ export const TransactionsTable = () => {
   return (
     <div>
       <h2>Transactions Table</h2>
-      <Table data={data} columns={columns}></Table>
+      {data && <Table data={data.body as VehicleTransaction[]} columns={columns}></Table>}
     </div>
   );
 };
