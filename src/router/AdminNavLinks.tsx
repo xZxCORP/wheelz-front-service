@@ -1,4 +1,4 @@
-import { LinkObject } from '../types/linkObject';
+import type { LinkObject } from '../types/linkObject';
 
 export const adminNavLinks: LinkObject[] = [
   {

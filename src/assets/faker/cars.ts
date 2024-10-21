@@ -1,4 +1,4 @@
-import { IVehicle } from '../../types/vehicle';
+import type { IVehicle } from '../../types/vehicle';
 
 export const cars: IVehicle[] = [
   {

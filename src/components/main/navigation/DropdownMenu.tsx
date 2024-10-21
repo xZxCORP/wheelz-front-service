@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useRef, useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 
-import { LinkObject } from '../../../types/linkObject';
+import type { LinkObject } from '../../../types/linkObject';
 import { Button } from '../../shared/button/Button';
 import { MenuItem } from './MenuItem';
 

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
-import { LinkObject } from '../../types/linkObject';
+import type { LinkObject } from '../../types/linkObject';
 import { Button } from './button/Button';
 
 interface Props {

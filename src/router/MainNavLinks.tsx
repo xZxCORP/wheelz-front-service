@@ -1,4 +1,4 @@
-import { DropdownLink } from '../types/dropdownLink';
+import type { DropdownLink } from '../types/dropdownLink';
 
 export const mainNavLinks: DropdownLink[] = [
   {

@@ -1,4 +1,4 @@
-import { IconType } from 'react-icons';
+import type { IconType } from 'react-icons';
 import { FaCheckCircle } from 'react-icons/fa';
 import { FaTriangleExclamation } from 'react-icons/fa6';
 
