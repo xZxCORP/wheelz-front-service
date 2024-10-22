@@ -5,7 +5,6 @@ import { useCallback } from 'react';
 import { transactionTsr } from '../../clients/api/transaction.api';
 import { Table } from '../../components/admin/Table';
 import { Badge } from '../../components/shared/badge/Badge';
-import { formatDate } from '../../utils/date';
 export const TransactionsTable = () => {
   const { data } = transactionTsr.transactions.getTransactions.useQuery({
     queryKey: ['transactions'],
@@ -67,11 +66,12 @@ export const TransactionsTable = () => {
       header: 'Vin du vehicle',
       cell: (info) => info.getValue(),
     }),
-    columnHelper.accessor('timestamp', {
-      header: 'Date de création',
-      cell: (info) => formatDate(new Date(info.getValue())),
-    }),
+    // columnHelper.accessor('timestamp', {
+    //   header: 'Date de création',
+    //   cell: (info) => formatDate(new Date(info.getValue())),
+    // }),
   ];
+
   return (
     data && (
       <Table

@@ -8,7 +8,6 @@ import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';
 export const AdminLayout = () => {
   //TODO: Implement admin role verification
   const isLoading = useGlobalLoadingStore((state) => state.isLoading);
-  console.log('isLoading', isLoading);
   return (
     <>
       <div className="flex min-h-screen w-full flex-col lg:hidden">
