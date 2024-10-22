@@ -5,9 +5,19 @@ import { useCallback } from 'react';
 import { transactionTsr } from '../../clients/api/transaction.api';
 import { Table } from '../../components/admin/Table';
 import { Badge } from '../../components/shared/badge/Badge';
+import { Button } from '../../components/shared/button/Button';
+import { usePagination } from '../../hooks/usePagination';
+import { formatDate } from '../../utils/date';
 export const TransactionsTable = () => {
+  const { pagination, apiPagination, onPaginationChange } = usePagination({
+    initialPage: 1,
+    initialPerPage: 10,
+  });
   const { data } = transactionTsr.transactions.getTransactions.useQuery({
-    queryKey: ['transactions'],
+    queryKey: ['transactions', apiPagination],
+    queryData: {
+      query: apiPagination,
+    },
   });
   const columnHelper = createColumnHelper<VehicleTransaction>();
   const actionToColor = useCallback((action: TransactionAction) => {
@@ -66,18 +76,38 @@ export const TransactionsTable = () => {
       header: 'Vin du vehicle',
       cell: (info) => info.getValue(),
     }),
-    // columnHelper.accessor('timestamp', {
-    //   header: 'Date de création',
-    //   cell: (info) => formatDate(new Date(info.getValue())),
-    // }),
+    columnHelper.accessor('timestamp', {
+      header: 'Date de création',
+      cell: (info) => formatDate(new Date(info.getValue())),
+    }),
+    columnHelper.display({
+      id: 'actions',
+      header: 'Actions',
+      cell: (info) => {
+        return (
+          <div>
+            <Button
+              onClick={() => {
+                console.log(info.row.original);
+              }}
+            >
+              Voir
+            </Button>
+          </div>
+        );
+      },
+    }),
   ];
 
   return (
     data && (
       <Table
         title="Transactions"
-        data={data.body as VehicleTransaction[]}
+        data={data.body.items}
+        meta={data.body.meta}
         columns={columns}
+        onPaginationChange={onPaginationChange}
+        pagination={pagination}
       ></Table>
     )
   );

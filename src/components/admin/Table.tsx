@@ -1,25 +1,62 @@
-import { type ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
-import { useState } from 'react';
+import {
+  type ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  type PaginationState,
+  useReactTable,
+} from '@tanstack/react-table';
+import type { Pagination, PaginationParameters } from '@zcorp/wheelz-contracts';
+import { useEffect, useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
+
+import { PaginationControls } from './PaginationControls';
 
 type Props<T extends object> = {
   data: T[];
+  meta: Pagination;
   title: string;
   columns: ColumnDef<T, any>[];
+  onPaginationChange: (paginationParameters: PaginationParameters) => void;
+  pagination: PaginationState;
 };
 
-export const Table = <T extends object>({ data, columns, title }: Props<T>) => {
+export const Table = <T extends object>({
+  data,
+  meta,
+  onPaginationChange,
+  pagination,
+  columns,
+  title,
+}: Props<T>) => {
   const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({});
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    manualPagination: true,
+    rowCount: meta.total,
+    onPaginationChange: (updater) => {
+      const newPagination = typeof updater === 'function' ? updater(pagination) : updater;
+      onPaginationChange({
+        page: newPagination.pageIndex + 1,
+        perPage: newPagination.pageSize,
+      });
+    },
+    state: {
+      pagination,
+    },
   });
 
   const toggleRowExpanded = (rowId: string) => {
     setExpandedRows((prev) => ({ ...prev, [rowId]: !prev[rowId] }));
   };
+  useEffect(() => {
+    onPaginationChange({
+      page: pagination.pageIndex + 1,
+      perPage: pagination.pageSize,
+    });
+  }, [onPaginationChange, pagination]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -103,6 +140,7 @@ export const Table = <T extends object>({ data, columns, title }: Props<T>) => {
             );
           })}
         </div>
+        <PaginationControls table={table} />
       </div>
     </div>
   );
