@@ -1,13 +1,14 @@
 import { createColumnHelper } from '@tanstack/react-table';
-import { type TransactionAction, type VehicleTransaction } from '@zcorp/shared-typing-wheelz';
-import { useCallback } from 'react';
+import { type VehicleTransaction } from '@zcorp/shared-typing-wheelz';
+import { Link } from 'react-router-dom';
 
-import { transactionTsr } from '../../clients/api/transaction.api';
-import { Table } from '../../components/admin/Table';
-import { Badge } from '../../components/shared/badge/Badge';
-import { Button } from '../../components/shared/button/Button';
-import { usePagination } from '../../hooks/usePagination';
-import { formatDate } from '../../utils/date';
+import { transactionTsr } from '../../../clients/api/transaction.api';
+import { Table } from '../../../components/admin/Table';
+import { Button } from '../../../components/shared/button/Button';
+import { ActionBadge } from '../../../components/transaction/ActionBadge';
+import { StatusBadge } from '../../../components/transaction/StatusBadge';
+import { usePagination } from '../../../hooks/usePagination';
+import { formatDate } from '../../../utils/date';
 export const TransactionsTable = () => {
   const { pagination, apiPagination, onPaginationChange } = usePagination({
     initialPage: 1,
@@ -20,36 +21,7 @@ export const TransactionsTable = () => {
     },
   });
   const columnHelper = createColumnHelper<VehicleTransaction>();
-  const actionToColor = useCallback((action: TransactionAction) => {
-    switch (action) {
-      case 'create': {
-        return 'success';
-      }
-      case 'update': {
-        return 'warning';
-      }
-      case 'delete': {
-        return 'error';
-      }
-      default: {
-        return 'success';
-      }
-    }
-  }, []);
-  const statusToColor = useCallback((status: string) => {
-    switch (status) {
-      case 'pending': {
-        return 'warning';
-      }
-      case 'finished': {
-        return 'warning';
-      }
 
-      default: {
-        return 'success';
-      }
-    }
-  }, []);
   const columns = [
     columnHelper.accessor('id', {
       header: 'ID',
@@ -57,15 +29,11 @@ export const TransactionsTable = () => {
     }),
     columnHelper.accessor('action', {
       header: 'Action',
-      cell: (info) => (
-        <Badge badgeStyle={{ color: actionToColor(info.getValue()) }} text={info.getValue()} />
-      ),
+      cell: (info) => <ActionBadge action={info.getValue()} />,
     }),
     columnHelper.accessor('status', {
       header: 'Statut',
-      cell: (info) => (
-        <Badge badgeStyle={{ color: statusToColor(info.getValue()) }} text={info.getValue()} />
-      ),
+      cell: (info) => <StatusBadge status={info.getValue()} />,
     }),
 
     columnHelper.accessor('dataSignature.signAlgorithm', {
@@ -80,18 +48,15 @@ export const TransactionsTable = () => {
       header: 'Date de création',
       cell: (info) => formatDate(new Date(info.getValue())),
     }),
+
     columnHelper.display({
       id: 'actions',
       header: 'Actions',
       cell: (info) => {
         return (
           <div>
-            <Button
-              onClick={() => {
-                console.log(info.row.original);
-              }}
-            >
-              Voir
+            <Button asChild>
+              <Link to={`/admin/transactions/${info.row.original.id}`}>Voir</Link>
             </Button>
           </div>
         );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import type { ISnackBar, SnackbarType } from '../../../stores/useSnackbar';
-import { P } from '../Typography';
+import { P } from '../typography/Typography';
 
 interface Props {
   snackbar: ISnackBar;

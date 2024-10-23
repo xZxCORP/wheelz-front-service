@@ -1,7 +1,7 @@
 import React from 'react';
 import { type VariantProps } from 'tailwind-variants';
 
-import { typography } from './typography/styles';
+import { typography } from './styles';
 
 interface BaseProps extends VariantProps<typeof typography> {
   className?: string;

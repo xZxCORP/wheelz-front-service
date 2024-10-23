@@ -1,7 +1,8 @@
 import type { RouteObject } from 'react-router-dom';
 
 import { AdminRoot } from '../pages/admin/AdminRoot';
-import { TransactionsTable } from '../pages/admin/TransactionsTable';
+import { TransactionsTable } from '../pages/admin/transactions/TransactionsTable';
+import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
 import { UsersTable } from '../pages/admin/UsersTable';
 import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
@@ -49,6 +50,10 @@ export const routes: RouteObject[] = [
           {
             path: 'transactions',
             element: <PrivateRoute element={TransactionsTable} role="admin" />,
+          },
+          {
+            path: 'transactions/:id',
+            element: <PrivateRoute element={ViewTransactionPage} role="admin" />,
           },
           {
             path: 'users',
