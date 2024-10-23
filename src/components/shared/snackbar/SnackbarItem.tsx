@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import type { ISnackBar, SnackbarType } from '../../../stores/useSnackbar';
+import { P } from '../Typography';
 
 interface Props {
   snackbar: ISnackBar;
@@ -70,7 +71,7 @@ export const SnackbarItem = ({ snackbar, onClose }: Props) => {
       style={{ width: '300px' }}
     >
       <div className="flex items-center justify-between p-4">
-        <p>{snackbar.message}</p>
+        <P>{snackbar.message}</P>
         <button onClick={() => onClose(snackbar.id)} className="ml-4 focus:outline-none">
           ×
         </button>
