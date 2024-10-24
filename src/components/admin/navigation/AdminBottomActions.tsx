@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { LogoutButton } from '../../main/auth/LogoutButton';
 import { Button } from '../../shared/button/Button';
-import { LogoutButton } from '../../shared/LogoutButton';
 
 export const AdminBottomActions = () => {
   return (

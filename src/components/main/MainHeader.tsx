@@ -4,7 +4,7 @@ import { WheelzIcon } from '../shared/WheelzIcon';
 import { DropdownMenu } from './navigation/DropdownMenu';
 import { MainBurgerMenu } from './navigation/MainBurgerMenu';
 import { ProfileButton } from './profile/ProfileButton';
-import { RegisterButtonTrigger } from './register/RegisterButtonTrigger';
+import { RegisterButtonTrigger } from './auth/RegisterButtonTrigger';
 
 export const Header = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);

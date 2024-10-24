@@ -8,7 +8,7 @@ import { Accordion } from '../../shared/Accordion';
 import { BurgerMenuButton } from '../../shared/BurgerMenuButton';
 import { Button } from '../../shared/button/Button';
 import { ProfileButton } from '../profile/ProfileButton';
-import { RegisterButtonTrigger } from '../register/RegisterButtonTrigger';
+import { RegisterButtonTrigger } from '../auth/RegisterButtonTrigger';
 
 interface Props {
   className?: string;
