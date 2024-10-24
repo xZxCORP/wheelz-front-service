@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { queryClient } from './clients/api/queryClient';
 import { transactionTsr } from './clients/api/transaction.api';
 import { userTsr } from './clients/api/user.api';
+import { AuthProvider } from './components/main/auth/AuthProvider';
 import { GlobalLoading } from './components/shared/GlobalLoading';
 import { Snackbar } from './components/shared/snackbar/Snackbar';
 import { routes } from './router/Routes';
@@ -20,6 +21,7 @@ export const App = () => {
           <GlobalLoading />
           <RouterProvider router={router} />
           <Snackbar />
+          <AuthProvider />
         </transactionTsr.ReactQueryProvider>
       </userTsr.ReactQueryProvider>
     </QueryClientProvider>
