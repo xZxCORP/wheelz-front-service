@@ -1,10 +1,10 @@
 import { mainNavLinks } from '../../router/MainNavLinks';
 import { useAuthStore } from '../../stores/useAuthStore';
 import { WheelzIcon } from '../shared/WheelzIcon';
+import { RegisterButtonTrigger } from './auth/RegisterButtonTrigger';
 import { DropdownMenu } from './navigation/DropdownMenu';
 import { MainBurgerMenu } from './navigation/MainBurgerMenu';
 import { ProfileButton } from './profile/ProfileButton';
-import { RegisterButtonTrigger } from './auth/RegisterButtonTrigger';
 
 export const Header = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);

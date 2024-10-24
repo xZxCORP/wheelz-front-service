@@ -7,8 +7,8 @@ import { useAuthStore } from '../../../stores/useAuthStore';
 import { Accordion } from '../../shared/Accordion';
 import { BurgerMenuButton } from '../../shared/BurgerMenuButton';
 import { Button } from '../../shared/button/Button';
-import { ProfileButton } from '../profile/ProfileButton';
 import { RegisterButtonTrigger } from '../auth/RegisterButtonTrigger';
+import { ProfileButton } from '../profile/ProfileButton';
 
 interface Props {
   className?: string;
