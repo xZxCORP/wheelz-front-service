@@ -1,6 +1,13 @@
 :80 {
 	root * /usr/share/caddy
 	file_server
+	header {
+        Access-Control-Allow-Origin *
+        Access-Control-Allow-Credentials true
+        Access-Control-Allow-Methods *
+        Access-Control-Allow-Headers *
+        defer
+    }
 
 	try_files {path} /index.html
 }
