@@ -17,7 +17,7 @@ export const createApiHandler = (): ApiFetcher => {
         url: path,
         headers: {
           ...headers,
-          Authorization: `Bearer ${token}`,
+          Authorization: token ? `Bearer ${token}` : null,
         },
         data: body,
       });
@@ -31,6 +31,10 @@ export const createApiHandler = (): ApiFetcher => {
       if (isAxiosError(error_)) {
         const error = error_ as AxiosError;
         const response = error.response as AxiosResponse;
+
+        if (response.status === 401) {
+          useAuthStore.getState().clearAuth();
+        }
         return {
           status: response.status,
           body: response.data,

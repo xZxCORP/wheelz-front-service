@@ -1,24 +1,30 @@
+import type { User } from '@zcorp/wheelz-contracts';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+
 const AUTH_TOKEN_KEY = 'auth-token-storage';
 interface AuthState {
   token: string | null;
-  isLoading: boolean;
+  user: User | null;
+
   setToken: (token: string) => void;
-  clearToken: () => void;
+  clearAuth: () => void;
   isAuthenticated: () => boolean;
-  setLoading: (isLoading: boolean) => void;
+
+  setUser: (user: User | null) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
       token: null,
-      isLoading: false,
-      setToken: (token: string) => set({ token }),
-      clearToken: () => set({ token: null }),
-      isAuthenticated: () => !!get().token,
-      setLoading: (isLoading: boolean) => set({ isLoading }),
+      user: null,
+      setToken: (token: string) => {
+        set({ token });
+      },
+      setUser: (user: User | null) => set({ user }),
+      clearAuth: () => set({ token: null, user: null }),
+      isAuthenticated: () => !!get().token && !!get().user,
     }),
     {
       name: AUTH_TOKEN_KEY,
