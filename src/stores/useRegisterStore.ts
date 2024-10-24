@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { AccountType, RegisterStep } from '../types/account';
+import type { AccountType, RegisterStep } from '../types/account';
 
 interface RegisterState {
   step: RegisterStep;

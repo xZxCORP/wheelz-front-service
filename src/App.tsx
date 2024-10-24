@@ -2,7 +2,10 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { queryClient } from './clients/api/queryClient';
-import { Snackbar } from './components/snackbar/Snackbar';
+import { transactionTsr } from './clients/api/transaction.api';
+import { userTsr } from './clients/api/user.api';
+import { GlobalLoading } from './components/shared/GlobalLoading';
+import { Snackbar } from './components/shared/snackbar/Snackbar';
 import { routes } from './router/Routes';
 
 const router = createBrowserRouter(routes);
@@ -10,8 +13,13 @@ const router = createBrowserRouter(routes);
 export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <Snackbar />
+      <userTsr.ReactQueryProvider>
+        <transactionTsr.ReactQueryProvider>
+          <GlobalLoading />
+          <RouterProvider router={router} />
+          <Snackbar />
+        </transactionTsr.ReactQueryProvider>
+      </userTsr.ReactQueryProvider>
     </QueryClientProvider>
   );
 };
