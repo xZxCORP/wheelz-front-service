@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants';
 
 export const typography = tv({
-  base: ['prose max-w-none'],
+  base: ['prose max-w-none break-all'],
   variants: {
     variant: {
       primary: [

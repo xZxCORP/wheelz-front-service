@@ -13,7 +13,7 @@ export const AdminLinks = () => {
           buttonStyle={{
             rounded: 'lg',
             size: 'lg',
-            color: link.url === location.pathname ? 'primary' : 'secondary',
+            color: location.pathname.includes(link.url) ? 'primary' : 'secondary',
           }}
           asChild
         >
