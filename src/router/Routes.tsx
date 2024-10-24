@@ -36,7 +36,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: '/admin',
-    element: <AdminLayout />,
+    element: <PrivateRoute element={AdminLayout} role="admin" />,
     errorElement: <ErrorLayout />,
 
     children: [
@@ -49,15 +49,15 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'transactions',
-            element: <PrivateRoute element={TransactionsTable} role="admin" />,
+            element: <TransactionsTable />,
           },
           {
             path: 'transactions/:id',
-            element: <PrivateRoute element={ViewTransactionPage} role="admin" />,
+            element: <ViewTransactionPage />,
           },
           {
             path: 'users',
-            element: <PrivateRoute element={UsersTable} role="admin" />,
+            element: <UsersTable />,
           },
         ],
       },
