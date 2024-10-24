@@ -6,12 +6,13 @@ import { useAuthStore } from '../stores/useAuthStore';
 import { useGlobalLoadingStore } from '../stores/useGlobalLoadingStore';
 
 export const useInitAuth = () => {
-  const { token, setUser, clearAuth } = useAuthStore();
+  const { token, setUser, clearAuth, setIsInitialized } = useAuthStore();
   const { setLoading } = useGlobalLoadingStore();
 
   useEffect(() => {
     if (token) {
       const fetch = async () => {
+        setIsInitialized(false);
         setLoading(true);
         const verifyResponse = await authTsr.authentication.verify.mutate({
           body: {
@@ -33,9 +34,10 @@ export const useInitAuth = () => {
 
         setLoading(false);
       };
-      fetch().then(() => console.log('init user'));
+      fetch().then(() => setIsInitialized(true));
     } else {
       clearAuth();
+      setIsInitialized(true);
     }
-  }, [clearAuth, setLoading, setUser, token]);
+  }, [clearAuth, setIsInitialized, setLoading, setUser, token]);
 };

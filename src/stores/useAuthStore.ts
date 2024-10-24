@@ -12,6 +12,8 @@ interface AuthState {
   isAuthenticated: () => boolean;
 
   setUser: (user: User | null) => void;
+  isInitialized: boolean;
+  setIsInitialized: (isInitialized: boolean) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -25,6 +27,8 @@ export const useAuthStore = create<AuthState>()(
       setUser: (user: User | null) => set({ user }),
       clearAuth: () => set({ token: null, user: null }),
       isAuthenticated: () => !!get().token && !!get().user,
+      isInitialized: false,
+      setIsInitialized: (isInitialized: boolean) => set({ isInitialized }),
     }),
     {
       name: AUTH_TOKEN_KEY,
