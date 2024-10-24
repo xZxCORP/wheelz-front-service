@@ -1,23 +1,28 @@
 import { mainNavLinks } from '../../router/MainNavLinks';
 import { useAuthStore } from '../../stores/useAuthStore';
 import { WheelzIcon } from '../shared/WheelzIcon';
-import { RegisterButtonTrigger } from './auth/RegisterButtonTrigger';
+import { LoginRegisterPickers } from './auth/LoginRegisterPickers';
+import { LogoutButton } from './auth/LogoutButton';
 import { DropdownMenu } from './navigation/DropdownMenu';
 import { MainBurgerMenu } from './navigation/MainBurgerMenu';
 import { ProfileButton } from './profile/ProfileButton';
 
 export const Header = () => {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
+  const { isAuthenticated, user } = useAuthStore();
   const links = mainNavLinks.map((link) => (
     <DropdownMenu title={link.title} links={link.links} key={link.title} />
   ));
 
   const AccountCell = () => {
     if (isAuthenticated()) {
-      return <ProfileButton />;
+      return (
+        <div className="flex gap-3">
+          <ProfileButton data={user!} />
+          <LogoutButton />
+        </div>
+      );
     }
-    return <RegisterButtonTrigger />;
+    return <LoginRegisterPickers />;
   };
 
   return (

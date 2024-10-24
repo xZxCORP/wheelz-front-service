@@ -7,7 +7,8 @@ import { useAuthStore } from '../../../stores/useAuthStore';
 import { Accordion } from '../../shared/Accordion';
 import { BurgerMenuButton } from '../../shared/BurgerMenuButton';
 import { Button } from '../../shared/button/Button';
-import { RegisterButtonTrigger } from '../auth/RegisterButtonTrigger';
+import { LoginRegisterPickers } from '../auth/LoginRegisterPickers';
+import { LogoutButton } from '../auth/LogoutButton';
 import { ProfileButton } from '../profile/ProfileButton';
 
 interface Props {
@@ -16,13 +17,18 @@ interface Props {
 
 export const MainBurgerMenu = ({ className }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const { user, isAuthenticated } = useAuthStore();
 
   const AccountCell = () => {
     if (isAuthenticated()) {
-      return <ProfileButton />;
+      return (
+        <div className="flex flex-col gap-2">
+          <ProfileButton data={user!} />
+          <LogoutButton variant="text" />
+        </div>
+      );
     }
-    return <RegisterButtonTrigger />;
+    return <LoginRegisterPickers />;
   };
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -32,7 +38,7 @@ export const MainBurgerMenu = ({ className }: Props) => {
       <BurgerMenuButton onClick={toggleMenu} />
       <div
         className={clsx(
-          'fixed inset-0 z-50 bg-secondary-100',
+          'fixed inset-0 z-30 bg-secondary-100',
           'transition-transform duration-300 ease-in-out',
           {
             'translate-x-0': isOpen,

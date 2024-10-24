@@ -54,12 +54,11 @@ export const Modal: React.FC<ModalProps> = ({
       document.body.style.overflow = '';
     };
   }, [isOpen, onClose, closeOnEscape]);
-
   if (!isOpen) return null;
 
   const modalContent = (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-secondary-950/50 ${overlayClassName}`}
+      className={`fixed inset-0 z-40 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-secondary-950/50 ${overlayClassName}`}
     >
       <div ref={modalRef} className={`relative m-auto w-full max-w-3xl p-6 ${modalClassName}`}>
         <div className="flex w-full translate-y-0 flex-col rounded-lg bg-secondary-50 opacity-100 shadow-lg transition-all duration-300 ease-out">

@@ -26,16 +26,16 @@ const getSnackbarStyles = (type: SnackbarType) => {
 const getProgressBarColor = (type: SnackbarType) => {
   switch (type) {
     case 'success': {
-      return 'bg-success';
+      return 'bg-success-500';
     }
     case 'error': {
-      return 'bg-error';
+      return 'bg-error-500';
     }
     case 'warning': {
-      return 'bg-warning';
+      return 'bg-warning-500';
     }
     default: {
-      return 'bg-primary';
+      return 'bg-primary-500';
     }
   }
 };

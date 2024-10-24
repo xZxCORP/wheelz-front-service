@@ -31,7 +31,7 @@ export const solidButton = tv({
   variants: {
     color: {
       primary: 'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800',
-      secondary: 'bg-secondary-200 hover:bg-secondary-300 active:bg-secondary-400',
+      secondary: 'bg-secondary-300 hover:bg-secondary-400 active:bg-secondary-500',
       error: 'bg-error-600 text-white hover:bg-error-700 active:bg-error-800',
       success: 'bg-success-600 text-white hover:bg-success-700 active:bg-success-800',
       warning: 'bg-warning-600 text-white hover:bg-warning-700 active:bg-warning-800',
