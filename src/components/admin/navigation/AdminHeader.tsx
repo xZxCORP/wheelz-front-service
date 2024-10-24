@@ -1,5 +1,5 @@
+import { LogoutButton } from '../../main/auth/LogoutButton';
 import { MainBurgerMenu } from '../../main/navigation/MainBurgerMenu';
-import { LogoutButton } from '../../shared/LogoutButton';
 import { WheelzIcon } from '../../shared/WheelzIcon';
 
 export const AdminHeader = () => {

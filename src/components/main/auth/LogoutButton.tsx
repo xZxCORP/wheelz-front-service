@@ -1,6 +1,6 @@
 import { FaRightFromBracket } from 'react-icons/fa6';
 
-import { Button } from './button/Button';
+import { Button } from '../../shared/button/Button';
 
 interface Props {
   variant?: 'text' | 'icon';
