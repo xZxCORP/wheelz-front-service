@@ -1,9 +1,15 @@
-import { Navigate, RouteObject } from 'react-router-dom';
+import type { RouteObject } from 'react-router-dom';
 
-import { Dashboard } from '../pages/dashboard/Dashboard';
-import { Report } from '../pages/dashboard/Report';
+import { AdminRoot } from '../pages/admin/AdminRoot';
+import { TransactionsTable } from '../pages/admin/transactions/TransactionsTable';
+import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
+import { UsersTable } from '../pages/admin/UsersTable';
+import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
 import { ErrorLayout } from '../pages/layout/ErrorLayout';
+import { ErrorOutletLayout } from '../pages/layout/ErrorOutletLayout';
+import { MainRoot } from '../pages/main/MainRoot';
+import { Report } from '../pages/main/Report';
 import { PrivateRoute } from './ProtectedRoutes';
 
 export const routes: RouteObject[] = [
@@ -11,18 +17,49 @@ export const routes: RouteObject[] = [
     path: '/',
     element: <BaseLayout />,
     errorElement: <ErrorLayout />,
+
     children: [
       {
-        index: true,
-        element: <Navigate to={'dashboard'} />,
+        errorElement: <ErrorOutletLayout />,
+        children: [
+          {
+            index: true,
+            element: <MainRoot />,
+          },
+          {
+            path: 'report',
+            element: <PrivateRoute element={Report} />,
+          },
+        ],
       },
+    ],
+  },
+  {
+    path: '/admin',
+    element: <AdminLayout />,
+    errorElement: <ErrorLayout />,
+
+    children: [
       {
-        path: 'dashboard',
-        element: <Dashboard />,
-      },
-      {
-        path: 'report',
-        element: <PrivateRoute element={Report} />,
+        errorElement: <ErrorOutletLayout />,
+        children: [
+          {
+            index: true,
+            element: <AdminRoot />,
+          },
+          {
+            path: 'transactions',
+            element: <PrivateRoute element={TransactionsTable} role="admin" />,
+          },
+          {
+            path: 'transactions/:id',
+            element: <PrivateRoute element={ViewTransactionPage} role="admin" />,
+          },
+          {
+            path: 'users',
+            element: <PrivateRoute element={UsersTable} role="admin" />,
+          },
+        ],
       },
     ],
   },

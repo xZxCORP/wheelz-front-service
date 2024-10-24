@@ -1,32 +1,23 @@
-import { QueryClient, useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { MutationCache, QueryClient } from '@tanstack/react-query';
+import type { BasicResponse } from '@zcorp/wheelz-contracts';
 
-import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';
+import { useSnackbarStore } from '../../stores/useSnackbar';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
       retry: false,
+      throwOnError: true,
+      staleTime: 5 * 60 * 1000,
+      structuralSharing: false,
     },
   },
+  mutationCache: new MutationCache({
+    onError: (error) => {
+      const unknownError: any = error;
+      const body: BasicResponse = unknownError.body as BasicResponse;
+      useSnackbarStore.getState().addSnackbar(body.message ?? "Une erreur s'est produite", 'error');
+    },
+  }),
 });
-export function useGlobalLoadingQuery<TData, TError>(
-  queryKey: unknown[],
-  queryFn: () => Promise<TData>,
-  options: Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'> = {}
-) {
-  const setLoading = useGlobalLoadingStore((state) => state.setLoading);
-
-  const query = useQuery<TData, TError>({
-    queryKey,
-    queryFn,
-    ...options,
-  });
-
-  useEffect(() => {
-    setLoading(query.isLoading);
-  }, [query.isLoading, setLoading]);
-
-  return query;
-}

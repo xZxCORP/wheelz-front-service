@@ -1,10 +1,11 @@
-import React from 'react';
+import type React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { useAuthStore } from '../stores/useAuthStore';
 
 interface Props {
   element: React.ComponentType;
+  role?: string;
 }
 
 export const PrivateRoute = ({ element: RouteComponent }: Props) => {
@@ -13,7 +14,7 @@ export const PrivateRoute = ({ element: RouteComponent }: Props) => {
   const location = useLocation();
 
   if (!isAuthenticated()) {
-    return <Navigate to="/dashboard" state={{ from: location }} replace />;
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
 
   return <RouteComponent />;
