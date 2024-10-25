@@ -36,10 +36,6 @@ export const TransactionsTable = () => {
       cell: (info) => <StatusBadge status={info.getValue()} />,
     }),
 
-    columnHelper.accessor('dataSignature.signAlgorithm', {
-      header: 'Algorithme de signature',
-      cell: (info) => info.getValue(),
-    }),
     columnHelper.accessor('data.vin', {
       header: 'Vin du vehicle',
       cell: (info) => info.getValue(),
