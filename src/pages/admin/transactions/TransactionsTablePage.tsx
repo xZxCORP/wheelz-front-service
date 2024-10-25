@@ -9,7 +9,7 @@ import { ActionBadge } from '../../../components/transaction/ActionBadge';
 import { StatusBadge } from '../../../components/transaction/StatusBadge';
 import { usePagination } from '../../../hooks/usePagination';
 import { formatDate } from '../../../utils/date';
-export const TransactionsTable = () => {
+export const TransactionsTablePage = () => {
   const { pagination, apiPagination, onPaginationChange } = usePagination({
     initialPage: 1,
     initialPerPage: 10,
@@ -62,14 +62,21 @@ export const TransactionsTable = () => {
 
   return (
     data && (
-      <Table
-        title="Transactions"
-        data={data.body.items}
-        meta={data.body.meta}
-        columns={columns}
-        onPaginationChange={onPaginationChange}
-        pagination={pagination}
-      ></Table>
+      <div className="flex flex-col gap-2">
+        <Table
+          title="Transactions"
+          data={data.body.items}
+          meta={data.body.meta}
+          columns={columns}
+          onPaginationChange={onPaginationChange}
+          pagination={pagination}
+        ></Table>
+        <div>
+          <Button asChild buttonStyle={{ color: 'secondary' }}>
+            <Link to="/admin/transactions/new">Créer une transaction</Link>
+          </Button>
+        </div>
+      </div>
     )
   );
 };
