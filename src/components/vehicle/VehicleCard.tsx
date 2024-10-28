@@ -23,32 +23,32 @@ export const VehicleCard = ({ vehicle }: Props) => {
           <VehicleInfos vehicle={vehicle} />
           <div className="flex flex-col gap-2">
             <IssuesList
-              items={vehicle.risks?.exterior || []}
+              items={vehicle.risks?.exterior.map((item) => item.name) || []}
               title="Risques extérieurs"
               type="risk"
             />
             <IssuesList
-              items={vehicle.risks?.mechanical || []}
+              items={vehicle.risks?.mechanical.map((item) => item.name) || []}
               title="Risques mécaniques"
               type="risk"
             />
             <IssuesList
-              items={vehicle.risks?.generic || []}
+              items={vehicle.risks?.generic.map((item) => item.name) || []}
               title="Risques génériques"
               type="risk"
             />
             <IssuesList
-              items={vehicle.issues?.exterior || []}
+              items={vehicle.issues?.exterior.map((item) => item.name) || []}
               title="Problèmes extérieurs"
               type="issue"
             />
             <IssuesList
-              items={vehicle.issues?.mechanical || []}
+              items={vehicle.issues?.mechanical.map((item) => item.name) || []}
               title="Problèmes mécaniques"
               type="issue"
             />
             <IssuesList
-              items={vehicle.issues?.generic || []}
+              items={vehicle.issues?.generic.map((item) => item.name) || []}
               title="Problèmes génériques"
               type="issue"
             />

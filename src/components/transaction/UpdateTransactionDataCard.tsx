@@ -49,20 +49,24 @@ export const UpdateTransactionCard = ({ data }: Props) => {
             <div className="space-y-4 rounded-lg bg-secondary-50 p-4">
               {changes.risks?.exterior && (
                 <ChangesList
-                  items={changes.risks.exterior}
+                  items={changes.risks.exterior.map((item) => item.name)}
                   title="Risques extérieurs"
                   type="risk"
                 />
               )}
               {changes.risks?.mechanical && (
                 <ChangesList
-                  items={changes.risks.mechanical}
+                  items={changes.risks.mechanical.map((item) => item.name)}
                   title="Risques mécaniques"
                   type="risk"
                 />
               )}
               {changes.risks?.generic && (
-                <ChangesList items={changes.risks.generic} title="Risques génériques" type="risk" />
+                <ChangesList
+                  items={changes.risks.generic.map((item) => item.name)}
+                  title="Risques génériques"
+                  type="risk"
+                />
               )}
             </div>
           </div>
@@ -73,21 +77,21 @@ export const UpdateTransactionCard = ({ data }: Props) => {
             <div className="space-y-4 rounded-lg bg-secondary-50 p-4">
               {changes.issues?.exterior && (
                 <ChangesList
-                  items={changes.issues.exterior}
+                  items={changes.issues.exterior.map((item) => item.name)}
                   title="Problèmes extérieurs"
                   type="issue"
                 />
               )}
               {changes.issues?.mechanical && (
                 <ChangesList
-                  items={changes.issues.mechanical}
+                  items={changes.issues.mechanical.map((item) => item.name)}
                   title="Problèmes mécaniques"
                   type="issue"
                 />
               )}
               {changes.issues?.generic && (
                 <ChangesList
-                  items={changes.issues.generic}
+                  items={changes.issues.generic.map((item) => item.name)}
                   title="Problèmes génériques"
                   type="issue"
                 />

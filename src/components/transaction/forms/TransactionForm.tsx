@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import type { TransactionAction } from '@zcorp/shared-typing-wheelz';
+import type { TransactionAction, VehicleTransaction } from '@zcorp/shared-typing-wheelz';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,21 +16,21 @@ export const TransactionForm = () => {
   const queryClient = useQueryClient();
   const { mutate: deleteTransactionMutate } =
     transactionTsr.transactions.deleteTransaction.useMutation({
-      onSuccess: async () => {
+      onSuccess: async (response) => {
         addSnackbar('Transaction de type Suppression créée avec succès', 'error');
-        await globalSuccess();
+        await globalSuccess(response.body);
       },
     });
   const { mutate: createTransactionMutate } =
     transactionTsr.transactions.submitTransaction.useMutation({
-      onSuccess: async () => {
+      onSuccess: async (response) => {
         addSnackbar('Transaction de type Création créée avec succès', 'error');
-        await globalSuccess();
+        await globalSuccess(response.body);
       },
     });
-  const globalSuccess = async () => {
+  const globalSuccess = async (result: VehicleTransaction) => {
     await queryClient.invalidateQueries({ queryKey: ['transactions'] });
-    navigate(-1);
+    navigate(`/admin/transactions/${result.id}`);
   };
 
   const renderForm = () => {

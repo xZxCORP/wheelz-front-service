@@ -3,7 +3,7 @@ export const content = ['./src/**/*.{js,jsx,ts,tsx}'];
 export const theme = {
   extend: {
     colors: {
-      primary: {
+      'primary': {
         50: '#fff8ed',
         100: '#fff0d4',
         200: '#ffdca9',
@@ -15,8 +15,9 @@ export const theme = {
         800: '#9c3b10',
         900: '#7e3310',
         950: '#441706',
+        foreground: '#ffffff',
       },
-      secondary: {
+      'secondary': {
         50: '#f8f9fa',
         100: '#f1f3f5',
         200: '#e9ecef',
@@ -29,7 +30,7 @@ export const theme = {
         900: '#212529',
         950: '#0d0f10',
       },
-      accent: {
+      'accent': {
         50: '#e6f9f0',
         100: '#ccf3e1',
         200: '#99e7c2',
@@ -42,7 +43,7 @@ export const theme = {
         900: '#002715',
         950: '#001309',
       },
-      error: {
+      'error': {
         50: '#fef2f2',
         100: '#fee2e2',
         200: '#fecaca',
@@ -55,7 +56,7 @@ export const theme = {
         900: '#7f1d1d',
         950: '#450a0a',
       },
-      warning: {
+      'warning': {
         50: '#fffbeb',
         100: '#fef3c7',
         200: '#fde68a',
@@ -68,7 +69,7 @@ export const theme = {
         900: '#78350f',
         950: '#451a03',
       },
-      info: {
+      'info': {
         50: '#ecfeff',
         100: '#cffafe',
         200: '#a5f3fc',
@@ -81,7 +82,7 @@ export const theme = {
         900: '#164e63',
         950: '#083344',
       },
-      success: {
+      'success': {
         50: '#f0fdf4',
         100: '#dcfce7',
         200: '#bbf7d0',
@@ -94,6 +95,9 @@ export const theme = {
         900: '#14532d',
         950: '#052e16',
       },
+      'ring': '#fd8012',
+      'background': '#ffffff',
+      'ring-offset': '#ffffff',
     },
     typography: {
       DEFAULT: {

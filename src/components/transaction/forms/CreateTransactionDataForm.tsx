@@ -17,9 +17,12 @@ import {
 import { Input } from '../../shared/form/Input';
 import { Separator } from '../../shared/Separator';
 import { H2 } from '../../shared/typography/Typography';
+import { RiskIssuesArrayField } from '../fields/RisksIssuesArrayField';
+import { SinistersArrayField } from '../fields/SinistersArrayField';
 type Props = {
   onSubmit: (data: CreateVehicleTransactionData) => void;
 };
+
 export const CreateTransactionDataForm = ({ onSubmit }: Props) => {
   const form = useForm<CreateVehicleTransactionData>({
     resolver: zodResolver(createVehicleTransactionDataSchema),
@@ -93,22 +96,64 @@ export const CreateTransactionDataForm = ({ onSubmit }: Props) => {
             <FormItem>
               <FormLabel>Année</FormLabel>
               <FormControl>
-                <Input placeholder="Année" {...field} />
+                <Input
+                  type="number"
+                  placeholder="Année"
+                  {...field}
+                  onChange={(e) => field.onChange(Number.parseInt(e.target.value))}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <Separator />
-        <H2>Risques</H2>
+        <H2>Problèmes</H2>
+        <RiskIssuesArrayField
+          control={form.control}
+          name="issues.exterior"
+          buttonLabel="Ajouter un problème exterieur"
+          placeholder="Problème exterieur"
+        />
+        <RiskIssuesArrayField
+          control={form.control}
+          name="issues.mechanical"
+          buttonLabel="Ajouter un problème mécanique"
+          placeholder="Problème mécanique"
+        />
+        <RiskIssuesArrayField
+          control={form.control}
+          name="issues.generic"
+          buttonLabel="Ajouter un problème générique"
+          placeholder="Problème générique"
+        />
 
         <Separator />
 
-        <H2>Problèmes</H2>
+        <H2>Risques</H2>
+        <RiskIssuesArrayField
+          control={form.control}
+          name="risks.exterior"
+          buttonLabel="Ajouter un risque exterieur"
+          placeholder="Risque exterieur"
+        />
+        <RiskIssuesArrayField
+          control={form.control}
+          name="risks.mechanical"
+          buttonLabel="Ajouter un risque mécanique"
+          placeholder="Risque mécanique"
+        />
+        <RiskIssuesArrayField
+          control={form.control}
+          name="risks.generic"
+          buttonLabel="Ajouter un risque générique"
+          placeholder="Risque générique"
+        />
 
         <Separator />
 
         <H2>Sinistres</H2>
+        <SinistersArrayField control={form.control} name="sinisters" />
 
         <Separator />
 
