@@ -1,4 +1,8 @@
-import type { DeleteVehicleTransactionData } from '@zcorp/shared-typing-wheelz';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  type DeleteVehicleTransactionData,
+  deleteVehicleTransactionDataSchema,
+} from '@zcorp/shared-typing-wheelz';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '../../shared/button/Button';
@@ -16,6 +20,7 @@ type Props = {
 };
 export const DeleteTransactionDataForm = ({ onSubmit }: Props) => {
   const form = useForm<DeleteVehicleTransactionData>({
+    resolver: zodResolver(deleteVehicleTransactionDataSchema),
     mode: 'onChange',
     defaultValues: {
       vin: '',

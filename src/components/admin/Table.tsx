@@ -9,6 +9,7 @@ import type { Pagination, PaginationParameters } from '@zcorp/wheelz-contracts';
 import { useEffect, useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
 
+import { H1 } from '../shared/typography/Typography';
 import { PaginationControls } from './PaginationControls';
 
 type Props<T extends object> = {
@@ -60,7 +61,7 @@ export const Table = <T extends object>({
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-3xl font-bold">{title}</h1>
+      <H1 variant="primary">{title}</H1>
       <div className="w-full overflow-hidden rounded-lg shadow-md">
         {/* Desktop view */}
         <div className="hidden overflow-x-auto lg:block">
