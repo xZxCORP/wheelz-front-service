@@ -2,21 +2,27 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   type CreateVehicleTransactionData,
   createVehicleTransactionDataSchema,
+  vehicleFixture,
 } from '@zcorp/shared-typing-wheelz';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '../../shared/button/Button';
 import { Form } from '../../shared/form/Form';
 import { GeneralInformationsFields } from '../fields/GeneralInformationsFields';
+import { HistoryArrayField } from '../fields/HistoryArrayField';
+import { TechnicalControlArrayField } from '../fields/TechnicalControlArrayField';
+import { TechnicalInformationsFields } from '../fields/TechnicalInformationsFields';
 type Props = {
-  onSubmit: (data: CreateVehicleTransactionData) => void;
+  onSubmit?: (data: CreateVehicleTransactionData) => void;
+  onlyView?: boolean;
+  baseData?: CreateVehicleTransactionData;
 };
 
-export const CreateTransactionDataForm = ({ onSubmit }: Props) => {
+export const CreateTransactionDataForm = ({ onSubmit, onlyView, baseData }: Props) => {
   const form = useForm<CreateVehicleTransactionData>({
     resolver: zodResolver(createVehicleTransactionDataSchema),
     mode: 'onChange',
-    defaultValues: {
+    defaultValues: baseData ?? {
       vin: '',
       features: {
         brand: '',
@@ -62,12 +68,27 @@ export const CreateTransactionDataForm = ({ onSubmit }: Props) => {
         lastSinisterDate: '',
       },
     },
+    disabled: onlyView,
   });
+  const onLoadQuickFill = () => {
+    form.reset(vehicleFixture);
+  };
 
   return (
     <Form {...form}>
-      <form className="flex flex-col gap-4" onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        className="flex w-full flex-col gap-4"
+        onSubmit={onSubmit ? form.handleSubmit(onSubmit) : undefined}
+      >
+        {!onlyView && (
+          <Button onClick={onLoadQuickFill} buttonStyle={{ color: 'secondary' }} type="button">
+            Remplir rapidement
+          </Button>
+        )}
         <GeneralInformationsFields control={form.control} />
+        <TechnicalInformationsFields control={form.control} />
+        <HistoryArrayField control={form.control} />
+        <TechnicalControlArrayField control={form.control} />
 
         {/* <Separator />
         <H2>Problèmes</H2>
@@ -119,7 +140,7 @@ export const CreateTransactionDataForm = ({ onSubmit }: Props) => {
 
         <Separator /> */}
 
-        <Button type="submit">Soumettre</Button>
+        {!onlyView && <Button type="submit">Soumettre</Button>}
       </form>
     </Form>
   );

@@ -16,20 +16,26 @@ import {
 } from '../../shared/form/Form';
 import { Input } from '../../shared/form/Input';
 type Props = {
-  onSubmit: (data: DeleteVehicleTransactionData) => void;
+  onSubmit?: (data: DeleteVehicleTransactionData) => void;
+  onlyView?: boolean;
+  baseData?: DeleteVehicleTransactionData;
 };
-export const DeleteTransactionDataForm = ({ onSubmit }: Props) => {
+export const DeleteTransactionDataForm = ({ onSubmit, onlyView, baseData }: Props) => {
   const form = useForm<DeleteVehicleTransactionData>({
     resolver: zodResolver(deleteVehicleTransactionDataSchema),
     mode: 'onChange',
-    defaultValues: {
+    defaultValues: baseData ?? {
       vin: '',
     },
+    disabled: onlyView,
   });
 
   return (
     <Form {...form}>
-      <form className="flex flex-col gap-4" onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        className="flex w-full flex-col gap-4"
+        onSubmit={onSubmit ? form.handleSubmit(onSubmit) : undefined}
+      >
         <FormField
           control={form.control}
           name="vin"
@@ -43,7 +49,7 @@ export const DeleteTransactionDataForm = ({ onSubmit }: Props) => {
             </FormItem>
           )}
         />
-        <Button type="submit">Soumettre</Button>
+        {!onlyView && <Button type="submit">Soumettre Soumettre</Button>}
       </form>
     </Form>
   );
