@@ -4,17 +4,22 @@ import React from 'react';
 
 const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & { required?: boolean }
   // eslint-disable-next-line react/prop-types
->(({ className, ...props }, ref) => (
+>(({ className, children, required = true, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
     className={clsx(
-      'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+      'text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+      required && 'font-bold italic',
+      !required && 'font-medium',
       className
     )}
     {...props}
-  />
+  >
+    {children}
+    {required && '*'}
+  </LabelPrimitive.Root>
 ));
 Label.displayName = LabelPrimitive.Root.displayName;
 

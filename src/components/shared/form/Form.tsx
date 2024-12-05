@@ -72,19 +72,21 @@ const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
 );
 FormItem.displayName = 'FormItem';
 
-const FormLabel = React.forwardRef<HTMLLabelElement, React.LabelHTMLAttributes<HTMLLabelElement>>(
-  ({ className, ...props }, ref) => {
-    const { error, formItemId } = useFormField();
-    return (
-      <Label
-        ref={ref}
-        className={clsx(error && 'text-error-500', className)}
-        htmlFor={formItemId}
-        {...props}
-      />
-    );
-  }
-);
+const FormLabel = React.forwardRef<
+  HTMLLabelElement,
+  React.LabelHTMLAttributes<HTMLLabelElement> & { required?: boolean }
+>(({ className, required = true, ...props }, ref) => {
+  const { error, formItemId } = useFormField();
+  return (
+    <Label
+      ref={ref}
+      className={clsx(error && 'text-error-500', className)}
+      htmlFor={formItemId}
+      required={required}
+      {...props}
+    />
+  );
+});
 FormLabel.displayName = 'FormLabel';
 
 const FormControl = React.forwardRef<
