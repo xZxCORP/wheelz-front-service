@@ -3,7 +3,7 @@ const zcorpConfig = require('@zcorp/prettier-config');
 
 module.exports = {
   ...zcorpConfig,
-  plugins: ['prettier-plugin-tailwindcss'],
+  // plugins: ['prettier-plugin-tailwindcss'],
   semi: false,
   singleQuote: true,
   tabWidth: 2,

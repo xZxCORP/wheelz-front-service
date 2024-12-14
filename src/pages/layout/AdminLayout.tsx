@@ -8,22 +8,22 @@ import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';
 export const AdminLayout = () => {
   //TODO: Implement admin role verification
   const isLoading = useGlobalLoadingStore((state) => state.isLoading);
+
   return (
     <>
-      <div className="flex min-h-screen w-full flex-col lg:hidden">
-        <AdminHeader />
-        <main className="grow p-4">
-          <Outlet />
-        </main>
-      </div>
-      <div className="hidden min-h-screen w-full lg:flex">
-        <AdminSidebar />
-        <main className="grow p-4">
-          <Outlet />
-        </main>
-      </div>
+      <div className="min-h-screen w-full flex-col lg:flex-row">
+        <AdminHeader className="lg:hidden" />
 
-      {isLoading && <Loader fullScreen size="lg" variant="primary" />}
+        <div className="flex min-h-screen">
+          <AdminSidebar className="hidden lg:flex" />
+
+          <main className="grow p-4">
+            <Outlet />
+          </main>
+        </div>
+
+        {isLoading && <Loader fullScreen size="lg" variant="primary" />}
+      </div>
     </>
   );
 };
