@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 
+import { adminNavLinks } from '../../../router/AdminNavLinks';
 import { LogoutButton } from '../../main/auth/LogoutButton';
 import { MainBurgerMenu } from '../../main/navigation/MainBurgerMenu';
 import { WheelzIcon } from '../../shared/WheelzIcon';
@@ -14,7 +15,7 @@ export const AdminHeader = ({ className }: Props) => {
 
         <div className="flex gap-2">
           <LogoutButton />
-          <MainBurgerMenu className="flex lg:hidden" />
+          <MainBurgerMenu className="flex lg:hidden" links={adminNavLinks} />
         </div>
       </div>
     </header>
