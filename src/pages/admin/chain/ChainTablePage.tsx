@@ -1,8 +1,10 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { type Vehicle } from '@zcorp/shared-typing-wheelz';
+import { Link } from 'react-router-dom';
 
 import { chainTsr } from '../../../clients/api/chain.api';
 import { Table } from '../../../components/admin/Table';
+import { Button } from '../../../components/shared/button/Button';
 import { usePagination } from '../../../hooks/usePagination';
 export const ChainTablePage = () => {
   const { pagination, apiPagination, onPaginationChange } = usePagination({
@@ -35,19 +37,19 @@ export const ChainTablePage = () => {
       cell: (info) => info.getValue(),
     }),
 
-    // columnHelper.display({
-    //   id: 'actions',
-    //   header: 'Actions',
-    //   cell: (info) => {
-    //     return (
-    //       <div>
-    //         <Button asChild>
-    //           <Link to={`/admin/transactions/${info.row.original.id}`}>Voir</Link>
-    //         </Button>
-    //       </div>
-    //     );
-    //   },
-    // }),
+    columnHelper.display({
+      id: 'actions',
+      header: 'Actions',
+      cell: (info) => {
+        return (
+          <div>
+            <Button asChild>
+              <Link to={`/admin/chain/${info.row.original.vin}`}>Voir</Link>
+            </Button>
+          </div>
+        );
+      },
+    }),
   ];
 
   return (
