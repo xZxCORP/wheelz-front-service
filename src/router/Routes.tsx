@@ -1,6 +1,7 @@
 import type { RouteObject } from 'react-router-dom';
 
 import { AdminRoot } from '../pages/admin/AdminRoot';
+import { ChainTablePage } from '../pages/admin/chain/ChainTablePage';
 import { CreateTransactionPage } from '../pages/admin/transactions/CreateTransactionPage';
 import { TransactionsTablePage } from '../pages/admin/transactions/TransactionsTablePage';
 import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
@@ -59,6 +60,10 @@ export const routes: RouteObject[] = [
           {
             path: 'transactions/:id',
             element: <ViewTransactionPage />,
+          },
+          {
+            path: 'chain',
+            element: <ChainTablePage />,
           },
           {
             path: 'users',
