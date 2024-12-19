@@ -37,7 +37,7 @@ export const Header = () => {
           <div className="mr-4 hidden lg:flex">
             <AccountCell />
           </div>
-          <MainBurgerMenu className="flex lg:hidden" />
+          <MainBurgerMenu className="flex lg:hidden" links={mainNavLinks} />
         </div>
       </div>
     </header>
