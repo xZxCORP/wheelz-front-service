@@ -9,135 +9,147 @@ import {
     FormMessage
 } from '../shared/form/Form';
 import { Input } from '../shared/form/Input'; 
-import { useForm, Controller } from 'react-hook-form';
-import type { Vehicle } from '@zcorp/shared-typing-wheelz';
+import { useForm } from 'react-hook-form';
+import { scraVehicleDataSchema} from '@zcorp/shared-typing-wheelz';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { z } from 'zod';
+import { transactionTsr } from '../../clients/api/transaction.api';
 
 interface SearchFormValues {
-    firstName: string;
-    lastName: string;
+    prenom: string;
+    nom: string;
     vin: string;
     immat: string;
-    formuleNumber: string;
+    numeroFormule: string;
   }
 
 export const VehicleSearchForm: React.FC = () => {
-    const { handleSubmit, control } = useForm<SearchFormValues>();
 
-  const onSubmit = (data: SearchFormValues) => {
-    console.log('Form data:', data);
-    // Ajoutez ici votre logique pour traiter les données du formulaire
-  };
+    const form = useForm({
+        resolver: zodResolver(scraVehicleDataSchema),
+        mode: 'onChange',
+        defaultValues: {
+            prenom: '',
+            nom: '',
+            vin: '',
+            immat: '',
+            numeroFormule: '',
+        },
+    });
+
+    const { mutate } = transactionTsr.transactions.scrapAndCreateTransaction.useMutation({
+        onSuccess: () => {
+          console.log('test');
+        },
+      });
 
   return (
-    <div className="flex w-full">
-      <div className="mx-auto w-full max-w-4xl space-y-6">
-        <div className="rounded-lg bg-primary-50 p-4 shadow-md md:p-6">
-          <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center">
-            <div className="flex h-40 w-full items-center justify-center rounded-lg bg-secondary-200 text-center font-bold md:w-40">
-              <p>Recherche Véhicule</p>
+    <Form {...form}>
+        <div className="flex h-screen justify-center">
+            <div className="w-full max-w-4xl space-y-6  ">
+                <div className=" rounded-lg bg-primary-50 p-8  justify-center ">
+                    <form
+                    onSubmit={form.handleSubmit((data) => mutate({ body: data }))}
+                    className="flex flex-col gap-6 justify-center items-center "
+                    >
+                        <FormField
+                            control={form.control}
+                            name="prenom"
+                            render={({ field }) => (
+                            <FormItem className="w-full max-w-lg self-center">
+                                <FormLabel className="block text-sm font-medium text-gray-700">Prénom</FormLabel>
+                                <FormControl>
+                                <Input
+                                    className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary-200"
+                                    placeholder="Prénom"
+                                    {...field}
+                                />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="nom"
+                            render={({ field }) => (
+                            <FormItem className="w-full max-w-lg self-center">
+                                <FormLabel className="block text-sm font-medium text-gray-700">Nom</FormLabel>
+                                <FormControl>
+                                <Input
+                                    className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary-200"
+                                    placeholder="Nom"
+                                    {...field}
+                                />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="vin"
+                            render={({ field }) => (
+                            <FormItem className="w-full max-w-lg self-center">
+                                <FormLabel className="block text-sm font-medium text-gray-700">Vin</FormLabel>
+                                <FormControl>
+                                <Input
+                                    className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary-200"
+                                    placeholder="Vin"
+                                    {...field}
+                                />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="immat"
+                            render={({ field }) => (
+                            <FormItem className="w-full max-w-lg self-center">
+                                <FormLabel className="block text-sm font-medium text-gray-700">Immatriculation</FormLabel>
+                                <FormControl>
+                                <Input
+                                    className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary-200"
+                                    placeholder="Immatriculation"
+                                    {...field}
+                                />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="numeroFormule"
+                            render={({ field }) => (
+                            <FormItem className="w-full max-w-lg self-center">
+                                <FormLabel className="block text-sm font-medium text-gray-700">Numéro de formule</FormLabel>
+                                <FormControl>
+                                <Input
+                                    className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary-200"
+                                    placeholder="Numéro de formule"
+                                    {...field}
+                                />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                        />
+                        <Button type="submit" className="w-full max-w-lg self-center">
+                            Rechercher
+                        </Button>
+                    </form>
+                </div>
             </div>
-
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-              <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                  Prénom
-                </label>
-                <Controller
-                  name="firstName"
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      id="firstName"
-                      placeholder="Prénom"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary-200"
-                      {...field}
-                    />
-                  )}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-                  Nom
-                </label>
-                <Controller
-                  name="lastName"
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      id="lastName"
-                      placeholder="Nom"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary-200"
-                      {...field}
-                    />
-                  )}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="vin" className="block text-sm font-medium text-gray-700">
-                  Vin
-                </label>
-                <Controller
-                  name="vin"
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      id="vin"
-                      placeholder="Vin"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary-200"
-                      {...field}
-                    />
-                  )}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="registrationNumber" className="block text-sm font-medium text-gray-700">
-                  Immatriculation
-                </label>
-                <Controller
-                  name="immat"
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      id="immat"
-                      placeholder="Immatriculation"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary-200"
-                      {...field}
-                    />
-                  )}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="policyNumber" className="block text-sm font-medium text-gray-700">
-                  Numéro de formule
-                </label>
-                <Controller
-                  name="formuleNumber"
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      id="formuleNumber"
-                      placeholder="Numéro de formule"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary-200"
-                      {...field}
-                    />
-                  )}
-                />
-              </div>
-
-              <Button type="submit" className="mt-4 w-full md:w-auto">
-                Rechercher
-              </Button>
-            </form>
-          </div>
         </div>
-      </div>
-    </div>
+    </Form>
+    
   );
 };
 
