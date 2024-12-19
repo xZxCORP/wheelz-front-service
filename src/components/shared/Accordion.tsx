@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
-import { Link } from 'react-router-dom';
 
 import type { RouterLink } from '../../types/navigation';
 import { Button } from './button/Button';
+import { LinkButton } from './LinkButton';
 
 interface Props {
   title: string;
@@ -35,13 +35,7 @@ export const Accordion = ({ title, links, onLinkClicked }: Props) => {
           {links &&
             links.map((link) => (
               <li key={link.title}>
-                <Link
-                  onClick={onLinkClicked}
-                  to={link.url ?? '#'}
-                  className="block py-2 text-sm hover:text-primary-700"
-                >
-                  {link.title}
-                </Link>
+                <LinkButton variant="ghost" onClick={onLinkClicked} link={link} />
               </li>
             ))}
         </ul>

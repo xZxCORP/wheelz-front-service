@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
-import { Link } from 'react-router-dom';
 
 import { useAuthStore } from '../../../stores/useAuthStore';
 import type { RouterLink } from '../../../types/navigation';
 import { Accordion } from '../../shared/Accordion';
 import { BurgerMenuButton } from '../../shared/BurgerMenuButton';
 import { Button } from '../../shared/button/Button';
+import { LinkButton } from '../../shared/LinkButton';
 import { LoginRegisterPickers } from '../auth/LoginRegisterPickers';
 import { LogoutButton } from '../auth/LogoutButton';
 import { ProfileButton } from '../profile/ProfileButton';
@@ -44,20 +44,7 @@ export const MainBurgerMenu = ({ className, links }: Props) => {
         />
       );
     }
-    return (
-      <Button
-        key={link.url}
-        buttonStyle={{
-          rounded: 'lg',
-          size: 'lg',
-          color: location.pathname.includes(link.url ?? '#') ? 'primary' : 'secondary',
-        }}
-        asChild
-        onClick={toggleMenu}
-      >
-        <Link to={link.url ?? '#'}>{link.title}</Link>
-      </Button>
-    );
+    return <LinkButton onClick={toggleMenu} link={link} />;
   };
   const toggleMenu = () => setIsOpen(!isOpen);
 
