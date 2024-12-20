@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react'
-import { FaCarCrash } from 'react-icons/fa'
-import { GiCrossedChains } from 'react-icons/gi'
+import type { Vehicle } from '@zcorp/shared-typing-wheelz';
+import { vehicleFixture } from '@zcorp/shared-typing-wheelz';
+import { useEffect, useState } from 'react';
+import { FaCarCrash } from 'react-icons/fa';
+import { GiCrossedChains } from 'react-icons/gi';
 
-import type { Vehicle } from '@zcorp/shared-typing-wheelz'
-import { vehicleFixture } from '@zcorp/shared-typing-wheelz'
-import { createCarImage } from '../../clients/api/carImage.api'
-import { NoticeCard } from '../../components/main/report/NoticeCard'
-import { LoadingAnimation } from '../../components/shared/LoadingAnimation'
+import { createCarImage } from '../../clients/api/carImage.api';
+import { NoticeCard } from '../../components/main/report/NoticeCard';
+import { LoadingAnimation } from '../../components/shared/LoadingAnimation';
 
 export const Report = () => {
-  const [carImage, setCarImage] = useState<string | undefined>()
-  const [vehicle, setVehicle] = useState<Vehicle | undefined>()
+  const [carImage, setCarImage] = useState<string | undefined>();
+  const [vehicle, setVehicle] = useState<Vehicle | undefined>();
 
   const REPORT_CARDS = [
     { title: 'Damage', Icon: FaCarCrash, warning: true },
@@ -18,27 +18,27 @@ export const Report = () => {
     { title: 'Damage', Icon: FaCarCrash, warning: true },
     { title: 'Damage', Icon: FaCarCrash, warning: false },
     { title: 'Damage', Icon: FaCarCrash, warning: true },
-  ]
+  ];
 
   const getCarImage = async () => {
-    console.log(vehicleFixture.features.color)
+    console.log(vehicleFixture.features.color);
 
     const carUrl = createCarImage({
       make: vehicleFixture.features.brand,
       year: vehicleFixture.infos.firstSivRegistrationDate.split('-')[0] ?? '2020',
       model: vehicleFixture.features.model,
       color: vehicleFixture.features.color,
-    })
+    });
 
-    setCarImage(carUrl)
-  }
+    setCarImage(carUrl);
+  };
 
   useEffect(() => {
-    setVehicle(vehicleFixture)
-    getCarImage()
-  }, [])
+    setVehicle(vehicleFixture);
+    getCarImage();
+  }, []);
 
-  if (!vehicle) return <LoadingAnimation />
+  if (!vehicle) return <LoadingAnimation />;
 
   return (
     <div className="flex w-full">
@@ -83,5 +83,5 @@ export const Report = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

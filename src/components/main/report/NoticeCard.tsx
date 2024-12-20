@@ -1,15 +1,15 @@
-import type { IconType } from 'react-icons'
-import { FaCheckCircle } from 'react-icons/fa'
-import { FaTriangleExclamation } from 'react-icons/fa6'
+import type { IconType } from 'react-icons';
+import { FaCheckCircle } from 'react-icons/fa';
+import { FaTriangleExclamation } from 'react-icons/fa6';
 
 export const NoticeCard = ({
   title,
   Icon,
   warning,
 }: {
-  title: string
-  Icon: IconType
-  warning?: boolean
+  title: string;
+  Icon: IconType;
+  warning?: boolean;
 }) => {
   return (
     <button className="flex h-auto min-h-[150px] w-full flex-col items-center justify-center rounded-lg border transition-colors hover:border-secondary-900 sm:h-1/2 sm:w-52">
@@ -27,5 +27,5 @@ export const NoticeCard = ({
         </div>
       )}
     </button>
-  )
-}
+  );
+};
