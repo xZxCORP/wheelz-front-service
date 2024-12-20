@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
 import { type Vehicle } from '@zcorp/shared-typing-wheelz';
 import { Link } from 'react-router-dom';
@@ -17,6 +18,20 @@ export const ChainTablePage = () => {
       query: apiPagination,
     },
   });
+  const queryClient = useQueryClient();
+  const { mutate: refreshChainStateMutate, isPending: isRefreshChainStatePending } =
+    chainTsr.chain.refreshChainState.useMutation({
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['chain'] });
+      },
+    });
+  const { mutate: processTransactionBatchMutate, isPending: isProcessTransactionBatchPending } =
+    chainTsr.chain.processTransactionBatch.useMutation({
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['chain'] });
+        queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      },
+    });
   const columnHelper = createColumnHelper<Vehicle>();
 
   const columns = [
@@ -63,11 +78,20 @@ export const ChainTablePage = () => {
           onPaginationChange={onPaginationChange}
           pagination={pagination}
         ></Table>
-        {/* <div>
-          <Button asChild buttonStyle={{ color: 'secondary' }}>
-            <Link to="/admin/transactions/new">Créer une transaction</Link>
-          </Button>
-        </div> */}
+        <Button
+          buttonStyle={{ color: 'secondary' }}
+          onClick={() => refreshChainStateMutate({ body: {} })}
+          disabled={isRefreshChainStatePending}
+        >
+          {isRefreshChainStatePending ? 'Chargement' : 'Rafraîchir'}
+        </Button>
+        <Button
+          buttonStyle={{ color: 'secondary' }}
+          onClick={() => processTransactionBatchMutate({ body: {} })}
+          disabled={isProcessTransactionBatchPending}
+        >
+          {isProcessTransactionBatchPending ? 'Chargement' : 'Traiter les nouvelles transactions'}
+        </Button>
       </div>
     )
   );
