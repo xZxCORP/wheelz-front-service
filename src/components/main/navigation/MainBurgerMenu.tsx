@@ -38,13 +38,13 @@ export const MainBurgerMenu = ({ className, links }: Props) => {
       return (
         <Accordion
           onLinkClicked={toggleMenu}
-          key={link.title}
+          key={link.url}
           title={link.title}
           links={link.links}
         />
       );
     }
-    return <LinkButton onClick={toggleMenu} link={link} />;
+    return <LinkButton key={link.url} onClick={toggleMenu} link={link} />;
   };
   const toggleMenu = () => setIsOpen(!isOpen);
 
