@@ -1,4 +1,4 @@
-import { VehicleSearchForm } from '../../components/vehicle/vehicleForm'
+import { VehicleSearchForm } from '../../components/vehicle/VehicleSearchForm';
 
 export const MainRoot = () => {
   return (
