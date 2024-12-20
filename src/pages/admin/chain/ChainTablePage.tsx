@@ -7,6 +7,7 @@ import { chainTsr } from '../../../clients/api/chain.api';
 import { Table } from '../../../components/admin/Table';
 import { Button } from '../../../components/shared/button/Button';
 import { usePagination } from '../../../hooks/usePagination';
+import { useSnackbarStore } from '../../../stores/useSnackbar';
 export const ChainTablePage = () => {
   const { pagination, apiPagination, onPaginationChange } = usePagination({
     initialPage: 1,
@@ -18,6 +19,7 @@ export const ChainTablePage = () => {
       query: apiPagination,
     },
   });
+  const { addSnackbar } = useSnackbarStore();
   const queryClient = useQueryClient();
   const { mutate: refreshChainStateMutate, isPending: isRefreshChainStatePending } =
     chainTsr.chain.refreshChainState.useMutation({
@@ -32,6 +34,13 @@ export const ChainTablePage = () => {
         queryClient.invalidateQueries({ queryKey: ['transactions'] });
       },
     });
+  const { mutate: verifyChainStateMutate, isPending: isVerifyChainStatePending } =
+    chainTsr.chain.verifyChainState.useMutation({
+      onSuccess: (data) => {
+        addSnackbar(data.body.message, 'success');
+      },
+    });
+
   const columnHelper = createColumnHelper<Vehicle>();
 
   const columns = [
@@ -91,6 +100,13 @@ export const ChainTablePage = () => {
           disabled={isProcessTransactionBatchPending}
         >
           {isProcessTransactionBatchPending ? 'Chargement' : 'Traiter les nouvelles transactions'}
+        </Button>
+        <Button
+          buttonStyle={{ color: 'secondary' }}
+          onClick={() => verifyChainStateMutate({ body: {} })}
+          disabled={isVerifyChainStatePending}
+        >
+          {isVerifyChainStatePending ? 'Chargement' : 'Vérifier la chaine'}
         </Button>
       </div>
     )

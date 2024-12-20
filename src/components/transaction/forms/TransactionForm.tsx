@@ -17,14 +17,14 @@ export const TransactionForm = () => {
   const { mutate: deleteTransactionMutate } =
     transactionTsr.transactions.deleteTransaction.useMutation({
       onSuccess: async (response) => {
-        addSnackbar('Transaction de type Suppression créée avec succès', 'error');
+        addSnackbar('Transaction de type Suppression créée avec succès', 'success');
         await globalSuccess(response.body);
       },
     });
   const { mutate: createTransactionMutate } =
     transactionTsr.transactions.submitTransaction.useMutation({
       onSuccess: async (response) => {
-        addSnackbar('Transaction de type Création créée avec succès', 'error');
+        addSnackbar('Transaction de type Création créée avec succès', 'success');
         await globalSuccess(response.body);
       },
     });
