@@ -42,6 +42,7 @@ export const VehicleSearchForm: React.FC = () => {
         onSubmit={form.handleSubmit((data) => mutate({ body: data }))}
         className="flex flex-col items-center justify-center gap-6"
       >
+        <h2 className="text-xl font-semibold">Rechercher et créer un véhicule</h2>
         <FormField
           control={form.control}
           name="prenom"
