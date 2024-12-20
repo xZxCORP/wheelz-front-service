@@ -4,6 +4,7 @@ import type React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { transactionTsr } from '../../clients/api/transaction.api';
+import { useSnackbarStore } from '../../stores/useSnackbar';
 import { Button } from '../shared/button/Button';
 import {
   Form,
@@ -16,6 +17,7 @@ import {
 import { Input } from '../shared/form/Input';
 
 export const VehicleSearchForm: React.FC = () => {
+  const { addSnackbar } = useSnackbarStore();
   const form = useForm({
     resolver: zodResolver(scraVehicleDataSchema),
     mode: 'onChange',
@@ -30,7 +32,7 @@ export const VehicleSearchForm: React.FC = () => {
 
   const { mutate } = transactionTsr.transactions.scrapAndCreateTransaction.useMutation({
     onSuccess: () => {
-      console.log('test');
+      addSnackbar('Transaction de type Création créée avec succès', 'error');
     },
   });
 
