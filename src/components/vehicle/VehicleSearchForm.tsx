@@ -31,8 +31,8 @@ export const VehicleSearchForm: React.FC = () => {
   });
 
   const { mutate } = transactionTsr.transactions.scrapAndCreateTransaction.useMutation({
-    onSuccess: () => {
-      addSnackbar('Transaction de type Création créée avec succès', 'error');
+    onSuccess: (result) => {
+      addSnackbar(result.body.message, 'success');
     },
   });
 
