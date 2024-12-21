@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { scraVehicleDataSchema } from '@zcorp/shared-typing-wheelz';
+import { scrapVehicleDataSchema } from '@zcorp/shared-typing-wheelz';
 import type React from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -19,7 +19,7 @@ import { Input } from '../shared/form/Input';
 export const VehicleSearchForm: React.FC = () => {
   const { addSnackbar } = useSnackbarStore();
   const form = useForm({
-    resolver: zodResolver(scraVehicleDataSchema),
+    resolver: zodResolver(scrapVehicleDataSchema),
     mode: 'onChange',
     defaultValues: {
       prenom: '',
@@ -30,7 +30,7 @@ export const VehicleSearchForm: React.FC = () => {
     },
   });
 
-  const { mutate } = transactionTsr.transactions.scrapAndCreateTransaction.useMutation({
+  const { mutate, isPending } = transactionTsr.transactions.scrapAndCreateTransaction.useMutation({
     onSuccess: (result) => {
       addSnackbar(result.body.message, 'success');
     },
@@ -112,7 +112,9 @@ export const VehicleSearchForm: React.FC = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Rechercher</Button>
+        <Button type="submit" disabled={isPending}>
+          {isPending ? 'Recherche en cours...' : 'Rechercher'}
+        </Button>
       </form>
     </Form>
   );
