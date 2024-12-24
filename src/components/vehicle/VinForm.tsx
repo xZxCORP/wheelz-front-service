@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button } from '../shared/button/Button';
+import { useNavigate } from 'react-router-dom';
 import {
   Form,
   FormControl,
@@ -16,10 +17,12 @@ import type { z } from 'zod';
 import { authTsr } from '../../clients/api/auth.api';
 import { getVehicleParametersSchema, type GetVehicleParameters } from '@zcorp/wheelz-contracts';
 import { chainTsr } from '../../clients/api/chain.api';
+import { exhaustiveGuard, isFetchError } from '@ts-rest/react-query/v5';
 
 
 export const VinForm = () => {
   const [vin, setVin] = useState<string | null>(null);
+  const navigate = useNavigate();
   const form = useForm<Vehicle>({
     resolver: zodResolver(getVehicleParametersSchema),
     mode: 'onChange',
@@ -28,34 +31,39 @@ export const VinForm = () => {
     }
   });
 
-
-  const { data } = chainTsr.chain.getVehicleOfTheChain.useQuery({
-    queryKey: ['transactions', vin],
+  const { data, error, isLoading } = chainTsr.chain.getVehicleOfTheChain.useQuery({
+    queryKey: ['vehicles', vin],
     queryData: {
-      query: { vin: vin! },
+      query: { vin: vin ?? undefined },
     },
-    enabled: !!vin
-  });
+    enabled: !!vin,
+  })
 
-  if (data) {
-    console.log("hihihihihihi")
-    if (data.status == 200) {
-      console.log("Véchicule trouvé wahouuu :");
-      console.log(data.body);
-    }
-    else {
-      console.log("HEHHH...");
-    }
-  }
-
-  //if (!vehicle) return <LoadingAnimation />;
 
   const submitForm = (formData: { vin: string }) => {
+
     console.log(formData);
     console.log("[RECHERCHE DU VEHICULE...]");
     console.log("vin:", formData.vin);
     setVin(formData.vin);
   }
+
+  if (error) {
+    if (isFetchError(error)) {
+      return <div>We could not retrieve this post. Please check your internet connection.</div>;
+    }
+
+    if (error.status === 404) {
+      return <div>Post not found</div>;
+    }
+
+  }
+  else if (data) {
+    // navigate
+    console.log("NO ERROR:");
+    console.log(data);
+  }
+
 
   return (
     <div className="flex w-full" >
@@ -84,7 +92,9 @@ export const VinForm = () => {
                     </FormItem>
                   )}
                 />
-                <Button type="submit">Rechercher</Button>
+                <Button disabled={isLoading} type="submit">
+                  {isLoading ? "Chargement..." : "Rechercher"}
+                </Button>
               </form>
             </Form>
           </div>
@@ -92,4 +102,5 @@ export const VinForm = () => {
       </div>
     </div >
   );
-};
+
+}

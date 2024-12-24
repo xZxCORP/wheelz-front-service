@@ -28,21 +28,20 @@ export const createApiHandler = (): ApiFetcher => {
         headers: new Headers(result.headers.toJSON()),
       };
     } catch (error_) {
-      if (isAxiosError(error_)) {
-        const error = error_ as AxiosError;
-        const response = error.response as AxiosResponse;
 
-        if (response.status === 401) {
-          useAuthStore.getState().clearAuth();
-        }
-        return {
-          status: response.status,
-          body: response.data,
-          // @ts-expect-error toJSON is not typed
-          headers: new Headers(response?.headers?.toJSON() || ''),
-        } as ApiError;
+      const error = error_ as AxiosError;
+      const response = error.response as AxiosResponse;
+
+      if (response.status === 401) {
+        useAuthStore.getState().clearAuth();
       }
-      throw error_;
+      return {
+        status: response.status,
+        body: response.data,
+        // @ts-expect-error toJSON is not typed
+        headers: new Headers(response?.headers?.toJSON() || ''),
+      } as ApiError;
+
     }
   };
 };
