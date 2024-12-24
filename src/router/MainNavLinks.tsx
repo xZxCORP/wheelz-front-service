@@ -1,6 +1,6 @@
-import type { DropdownLink } from '../types/dropdownLink';
+import type { RouterLink } from '../types/navigation';
 
-export const mainNavLinks: DropdownLink[] = [
+export const mainNavLinks: RouterLink[] = [
   {
     title: 'Rapports',
     links: [

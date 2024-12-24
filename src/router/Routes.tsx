@@ -1,7 +1,10 @@
 import type { RouteObject } from 'react-router-dom';
 
 import { AdminRoot } from '../pages/admin/AdminRoot';
-import { TransactionsTable } from '../pages/admin/transactions/TransactionsTable';
+import { ChainTablePage } from '../pages/admin/chain/ChainTablePage';
+import { ViewVehiclePage } from '../pages/admin/chain/ViewVehiclePage';
+import { CreateTransactionPage } from '../pages/admin/transactions/CreateTransactionPage';
+import { TransactionsTablePage } from '../pages/admin/transactions/TransactionsTablePage';
 import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
 import { UsersTable } from '../pages/admin/UsersTable';
 import { AdminLayout } from '../pages/layout/AdminLayout';
@@ -49,11 +52,23 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'transactions',
-            element: <TransactionsTable />,
+            element: <TransactionsTablePage />,
+          },
+          {
+            path: 'transactions/new',
+            element: <CreateTransactionPage />,
           },
           {
             path: 'transactions/:id',
             element: <ViewTransactionPage />,
+          },
+          {
+            path: 'chain',
+            element: <ChainTablePage />,
+          },
+          {
+            path: 'chain/:vin',
+            element: <ViewVehiclePage />,
           },
           {
             path: 'users',

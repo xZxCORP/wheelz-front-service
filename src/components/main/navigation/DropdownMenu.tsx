@@ -2,13 +2,13 @@ import clsx from 'clsx';
 import { useRef, useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 
-import type { LinkObject } from '../../../types/linkObject';
+import type { RouterLink } from '../../../types/navigation';
 import { Button } from '../../shared/button/Button';
 import { MenuItem } from './MenuItem';
 
 interface Props {
   title: string;
-  links?: LinkObject[];
+  links?: RouterLink[];
 }
 
 export const DropdownMenu = ({ title, links }: Props) => {
@@ -45,7 +45,7 @@ export const DropdownMenu = ({ title, links }: Props) => {
             aria-labelledby="options-menu"
           >
             {links?.map((link) => (
-              <MenuItem key={link.title} to={link.url}>
+              <MenuItem key={link.title} to={link.url ?? '#'}>
                 {link.title}
               </MenuItem>
             ))}

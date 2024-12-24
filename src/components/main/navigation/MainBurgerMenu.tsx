@@ -2,20 +2,22 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
 
-import { mainNavLinks } from '../../../router/MainNavLinks';
 import { useAuthStore } from '../../../stores/useAuthStore';
+import type { RouterLink } from '../../../types/navigation';
 import { Accordion } from '../../shared/Accordion';
 import { BurgerMenuButton } from '../../shared/BurgerMenuButton';
 import { Button } from '../../shared/button/Button';
+import { LinkButton } from '../../shared/LinkButton';
 import { LoginRegisterPickers } from '../auth/LoginRegisterPickers';
 import { LogoutButton } from '../auth/LogoutButton';
 import { ProfileButton } from '../profile/ProfileButton';
 
 interface Props {
   className?: string;
+  links: RouterLink[];
 }
 
-export const MainBurgerMenu = ({ className }: Props) => {
+export const MainBurgerMenu = ({ className, links }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, isAuthenticated } = useAuthStore();
 
@@ -31,6 +33,19 @@ export const MainBurgerMenu = ({ className }: Props) => {
     return <LoginRegisterPickers />;
   };
 
+  const LinkCell = (link: RouterLink) => {
+    if (link.links) {
+      return (
+        <Accordion
+          onLinkClicked={toggleMenu}
+          key={link.url}
+          title={link.title}
+          links={link.links}
+        />
+      );
+    }
+    return <LinkButton key={link.url} onClick={toggleMenu} link={link} />;
+  };
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
@@ -53,9 +68,7 @@ export const MainBurgerMenu = ({ className }: Props) => {
             </Button>
           </div>
           <div className="flex flex-col gap-4">
-            {mainNavLinks.map((link) => (
-              <Accordion key={link.title} title={link.title} links={link.links} />
-            ))}
+            {links.map((link) => LinkCell(link))}
             {AccountCell()}
           </div>
         </div>

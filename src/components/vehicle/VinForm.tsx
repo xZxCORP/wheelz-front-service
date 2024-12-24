@@ -14,24 +14,47 @@ import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { z } from 'zod';
 import { authTsr } from '../../clients/api/auth.api';
+import { getVehicleParametersSchema, type GetVehicleParameters } from '@zcorp/wheelz-contracts';
+import { chainTsr } from '../../clients/api/chain.api';
+
 
 export const VinForm = () => {
+  const [vin, setVin] = useState<string | null>(null);
   const form = useForm<Vehicle>({
-    resolver: zodResolver(searchVehicleSchema),
+    resolver: zodResolver(getVehicleParametersSchema),
     mode: 'onChange',
     defaultValues: {
       vin: ''
     }
   });
 
-  // TODO - Create VIN type
-  const [vin, setVin] = useState<string | null>(null);
+
+  const { data } = chainTsr.chain.getVehicleOfTheChain.useQuery({
+    queryKey: ['transactions', vin],
+    queryData: {
+      query: { vin: vin! },
+    },
+    enabled: !!vin
+  });
+
+  if (data) {
+    console.log("hihihihihihi")
+    if (data.status == 200) {
+      console.log("Véchicule trouvé wahouuu :");
+      console.log(data.body);
+    }
+    else {
+      console.log("HEHHH...");
+    }
+  }
 
   //if (!vehicle) return <LoadingAnimation />;
-  const proutProutCamembert = (data) => {
+
+  const submitForm = (formData: { vin: string }) => {
+    console.log(formData);
     console.log("[RECHERCHE DU VEHICULE...]");
-    console.log("data:", data);
-    //...
+    console.log("vin:", formData.vin);
+    setVin(formData.vin);
   }
 
   return (
@@ -45,7 +68,7 @@ export const VinForm = () => {
 
             <Form {...form}>
               <form
-                onSubmit={form.handleSubmit((data) => proutProutCamembert(data))}
+                onSubmit={form.handleSubmit((formData) => submitForm(formData))}
                 className="flex flex-col gap-4"
               >
                 <FormField
