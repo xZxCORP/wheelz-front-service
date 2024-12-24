@@ -1,5 +1,5 @@
-import { VinForm } from "../../components/vehicle/VinForm";
 import { VehicleSearchForm } from '../../components/vehicle/VehicleSearchForm';
+import { VinForm } from '../../components/vehicle/VinForm';
 
 export const MainRoot = () => {
   return (

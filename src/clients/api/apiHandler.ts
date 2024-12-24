@@ -1,6 +1,6 @@
 import type { ApiFetcher } from '@ts-rest/core';
 import type { AxiosError, AxiosResponse } from 'axios';
-import axios, { isAxiosError, type Method } from 'axios';
+import axios, { type Method } from 'axios';
 
 import { useAuthStore } from '../../stores/useAuthStore';
 export interface ApiError {
@@ -28,7 +28,6 @@ export const createApiHandler = (): ApiFetcher => {
         headers: new Headers(result.headers.toJSON()),
       };
     } catch (error_) {
-
       const error = error_ as AxiosError;
       const response = error.response as AxiosResponse;
 
@@ -41,7 +40,6 @@ export const createApiHandler = (): ApiFetcher => {
         // @ts-expect-error toJSON is not typed
         headers: new Headers(response?.headers?.toJSON() || ''),
       } as ApiError;
-
     }
   };
 };

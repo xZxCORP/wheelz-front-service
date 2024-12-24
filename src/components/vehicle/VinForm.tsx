@@ -1,6 +1,12 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import type { Vehicle } from '@zcorp/shared-typing-wheelz';
+import { getVehicleParametersSchema } from '@zcorp/wheelz-contracts';
 import { useState } from 'react';
-import { Button } from '../shared/button/Button';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+
+import { chainTsr } from '../../clients/api/chain.api';
+import { Button } from '../shared/button/Button';
 import {
   Form,
   FormControl,
@@ -10,15 +16,6 @@ import {
   FormMessage,
 } from '../shared/form/Form';
 import { Input } from '../shared/form/Input';
-import { useForm } from 'react-hook-form';
-import type { Vehicle } from '@zcorp/shared-typing-wheelz';
-import { zodResolver } from '@hookform/resolvers/zod';
-import type { z } from 'zod';
-import { authTsr } from '../../clients/api/auth.api';
-import { getVehicleParametersSchema, type GetVehicleParameters } from '@zcorp/wheelz-contracts';
-import { chainTsr } from '../../clients/api/chain.api';
-import { exhaustiveGuard, isFetchError } from '@ts-rest/react-query/v5';
-
 
 export const VinForm = () => {
   const [vin, setVin] = useState<string | null>(null);
@@ -27,8 +24,8 @@ export const VinForm = () => {
     resolver: zodResolver(getVehicleParametersSchema),
     mode: 'onChange',
     defaultValues: {
-      vin: ''
-    }
+      vin: '',
+    },
   });
 
   const { data, error, isLoading } = chainTsr.chain.getVehicleOfTheChain.useQuery({
@@ -37,36 +34,25 @@ export const VinForm = () => {
       query: { vin: vin ?? undefined },
     },
     enabled: !!vin,
-  })
-
+  });
 
   const submitForm = (formData: { vin: string }) => {
-
     console.log(formData);
-    console.log("[RECHERCHE DU VEHICULE...]");
-    console.log("vin:", formData.vin);
+    console.log('[RECHERCHE DU VEHICULE...]');
+    console.log('vin:', formData.vin);
     setVin(formData.vin);
-  }
+  };
 
   if (error) {
-    if (isFetchError(error)) {
-      return <div>We could not retrieve this post. Please check your internet connection.</div>;
-    }
-
-    if (error.status === 404) {
-      return <div>Post not found</div>;
-    }
-
-  }
-  else if (data) {
+    console.error('error', error);
+  } else if (data) {
     // navigate
-    console.log("NO ERROR:");
+    console.log('NO ERROR:');
     console.log(data);
   }
 
-
   return (
-    <div className="flex w-full" >
+    <div className="flex w-full">
       <div className="mx-auto w-full max-w-4xl space-y-6">
         <div className="rounded-lg bg-primary-50 p-4 shadow-md md:p-6">
           <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center">
@@ -93,14 +79,13 @@ export const VinForm = () => {
                   )}
                 />
                 <Button disabled={isLoading} type="submit">
-                  {isLoading ? "Chargement..." : "Rechercher"}
+                  {isLoading ? 'Chargement...' : 'Rechercher'}
                 </Button>
               </form>
             </Form>
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
-
-}
+};

@@ -19,11 +19,9 @@ export const routes: RouteObject[] = [
   {
     path: '/',
     element: <BaseLayout />,
-    errorElement: <ErrorLayout />,
 
     children: [
       {
-        errorElement: <ErrorOutletLayout />,
         children: [
           {
             index: true,
