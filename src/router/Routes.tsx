@@ -14,6 +14,7 @@ import { ErrorOutletLayout } from '../pages/layout/ErrorOutletLayout';
 import { MainRoot } from '../pages/main/MainRoot';
 import { Report } from '../pages/main/Report';
 import { PrivateRoute } from './ProtectedRoutes';
+import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
 
 export const routes: RouteObject[] = [
   {
@@ -30,6 +31,11 @@ export const routes: RouteObject[] = [
           {
             path: 'report',
             element: <PrivateRoute element={Report} />,
+          },
+          {
+            // page with VehicleSearchForm
+            path: 'search',
+            element: <VehicleSearchPage />,
           },
         ],
       },
