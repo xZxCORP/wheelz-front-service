@@ -1,24 +1,23 @@
 import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 import { vehicleFixture } from '@zcorp/shared-typing-wheelz';
 import { useEffect, useState } from 'react';
-import { FaCarCrash } from 'react-icons/fa';
+//import { FaCarCrash } from 'react-icons/fa';
 import { GiCrossedChains } from 'react-icons/gi';
 
 import { createCarImage } from '../../clients/api/carImage.api';
-import { NoticeCard } from '../../components/main/report/NoticeCard';
 import { LoadingAnimation } from '../../components/shared/LoadingAnimation';
 
 export const Report = () => {
   const [carImage, setCarImage] = useState<string | undefined>();
   const [vehicle, setVehicle] = useState<Vehicle | undefined>();
 
-  const REPORT_CARDS = [
+  /*const REPORT_CARDS = [
     { title: 'Damage', Icon: FaCarCrash, warning: true },
     { title: 'Damage', Icon: FaCarCrash, warning: true },
     { title: 'Damage', Icon: FaCarCrash, warning: true },
     { title: 'Damage', Icon: FaCarCrash, warning: false },
     { title: 'Damage', Icon: FaCarCrash, warning: true },
-  ];
+  ];*/
 
   const getCarImage = async () => {
     console.log(vehicleFixture.features.color);
@@ -64,7 +63,68 @@ export const Report = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 justify-items-center gap-4 sm:grid-cols-2 md:grid-cols-3">
+          {/* Caractéristique techniques */}
+          <div className="mb-6">
+            <h2 className="mb-4 text-lg font-bold">Caractéristiques techniques</h2>
+            <table className="w-full table-auto border-collapse border border-gray-200">
+              <tbody>
+                {Object.entries(vehicle.features).map(([key, value]) => (
+                  <tr key={key}>
+                    <td className="border border-gray-200 p-2 font-medium capitalize">{key}</td>
+                    <td className="border border-gray-200 p-2">{value ?? 'N/A'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Historique */}
+          <div className="mb-6">
+            <h2 className="mb-4 text-lg font-bold">Historique</h2>
+            <table className="w-full table-auto border-collapse border border-gray-200">
+              <thead>
+                <tr>
+                  <th className="border border-gray-200 p-2">Date</th>
+                  <th className="border border-gray-200 p-2">Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {vehicle.history.map((entry, index) => (
+                  <tr key={index}>
+                    <td className="border border-gray-200 p-2">{entry.date}</td>
+                    <td className="border border-gray-200 p-2">{entry.type}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Contrôle technique */}
+          <div className="mb-6">
+            <h2 className="mb-4 text-lg font-bold">Contrôle technique</h2>
+            <table className="w-full table-auto border-collapse border border-gray-200">
+              <thead>
+                <tr>
+                  <th className="border border-gray-200 p-2">Date</th>
+                  <th className="border border-gray-200 p-2">Résultat</th>
+                  <th className="border border-gray-200 p-2">Nature</th>
+                  <th className="border border-gray-200 p-2">Kilométrage</th>
+                </tr>
+              </thead>
+              <tbody>
+                {vehicle.technicalControls.map((control, index) => (
+                  <tr key={index}>
+                    <td className="border border-gray-200 p-2">{control.date}</td>
+                    <td className="border border-gray-200 p-2">{control.resultRaw}</td>
+                    <td className="border border-gray-200 p-2">{control.nature}</td>
+                    <td className="border border-gray-200 p-2">{control.km} km</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* <div className="grid grid-cols-1 justify-items-center gap-4 sm:grid-cols-2 md:grid-cols-3">
             {REPORT_CARDS.map((element, index) => (
               <NoticeCard
                 key={index}
@@ -73,7 +133,7 @@ export const Report = () => {
                 warning={element.warning}
               />
             ))}
-          </div>
+          </div> */}
         </div>
         <div className="flex items-center gap-4 rounded-lg bg-primary-50 p-4 shadow-md">
           <GiCrossedChains className="shrink-0 text-3xl" />
