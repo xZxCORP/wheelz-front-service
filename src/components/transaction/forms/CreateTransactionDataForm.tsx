@@ -87,8 +87,8 @@ export const CreateTransactionDataForm = ({ onSubmit, onlyView, baseData }: Prop
         )}
         <GeneralInformationsFields control={form.control} />
         <TechnicalInformationsFields control={form.control} />
-        <HistoryArrayField control={form.control} />
-        <TechnicalControlArrayField control={form.control} />
+        <HistoryArrayField onlyView={onlyView} control={form.control} />
+        <TechnicalControlArrayField onlyView={onlyView} control={form.control} />
 
         {/* <Separator />
         <H2>Problèmes</H2>
