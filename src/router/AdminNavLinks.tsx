@@ -10,6 +10,10 @@ export const adminNavLinks: RouterLink[] = [
     url: '/admin/chain',
   },
   {
+    title: 'Statistiques',
+    url: '/admin/stats',
+  },
+  {
     title: 'Utilisateurs',
     url: '/admin/users',
   },
