@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { chainTsr } from '../../../clients/api/chain.api';
 import { Table } from '../../../components/admin/Table';
+import { ChainStatsExecutionInfos } from '../../../components/chain/ChainStatsExecutionInfos';
 import { Button } from '../../../components/shared/button/Button';
 import { usePagination } from '../../../hooks/usePagination';
 import { useSnackbarStore } from '../../../stores/useSnackbar';
@@ -13,11 +14,14 @@ export const ChainTablePage = () => {
     initialPage: 1,
     initialPerPage: 10,
   });
-  const { data } = chainTsr.chain.getAllVehiclesOfTheChain.useQuery({
+  const { data: allVehiclesData } = chainTsr.chain.getAllVehiclesOfTheChain.useQuery({
     queryKey: ['chain', apiPagination],
     queryData: {
       query: apiPagination,
     },
+  });
+  const { data: chainStatsData } = chainTsr.chain.stats.useQuery({
+    queryKey: ['chain', 'stats'],
   });
   const { addSnackbar } = useSnackbarStore();
   const queryClient = useQueryClient();
@@ -90,16 +94,17 @@ export const ChainTablePage = () => {
   ];
 
   return (
-    data && (
+    allVehiclesData && (
       <div className="flex flex-col gap-2">
         <Table
           title="Chaine"
-          data={data.body.items}
-          meta={data.body.meta}
+          data={allVehiclesData.body.items}
+          meta={allVehiclesData.body.meta}
           columns={columns}
           onPaginationChange={onPaginationChange}
           pagination={pagination}
         ></Table>
+        {chainStatsData && <ChainStatsExecutionInfos data={chainStatsData.body} />}
         <Button
           buttonStyle={{ color: 'secondary' }}
           onClick={onRefreshChainState}
