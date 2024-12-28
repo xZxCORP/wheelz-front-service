@@ -40,6 +40,19 @@ export const ChainTablePage = () => {
         addSnackbar(data.body.message, 'success');
       },
     });
+  const onRefreshChainState = () => {
+    refreshChainStateMutate({ body: {} });
+    queryClient.invalidateQueries({ queryKey: ['chain'] });
+  };
+  const onProcessTransactionBatch = () => {
+    processTransactionBatchMutate({ body: {} });
+    queryClient.invalidateQueries({ queryKey: ['chain'] });
+    queryClient.invalidateQueries({ queryKey: ['transactions'] });
+  };
+  const onVerifyChainState = () => {
+    verifyChainStateMutate({ body: {} });
+    queryClient.invalidateQueries({ queryKey: ['chain'] });
+  };
 
   const columnHelper = createColumnHelper<Vehicle>();
 
@@ -89,21 +102,21 @@ export const ChainTablePage = () => {
         ></Table>
         <Button
           buttonStyle={{ color: 'secondary' }}
-          onClick={() => refreshChainStateMutate({ body: {} })}
+          onClick={onRefreshChainState}
           disabled={isRefreshChainStatePending}
         >
           {isRefreshChainStatePending ? 'Chargement' : 'Rafraîchir'}
         </Button>
         <Button
           buttonStyle={{ color: 'secondary' }}
-          onClick={() => processTransactionBatchMutate({ body: {} })}
+          onClick={onProcessTransactionBatch}
           disabled={isProcessTransactionBatchPending}
         >
           {isProcessTransactionBatchPending ? 'Chargement' : 'Traiter les nouvelles transactions'}
         </Button>
         <Button
           buttonStyle={{ color: 'secondary' }}
-          onClick={() => verifyChainStateMutate({ body: {} })}
+          onClick={onVerifyChainState}
           disabled={isVerifyChainStatePending}
         >
           {isVerifyChainStatePending ? 'Chargement' : 'Vérifier la chaine'}
