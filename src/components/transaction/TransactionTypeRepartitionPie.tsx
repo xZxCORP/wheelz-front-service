@@ -3,15 +3,14 @@ import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recha
 
 import { Card, CardContent, CardHeader } from '../shared/Card';
 import { H2 } from '../shared/typography/Typography';
-const COLORS = ['#22c55e', '#06b6d4', '#ef4444'];
 type Props = {
   data: TransactionStats;
 };
 export const TransactionTypeRepartitionPie = ({ data }: Props) => {
   const typeRepartition = [
-    { name: 'Création', value: data.repartition.type.create },
-    { name: 'Modification', value: data.repartition.type.update },
-    { name: 'Suppression', value: data.repartition.type.delete },
+    { name: 'Création', value: data.repartition.type.create, color: '#22c55e' },
+    { name: 'Modification', value: data.repartition.type.update, color: '#06b6d4' },
+    { name: 'Suppression', value: data.repartition.type.delete, color: '#ef4444' },
   ];
   return (
     <Card className="w-full">
@@ -29,8 +28,8 @@ export const TransactionTypeRepartitionPie = ({ data }: Props) => {
               dataKey="value"
               label={(entry) => `${entry.name}: ${entry.value}`}
             >
-              {typeRepartition.map((_, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              {typeRepartition.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
             <Tooltip />
