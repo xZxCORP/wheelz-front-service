@@ -3,7 +3,7 @@ import type { RouteObject } from 'react-router-dom';
 import { AdminRoot } from '../pages/admin/AdminRoot';
 import { ChainTablePage } from '../pages/admin/chain/ChainTablePage';
 import { ViewVehiclePage } from '../pages/admin/chain/ViewVehiclePage';
-import { StatsTable } from '../pages/admin/StatsTable';
+import { StatsPage } from '../pages/admin/StatsPage';
 import { CreateTransactionPage } from '../pages/admin/transactions/CreateTransactionPage';
 import { TransactionsTablePage } from '../pages/admin/transactions/TransactionsTablePage';
 import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
@@ -77,7 +77,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'stats',
-            element: <StatsTable />,
+            element: <StatsPage />,
           },
         ],
       },
