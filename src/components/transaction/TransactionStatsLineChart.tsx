@@ -1,4 +1,4 @@
-import type { ChainStats } from '@zcorp/shared-typing-wheelz';
+import type { TransactionStats } from '@zcorp/shared-typing-wheelz';
 import {
   CartesianGrid,
   Legend,
@@ -13,15 +13,15 @@ import {
 import { Card, CardContent, CardHeader } from '../shared/Card';
 import { H2 } from '../shared/typography/Typography';
 type Props = {
-  data: ChainStats;
+  data: TransactionStats;
 };
 
-export const ChainStatsChart = ({ data }: Props) => {
-  const mergedData = data.evolutionOfVehicles.map((vehicleEntry) => {
-    const transactionEntry = data.evolutionOfTransactions.find((t) => t.date === vehicleEntry.date);
+export const TransactionStatsLineChart = ({ data }: Props) => {
+  const mergedData = data.evolution.map((transactionEntry) => {
+    const anomalyEntry = data.anomalies.find((t) => t.date === transactionEntry.date);
     return {
-      date: vehicleEntry.date,
-      vehicles: vehicleEntry.value,
+      date: transactionEntry.date,
+      anomalies: anomalyEntry ? anomalyEntry.value : 0,
       transactions: transactionEntry ? transactionEntry.value : 0,
     };
   });
@@ -29,7 +29,7 @@ export const ChainStatsChart = ({ data }: Props) => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <H2>Evolution de la chaine</H2>
+        <H2>Evolution du nombre de transactions et d&apos;anomalies</H2>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
@@ -45,8 +45,8 @@ export const ChainStatsChart = ({ data }: Props) => {
             <Legend />
             <Line
               type="monotone"
-              name="Nombre de véhicules"
-              dataKey="vehicles"
+              name="Nombre de transactions"
+              dataKey="transactions"
               stroke="#fd8012"
               strokeWidth={2}
               dot={{ r: 4, fill: '#fd8012' }}
@@ -54,12 +54,12 @@ export const ChainStatsChart = ({ data }: Props) => {
             />
             <Line
               type="monotone"
-              name="Nombre de transactions"
-              dataKey="transactions"
-              stroke="#06b6d4"
+              name="Nombre d'anomalies"
+              dataKey="anomalies"
+              stroke="#ef4444"
               strokeWidth={2}
-              dot={{ r: 4, fill: '#06b6d4' }}
-              activeDot={{ r: 6, fill: '#06b6d4' }}
+              dot={{ r: 4, fill: '#ef4444' }}
+              activeDot={{ r: 6, fill: '#ef4444' }}
             />
           </LineChart>
         </ResponsiveContainer>
