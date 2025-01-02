@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { AdminHeader } from '../../components/admin/navigation/AdminHeader';
 import { AdminSidebar } from '../../components/admin/navigation/AdminSidebar';
 import { Loader } from '../../components/shared/Loader';
+import { ForceCreateTransactionModal } from '../../components/transaction/modals/ForceCreateTransactionModal';
 import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';
 
 export const AdminLayout = () => {
@@ -23,6 +24,7 @@ export const AdminLayout = () => {
         </div>
 
         {isLoading && <Loader fullScreen size="lg" variant="primary" />}
+        <ForceCreateTransactionModal />
       </div>
     </>
   );
