@@ -90,56 +90,6 @@ export const CreateTransactionDataForm = ({ onSubmit, onlyView, baseData }: Prop
         <HistoryArrayField onlyView={onlyView} control={form.control} />
         <TechnicalControlArrayField onlyView={onlyView} control={form.control} />
 
-        {/* <Separator />
-        <H2>Problèmes</H2>
-        <RiskIssuesArrayField
-          control={form.control}
-          name="issues.exterior"
-          buttonLabel="Ajouter un problème exterieur"
-          placeholder="Problème exterieur"
-        />
-        <RiskIssuesArrayField
-          control={form.control}
-          name="issues.mechanical"
-          buttonLabel="Ajouter un problème mécanique"
-          placeholder="Problème mécanique"
-        />
-        <RiskIssuesArrayField
-          control={form.control}
-          name="issues.generic"
-          buttonLabel="Ajouter un problème générique"
-          placeholder="Problème générique"
-        />
-
-        <Separator />
-
-        <H2>Risques</H2>
-        <RiskIssuesArrayField
-          control={form.control}
-          name="risks.exterior"
-          buttonLabel="Ajouter un risque exterieur"
-          placeholder="Risque exterieur"
-        />
-        <RiskIssuesArrayField
-          control={form.control}
-          name="risks.mechanical"
-          buttonLabel="Ajouter un risque mécanique"
-          placeholder="Risque mécanique"
-        />
-        <RiskIssuesArrayField
-          control={form.control}
-          name="risks.generic"
-          buttonLabel="Ajouter un risque générique"
-          placeholder="Risque générique"
-        />
-
-        <Separator />
-
-        <H2>Sinistres</H2>
-        <SinistersArrayField control={form.control} name="sinisters" />
-
-        <Separator /> */}
-
         {!onlyView && <Button type="submit">Soumettre</Button>}
       </form>
     </Form>
