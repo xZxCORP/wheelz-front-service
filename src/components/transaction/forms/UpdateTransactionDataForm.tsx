@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 
 import { chainTsr } from '../../../clients/api/chain.api';
 import { useSnackbarStore } from '../../../stores/useSnackbar';
-import { dirtyValues } from '../../../utils/form';
+import { clearEmpties, getDirtyValues } from '../../../utils/form';
 import { baseCreateTransactionData } from '../../../utils/transaction';
 import { Button } from '../../shared/button/Button';
 import {
@@ -24,6 +24,9 @@ import {
 import { Input } from '../../shared/form/Input';
 import { H2 } from '../../shared/typography/Typography';
 import { GeneralInformationsFields } from '../fields/GeneralInformationsFields';
+import { HistoryArrayField } from '../fields/HistoryArrayField';
+import { TechnicalControlArrayField } from '../fields/TechnicalControlArrayField';
+import { TechnicalInformationsFields } from '../fields/TechnicalInformationsFields';
 type Props = {
   onSubmit?: (data: UpdateVehicleTransactionData) => void;
 };
@@ -58,10 +61,32 @@ export const UpdateTransactionDataForm = ({ onSubmit }: Props) => {
   };
   const submitWithChanges = (data: CreateVehicleTransactionData) => {
     const dirtyFields = updateVehicleForm.formState.dirtyFields;
-    const changedValues: Partial<CreateVehicleTransactionData> = dirtyValues(dirtyFields, data);
+    if (Object.keys(dirtyFields).length === 0) {
+      addSnackbar('Aucun champ modifié', 'error');
+      return;
+    }
+    const changedValuesObjects = getDirtyValues(dirtyFields, {
+      features: data.features,
+      infos: data.infos,
+      sinisterInfos: data.sinisterInfos,
+    });
+    const cleanedValuesObjects = clearEmpties(changedValuesObjects);
+
+    const isTechnicalControlArrayChanged =
+      Array.isArray(dirtyFields.technicalControls) &&
+      JSON.stringify(data.technicalControls) !==
+        JSON.stringify(previousVehiculeData!.body.technicalControls);
+    const isHistoryArrayChanged =
+      Array.isArray(dirtyFields.history) &&
+      JSON.stringify(data.history) !== JSON.stringify(previousVehiculeData!.body.history);
+
     const finalData: UpdateVehicleTransactionData = {
       vin: data.vin,
-      changes: changedValues,
+      changes: {
+        ...cleanedValuesObjects,
+        technicalControls: isTechnicalControlArrayChanged ? data.technicalControls : undefined,
+        history: isHistoryArrayChanged ? data.history : undefined,
+      },
     };
     if (onSubmit) onSubmit(finalData);
   };
@@ -122,6 +147,9 @@ export const UpdateTransactionDataForm = ({ onSubmit }: Props) => {
             onSubmit={onSubmit ? updateVehicleForm.handleSubmit(submitWithChanges) : undefined}
           >
             <GeneralInformationsFields type="update" control={updateVehicleForm.control} />
+            <TechnicalInformationsFields control={updateVehicleForm.control} />
+            <HistoryArrayField control={updateVehicleForm.control} />
+            <TechnicalControlArrayField control={updateVehicleForm.control} />
 
             <Button type="submit">Soumettre</Button>
           </form>
