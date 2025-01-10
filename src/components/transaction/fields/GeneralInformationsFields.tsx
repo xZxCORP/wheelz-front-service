@@ -7,9 +7,10 @@ import { Input } from '../../shared/form/Input';
 
 type Props = {
   control: Control<Vehicle>;
+  type?: 'update' | 'create';
 };
 
-export const GeneralInformationsFields = ({ control }: Props) => {
+export const GeneralInformationsFields = ({ control, type = 'create' }: Props) => {
   return (
     <Card className="w-full">
       <CardHeader>
@@ -23,7 +24,7 @@ export const GeneralInformationsFields = ({ control }: Props) => {
             <FormItem>
               <FormLabel>VIN</FormLabel>
               <FormControl>
-                <Input placeholder="VIN" {...field} />
+                <Input disabled={type === 'update'} placeholder="VIN" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
