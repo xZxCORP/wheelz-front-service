@@ -1,12 +1,13 @@
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { zodResolver } from '@hookform/resolvers/zod';
+
 import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 import { getVehicleParametersSchema } from '@zcorp/wheelz-contracts';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-
 import { chainTsr } from '../../clients/api/chain.api';
-import { Button } from '../shared/button/Button';
+
 import {
   Form,
   FormControl,
@@ -16,11 +17,13 @@ import {
   FormMessage,
 } from '../shared/form/Form';
 import { Input } from '../shared/form/Input';
-import { Report } from '../../pages/main/Report';
+import { Button } from '../shared/button/Button';
+import { useSnackbarStore } from '../../stores/useSnackbar';
 
 export const VinForm = () => {
   const [vin, setVin] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { addSnackbar } = useSnackbarStore();
   const form = useForm<Vehicle>({
     resolver: zodResolver(getVehicleParametersSchema),
     mode: 'onChange',
@@ -29,6 +32,7 @@ export const VinForm = () => {
     },
   });
 
+  // Called when vin is set
   const { data, error, isLoading } = chainTsr.chain.getVehicleOfTheChain.useQuery({
     queryKey: ['vehicles', vin],
     queryData: {
@@ -38,43 +42,28 @@ export const VinForm = () => {
   });
 
   const submitForm = (formData: { vin: string }) => {
-    console.log(formData);
     console.log('[RECHERCHE DU VEHICULE...]');
     console.log('vin:', formData.vin);
     setVin(formData.vin);
   };
 
-  if (error) {
-    console.error('error', error);
-
-    return (
-      <div>
-        <p>Ce VIN n'a pas permis de récupérer un véhicule. Cliquez sur le bouton ci-dessous pour réaliser une recherche plus complète.</p>
-        <button onClick={() => navigate("/search")}>Recherche complète</button>
-      </div>
-    )
-  } else if (data) {
-    console.log('NO ERROR:');
-    console.log(data);
-
-    return (
-      <div>
-        <p>Véhicule trouvé ! Cliquez sur le bouton ci-dessous pour accéder au rapport complet correspondant.</p>
-        <button onClick={() => navigate("/report")}>Accéder au rapport</button>
-      </div>
-    )
-  }
+  // Data / error handling
+  useEffect(() => {
+    if (error) {
+      console.error('Error:', error);
+      addSnackbar(error.body?.message ?? "Une erreur s'est produite", 'error');
+    } else if (data) {
+      // Vehicle data still needs to be sent to report component
+      navigate('/report');
+    }
+  }, [error, data, navigate, addSnackbar]);
 
   return (
     < div className="flex w-full" >
       <div className="mx-auto w-full max-w-4xl space-y-6">
         <div className="rounded-lg bg-primary-50 p-4 shadow-md md:p-6">
-          <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center">
-            <div className="flex h-40 w-full items-center justify-center rounded-lg bg-secondary-200 text-center font-bold md:w-40">
-              <p>POUET POUET</p>
-            </div>
-
-            {!data ? (
+          {!error ? (
+            <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center">
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit((formData) => submitForm(formData))}
@@ -98,10 +87,15 @@ export const VinForm = () => {
                   </Button>
                 </form>
               </Form>
-            ) : <Report vehicle={data}></Report>}
-          </div>
+            </div>
+          ) : <div className="flex flex-col justify-center items-center w-full">
+            <span className="mb-4">Vehicle could not be found. You will be redirected to a more complete form.</span>
+            <Link to="/search" style={{ textDecoration: 'none' }}>
+              <Button>OK</Button>
+            </Link>
+          </div>}
         </div>
       </div>
-    </div >
+    </div>
   );
 };
