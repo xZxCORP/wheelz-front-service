@@ -2,9 +2,9 @@ import { chainTsr } from '../../clients/api/chain.api';
 import { transactionTsr } from '../../clients/api/transaction.api';
 import { ChainStatsLineChart } from '../../components/chain/ChainStatsLineChart';
 import { H1 } from '../../components/shared/typography/Typography';
-import { TransactionStatsLineChart } from '../../components/transaction/TransactionStatsLineChart';
-import { TransactionStatusRepartitionPie } from '../../components/transaction/TransactionStatusRepartitionPie';
-import { TransactionTypeRepartitionPie } from '../../components/transaction/TransactionTypeRepartitionPie';
+import { TransactionStatsLineChart } from '../../components/transaction/stats/TransactionStatsLineChart';
+import { TransactionStatusRepartitionPie } from '../../components/transaction/stats/TransactionStatusRepartitionPie';
+import { TransactionTypeRepartitionPie } from '../../components/transaction/stats/TransactionTypeRepartitionPie';
 
 export const StatsPage = () => {
   const { data: chainStatsData } = chainTsr.chain.stats.useQuery({

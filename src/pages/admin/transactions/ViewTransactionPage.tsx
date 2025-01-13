@@ -3,9 +3,9 @@ import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { transactionTsr } from '../../../clients/api/transaction.api';
+import { TransactionCard } from '../../../components/transaction/cards/TransactionCard';
 import { CreateTransactionDataForm } from '../../../components/transaction/forms/CreateTransactionDataForm';
 import { DeleteTransactionDataForm } from '../../../components/transaction/forms/DeleteTransactionDataForm';
-import { TransactionCard } from '../../../components/transaction/TransactionCard';
 
 type PageParams = {
   id: string;
