@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
 import { FaCarCrash } from 'react-icons/fa';
 import { GiCrossedChains } from 'react-icons/gi';
 
-import { cars } from '../../assets/faker/cars';
 import { NoticeCard } from '../../components/main/report/NoticeCard';
 import { LoadingAnimation } from '../../components/shared/LoadingAnimation';
-import type { IVehicle } from '../../types/vehicle';
 
 export const Report = ({ vehicle }) => {
   //const [vehicle, setVehicle] = useState<IVehicle | undefined>();
