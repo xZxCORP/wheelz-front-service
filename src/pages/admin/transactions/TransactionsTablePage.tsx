@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import { transactionTsr } from '../../../clients/api/transaction.api';
 import { Table } from '../../../components/admin/Table';
 import { Button } from '../../../components/shared/button/Button';
-import { ActionBadge } from '../../../components/transaction/ActionBadge';
-import { StatusBadge } from '../../../components/transaction/StatusBadge';
+import { ActionBadge } from '../../../components/transaction/badges/ActionBadge';
+import { StatusBadge } from '../../../components/transaction/badges/StatusBadge';
 import { usePagination } from '../../../hooks/usePagination';
 import { formatDate } from '../../../utils/date';
 export const TransactionsTablePage = () => {

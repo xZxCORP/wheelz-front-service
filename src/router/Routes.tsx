@@ -41,11 +41,9 @@ export const routes: RouteObject[] = [
   {
     path: '/admin',
     element: <PrivateRoute element={AdminLayout} role="admin" />,
-    errorElement: <ErrorLayout />,
 
     children: [
       {
-        errorElement: <ErrorOutletLayout />,
         children: [
           {
             index: true,

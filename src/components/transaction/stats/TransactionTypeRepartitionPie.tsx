@@ -1,8 +1,8 @@
 import type { TransactionStats } from '@zcorp/shared-typing-wheelz';
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
-import { Card, CardContent, CardHeader } from '../shared/Card';
-import { H2 } from '../shared/typography/Typography';
+import { Card, CardContent, CardHeader } from '../../shared/Card';
+import { H2 } from '../../shared/typography/Typography';
 type Props = {
   data: TransactionStats;
 };

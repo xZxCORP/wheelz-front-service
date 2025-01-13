@@ -1,11 +1,11 @@
 import type { VehicleTransaction } from '@zcorp/shared-typing-wheelz';
 
-import { formatDate } from '../../utils/date';
-import { Card, CardContent, CardFooter, CardHeader } from '../shared/Card';
-import { InfoField } from '../shared/InfoField';
-import { H1 } from '../shared/typography/Typography';
-import { ActionBadge } from './ActionBadge';
-import { StatusBadge } from './StatusBadge';
+import { formatDate } from '../../../utils/date';
+import { Card, CardContent, CardFooter, CardHeader } from '../../shared/Card';
+import { InfoField } from '../../shared/InfoField';
+import { H1 } from '../../shared/typography/Typography';
+import { ActionBadge } from '../badges/ActionBadge';
+import { StatusBadge } from '../badges/StatusBadge';
 
 type Props = {
   transaction: VehicleTransaction;

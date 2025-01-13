@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { FaPlus, FaTrash } from 'react-icons/fa6';
 import { GrUpdate } from 'react-icons/gr';
 
-import { Badge } from '../shared/badge/Badge';
+import { Badge } from '../../shared/badge/Badge';
 
 interface Props {
   action: TransactionAction;

@@ -11,6 +11,7 @@ import { useSnackbarStore } from '../../../stores/useSnackbar';
 import { type ForceCreateTransactionProps, MODAL_IDS } from '../../../types/modalIds';
 import { CreateTransactionDataForm } from './CreateTransactionDataForm';
 import { DeleteTransactionDataForm } from './DeleteTransactionDataForm';
+import { UpdateTransactionDataForm } from './UpdateTransactionDataForm';
 
 export const TransactionForm = () => {
   const [action, setAction] = useState<TransactionAction | undefined>();
@@ -32,13 +33,19 @@ export const TransactionForm = () => {
         await globalSuccess(response.body);
       },
       onError: (error, request) => {
-        console.log(isFetchError(error));
         if (!isFetchError(error) && error.status === 422) {
           open({
             response: error.body,
             transactionData: request.body,
           });
         }
+      },
+    });
+  const { mutate: updateTransactionMutate } =
+    transactionTsr.transactions.updateTransaction.useMutation({
+      onSuccess: async (response) => {
+        addSnackbar('Transaction de type Modification créée avec succès', 'success');
+        await globalSuccess(response.body);
       },
     });
   const globalSuccess = async (result: VehicleTransaction) => {
@@ -53,6 +60,12 @@ export const TransactionForm = () => {
           <CreateTransactionDataForm onSubmit={(data) => createTransactionMutate({ body: data })} />
         );
       }
+      case 'update': {
+        return (
+          <UpdateTransactionDataForm onSubmit={(data) => updateTransactionMutate({ body: data })} />
+        );
+      }
+
       case 'delete': {
         return (
           <DeleteTransactionDataForm onSubmit={(data) => deleteTransactionMutate({ body: data })} />
