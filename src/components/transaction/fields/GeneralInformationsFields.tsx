@@ -1,6 +1,7 @@
 import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 import type { Control } from 'react-hook-form';
 
+import { vehicleInfosLabels, vehicleLabels } from '../../../types/vehicleLabels';
 import { Card, CardContent, CardHeader, CardTitle } from '../../shared/Card';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../shared/form/Form';
 import { Input } from '../../shared/form/Input';
@@ -22,9 +23,9 @@ export const GeneralInformationsFields = ({ control, type = 'create' }: Props) =
           name="vin"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>VIN</FormLabel>
+              <FormLabel>{vehicleLabels.vin}</FormLabel>
               <FormControl>
-                <Input disabled={type === 'update'} placeholder="VIN" {...field} />
+                <Input disabled={type === 'update'} placeholder={vehicleLabels.vin} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -35,9 +36,9 @@ export const GeneralInformationsFields = ({ control, type = 'create' }: Props) =
           name="infos.holderCount"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nombre de propriétaires</FormLabel>
+              <FormLabel>{vehicleInfosLabels.holderCount}</FormLabel>
               <FormControl>
-                <Input placeholder="Nombre de propriétaires" {...field} />
+                <Input placeholder={vehicleInfosLabels.holderCount} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -48,11 +49,11 @@ export const GeneralInformationsFields = ({ control, type = 'create' }: Props) =
           name="infos.firstRegistrationInFranceDate"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Date de première inscription en France</FormLabel>
+              <FormLabel>{vehicleInfosLabels.firstRegistrationInFranceDate}</FormLabel>
               <FormControl>
                 <Input
                   type="date"
-                  placeholder="Date de première inscription en France"
+                  placeholder={vehicleInfosLabels.firstRegistrationInFranceDate}
                   {...field}
                 />
               </FormControl>
@@ -65,9 +66,13 @@ export const GeneralInformationsFields = ({ control, type = 'create' }: Props) =
           name="infos.firstSivRegistrationDate"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Date de première inscription SIV</FormLabel>
+              <FormLabel>{vehicleInfosLabels.firstSivRegistrationDate}</FormLabel>
               <FormControl>
-                <Input type="date" placeholder="Date de première inscription SIV" {...field} />
+                <Input
+                  type="date"
+                  placeholder={vehicleInfosLabels.firstSivRegistrationDate}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -78,9 +83,9 @@ export const GeneralInformationsFields = ({ control, type = 'create' }: Props) =
           name="infos.licensePlate"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Plaque d&apos;immatriculation</FormLabel>
+              <FormLabel>{vehicleInfosLabels.licensePlate}</FormLabel>
               <FormControl>
-                <Input placeholder="Plaque d'immatriculation" {...field} />
+                <Input placeholder={vehicleInfosLabels.licensePlate} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -91,11 +96,11 @@ export const GeneralInformationsFields = ({ control, type = 'create' }: Props) =
           name="infos.sivConversionDate"
           render={({ field }) => (
             <FormItem>
-              <FormLabel required={false}>Date de conversion SIV</FormLabel>
+              <FormLabel required={false}>{vehicleInfosLabels.sivConversionDate}</FormLabel>
               <FormControl>
                 <Input
                   type="date"
-                  placeholder="Date de conversion SIV"
+                  placeholder={vehicleInfosLabels.sivConversionDate}
                   {...field}
                   value={field.value ?? ''}
                 />
