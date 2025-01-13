@@ -1,6 +1,10 @@
 import type { UpdateVehicleTransactionData, Vehicle } from '@zcorp/shared-typing-wheelz';
 
-import { vehicleFeaturesLabels, vehicleInfosLabels } from '../../../types/vehicleLabels';
+import {
+  sinisterInfosLabels,
+  vehicleFeaturesLabels,
+  vehicleInfosLabels,
+} from '../../../types/vehicleLabels';
 import { Card, CardContent, CardHeader, CardTitle } from '../../shared/Card';
 import { InfoField } from '../../shared/InfoField';
 import { HistoryTable } from '../tables/HistoryTable';
@@ -34,6 +38,19 @@ export const ViewUpdateTransaction = ({ data }: Props) => {
             {Object.entries(data.changes.features).map(([key, value]) => {
               const typedKey = key as keyof Vehicle['features'];
               return <InfoField key={key} label={vehicleFeaturesLabels[typedKey]} value={value} />;
+            })}
+          </CardContent>
+        </Card>
+      )}
+      {!!data.changes.sinisterInfos && (
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Infos sur les sinistres</CardTitle>
+          </CardHeader>
+          <CardContent className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            {Object.entries(data.changes.sinisterInfos).map(([key, value]) => {
+              const typedKey = key as keyof Vehicle['sinisterInfos'];
+              return <InfoField key={key} label={sinisterInfosLabels[typedKey]} value={value} />;
             })}
           </CardContent>
         </Card>

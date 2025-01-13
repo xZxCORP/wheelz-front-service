@@ -25,6 +25,7 @@ import { Input } from '../../shared/form/Input';
 import { H2 } from '../../shared/typography/Typography';
 import { GeneralInformationsFields } from '../fields/GeneralInformationsFields';
 import { HistoryArrayField } from '../fields/HistoryArrayField';
+import { SinisterInformationsFields } from '../fields/SinisterInformationsFields';
 import { TechnicalControlArrayField } from '../fields/TechnicalControlArrayField';
 import { TechnicalInformationsFields } from '../fields/TechnicalInformationsFields';
 type Props = {
@@ -147,6 +148,7 @@ export const UpdateTransactionDataForm = ({ onSubmit }: Props) => {
             onSubmit={onSubmit ? updateVehicleForm.handleSubmit(submitWithChanges) : undefined}
           >
             <GeneralInformationsFields type="update" control={updateVehicleForm.control} />
+            <SinisterInformationsFields control={updateVehicleForm.control} />
             <TechnicalInformationsFields control={updateVehicleForm.control} />
             <HistoryArrayField control={updateVehicleForm.control} />
             <TechnicalControlArrayField control={updateVehicleForm.control} />

@@ -11,6 +11,7 @@ import { Button } from '../../shared/button/Button';
 import { Form } from '../../shared/form/Form';
 import { GeneralInformationsFields } from '../fields/GeneralInformationsFields';
 import { HistoryArrayField } from '../fields/HistoryArrayField';
+import { SinisterInformationsFields } from '../fields/SinisterInformationsFields';
 import { TechnicalControlArrayField } from '../fields/TechnicalControlArrayField';
 import { TechnicalInformationsFields } from '../fields/TechnicalInformationsFields';
 type Props = {
@@ -47,6 +48,7 @@ export const CreateTransactionDataForm = ({
         )}
         <GeneralInformationsFields control={form.control} />
         <TechnicalInformationsFields control={form.control} />
+        <SinisterInformationsFields control={form.control} />
         <HistoryArrayField onlyView={onlyView} control={form.control} />
         <TechnicalControlArrayField onlyView={onlyView} control={form.control} />
 
