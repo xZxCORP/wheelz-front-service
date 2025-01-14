@@ -1,14 +1,11 @@
-import { useEffect, useState } from 'react';
 import { FaCarCrash } from 'react-icons/fa';
 import { GiCrossedChains } from 'react-icons/gi';
 
-import { cars } from '../../assets/faker/cars';
 import { NoticeCard } from '../../components/main/report/NoticeCard';
 import { LoadingAnimation } from '../../components/shared/LoadingAnimation';
-import type { IVehicle } from '../../types/vehicle';
 
-export const Report = () => {
-  const [vehicle, setVehicle] = useState<IVehicle | undefined>();
+export const Report = ({ vehicle }) => {
+  //const [vehicle, setVehicle] = useState<IVehicle | undefined>();
   const REPORT_CARDS = [
     { title: 'Damage', Icon: FaCarCrash, warning: true },
     { title: 'Damage', Icon: FaCarCrash, warning: true },
@@ -17,9 +14,9 @@ export const Report = () => {
     { title: 'Damage', Icon: FaCarCrash, warning: true },
   ];
 
-  useEffect(() => {
-    setVehicle(cars[0]);
-  }, []);
+  // useEffect(() => {
+  //   setVehicle(cars[0]);
+  // }, []);
 
   if (!vehicle) return <LoadingAnimation />;
 

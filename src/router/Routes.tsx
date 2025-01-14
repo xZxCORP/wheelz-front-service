@@ -14,17 +14,16 @@ import { ErrorLayout } from '../pages/layout/ErrorLayout';
 import { ErrorOutletLayout } from '../pages/layout/ErrorOutletLayout';
 import { MainRoot } from '../pages/main/MainRoot';
 import { Report } from '../pages/main/Report';
+import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
 import { PrivateRoute } from './ProtectedRoutes';
 
 export const routes: RouteObject[] = [
   {
     path: '/',
     element: <BaseLayout />,
-    errorElement: <ErrorLayout />,
 
     children: [
       {
-        errorElement: <ErrorOutletLayout />,
         children: [
           {
             index: true,
@@ -33,6 +32,11 @@ export const routes: RouteObject[] = [
           {
             path: 'report',
             element: <PrivateRoute element={Report} />,
+          },
+          {
+            // page with VehicleSearchForm
+            path: 'search',
+            element: <VehicleSearchPage />,
           },
         ],
       },
