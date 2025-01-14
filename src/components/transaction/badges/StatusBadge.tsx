@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { FaCheck, FaClock } from 'react-icons/fa6';
 
-import { Badge } from '../shared/badge/Badge';
+import { Badge } from '../../shared/badge/Badge';
 
 interface Props {
   status: Status;
