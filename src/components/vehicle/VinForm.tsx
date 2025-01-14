@@ -42,15 +42,12 @@ export const VinForm = () => {
   });
 
   const submitForm = (formData: { vin: string }) => {
-    console.log('[RECHERCHE DU VEHICULE...]');
-    console.log('vin:', formData.vin);
     setVin(formData.vin);
   };
 
   // Data / error handling
   useEffect(() => {
     if (error) {
-      console.error('Error:', error);
       addSnackbar(error.body?.message ?? "Une erreur s'est produite", 'error');
     } else if (data) {
       // Vehicle data still needs to be sent to report component
@@ -89,7 +86,7 @@ export const VinForm = () => {
               </Form>
             </div>
           ) : <div className="flex flex-col justify-center items-center w-full">
-            <span className="mb-4">Vehicle could not be found. You will be redirected to a more complete form.</span>
+            <span className="mb-4">Le véhicule n'a pas pu être trouvé. Vous allez être redirigé vers un formulaire plus complet.</span>
             <Link to="/search" style={{ textDecoration: 'none' }}>
               <Button>OK</Button>
             </Link>
