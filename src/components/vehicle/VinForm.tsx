@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Vehicle } from '@zcorp/shared-typing-wheelz';
-import { getVehicleParametersSchema } from '@zcorp/wheelz-contracts';
+import { type BasicResponse, getVehicleParametersSchema } from '@zcorp/wheelz-contracts';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -46,7 +46,9 @@ export const VinForm = () => {
   // Data / error handling
   useEffect(() => {
     if (error) {
-      addSnackbar(error.body?.message ?? "Une erreur s'est produite", 'error');
+      const unknownError: any = error;
+      const body: BasicResponse = unknownError.body as BasicResponse;
+      addSnackbar(body?.message ?? "Une erreur s'est produite", 'error');
     } else if (data) {
       // Vehicle data still needs to be sent to report component
       navigate('/report');
@@ -57,39 +59,43 @@ export const VinForm = () => {
     <div className="flex w-full">
       <div className="mx-auto w-full max-w-4xl space-y-6">
         <div className="rounded-lg bg-primary-50 p-4 shadow-md md:p-6">
-          {error ? (<div className="flex flex-col justify-center items-center w-full">
-            <span className="mb-4">Le véhicule n'a pas pu être trouvé. Vous allez être redirigé vers un formulaire plus complet.</span>
-            <Link to="/search" style={{ textDecoration: 'none' }}>
-              <Button>OK</Button>
-            </Link>
-          </div>)
-            : (
-              <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center">
-                <Form {...form}>
-                  <form
-                    onSubmit={form.handleSubmit((formData) => submitForm(formData))}
-                    className="flex flex-col gap-4"
-                  >
-                    <FormField
-                      control={form.control}
-                      name="vin"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>VIN</FormLabel>
-                          <FormControl>
-                            <Input placeholder="VIN" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button disabled={isLoading} type="submit">
-                      {isLoading ? 'Chargement...' : 'Rechercher'}
-                    </Button>
-                  </form>
-                </Form>
-              </div>
-            )}
+          {error ? (
+            <div className="flex w-full flex-col items-center justify-center">
+              <span className="mb-4">
+                Le véhicule n&apos;a pas pu être trouvé. Vous allez être redirigé vers un formulaire
+                plus complet.
+              </span>
+              <Link to="/search" style={{ textDecoration: 'none' }}>
+                <Button>OK</Button>
+              </Link>
+            </div>
+          ) : (
+            <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center">
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit((formData) => submitForm(formData))}
+                  className="flex flex-col gap-4"
+                >
+                  <FormField
+                    control={form.control}
+                    name="vin"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>VIN</FormLabel>
+                        <FormControl>
+                          <Input placeholder="VIN" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button disabled={isLoading} type="submit">
+                    {isLoading ? 'Chargement...' : 'Rechercher'}
+                  </Button>
+                </form>
+              </Form>
+            </div>
+          )}
         </div>
       </div>
     </div>
