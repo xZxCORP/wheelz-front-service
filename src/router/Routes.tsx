@@ -10,8 +10,6 @@ import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransaction
 import { UsersTable } from '../pages/admin/UsersTable';
 import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
-import { ErrorLayout } from '../pages/layout/ErrorLayout';
-import { ErrorOutletLayout } from '../pages/layout/ErrorOutletLayout';
 import { MainRoot } from '../pages/main/MainRoot';
 import { Report } from '../pages/main/Report';
 import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
