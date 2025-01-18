@@ -47,6 +47,7 @@ export const ChainTablePage = () => {
   const onRefreshChainState = () => {
     refreshChainStateMutate({ body: {} });
     queryClient.invalidateQueries({ queryKey: ['chain'] });
+    queryClient.invalidateQueries({ queryKey: ['transactions'] });
   };
   const onProcessTransactionBatch = () => {
     processTransactionBatchMutate({ body: {} });
