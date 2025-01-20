@@ -1,7 +1,6 @@
 //import { useState } from 'react';
 import { FaBalanceScale } from 'react-icons/fa';
 import { FaCheckCircle } from 'react-icons/fa';
-import { FaInfoCircle } from 'react-icons/fa';
 import { FaTriangleExclamation } from 'react-icons/fa6';
 
 import { NoticeCard } from '../NoticeCard';
@@ -74,6 +73,6 @@ export const LegalStatusCard = ({ vehicle }: { vehicle: any }) => {
         </div>
       </div>
     ),
-    cardComponent: <NoticeCard title="Détails" Icon={FaInfoCircle} warning={false} />,
+    cardComponent: <NoticeCard title="Détails" Icon={FaBalanceScale} warning={false} />,
   };
 };
