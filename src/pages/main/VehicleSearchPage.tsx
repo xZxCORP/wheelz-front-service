@@ -1,4 +1,4 @@
-import { VehicleSearchForm } from '../../components/vehicle/VehicleSearchForm';
+import { VehicleSearchForm } from '../../components/vehicle/forms/VehicleSearchForm';
 
 export const VehicleSearchPage = () => {
   return (

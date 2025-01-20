@@ -5,16 +5,18 @@ import { Link } from 'react-router-dom';
 import { transactionTsr } from '../../../clients/api/transaction.api';
 import { Table } from '../../../components/admin/Table';
 import { Button } from '../../../components/shared/button/Button';
+import { ErrorContainer } from '../../../components/shared/error/ErrorContainer';
 import { ActionBadge } from '../../../components/transaction/badges/ActionBadge';
 import { StatusBadge } from '../../../components/transaction/badges/StatusBadge';
 import { usePagination } from '../../../hooks/usePagination';
 import { formatDate } from '../../../utils/date';
+import { isApiResponse } from '../../../utils/errors';
 export const TransactionsTablePage = () => {
   const { pagination, apiPagination, onPaginationChange } = usePagination({
     initialPage: 1,
     initialPerPage: 10,
   });
-  const { data } = transactionTsr.transactions.getTransactions.useQuery({
+  const { data, error } = transactionTsr.transactions.getTransactions.useQuery({
     queryKey: ['transactions', apiPagination],
     queryData: {
       query: apiPagination,
@@ -59,6 +61,9 @@ export const TransactionsTablePage = () => {
       },
     }),
   ];
+  if (error && isApiResponse(error)) {
+    return <ErrorContainer errorMessage={error.body.message} />;
+  }
 
   return (
     data && (

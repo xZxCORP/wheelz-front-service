@@ -6,7 +6,7 @@ import { useAuthStore } from '../stores/useAuthStore';
 import { useGlobalLoadingStore } from '../stores/useGlobalLoadingStore';
 
 export const useInitAuth = () => {
-  const { token, setUser, clearAuth, setIsInitialized } = useAuthStore();
+  const { token, setUser, setRoles, clearAuth, setIsInitialized } = useAuthStore();
   const { setLoading } = useGlobalLoadingStore();
 
   useEffect(() => {
@@ -20,9 +20,10 @@ export const useInitAuth = () => {
           },
         });
         if (verifyResponse.status === 200) {
+          setRoles(verifyResponse.body.roles);
           const userResponse = await userTsr.users.getUserById.query({
             params: {
-              id: verifyResponse.body.toString(),
+              id: verifyResponse.body.userId.toString(),
             },
           });
           if (userResponse.status === 200) {
@@ -39,5 +40,5 @@ export const useInitAuth = () => {
       clearAuth();
       setIsInitialized(true);
     }
-  }, [clearAuth, setIsInitialized, setLoading, setUser, token]);
+  }, [clearAuth, setIsInitialized, setLoading, setRoles, setUser, token]);
 };
