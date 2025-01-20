@@ -88,7 +88,7 @@ export const Report = () => {
 
         {/* Contenu de la carte sélectionnée */}
         <div className="rounded-lg bg-primary-50 p-4 shadow-md md:p-6">
-          <div className="mt-6 w-full rounded-lg border bg-white p-4 shadow-md">
+          <div>
             {selectedCard ? (
               CARDS.find((card) => card.key === selectedCard)?.content
             ) : (

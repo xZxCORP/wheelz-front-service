@@ -18,12 +18,12 @@ export const NoticeCard = ({
       {warning ? (
         <div className="flex items-center space-x-1 rounded bg-yellow-300 p-1 text-xs sm:text-sm">
           <FaTriangleExclamation className="shrink-0" />
-          <p>Analyze</p>
+          <p>En vérification</p>
         </div>
       ) : (
         <div className="flex items-center space-x-1 rounded bg-success-500 p-1 text-xs sm:text-sm">
           <FaCheckCircle className="shrink-0" />
-          <p>Everything is fine !</p>
+          <p>Aucun problème</p>
         </div>
       )}
     </button>
