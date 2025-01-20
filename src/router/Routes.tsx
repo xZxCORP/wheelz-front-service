@@ -42,7 +42,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: '/admin',
-    element: <PrivateRoute element={AdminLayout} role="admin" />,
+    element: <PrivateRoute element={AdminLayout} roles={['admin']} />,
 
     children: [
       {

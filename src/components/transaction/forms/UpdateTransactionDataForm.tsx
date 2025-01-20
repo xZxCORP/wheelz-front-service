@@ -10,9 +10,11 @@ import { useForm } from 'react-hook-form';
 
 import { chainTsr } from '../../../clients/api/chain.api';
 import { useSnackbarStore } from '../../../stores/useSnackbar';
+import { isApiResponse } from '../../../utils/errors';
 import { clearEmpties, getDirtyValues } from '../../../utils/form';
 import { baseCreateTransactionData } from '../../../utils/transaction';
 import { Button } from '../../shared/button/Button';
+import { ErrorContainer } from '../../shared/error/ErrorContainer';
 import {
   Form,
   FormControl,
@@ -48,14 +50,17 @@ export const UpdateTransactionDataForm = ({ onSubmit }: Props) => {
     mode: 'onChange',
     defaultValues: baseCreateTransactionData,
   });
-  const { data: previousVehiculeData, isError: noVehicleFound } =
-    chainTsr.chain.getVehicleOfTheChain.useQuery({
-      queryKey: ['vehicles', vin],
-      queryData: {
-        query: { vin },
-      },
-      enabled: !!vin,
-    });
+  const {
+    data: previousVehiculeData,
+    isError: noVehicleFound,
+    error,
+  } = chainTsr.chain.getVehicleOfTheChain.useQuery({
+    queryKey: ['vehicles', vin],
+    queryData: {
+      query: { vin },
+    },
+    enabled: !!vin,
+  });
   const isDataFormAvailable = !!previousVehiculeData;
   const onVinChange = (data: GetVehicleParameters) => {
     setVin(data.vin);
@@ -117,6 +122,9 @@ export const UpdateTransactionDataForm = ({ onSubmit }: Props) => {
       addSnackbar('Véhicule non trouvé', 'error');
     }
   }, [addSnackbar, noVehicleFound, searchVehicleForm, updateVehicleForm]);
+  if (error && isApiResponse(error)) {
+    return <ErrorContainer errorMessage={error.body.message} />;
+  }
   return (
     <div>
       <H2>Chercher un véhicule à modifier</H2>

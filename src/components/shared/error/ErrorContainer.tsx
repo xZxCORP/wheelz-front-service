@@ -1,6 +1,6 @@
 import { FaTriangleExclamation } from 'react-icons/fa6';
 interface Props {
-  errorCode: number | string;
+  errorCode?: number | string;
   errorMessage: string;
 }
 export const ErrorContainer = ({ errorCode, errorMessage }: Props) => {
@@ -10,7 +10,7 @@ export const ErrorContainer = ({ errorCode, errorMessage }: Props) => {
         <FaTriangleExclamation className="size-16 text-error-600" />
       </div>
       <h1 className="mt-4 text-center text-3xl font-bold">Oops!</h1>
-      <p className="mt-2 text-center text-xl font-semibold">Erreur {errorCode}</p>
+      {errorCode && <p className="mt-2 text-center text-xl font-semibold">Erreur {errorCode}</p>}
       <p className="mt-4 text-center">{errorMessage}</p>
     </div>
   );

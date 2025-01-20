@@ -7,14 +7,16 @@ import { chainTsr } from '../../../clients/api/chain.api';
 import { Table } from '../../../components/admin/Table';
 import { ChainStatsExecutionInfos } from '../../../components/chain/ChainStatsExecutionInfos';
 import { Button } from '../../../components/shared/button/Button';
+import { ErrorContainer } from '../../../components/shared/error/ErrorContainer';
 import { usePagination } from '../../../hooks/usePagination';
 import { useSnackbarStore } from '../../../stores/useSnackbar';
+import { isApiResponse } from '../../../utils/errors';
 export const ChainTablePage = () => {
   const { pagination, apiPagination, onPaginationChange } = usePagination({
     initialPage: 1,
     initialPerPage: 10,
   });
-  const { data: allVehiclesData } = chainTsr.chain.getAllVehiclesOfTheChain.useQuery({
+  const { data: allVehiclesData, error } = chainTsr.chain.getAllVehiclesOfTheChain.useQuery({
     queryKey: ['chain', apiPagination],
     queryData: {
       query: apiPagination,
@@ -93,7 +95,9 @@ export const ChainTablePage = () => {
       },
     }),
   ];
-
+  if (error && isApiResponse(error)) {
+    return <ErrorContainer errorMessage={error.body.message} />;
+  }
   return (
     allVehiclesData && (
       <div className="flex flex-col gap-2">
