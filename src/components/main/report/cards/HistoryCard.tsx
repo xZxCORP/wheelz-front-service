@@ -10,7 +10,7 @@ export const HistoryCard = ({ vehicle }: { vehicle: any }) => ({
     <div>
       <div className="mt-6 w-full rounded-lg border bg-white p-4 shadow-md">
         <h2 className="text-lg font-bold">Historique</h2>
-        <p className="mb-4 text-sm text-gray-600">Quel est l'historique pour ce véhicule ?</p>
+        <p className="mb-4 text-sm text-gray-600">Quel est l&apos;historique pour ce véhicule ?</p>
 
         {/* Note */}
         <div className="mb-4 flex items-start rounded-lg bg-gray-100 p-3">
@@ -19,7 +19,8 @@ export const HistoryCard = ({ vehicle }: { vehicle: any }) => ({
           </div>
           <div>
             <p className="text-sm text-gray-800">
-              Vérifie que l'historique de ce véhicule correspondent aux déclarations du vendeur.
+              Vérifie que l&apos;historique de ce véhicule correspondent aux déclarations du
+              vendeur.
             </p>
           </div>
         </div>

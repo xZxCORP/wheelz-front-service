@@ -18,7 +18,7 @@ export const NoticeCard = ({
       {warning ? (
         <div className="flex items-center space-x-1 rounded bg-yellow-300 p-1 text-xs sm:text-sm">
           <FaTriangleExclamation className="shrink-0" />
-          <p>En vérification</p>
+          <p>Attention !</p>
         </div>
       ) : (
         <div className="flex items-center space-x-1 rounded bg-success-500 p-1 text-xs sm:text-sm">

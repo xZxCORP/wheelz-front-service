@@ -7,11 +7,12 @@ import { FaTriangleExclamation } from 'react-icons/fa6';
 import { NoticeCard } from '../NoticeCard';
 
 export const LegalStatusCard = ({ vehicle }: { vehicle: any }) => {
+  const warning = vehicle.technicalControls[0]?.result !== 'Ok';
   //const [isModalOpen, setIsModalOpen] = useState(false);
   //const handleOpenModal = () => setIsModalOpen(true);
   //const handleCloseModal = () => setIsModalOpen(false);
   return {
-    title: 'Statut legal',
+    title: 'Statut légal',
     icon: <FaBalanceScale className="text-4xl text-gray-700" />,
     key: 'legal',
     content: (
@@ -68,12 +69,12 @@ export const LegalStatusCard = ({ vehicle }: { vehicle: any }) => {
               </div>
             </div>
             <p className="mt-1 text-sm text-gray-500">
-              Rien n&aposindique que le véhicule a été déclaré comme épave.
+              Rien n&apos;indique que le véhicule a été déclaré comme épave.
             </p>
           </div>
         </div>
       </div>
     ),
-    cardComponent: <NoticeCard title="Statut legal" Icon={FaBalanceScale} warning={false} />,
+    cardComponent: <NoticeCard title="Statut légal" Icon={FaBalanceScale} warning={warning} />,
   };
 };
