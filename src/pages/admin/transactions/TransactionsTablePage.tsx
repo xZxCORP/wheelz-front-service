@@ -8,6 +8,7 @@ import { Button } from '../../../components/shared/button/Button';
 import { ErrorContainer } from '../../../components/shared/error/ErrorContainer';
 import { ActionBadge } from '../../../components/transaction/badges/ActionBadge';
 import { StatusBadge } from '../../../components/transaction/badges/StatusBadge';
+import { RevertDeleteTransactionButton } from '../../../components/transaction/buttons/RevertDeleteTransactionButton';
 import { usePagination } from '../../../hooks/usePagination';
 import { formatDate } from '../../../utils/date';
 import { isApiResponse } from '../../../utils/errors';
@@ -23,7 +24,7 @@ export const TransactionsTablePage = () => {
     },
   });
   const columnHelper = createColumnHelper<VehicleTransaction>();
-
+  const isLastTransactionIndex = (index: number) => data && data.body.meta.total === index + 1;
   const columns = [
     columnHelper.accessor('id', {
       header: 'ID',
@@ -52,10 +53,14 @@ export const TransactionsTablePage = () => {
       header: 'Actions',
       cell: (info) => {
         return (
-          <div>
+          <div className="flex items-center gap-2">
             <Button asChild>
               <Link to={`/admin/transactions/${info.row.original.id}`}>Voir</Link>
             </Button>
+            {info.row.original.action === 'delete' &&
+              isLastTransactionIndex(
+                info.row.index + pagination.pageIndex * pagination.pageSize
+              ) && <RevertDeleteTransactionButton transactionId={info.row.original.id} />}
           </div>
         );
       },
