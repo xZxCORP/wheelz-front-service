@@ -1,6 +1,7 @@
 //import { useState } from 'react';
 import { FaBalanceScale } from 'react-icons/fa';
 import { FaCheckCircle } from 'react-icons/fa';
+import { FaInfoCircle } from 'react-icons/fa';
 import { FaTriangleExclamation } from 'react-icons/fa6';
 
 import { NoticeCard } from '../NoticeCard';
@@ -10,7 +11,7 @@ export const LegalStatusCard = ({ vehicle }: { vehicle: any }) => {
   //const handleOpenModal = () => setIsModalOpen(true);
   //const handleCloseModal = () => setIsModalOpen(false);
   return {
-    title: 'Statut légal',
+    title: 'Statut legal',
     icon: <FaBalanceScale className="text-4xl text-gray-700" />,
     key: 'legal',
     content: (
@@ -23,7 +24,7 @@ export const LegalStatusCard = ({ vehicle }: { vehicle: any }) => {
         {/* Note */}
         <div className="mb-4 flex items-start rounded-lg bg-gray-100 p-3">
           <div className="mr-3 shrink-0 text-xl text-blue-500">
-            <FaBalanceScale />
+            <FaInfoCircle />
           </div>
           <div>
             <p className="text-sm text-gray-800">
@@ -73,6 +74,6 @@ export const LegalStatusCard = ({ vehicle }: { vehicle: any }) => {
         </div>
       </div>
     ),
-    cardComponent: <NoticeCard title="Détails" Icon={FaBalanceScale} warning={false} />,
+    cardComponent: <NoticeCard title="Statut legal" Icon={FaBalanceScale} warning={false} />,
   };
 };
