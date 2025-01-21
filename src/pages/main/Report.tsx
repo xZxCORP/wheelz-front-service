@@ -4,12 +4,14 @@ import { useParams } from 'react-router-dom';
 
 import { createCarImage } from '../../clients/api/carImage.api';
 import { chainTsr } from '../../clients/api/chain.api';
+import { transactionTsr } from '../../clients/api/transaction.api';
 import { DamageCard } from '../../components/main/report/cards/DamagesCard';
 import { DetailsCard } from '../../components/main/report/cards/DetailsCard';
 import { HistoryCard } from '../../components/main/report/cards/HistoryCard';
 import { LegalStatusCard } from '../../components/main/report/cards/LegalStatusCard';
 import { ErrorContainer } from '../../components/shared/error/ErrorContainer';
 import { LoadingAnimation } from '../../components/shared/LoadingAnimation';
+import { formatFrenchDate } from '../../utils/date';
 import { isApiResponse } from '../../utils/errors';
 type PageParams = {
   vin: string;
@@ -24,6 +26,13 @@ export const Report = () => {
     queryKey: ['vehicles', vin],
     queryData: {
       query: { vin: vin ?? undefined },
+    },
+    enabled: !!vin,
+  });
+  const { data: vinMetadatasData } = transactionTsr.transactions.getVinMetadatas.useQuery({
+    queryKey: ['vehicles', vin, 'metadatas'],
+    queryData: {
+      params: { vin: vin! },
     },
     enabled: !!vin,
   });
@@ -85,6 +94,22 @@ export const Report = () => {
                       {vehicleData.body.infos.firstSivRegistrationDate}
                     </span>
                   </p>
+                  {vinMetadatasData && (
+                    <>
+                      <p className="rounded-md bg-info-700 p-2 text-secondary-200">
+                        Date de création:{' '}
+                        <span className="font-bold">
+                          {formatFrenchDate(new Date(vinMetadatasData.body.firstTransactionDate))}
+                        </span>
+                      </p>
+                      <p className="rounded-md bg-info-700 p-2 text-secondary-200">
+                        Date de dernière mise à jour:{' '}
+                        <span className="font-bold">
+                          {formatFrenchDate(new Date(vinMetadatasData.body.lastTransactionDate))}
+                        </span>
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
