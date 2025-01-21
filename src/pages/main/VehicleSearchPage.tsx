@@ -3,7 +3,6 @@ import { VehicleSearchForm } from '../../components/vehicle/forms/VehicleSearchF
 export const VehicleSearchPage = () => {
   return (
     <div className="flex flex-col gap-2">
-      <h2>Recherche complète d&apos;un véhicule :</h2>
       <VehicleSearchForm />
     </div>
   );
