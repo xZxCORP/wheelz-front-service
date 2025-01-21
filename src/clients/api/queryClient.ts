@@ -1,7 +1,7 @@
 import { MutationCache, QueryClient } from '@tanstack/react-query';
-import type { BasicResponse } from '@zcorp/wheelz-contracts';
 
 import { useSnackbarStore } from '../../stores/useSnackbar';
+import { isApiResponse } from '../../utils/errors';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -14,9 +14,11 @@ export const queryClient = new QueryClient({
   },
   mutationCache: new MutationCache({
     onError: (error) => {
-      const unknownError: any = error;
-      const body: BasicResponse = unknownError.body as BasicResponse;
-      useSnackbarStore.getState().addSnackbar(body.message ?? "Une erreur s'est produite", 'error');
+      if (isApiResponse(error)) {
+        useSnackbarStore.getState().addSnackbar(error.body.message, 'error');
+      } else {
+        useSnackbarStore.getState().addSnackbar("Une erreur s'est produite", 'error');
+      }
     },
   }),
 });

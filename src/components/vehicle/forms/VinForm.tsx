@@ -1,13 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Vehicle } from '@zcorp/shared-typing-wheelz';
-import { type BasicResponse, getVehicleParametersSchema } from '@zcorp/wheelz-contracts';
+import { getVehicleParametersSchema } from '@zcorp/wheelz-contracts';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { chainTsr } from '../../clients/api/chain.api';
-import { useSnackbarStore } from '../../stores/useSnackbar';
-import { Button } from '../shared/button/Button';
+import { chainTsr } from '../../../clients/api/chain.api';
+import { useSnackbarStore } from '../../../stores/useSnackbar';
+import { isApiResponse } from '../../../utils/errors';
+import { Button } from '../../shared/button/Button';
 import {
   Form,
   FormControl,
@@ -15,8 +16,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../shared/form/Form';
-import { Input } from '../shared/form/Input';
+} from '../../shared/form/Form';
+import { Input } from '../../shared/form/Input';
 
 export const VinForm = () => {
   const [vin, setVin] = useState<string | null>(null);
@@ -45,13 +46,11 @@ export const VinForm = () => {
 
   // Data / error handling
   useEffect(() => {
-    if (error) {
-      const unknownError: any = error;
-      const body: BasicResponse = unknownError.body as BasicResponse;
-      addSnackbar(body?.message ?? "Une erreur s'est produite", 'error');
+    if (error && isApiResponse(error)) {
+      addSnackbar(error.body.message ?? "Une erreur s'est produite", 'error');
     } else if (data) {
       // Vehicle data still needs to be sent to report component
-      navigate('/report');
+      navigate(`/report/${data.body.vin}`);
     }
   }, [error, data, navigate, addSnackbar]);
 
@@ -74,7 +73,7 @@ export const VinForm = () => {
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit((formData) => submitForm(formData))}
-                  className="flex flex-col gap-4"
+                  className="flex w-full flex-col gap-4"
                 >
                   <FormField
                     control={form.control}
