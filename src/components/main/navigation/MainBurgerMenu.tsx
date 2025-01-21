@@ -11,6 +11,7 @@ import { LinkButton } from '../../shared/LinkButton';
 import { LoginRegisterPickers } from '../auth/LoginRegisterPickers';
 import { LogoutButton } from '../auth/LogoutButton';
 import { ProfileButton } from '../profile/ProfileButton';
+import { WheelzIcon } from '../../shared/WheelzIcon';
 
 interface Props {
   className?: string;
@@ -66,6 +67,9 @@ export const MainBurgerMenu = ({ className, links }: Props) => {
             <Button onClick={toggleMenu} buttonVariant="ghost">
               <FaXmark className="size-6" />
             </Button>
+          </div>
+          <div className="mb-4">
+            <WheelzIcon></WheelzIcon>
           </div>
           <div className="flex flex-col gap-4">
             {links.map((link) => LinkCell(link))}
