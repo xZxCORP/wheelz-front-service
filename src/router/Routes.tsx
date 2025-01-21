@@ -3,27 +3,25 @@ import type { RouteObject } from 'react-router-dom';
 import { AdminRoot } from '../pages/admin/AdminRoot';
 import { ChainTablePage } from '../pages/admin/chain/ChainTablePage';
 import { ViewVehiclePage } from '../pages/admin/chain/ViewVehiclePage';
+import { StatsPage } from '../pages/admin/StatsPage';
 import { CreateTransactionPage } from '../pages/admin/transactions/CreateTransactionPage';
 import { TransactionsTablePage } from '../pages/admin/transactions/TransactionsTablePage';
 import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
 import { UsersTable } from '../pages/admin/UsersTable';
 import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
-import { ErrorLayout } from '../pages/layout/ErrorLayout';
-import { ErrorOutletLayout } from '../pages/layout/ErrorOutletLayout';
 import { MainRoot } from '../pages/main/MainRoot';
 import { Report } from '../pages/main/Report';
+import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
 import { PrivateRoute } from './ProtectedRoutes';
 
 export const routes: RouteObject[] = [
   {
     path: '/',
     element: <BaseLayout />,
-    errorElement: <ErrorLayout />,
 
     children: [
       {
-        errorElement: <ErrorOutletLayout />,
         children: [
           {
             index: true,
@@ -33,18 +31,21 @@ export const routes: RouteObject[] = [
             path: 'report/:vin',
             element: <PrivateRoute element={Report} />,
           },
+          {
+            // page with VehicleSearchForm
+            path: 'search',
+            element: <VehicleSearchPage />,
+          },
         ],
       },
     ],
   },
   {
     path: '/admin',
-    element: <PrivateRoute element={AdminLayout} role="admin" />,
-    errorElement: <ErrorLayout />,
+    element: <PrivateRoute element={AdminLayout} roles={['admin']} />,
 
     children: [
       {
-        errorElement: <ErrorOutletLayout />,
         children: [
           {
             index: true,
@@ -73,6 +74,10 @@ export const routes: RouteObject[] = [
           {
             path: 'users',
             element: <UsersTable />,
+          },
+          {
+            path: 'stats',
+            element: <StatsPage />,
           },
         ],
       },

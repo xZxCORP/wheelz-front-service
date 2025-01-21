@@ -1,6 +1,7 @@
 import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 import { type Control, useFieldArray } from 'react-hook-form';
 
+import { vehicleHistoryLabels } from '../../../types/vehicleLabels';
 import { Button } from '../../shared/button/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../../shared/Card';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../shared/form/Form';
@@ -39,7 +40,7 @@ export const HistoryArrayField = ({ control, onlyView }: Props) => {
               name={`history.${index}.date`}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Date</FormLabel>
+                  <FormLabel>{vehicleHistoryLabels.date}</FormLabel>
                   <FormControl>
                     <Input type="date" className="w-full" {...field} value={field.value ?? ''} />
                   </FormControl>
@@ -53,7 +54,7 @@ export const HistoryArrayField = ({ control, onlyView }: Props) => {
               name={`history.${index}.type`}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Type</FormLabel>
+                  <FormLabel>{vehicleHistoryLabels.type}</FormLabel>
 
                   <FormControl>
                     <Input className="w-full" {...field} placeholder={`Type`} />

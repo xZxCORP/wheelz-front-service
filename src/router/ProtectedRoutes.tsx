@@ -6,17 +6,21 @@ import { useAuthStore } from '../stores/useAuthStore';
 
 interface Props {
   element: React.ComponentType;
-  role?: string;
+  roles?: string[];
 }
 
-export const PrivateRoute = ({ element: RouteComponent }: Props) => {
-  const { isInitialized, isAuthenticated } = useAuthStore();
+export const PrivateRoute = ({ element: RouteComponent, roles }: Props) => {
+  const { isInitialized, isAuthenticated, user, roles: userRoles } = useAuthStore();
   const location = useLocation();
+  const isAuthorized = () => {
+    if (!roles) return true;
+    return user && roles.some((role) => userRoles.includes(role));
+  };
   if (!isInitialized) {
     return <Loader fullScreen />;
   }
 
-  if (!isAuthenticated()) {
+  if (!isAuthenticated() || !isAuthorized()) {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
 

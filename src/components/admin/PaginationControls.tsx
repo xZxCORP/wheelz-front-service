@@ -27,20 +27,6 @@ export const PaginationControls = ({ table }: Props) => {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* <select
-            className="border-input bg-background h-8 rounded-md border px-2 text-sm"
-            value={table.getState().pagination.pageSize}
-            onChange={(e) => {
-              table.setPageSize(Number(e.target.value));
-            }}
-          >
-            {[10, 20, 30, 40, 50].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
-                {pageSize} lignes
-              </option>
-            ))}
-          </select> */}
-
           <div className="flex items-center gap-1">
             <Button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
               <FaChevronLeft />

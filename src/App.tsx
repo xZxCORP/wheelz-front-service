@@ -2,6 +2,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { z } from 'zod';
 
+import { chainTsr } from './clients/api/chain.api';
 import { queryClient } from './clients/api/queryClient';
 import { transactionTsr } from './clients/api/transaction.api';
 import { userTsr } from './clients/api/user.api';
@@ -19,10 +20,12 @@ export const App = () => {
     <QueryClientProvider client={queryClient}>
       <userTsr.ReactQueryProvider>
         <transactionTsr.ReactQueryProvider>
-          <GlobalLoading />
-          <RouterProvider router={router} />
-          <Snackbar />
-          <AuthProvider />
+          <chainTsr.ReactQueryProvider>
+            <GlobalLoading />
+            <RouterProvider router={router} />
+            <Snackbar />
+            <AuthProvider />
+          </chainTsr.ReactQueryProvider>
         </transactionTsr.ReactQueryProvider>
       </userTsr.ReactQueryProvider>
     </QueryClientProvider>

@@ -6,7 +6,7 @@
     "plugin:prettier/recommended",
     "plugin:@tanstack/query/recommended"
   ],
-  "plugins": ["tailwindcss", "prettier", "unused-imports", "import"],
+  "plugins": ["tailwindcss", "prettier","unused-imports","import"],
   "rules": {
     "unicorn/no-null": "off",
     "unicorn/filename-case": "off",

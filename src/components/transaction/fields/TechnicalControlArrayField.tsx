@@ -1,6 +1,7 @@
 import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 import { type Control, useFieldArray } from 'react-hook-form';
 
+import { technicalControlLabels } from '../../../types/vehicleLabels';
 import { Button } from '../../shared/button/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../../shared/Card';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../shared/form/Form';
@@ -47,7 +48,7 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
               name={`technicalControls.${index}.date`}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Date</FormLabel>
+                  <FormLabel>{technicalControlLabels.date}</FormLabel>
                   <FormControl>
                     <Input type="date" className="w-full" {...field} value={field.value ?? ''} />
                   </FormControl>
@@ -61,10 +62,14 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
               name={`technicalControls.${index}.result`}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Resultat</FormLabel>
+                  <FormLabel>{technicalControlLabels.result}</FormLabel>
 
                   <FormControl>
-                    <Input className="w-full" {...field} placeholder={`Resultat`} />
+                    <Input
+                      className="w-full"
+                      {...field}
+                      placeholder={technicalControlLabels.result}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -75,10 +80,14 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
               name={`technicalControls.${index}.resultRaw`}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Resultat Raw</FormLabel>
+                  <FormLabel>{technicalControlLabels.resultRaw}</FormLabel>
 
                   <FormControl>
-                    <Input className="w-full" {...field} placeholder={`Resultat Raw`} />
+                    <Input
+                      className="w-full"
+                      {...field}
+                      placeholder={technicalControlLabels.resultRaw}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -89,10 +98,14 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
               name={`technicalControls.${index}.nature`}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nature</FormLabel>
+                  <FormLabel>{technicalControlLabels.nature}</FormLabel>
 
                   <FormControl>
-                    <Input className="w-full" {...field} placeholder={`Nature`} />
+                    <Input
+                      className="w-full"
+                      {...field}
+                      placeholder={technicalControlLabels.nature}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -103,10 +116,15 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
               name={`technicalControls.${index}.km`}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Km</FormLabel>
+                  <FormLabel>{technicalControlLabels.km}</FormLabel>
 
                   <FormControl>
-                    <Input type="number" className="w-full" {...field} placeholder={`Km`} />
+                    <Input
+                      type="number"
+                      className="w-full"
+                      {...field}
+                      placeholder={technicalControlLabels.km}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -5,23 +5,26 @@ import { Link } from 'react-router-dom';
 import { transactionTsr } from '../../../clients/api/transaction.api';
 import { Table } from '../../../components/admin/Table';
 import { Button } from '../../../components/shared/button/Button';
-import { ActionBadge } from '../../../components/transaction/ActionBadge';
-import { StatusBadge } from '../../../components/transaction/StatusBadge';
+import { ErrorContainer } from '../../../components/shared/error/ErrorContainer';
+import { ActionBadge } from '../../../components/transaction/badges/ActionBadge';
+import { StatusBadge } from '../../../components/transaction/badges/StatusBadge';
+import { RevertDeleteTransactionButton } from '../../../components/transaction/buttons/RevertDeleteTransactionButton';
 import { usePagination } from '../../../hooks/usePagination';
 import { formatDate } from '../../../utils/date';
+import { isApiResponse } from '../../../utils/errors';
 export const TransactionsTablePage = () => {
   const { pagination, apiPagination, onPaginationChange } = usePagination({
     initialPage: 1,
     initialPerPage: 10,
   });
-  const { data } = transactionTsr.transactions.getTransactions.useQuery({
+  const { data, error } = transactionTsr.transactions.getTransactions.useQuery({
     queryKey: ['transactions', apiPagination],
     queryData: {
       query: apiPagination,
     },
   });
   const columnHelper = createColumnHelper<VehicleTransaction>();
-
+  const isLastTransactionIndex = (index: number) => data && data.body.meta.total === index + 1;
   const columns = [
     columnHelper.accessor('id', {
       header: 'ID',
@@ -50,15 +53,22 @@ export const TransactionsTablePage = () => {
       header: 'Actions',
       cell: (info) => {
         return (
-          <div>
+          <div className="flex items-center gap-2">
             <Button asChild>
               <Link to={`/admin/transactions/${info.row.original.id}`}>Voir</Link>
             </Button>
+            {info.row.original.action === 'delete' &&
+              isLastTransactionIndex(
+                info.row.index + pagination.pageIndex * pagination.pageSize
+              ) && <RevertDeleteTransactionButton transactionId={info.row.original.id} />}
           </div>
         );
       },
     }),
   ];
+  if (error && isApiResponse(error)) {
+    return <ErrorContainer errorMessage={error.body.message} />;
+  }
 
   return (
     data && (

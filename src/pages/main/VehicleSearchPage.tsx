@@ -1,11 +1,9 @@
 import { VehicleSearchForm } from '../../components/vehicle/forms/VehicleSearchForm';
-import { VinForm } from '../../components/vehicle/VinForm';
 
-export const MainRoot = () => {
+export const VehicleSearchPage = () => {
   return (
     <div className="flex flex-col gap-2">
-      <h2>MainRoot</h2>
-      <VinForm></VinForm>
+      <h2>Recherche complète d&apos;un véhicule :</h2>
       <VehicleSearchForm />
     </div>
   );
