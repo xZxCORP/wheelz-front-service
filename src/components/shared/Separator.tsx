@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
 import clsx from 'clsx';
 import React from 'react';
