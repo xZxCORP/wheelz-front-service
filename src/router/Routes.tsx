@@ -11,6 +11,7 @@ import { UsersTable } from '../pages/admin/UsersTable';
 import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
 import { MainRoot } from '../pages/main/MainRoot';
+import { Profile } from '../pages/main/Profile';
 import { Report } from '../pages/main/Report';
 import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
 import { PrivateRoute } from './ProtectedRoutes';
@@ -35,6 +36,10 @@ export const routes: RouteObject[] = [
             // page with VehicleSearchForm
             path: 'search',
             element: <VehicleSearchPage />,
+          },
+          {
+            path: '/profile',
+            element: <PrivateRoute element={Profile} />,
           },
         ],
       },
