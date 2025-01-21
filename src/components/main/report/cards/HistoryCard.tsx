@@ -41,15 +41,20 @@ export const HistoryCard = ({ vehicle }: Props) => ({
                 date: control.date,
                 type: `Contrôle technique : ${control.nature} (${control.result}) - ${control.resultRaw}`,
               })),
-              {
-                date: vehicle.sinisterInfos.lastSinisterDate,
-                type: 'Sinistre : Dernier sinistre enregistré',
-              },
-              {
-                date: vehicle.sinisterInfos.lastResolutionDate,
-                type: 'Sinistre : Dernière résolution de sinistre',
-              },
+              vehicle.sinisterInfos.lastSinisterDate
+                ? {
+                    date: vehicle.sinisterInfos.lastSinisterDate,
+                    type: 'Sinistre : Dernier sinistre enregistré',
+                  }
+                : undefined,
+              vehicle.sinisterInfos.lastResolutionDate
+                ? {
+                    date: vehicle.sinisterInfos.lastResolutionDate,
+                    type: 'Sinistre : Dernière résolution de sinistre',
+                  }
+                : undefined,
             ]
+              .filter((entry) => entry !== undefined)
               .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
               .map((entry, index) => (
                 <li

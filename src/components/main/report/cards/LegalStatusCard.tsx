@@ -1,13 +1,16 @@
 //import { useState } from 'react';
+import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 import { FaBalanceScale } from 'react-icons/fa';
 import { FaCheckCircle } from 'react-icons/fa';
 import { FaInfoCircle } from 'react-icons/fa';
 import { FaTriangleExclamation } from 'react-icons/fa6';
 
 import { NoticeCard } from '../NoticeCard';
-
-export const LegalStatusCard = ({ vehicle }: { vehicle: any }) => {
-  const warning = vehicle.technicalControls[0]?.result !== 'Ok';
+type Props = {
+  vehicle: Vehicle;
+};
+export const LegalStatusCard = ({ vehicle }: Props) => {
+  const warning = vehicle.technicalControls[0]?.resultRaw !== 'A';
 
   return {
     title: 'Statut légal',
@@ -39,15 +42,15 @@ export const LegalStatusCard = ({ vehicle }: { vehicle: any }) => {
           <div className="rounded-lg border bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
               <h4 className="text-sm font-bold">Contrôle technique</h4>
-              {vehicle.technicalControls[0]?.result === 'Ok' ? (
+              {vehicle.technicalControls[0]?.resultRaw === 'A' ? (
                 <div className="flex items-center space-x-1 text-green-600">
                   <FaCheckCircle className="text-xl" />
-                  <span className="text-sm font-medium">Passé</span>
+                  <span className="text-sm font-medium">Favorable</span>
                 </div>
               ) : (
                 <div className="flex items-center space-x-1 text-yellow-500">
                   <FaTriangleExclamation className="text-xl" />
-                  <span className="text-sm font-medium">Analyse</span>
+                  <span className="text-sm font-medium">Défavorable</span>
                 </div>
               )}
             </div>

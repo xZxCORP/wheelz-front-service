@@ -1,4 +1,3 @@
-import { vehicleFixture } from '@zcorp/shared-typing-wheelz';
 import { useMemo, useState } from 'react';
 import { GiCrossedChains } from 'react-icons/gi';
 import { useParams } from 'react-router-dom';
@@ -31,10 +30,10 @@ export const Report = () => {
   const carImage = useMemo(() => {
     if (!vehicleData) return null;
     return createCarImage({
-      make: vehicleFixture.features.brand,
-      year: vehicleFixture.infos.firstSivRegistrationDate.split('-')[0] ?? '2020',
-      model: vehicleFixture.features.model,
-      color: vehicleFixture.features.color,
+      make: vehicleData.body.features.brand,
+      year: vehicleData.body.infos.firstSivRegistrationDate.split('-')[0] ?? '2020',
+      model: vehicleData.body.features.model,
+      color: vehicleData.body.features.color,
     });
   }, [vehicleData]);
   const [selectedCard, setSelectedCard] = useState<string | null>(null);

@@ -30,30 +30,35 @@ export const DamageCard = ({ vehicle }: Props) => ({
       <h3 className="mb-4 text-lg font-semibold text-gray-700">Historique des dommages</h3>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         {/* Dernier sinistre */}
-        <div className="flex items-center space-x-4 rounded-lg bg-gray-50 p-4 shadow">
-          <div className="text-3xl text-red-500">
-            <FaInfoCircle />
+        {vehicle.sinisterInfos.lastSinisterDate && (
+          <div className="flex items-center space-x-4 rounded-lg bg-gray-50 p-4 shadow">
+            <div className="text-3xl text-red-500">
+              <FaInfoCircle />
+            </div>
+
+            <div>
+              <p className="text-sm font-medium text-gray-600">Dernier sinistre</p>
+              <p className="text-base font-bold text-gray-800">
+                {vehicle.sinisterInfos.lastSinisterDate}
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-sm font-medium text-gray-600">Dernier sinistre</p>
-            <p className="text-base font-bold text-gray-800">
-              {vehicle.sinisterInfos.lastSinisterDate}
-            </p>
-          </div>
-        </div>
+        )}
 
         {/* Résolution */}
-        <div className="flex items-center space-x-4 rounded-lg bg-gray-50 p-4 shadow">
-          <div className="text-3xl text-green-500">
-            <FaInfoCircle />
+        {vehicle.sinisterInfos.lastResolutionDate && (
+          <div className="flex items-center space-x-4 rounded-lg bg-gray-50 p-4 shadow">
+            <div className="text-3xl text-green-500">
+              <FaInfoCircle />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-gray-600">Résolution</p>
+              <p className="text-base font-bold text-gray-800">
+                {vehicle.sinisterInfos.lastResolutionDate}
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-sm font-medium text-gray-600">Résolution</p>
-            <p className="text-base font-bold text-gray-800">
-              {vehicle.sinisterInfos.lastResolutionDate}
-            </p>
-          </div>
-        </div>
+        )}
 
         {/* Total des sinistres */}
         <div className="flex items-center space-x-4 rounded-lg bg-gray-50 p-4 shadow">
