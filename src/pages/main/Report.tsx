@@ -1,46 +1,49 @@
-import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 import { vehicleFixture } from '@zcorp/shared-typing-wheelz';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { GiCrossedChains } from 'react-icons/gi';
+import { useParams } from 'react-router-dom';
 
 import { createCarImage } from '../../clients/api/carImage.api';
+import { chainTsr } from '../../clients/api/chain.api';
 import { DamageCard } from '../../components/main/report/cards/DamagesCard';
 import { DetailsCard } from '../../components/main/report/cards/DetailsCard';
 import { HistoryCard } from '../../components/main/report/cards/HistoryCard';
 import { LegalStatusCard } from '../../components/main/report/cards/LegalStatusCard';
 import { LoadingAnimation } from '../../components/shared/LoadingAnimation';
-
+type PageParams = {
+  vin: string;
+};
 export const Report = () => {
-  const [carImage, setCarImage] = useState<string | undefined>();
-  const [vehicle, setVehicle] = useState<Vehicle | undefined>();
-  const [selectedCard, setSelectedCard] = useState<string | null>(null);
-
-  const CARDS = vehicle
-    ? [
-        DetailsCard({ vehicle }),
-        HistoryCard({ vehicle }),
-        DamageCard({ vehicle }),
-        LegalStatusCard({ vehicle }),
-      ]
-    : [];
-
-  const getCarImage = async () => {
-    const carUrl = createCarImage({
+  const { vin } = useParams<PageParams>();
+  const { data: vehicleData, isPending } = chainTsr.chain.getVehicleOfTheChain.useQuery({
+    queryKey: ['vehicles', vin],
+    queryData: {
+      query: { vin: vin ?? undefined },
+    },
+    enabled: !!vin,
+  });
+  const carImage = useMemo(() => {
+    if (!vehicleData) return null;
+    return createCarImage({
       make: vehicleFixture.features.brand,
       year: vehicleFixture.infos.firstSivRegistrationDate.split('-')[0] ?? '2020',
       model: vehicleFixture.features.model,
       color: vehicleFixture.features.color,
     });
+  }, [vehicleData]);
+  const [selectedCard, setSelectedCard] = useState<string | null>(null);
 
-    setCarImage(carUrl);
-  };
+  const CARDS =
+    vehicleData && vehicleData.status == 200
+      ? [
+          DetailsCard({ vehicle: vehicleData.body }),
+          HistoryCard({ vehicle: vehicleData.body }),
+          DamageCard({ vehicle: vehicleData.body }),
+          LegalStatusCard({ vehicle: vehicleData.body }),
+        ]
+      : [];
 
-  useEffect(() => {
-    setVehicle(vehicleFixture);
-    getCarImage();
-  }, []);
-
-  if (!vehicle) return <LoadingAnimation />;
+  if (!vehicleData || isPending) return <LoadingAnimation />;
 
   return (
     <div className="flex w-full">
@@ -48,21 +51,25 @@ export const Report = () => {
         <div className="rounded-lg bg-primary-50 p-4 shadow-md md:p-6">
           {/* Header avec l'image et les infos principales */}
           <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center">
-            <div className="flex h-40 w-full items-center justify-center rounded-lg text-center font-bold md:w-40">
-              <img src={carImage} alt="Car" />
-            </div>
+            {carImage && (
+              <div className="flex h-40 w-full items-center justify-center rounded-lg text-center font-bold md:w-40">
+                <img src={carImage} alt="Car" />
+              </div>
+            )}
             <div className="grow">
               <div className="mb-2 text-lg font-bold">
-                <span className="capitalize">{vehicle.features.brand}</span>{' '}
-                {vehicle.features.model}
+                <span className="capitalize">{vehicleData.body.features.brand}</span>
+                {vehicleData.body.features.model}
               </div>
               <div className="flex flex-wrap gap-2 text-sm">
                 <p className="rounded-md bg-secondary-700 p-2 text-secondary-200">
-                  VIN: <span className="font-bold">{vehicle.vin}</span>
+                  VIN: <span className="font-bold">{vehicleData.body.vin}</span>
                 </p>
                 <p className="rounded-md bg-secondary-700 p-2 text-secondary-200">
                   Première immatriculation:{' '}
-                  <span className="font-bold">{vehicle.infos.firstSivRegistrationDate}</span>
+                  <span className="font-bold">
+                    {vehicleData.body.infos.firstSivRegistrationDate}
+                  </span>
                 </p>
               </div>
             </div>

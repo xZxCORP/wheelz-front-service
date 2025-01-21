@@ -30,7 +30,7 @@ export const routes: RouteObject[] = [
             element: <MainRoot />,
           },
           {
-            path: 'report',
+            path: 'report/:vin',
             element: <PrivateRoute element={Report} />,
           },
         ],
