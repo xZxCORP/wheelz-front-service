@@ -10,29 +10,31 @@ import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransaction
 import { UsersTable } from '../pages/admin/UsersTable';
 import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
-import { ErrorLayout } from '../pages/layout/ErrorLayout';
-import { ErrorOutletLayout } from '../pages/layout/ErrorOutletLayout';
 import { MainRoot } from '../pages/main/MainRoot';
 import { Report } from '../pages/main/Report';
+import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
 import { PrivateRoute } from './ProtectedRoutes';
 
 export const routes: RouteObject[] = [
   {
     path: '/',
     element: <BaseLayout />,
-    errorElement: <ErrorLayout />,
 
     children: [
       {
-        errorElement: <ErrorOutletLayout />,
         children: [
           {
             index: true,
             element: <MainRoot />,
           },
           {
-            path: 'report',
+            path: 'report/:vin',
             element: <PrivateRoute element={Report} />,
+          },
+          {
+            // page with VehicleSearchForm
+            path: 'search',
+            element: <VehicleSearchPage />,
           },
         ],
       },
@@ -40,12 +42,10 @@ export const routes: RouteObject[] = [
   },
   {
     path: '/admin',
-    element: <PrivateRoute element={AdminLayout} role="admin" />,
-    errorElement: <ErrorLayout />,
+    element: <PrivateRoute element={AdminLayout} roles={['admin']} />,
 
     children: [
       {
-        errorElement: <ErrorOutletLayout />,
         children: [
           {
             index: true,

@@ -3,15 +3,14 @@
   "extends": [
     "@zcorp/eslint-config/react",
     "plugin:tailwindcss/recommended",
-    "plugin:@react-three/recommended",
     "plugin:prettier/recommended",
     "plugin:@tanstack/query/recommended"
   ],
-  "plugins": ["tailwindcss", "@react-three","prettier","unused-imports","import"],
+  "plugins": ["tailwindcss", "prettier","unused-imports","import"],
   "rules": {
     "unicorn/no-null": "off",
     "unicorn/filename-case": "off",
-    "unicorn/prevent-abbreviations":"off",
+    "unicorn/prevent-abbreviations": "off",
     "react/no-unknown-property": ["off", { "ignore": ["JSX"] }],
     "unused-imports/no-unused-imports": "error",
     "import/no-default-export": "error",

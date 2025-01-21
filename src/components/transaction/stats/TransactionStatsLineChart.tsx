@@ -10,8 +10,8 @@ import {
   YAxis,
 } from 'recharts';
 
-import { Card, CardContent, CardHeader } from '../shared/Card';
-import { H2 } from '../shared/typography/Typography';
+import { Card, CardContent, CardHeader } from '../../shared/Card';
+import { H2 } from '../../shared/typography/Typography';
 type Props = {
   data: TransactionStats;
 };

@@ -4,6 +4,7 @@ import { AdminHeader } from '../../components/admin/navigation/AdminHeader';
 import { AdminSidebar } from '../../components/admin/navigation/AdminSidebar';
 import { Loader } from '../../components/shared/Loader';
 import { ForceCreateTransactionModal } from '../../components/transaction/modals/ForceCreateTransactionModal';
+import { ForceUpdateTransactionModal } from '../../components/transaction/modals/ForceUpdateTransactionModal';
 import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';
 
 export const AdminLayout = () => {
@@ -25,6 +26,7 @@ export const AdminLayout = () => {
 
         {isLoading && <Loader fullScreen size="lg" variant="primary" />}
         <ForceCreateTransactionModal />
+        <ForceUpdateTransactionModal />
       </div>
     </>
   );

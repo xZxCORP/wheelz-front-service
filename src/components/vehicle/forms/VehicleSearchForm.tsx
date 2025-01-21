@@ -3,9 +3,9 @@ import { scrapVehicleDataSchema } from '@zcorp/shared-typing-wheelz';
 import type React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { transactionTsr } from '../../clients/api/transaction.api';
-import { useSnackbarStore } from '../../stores/useSnackbar';
-import { Button } from '../shared/button/Button';
+import { transactionTsr } from '../../../clients/api/transaction.api';
+import { useSnackbarStore } from '../../../stores/useSnackbar';
+import { Button } from '../../shared/button/Button';
 import {
   Form,
   FormControl,
@@ -13,8 +13,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../shared/form/Form';
-import { Input } from '../shared/form/Input';
+} from '../../shared/form/Form';
+import { Input } from '../../shared/form/Input';
 
 export const VehicleSearchForm: React.FC = () => {
   const { addSnackbar } = useSnackbarStore();

@@ -8,16 +8,26 @@ import { transactionTsr } from '../../../clients/api/transaction.api';
 import { useModal } from '../../../hooks/useModal';
 import { TransactionActionSelect } from '../../../pages/admin/transactions/TransactionActionSelect';
 import { useSnackbarStore } from '../../../stores/useSnackbar';
-import { type ForceCreateTransactionProps, MODAL_IDS } from '../../../types/modalIds';
+import {
+  type ForceCreateTransactionProps,
+  type ForceUpdateTransactionProps,
+  MODAL_IDS,
+} from '../../../types/modalIds';
 import { CreateTransactionDataForm } from './CreateTransactionDataForm';
 import { DeleteTransactionDataForm } from './DeleteTransactionDataForm';
+import { UpdateTransactionDataForm } from './UpdateTransactionDataForm';
 
 export const TransactionForm = () => {
   const [action, setAction] = useState<TransactionAction | undefined>();
   const navigate = useNavigate();
   const { addSnackbar } = useSnackbarStore();
   const queryClient = useQueryClient();
-  const { open } = useModal<ForceCreateTransactionProps>(MODAL_IDS.FORCE_CREATE_TRANSACTION);
+  const { open: openForceCreateTransactionModal } = useModal<ForceCreateTransactionProps>(
+    MODAL_IDS.FORCE_CREATE_TRANSACTION
+  );
+  const { open: openForceUpdateTransactionModal } = useModal<ForceUpdateTransactionProps>(
+    MODAL_IDS.FORCE_UPDATE_TRANSACTION
+  );
   const { mutate: deleteTransactionMutate } =
     transactionTsr.transactions.deleteTransaction.useMutation({
       onSuccess: async (response) => {
@@ -32,9 +42,23 @@ export const TransactionForm = () => {
         await globalSuccess(response.body);
       },
       onError: (error, request) => {
-        console.log(isFetchError(error));
         if (!isFetchError(error) && error.status === 422) {
-          open({
+          openForceCreateTransactionModal({
+            response: error.body,
+            transactionData: request.body,
+          });
+        }
+      },
+    });
+  const { mutate: updateTransactionMutate } =
+    transactionTsr.transactions.updateTransaction.useMutation({
+      onSuccess: async (response) => {
+        addSnackbar('Transaction de type Modification créée avec succès', 'success');
+        await globalSuccess(response.body);
+      },
+      onError: (error, request) => {
+        if (!isFetchError(error) && error.status === 422) {
+          openForceUpdateTransactionModal({
             response: error.body,
             transactionData: request.body,
           });
@@ -53,6 +77,12 @@ export const TransactionForm = () => {
           <CreateTransactionDataForm onSubmit={(data) => createTransactionMutate({ body: data })} />
         );
       }
+      case 'update': {
+        return (
+          <UpdateTransactionDataForm onSubmit={(data) => updateTransactionMutate({ body: data })} />
+        );
+      }
+
       case 'delete': {
         return (
           <DeleteTransactionDataForm onSubmit={(data) => deleteTransactionMutate({ body: data })} />

@@ -14,11 +14,11 @@ import { PaginationControls } from './PaginationControls';
 
 type Props<T extends object> = {
   data: T[];
-  meta: Pagination;
+  meta?: Pagination;
   title: string;
   columns: ColumnDef<T, any>[];
-  onPaginationChange: (paginationParameters: PaginationParameters) => void;
-  pagination: PaginationState;
+  onPaginationChange?: (paginationParameters: PaginationParameters) => void;
+  pagination?: PaginationState;
 };
 
 export const Table = <T extends object>({
@@ -35,15 +35,18 @@ export const Table = <T extends object>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    manualPagination: true,
-    rowCount: meta.total,
-    onPaginationChange: (updater) => {
-      const newPagination = typeof updater === 'function' ? updater(pagination) : updater;
-      onPaginationChange({
-        page: newPagination.pageIndex + 1,
-        perPage: newPagination.pageSize,
-      });
-    },
+    manualPagination: !!pagination,
+    rowCount: meta ? meta.total : data.length,
+    onPaginationChange:
+      onPaginationChange && pagination
+        ? (updater) => {
+            const newPagination = typeof updater === 'function' ? updater(pagination) : updater;
+            onPaginationChange({
+              page: newPagination.pageIndex + 1,
+              perPage: newPagination.pageSize,
+            });
+          }
+        : undefined,
     state: {
       pagination,
     },
@@ -53,10 +56,12 @@ export const Table = <T extends object>({
     setExpandedRows((prev) => ({ ...prev, [rowId]: !prev[rowId] }));
   };
   useEffect(() => {
-    onPaginationChange({
-      page: pagination.pageIndex + 1,
-      perPage: pagination.pageSize,
-    });
+    if (onPaginationChange && pagination) {
+      onPaginationChange({
+        page: pagination.pageIndex + 1,
+        perPage: pagination.pageSize,
+      });
+    }
   }, [onPaginationChange, pagination]);
 
   return (
@@ -141,7 +146,7 @@ export const Table = <T extends object>({
             );
           })}
         </div>
-        <PaginationControls table={table} />
+        {pagination && <PaginationControls table={table} />}
       </div>
     </div>
   );
