@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import wheelzLogo from '/public/wheelz_logo.svg';
 interface Props {
   link?: string;
 }
@@ -6,9 +7,10 @@ export const WheelzIcon = ({ link = '/' }: Props) => {
   return (
     <Link
       to={link}
-      className="flex items-center justify-center text-2xl font-bold text-primary-500 transition-colors hover:text-primary-600 sm:text-3xl"
+      className="flex items-center justify-center text-2xl font-bold text-secondary-600 transition-colors hover:text-secondary-700"
     >
-      WheelZ
+      <img src={wheelzLogo} alt="Wheelz Logo" className="w-14 mr-2" />
+      <span className="hidden md:block">WheelZ</span>
     </Link>
   );
 };
