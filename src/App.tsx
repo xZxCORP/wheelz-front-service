@@ -11,6 +11,7 @@ import { GlobalLoading } from './components/shared/GlobalLoading';
 import { Snackbar } from './components/shared/snackbar/Snackbar';
 import { routes } from './router/Routes';
 import { zodFrenchErrorMap } from './types/zodErrorMap';
+
 z.setErrorMap(zodFrenchErrorMap);
 const router = createBrowserRouter(routes);
 

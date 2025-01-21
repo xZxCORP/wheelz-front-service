@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import * as SelectPrimitive from '@radix-ui/react-select';
 import clsx from 'clsx';
 import * as React from 'react';

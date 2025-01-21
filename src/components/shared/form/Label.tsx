@@ -5,7 +5,6 @@ import React from 'react';
 const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & { required?: boolean }
-  // eslint-disable-next-line react/prop-types
 >(({ className, children, required = true, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
