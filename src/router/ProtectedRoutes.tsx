@@ -16,8 +16,7 @@ export const PrivateRoute = ({ element: RouteComponent }: Props) => {
     return <Loader fullScreen />;
   }
 
-  if (isAuthenticated()) {
-    // REMOVE NINO BEFORE MERGE SINON JE SUIS UN FARFADET DU CAFE
+  if (!isAuthenticated()) {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
 

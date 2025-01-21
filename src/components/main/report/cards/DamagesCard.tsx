@@ -1,9 +1,13 @@
+import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 import { FaCarCrash } from 'react-icons/fa';
 import { FaInfoCircle } from 'react-icons/fa';
 
 import { NoticeCard } from '../NoticeCard';
+type Props = {
+  vehicle: Vehicle;
+};
 
-export const DamageCard = ({ vehicle }: { vehicle: any }) => ({
+export const DamageCard = ({ vehicle }: Props) => ({
   title: 'Damage',
   icon: <FaCarCrash className="text-4xl text-gray-700" />,
   key: 'damage',
@@ -67,7 +71,7 @@ export const DamageCard = ({ vehicle }: { vehicle: any }) => ({
   cardComponent: (
     <NoticeCard
       title="Dommages"
-      Icon={FaCarCrash}
+      icon={FaCarCrash}
       warning={vehicle.sinisterInfos.count > 0} // Exemple : warning si des sinistres sont présents
     />
   ),

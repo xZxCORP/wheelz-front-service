@@ -16,5 +16,5 @@ export const createCarImage = (car: CarImage, angle?: string) => {
   url.searchParams.append('modelYear', `${year}`);
   url.searchParams.append('angle', `${angle}`);
 
-  return url;
+  return url.toString();
 };

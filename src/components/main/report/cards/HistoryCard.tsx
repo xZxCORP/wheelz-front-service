@@ -1,8 +1,12 @@
+import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 import { FaInfoCircle } from 'react-icons/fa';
 import { GiNotebook } from 'react-icons/gi';
 
 import { NoticeCard } from '../NoticeCard';
-export const HistoryCard = ({ vehicle }: { vehicle: any }) => ({
+type Props = {
+  vehicle: Vehicle;
+};
+export const HistoryCard = ({ vehicle }: Props) => ({
   title: 'History',
   icon: <GiNotebook className="text-4xl text-gray-700" />,
   key: 'history',
@@ -70,7 +74,7 @@ export const HistoryCard = ({ vehicle }: { vehicle: any }) => ({
   cardComponent: (
     <NoticeCard
       title="Historique"
-      Icon={GiNotebook}
+      icon={GiNotebook}
       warning={vehicle.history.length === 0} // Exemple : warning si pas d'historique
     />
   ),

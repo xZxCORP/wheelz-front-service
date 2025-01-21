@@ -1,4 +1,3 @@
-import type React from 'react';
 import { BiBrush } from 'react-icons/bi';
 import { BsFuelPumpFill } from 'react-icons/bs';
 import { FaInfoCircle } from 'react-icons/fa';
@@ -25,11 +24,11 @@ type KilometerData = {
   kilometers: number;
 };
 
-interface KilometerChartProps {
-  data: KilometerData[]; // Données pour le graphique
+interface Props {
+  data: KilometerData[];
 }
 
-const KilometerChart: React.FC<KilometerChartProps> = ({ data }) => {
+const KilometerChart = ({ data }: Props) => {
   return (
     <div style={{ width: '100%', height: 400 }}>
       <ResponsiveContainer>
@@ -45,7 +44,6 @@ const KilometerChart: React.FC<KilometerChartProps> = ({ data }) => {
   );
 };
 
-// Extraction des données pour le graphique à partir de technicalControls
 const getChartData = (vehicle: any): KilometerData[] =>
   vehicle.technicalControls
     .map((control: any) => ({
@@ -55,13 +53,11 @@ const getChartData = (vehicle: any): KilometerData[] =>
     .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
 const hasMileageError = (data: KilometerData[]): boolean => {
-  // Vérification initiale : données insuffisantes
   if (!data || data.length < 2) {
-    return false; // Pas assez de données pour détecter des anomalies
+    return false;
   }
 
   for (let i = 1; i < data.length; i++) {
-    // Vérification explicite de la validité des éléments
     const current = data[i];
     const previous = data[i - 1];
 
@@ -70,7 +66,7 @@ const hasMileageError = (data: KilometerData[]): boolean => {
       previous?.kilometers !== undefined &&
       current.kilometers < previous.kilometers
     ) {
-      return true; // Anomalie détectée
+      return true;
     }
   }
 
@@ -206,6 +202,6 @@ export const DetailsCard = ({ vehicle }: { vehicle: any }) => {
         </div>
       </div>
     ),
-    cardComponent: <NoticeCard title="Détails" Icon={FaInfoCircle} warning={warning} />,
+    cardComponent: <NoticeCard title="Détails" icon={FaInfoCircle} warning={warning} />,
   };
 };

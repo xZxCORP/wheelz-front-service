@@ -8,9 +8,7 @@ import { NoticeCard } from '../NoticeCard';
 
 export const LegalStatusCard = ({ vehicle }: { vehicle: any }) => {
   const warning = vehicle.technicalControls[0]?.result !== 'Ok';
-  //const [isModalOpen, setIsModalOpen] = useState(false);
-  //const handleOpenModal = () => setIsModalOpen(true);
-  //const handleCloseModal = () => setIsModalOpen(false);
+
   return {
     title: 'Statut légal',
     icon: <FaBalanceScale className="text-4xl text-gray-700" />,
@@ -75,6 +73,6 @@ export const LegalStatusCard = ({ vehicle }: { vehicle: any }) => {
         </div>
       </div>
     ),
-    cardComponent: <NoticeCard title="Statut légal" Icon={FaBalanceScale} warning={warning} />,
+    cardComponent: <NoticeCard title="Statut légal" icon={FaBalanceScale} warning={warning} />,
   };
 };

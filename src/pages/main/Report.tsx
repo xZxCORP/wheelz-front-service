@@ -7,7 +7,7 @@ import { createCarImage } from '../../clients/api/carImage.api';
 import { DamageCard } from '../../components/main/report/cards/DamagesCard';
 import { DetailsCard } from '../../components/main/report/cards/DetailsCard';
 import { HistoryCard } from '../../components/main/report/cards/HistoryCard';
-import { LegalStatusCard } from '../../components/main/report/cards/LegalStatusCar';
+import { LegalStatusCard } from '../../components/main/report/cards/LegalStatusCard';
 import { LoadingAnimation } from '../../components/shared/LoadingAnimation';
 
 export const Report = () => {
