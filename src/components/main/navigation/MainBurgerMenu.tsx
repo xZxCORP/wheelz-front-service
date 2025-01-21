@@ -8,6 +8,7 @@ import { Accordion } from '../../shared/Accordion';
 import { BurgerMenuButton } from '../../shared/BurgerMenuButton';
 import { Button } from '../../shared/button/Button';
 import { LinkButton } from '../../shared/LinkButton';
+import { WheelzIcon } from '../../shared/WheelzIcon';
 import { LoginRegisterPickers } from '../auth/LoginRegisterPickers';
 import { LogoutButton } from '../auth/LogoutButton';
 import { ProfileButton } from '../profile/ProfileButton';
@@ -66,6 +67,9 @@ export const MainBurgerMenu = ({ className, links }: Props) => {
             <Button onClick={toggleMenu} buttonVariant="ghost">
               <FaXmark className="size-6" />
             </Button>
+          </div>
+          <div className="mb-4">
+            <WheelzIcon></WheelzIcon>
           </div>
           <div className="flex flex-col gap-4">
             {links.map((link) => LinkCell(link))}
