@@ -8,10 +8,10 @@ import { Accordion } from '../../shared/Accordion';
 import { BurgerMenuButton } from '../../shared/BurgerMenuButton';
 import { Button } from '../../shared/button/Button';
 import { LinkButton } from '../../shared/LinkButton';
+import { WheelzIcon } from '../../shared/WheelzIcon';
 import { LoginRegisterPickers } from '../auth/LoginRegisterPickers';
 import { LogoutButton } from '../auth/LogoutButton';
 import { ProfileButton } from '../profile/ProfileButton';
-import { WheelzIcon } from '../../shared/WheelzIcon';
 
 interface Props {
   className?: string;
