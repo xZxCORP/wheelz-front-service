@@ -1,5 +1,5 @@
+import { RandomVehiclesBanner } from '../../components/main/home/RandomVehiclesBanner';
 import { VinForm } from '../../components/vehicle/forms/VinForm';
-import { RandomVehiclesBanner } from '../layout/RandomVehiclesBanner';
 
 export const MainRoot = () => {
   return (

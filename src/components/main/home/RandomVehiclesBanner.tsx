@@ -1,10 +1,14 @@
 import clsx from 'clsx';
 
+import { CarIcon } from './icons/CarIcon';
+import { MotorcycleIcon } from './icons/MotorcycleIcon';
+import { TruckIcon } from './icons/TruckIcon';
+
 type Props = {
   orientation: 'left' | 'right';
 };
 export const RandomVehiclesBanner = ({ orientation }: Props) => {
-  const vehiclesNames: string[] = ['car', 'motorcycle', 'truck'];
+  const vehiclesIcons: any[] = [CarIcon, MotorcycleIcon, TruckIcon];
 
   const translationClass: string =
     orientation === 'left'
@@ -16,17 +20,14 @@ export const RandomVehiclesBanner = ({ orientation }: Props) => {
       : 'animate-infinite-scroll-left-to-right';
   const flipClass: string = orientation === 'left' ? 'scale-x-[-1]' : '';
 
-  const generateFileName = (path: string, max: number) => {
-    return `${path}/${vehiclesNames[Math.floor(Math.random() * max)]}-icon.svg`;
+  const getRandomIcon = (max: number) => {
+    const IconComponent = vehiclesIcons[Math.floor(Math.random() * max)];
+    return <IconComponent classes="w-56 h-auto fill-black" />;
   };
 
-  const pouet = Array.from({ length: 4 }).map((_, i) => (
-    <li key={i}>
-      <img
-        src={generateFileName('/home_page', vehiclesNames.length)}
-        alt="Icône de véhicule"
-        className={clsx('w-56 ', flipClass)}
-      />
+  const vehicleIcon = Array.from({ length: 4 }).map((_, i) => (
+    <li key={i} className={clsx('w-56', flipClass)}>
+      {getRandomIcon(vehiclesIcons.length)}
     </li>
   ));
 
@@ -38,7 +39,7 @@ export const RandomVehiclesBanner = ({ orientation }: Props) => {
           animationClass
         )}
       >
-        {pouet}
+        {vehicleIcon}
       </ul>
       <ul
         className={clsx(
@@ -46,7 +47,7 @@ export const RandomVehiclesBanner = ({ orientation }: Props) => {
           animationClass
         )}
       >
-        {pouet}
+        {vehicleIcon}
       </ul>
     </div>
   );
