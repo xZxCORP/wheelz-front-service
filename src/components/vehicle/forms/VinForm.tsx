@@ -69,26 +69,26 @@ export const VinForm = () => {
               </Link>
             </div>
           ) : (
-            <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center">
+            <div>
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit((formData) => submitForm(formData))}
-                  className="flex w-full flex-col gap-4"
+                  className="flex w-full gap-4"
                 >
                   <FormField
                     control={form.control}
                     name="vin"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>VIN</FormLabel>
+                        <FormLabel className="!text-lg">VIN</FormLabel>
                         <FormControl>
-                          <Input placeholder="VIN" {...field} />
+                          <Input className="!text-lg" placeholder="Entrez le VIN" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                  <Button disabled={isLoading} type="submit">
+                  <Button disabled={isLoading} type="submit" className="m-2 text-base">
                     {isLoading ? 'Chargement...' : 'Rechercher'}
                   </Button>
                 </form>
