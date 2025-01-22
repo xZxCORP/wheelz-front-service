@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { userTsr } from '../../clients/api/user.api';
 import { Button } from '../../components/shared/button/Button';
+import { Card, CardContent, CardHeader } from '../../components/shared/Card';
 import {
   Form,
   FormControl,
@@ -13,6 +14,7 @@ import {
   FormMessage,
 } from '../../components/shared/form/Form';
 import { Input } from '../../components/shared/form/Input';
+import { H2 } from '../../components/shared/typography/Typography';
 import { useAuthStore } from '../../stores/useAuthStore';
 import { useSnackbarStore } from '../../stores/useSnackbar';
 
@@ -44,70 +46,76 @@ export const Profile = () => {
   if (!user) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center">
-        <h1 className="text-2xl font-semibold">Vous nêtes pas connecté.</h1>
+        <h1 className="text-2xl font-semibold">Vous n&apos;êtes pas connecté.</h1>
       </div>
     );
   }
 
+  const handleSubmit = (data: any) => {
+    mutate({
+      body: {
+        firstname: data.firstname,
+        lastname: data.lastname,
+      },
+      params: {
+        id: user.id.toString(),
+      },
+    });
+  };
+
   return (
     <Form {...form}>
-      <h1 className="mb-6 text-3xl font-bold">
-        Profil de {user.firstname} {user.lastname}
-      </h1>
-      <div className="rounded-lg bg-white p-6 shadow-md">
-        <h2 className="mb-4 text-xl font-semibold">Informations personnelles</h2>
-        <form
-          onSubmit={form.handleSubmit((data) =>
-            mutate({
-              body: {
-                firstname: data.firstname,
-                lastname: data.lastname,
-              },
-              params: {
-                id: user.id.toString(),
-              },
-            })
-          )}
-          className="flex flex-col items-center justify-center gap-6"
-        >
-          <FormField
-            control={form.control}
-            name="firstname"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Prénom</FormLabel>
-                <FormControl>
-                  <Input placeholder="Prénom" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <Card className="w-full">
+        <CardHeader>
+          <H2>
+            Profil de {user.firstname} {user.lastname}
+          </H2>
+        </CardHeader>
+        <CardContent>
+          <h2 className="mb-4 text-xl font-semibold text-neutral-600">Informations personnelles</h2>
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="flex flex-col items-center justify-center gap-6"
+          >
+            <FormField
+              control={form.control}
+              name="firstname"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Prénom</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Prénom" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          <FormField
-            control={form.control}
-            name="lastname"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nom</FormLabel>
-                <FormControl>
-                  <Input placeholder="Nom" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormItem>
-            <FormLabel>Email</FormLabel>
-            <FormControl>
-              <Input value={user.email} disabled />
-            </FormControl>
-          </FormItem>
-          <Button type="submit" disabled={isPending}>
-            {isPending ? 'En cours...' : 'Mettre à jour'}
-          </Button>
-        </form>
-      </div>
+            <FormField
+              control={form.control}
+              name="lastname"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nom</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Nom" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input value={user.email} disabled />
+              </FormControl>
+            </FormItem>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? 'En cours...' : 'Mettre à jour'}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </Form>
   );
 };
