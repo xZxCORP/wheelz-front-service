@@ -100,7 +100,7 @@ export const Profile = () => {
           <FormItem>
             <FormLabel>Email</FormLabel>
             <FormControl>
-              <Input value={user.email} readOnly />
+              <Input value={user.email} disabled />
             </FormControl>
           </FormItem>
           <Button type="submit" disabled={isPending}>
