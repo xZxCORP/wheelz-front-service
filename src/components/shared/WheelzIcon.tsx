@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import wheelzLogo from '/public/wheelz_logo.svg';
+import wheelzLogo from '/wheelz_logo.svg';
 interface Props {
   link?: string;
 }

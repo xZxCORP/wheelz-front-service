@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+export const mode = 'jit';
 export const content = ['./src/**/*.{js,jsx,ts,tsx}'];
 export const theme = {
   extend: {
@@ -161,6 +162,14 @@ export const theme = {
         from: { transform: 'translateX(100%)' },
         to: { transform: 'translateX(0)' },
       },
+      'infinite-scroll-left-to-right': {
+        from: { transform: 'translateX(0)' },
+        to: { transform: 'translateX(100%)' },
+      },
+      'infinite-scroll-right-to-left': {
+        from: { transform: 'translateX(0)' },
+        to: { transform: 'translateX(-100%)' },
+      },
     },
     animation: {
       'accordion-down': 'accordion-down 0.2s ease-out',
@@ -173,6 +182,8 @@ export const theme = {
       'slide-in-from-bottom': 'slide-in-from-bottom 0.2s ease-out',
       'slide-in-from-left': 'slide-in-from-left 0.2s ease-out',
       'slide-in-from-right': 'slide-in-from-right 0.2s ease-out',
+      'infinite-scroll-left-to-right': 'infinite-scroll-left-to-right 7s linear infinite',
+      'infinite-scroll-right-to-left': 'infinite-scroll-right-to-left 7s linear infinite',
     },
   },
 };
