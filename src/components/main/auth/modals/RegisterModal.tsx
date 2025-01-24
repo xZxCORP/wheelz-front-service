@@ -11,6 +11,7 @@ import { AccountTypeForm } from '../forms/AccountTypeForm';
 import { BusinessInfosForm } from '../forms/BusinessInfosForm';
 import { PersonalInfosForm } from '../forms/PersonalInfosForm';
 import { RegisterSharedBottomActions } from '../RegisterSharedBottomActions';
+import { RegisterSuccessNotifier } from '../RegisterSuccessNotifier';
 
 export const RegisterModal = () => {
   const { isOpen, close } = useModal(MODAL_IDS.REGISTER);
@@ -58,12 +59,16 @@ export const RegisterModal = () => {
       case 'business-infos-owner': {
         return <BusinessInfosForm onSwitchToLogin={switchToLogin} />;
       }
+      case 'success': {
+        return <RegisterSuccessNotifier />;
+      }
     }
   }, [onAccountCreated, onAccountTypeSelected, step, switchToLogin]);
 
   return (
     <Modal isOpen={isOpen} onClose={() => close()} title={calculatedTitle}>
-      {calculatedComponent}
+      {/* {calculatedComponent} */}
+      <RegisterSuccessNotifier />
       <RegisterSharedBottomActions onFinish={() => close()} />
     </Modal>
   );

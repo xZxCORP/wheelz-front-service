@@ -6,6 +6,7 @@ import {
   getProgressSteps,
   type RegisterStep,
   stepLabels,
+  successMessages,
 } from '../types/account';
 
 interface RegisterState {
@@ -20,7 +21,7 @@ interface RegisterState {
   reset: () => void;
 }
 
-export const useRegisterStore = create<RegisterState>((set, get) => ({
+const useRegisterStore = create<RegisterState>((set, get) => ({
   //properties
   step: 'account-type',
   accountType: null,
@@ -74,6 +75,11 @@ const useCalculatedTitle = () => {
   if (!accountType || !step) return '';
   return `${accountTypeLabels[accountType]} - ${stepLabels[step]}`;
 };
+const useCalculatedSuccessMessage = () => {
+  const { accountType } = useRegisterStore();
+  if (!accountType) return '';
+  return successMessages[accountType];
+};
 
 export const RegisterStore = {
   use: useRegisterStore,
@@ -81,4 +87,5 @@ export const RegisterStore = {
   useCanFinish,
   useCanPrevious,
   useCalculatedTitle,
+  useCalculatedSuccessMessage,
 };
