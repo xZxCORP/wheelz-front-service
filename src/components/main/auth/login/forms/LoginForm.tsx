@@ -2,9 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import loginSchema, { type Login } from '@zcorp/wheelz-contracts/dist/authentication/schemas/login';
 import { useForm } from 'react-hook-form';
 
-import { authTsr } from '../../../../clients/api/auth.api';
-import { useAuthStore } from '../../../../stores/useAuthStore';
-import { Button } from '../../../shared/button/Button';
+import { authTsr } from '../../../../../clients/api/auth.api';
+import { useAuthStore } from '../../../../../stores/useAuthStore';
+import { Button } from '../../../../shared/button/Button';
 import {
   Form,
   FormControl,
@@ -12,8 +12,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../shared/form/Form';
-import { Input } from '../../../shared/form/Input';
+} from '../../../../shared/form/Form';
+import { Input } from '../../../../shared/form/Input';
 
 type Props = {
   onSwitchToRegister: () => void;

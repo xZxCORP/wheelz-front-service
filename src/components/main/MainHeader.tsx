@@ -1,7 +1,7 @@
 import { mainNavLinks } from '../../router/MainNavLinks';
 import { useAuthStore } from '../../stores/useAuthStore';
 import { WheelzIcon } from '../shared/WheelzIcon';
-import { LoginRegisterPickers } from './auth/LoginRegisterPickers';
+import { LoginRegisterPickers } from './auth/register/LoginRegisterPickers';
 import { LogoutButton } from './auth/LogoutButton';
 import { DropdownMenu } from './navigation/DropdownMenu';
 import { MainBurgerMenu } from './navigation/MainBurgerMenu';

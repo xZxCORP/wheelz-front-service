@@ -35,8 +35,8 @@
     "uuid": "^10.0.0",
     "zod": "^3.23.8",
     "zustand": "^4.5.4",
-    "@zcorp/shared-typing-wheelz": "latest",
-    "@zcorp/wheelz-contracts": "latest"
+    "@zcorp/shared-typing-wheelz": "^1.0",
+    "@zcorp/wheelz-contracts": "^1.1"
 
   },
   "devDependencies": {

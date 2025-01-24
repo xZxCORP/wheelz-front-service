@@ -1,11 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { User } from '@zcorp/wheelz-contracts';
+import type { Register } from '@zcorp/wheelz-contracts';
 import registerSchema from '@zcorp/wheelz-contracts/dist/authentication/schemas/register';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
-import { authTsr } from '../../../../clients/api/auth.api';
-import { Button } from '../../../shared/button/Button';
+import { authTsr } from '../../../../../clients/api/auth.api';
+import { Button } from '../../../../shared/button/Button';
 import {
   Form,
   FormControl,
@@ -13,52 +12,33 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../shared/form/Form';
-import { Input } from '../../../shared/form/Input';
-const registerWithConfirmationSchema = registerSchema
-  .extend({
-    passwordConfirmation: z.string(),
-  })
-  .refine((data) => data.password === data.passwordConfirmation, {
-    message: 'Les mots de passe ne correspondent pas',
-    path: ['passwordConfirmation'],
-  });
-type RegisterWithConfirmation = z.infer<typeof registerWithConfirmationSchema>;
+} from '../../../../shared/form/Form';
+import { Input } from '../../../../shared/form/Input';
+
 type Props = {
   onSwitchToLogin: () => void;
-  onRegistered: (data: User, password: string) => void;
 };
-export const PersonalInfosForm = ({ onSwitchToLogin, onRegistered }: Props) => {
-  const form = useForm<RegisterWithConfirmation>({
-    resolver: zodResolver(registerWithConfirmationSchema),
+export const BusinessInfosForm = ({ onSwitchToLogin }: Props) => {
+  const form = useForm<Register>({
+    resolver: zodResolver(registerSchema),
     mode: 'onChange',
     defaultValues: {
       email: '',
       password: '',
-      passwordConfirmation: '',
       firstname: '',
       lastname: '',
     },
   });
   const { mutate } = authTsr.authentication.register.useMutation({
-    onSuccess: (data) => {
-      onRegistered(data.body.data, form.getValues().password);
+    onSuccess: () => {
+      console.log('test');
     },
   });
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit((data) =>
-          mutate({
-            body: {
-              email: data.email,
-              password: data.password,
-              firstname: data.firstname,
-              lastname: data.lastname,
-            },
-          })
-        )}
+        onSubmit={form.handleSubmit((data) => mutate({ body: data }))}
         className="flex flex-col gap-4"
       >
         <FormField
@@ -109,19 +89,6 @@ export const PersonalInfosForm = ({ onSwitchToLogin, onRegistered }: Props) => {
               <FormLabel>Mot de passe</FormLabel>
               <FormControl>
                 <Input type="password" placeholder="Mot de passe" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="passwordConfirmation"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirmer le mot de passe</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="Confirmer le mot de passe" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
