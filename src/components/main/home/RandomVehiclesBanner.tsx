@@ -25,21 +25,17 @@ export const RandomVehiclesBanner = ({ orientation }: Props) => {
       : 'animate-infinite-scroll-left-to-right';
   const flipClass: string = orientation === 'left' ? 'scale-x-[-1]' : '';
 
-  const getRandomIcon = (icons: any[], colors: string[]) => {
-    const IconComponent = icons[Math.floor(Math.random() * icons.length)];
+  const getRandomIcon = (icons: React.ComponentType<{ className: string }>[], colors: string[]) => {
+    const IconComponent = icons[Math.floor(Math.random() * icons.length)]!;
 
     const randomIndex: number = Math.floor(Math.random() * colors.length);
     const baseColor = colors[randomIndex];
     const hoverColor = colors[colors.length - randomIndex - 1];
-
+    const fillColor = baseColor === 'secondary-900' ? 'fill-secondary-900' : 'fill-primary-600';
+    const hoverFillColor =
+      hoverColor === 'secondary-900' ? 'hover:fill-secondary-900' : 'hover:fill-primary-600';
     return (
-      <IconComponent
-        className={clsx(
-          `fill-${baseColor}`,
-          `hover:fill-${hoverColor}`,
-          'h-auto w-56 transition-colors'
-        )}
-      />
+      <IconComponent className={clsx(fillColor, hoverFillColor, 'h-auto w-56 transition-colors')} />
     );
   };
 
@@ -51,8 +47,6 @@ export const RandomVehiclesBanner = ({ orientation }: Props) => {
 
   return (
     <>
-      {/* Helps compiling needed Tailwind classes correctly */}
-      <div className="hidden fill-primary-600 fill-secondary-900 hover:fill-primary-600 hover:fill-secondary-900"></div>
       <div className={clsx('inline-flex w-full', translationClass)}>
         <ul
           className={clsx(
