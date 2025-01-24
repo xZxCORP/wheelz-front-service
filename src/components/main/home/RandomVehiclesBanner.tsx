@@ -8,7 +8,11 @@ type Props = {
   orientation: 'left' | 'right';
 };
 export const RandomVehiclesBanner = ({ orientation }: Props) => {
-  const vehiclesIcons: any[] = [CarIcon, MotorcycleIcon, TruckIcon];
+  const vehiclesIcons: React.ComponentType<{ className: string }>[] = [
+    CarIcon,
+    MotorcycleIcon,
+    TruckIcon,
+  ];
   const vehiclesColors: string[] = ['secondary-900', 'primary-600'];
 
   const translationClass: string =
@@ -30,7 +34,7 @@ export const RandomVehiclesBanner = ({ orientation }: Props) => {
 
     return (
       <IconComponent
-        classes={clsx(
+        className={clsx(
           `fill-${baseColor}`,
           `hover:fill-${hoverColor}`,
           'h-auto w-56 transition-colors'
