@@ -9,6 +9,7 @@ type Props = {
 };
 export const RandomVehiclesBanner = ({ orientation }: Props) => {
   const vehiclesIcons: any[] = [CarIcon, MotorcycleIcon, TruckIcon];
+  const vehiclesColors: string[] = ['secondary-900', 'primary-600'];
 
   const translationClass: string =
     orientation === 'left'
@@ -20,35 +21,52 @@ export const RandomVehiclesBanner = ({ orientation }: Props) => {
       : 'animate-infinite-scroll-left-to-right';
   const flipClass: string = orientation === 'left' ? 'scale-x-[-1]' : '';
 
-  const getRandomIcon = (max: number) => {
-    const IconComponent = vehiclesIcons[Math.floor(Math.random() * max)];
-    return <IconComponent classes="w-56 h-auto fill-black" />;
+  const getRandomIcon = (icons: any[], colors: string[]) => {
+    const IconComponent = icons[Math.floor(Math.random() * icons.length)];
+
+    const randomIndex: number = Math.floor(Math.random() * colors.length);
+    const baseColor = colors[randomIndex];
+    const hoverColor = colors[colors.length - randomIndex - 1];
+
+    return (
+      <IconComponent
+        classes={clsx(
+          `fill-${baseColor}`,
+          `hover:fill-${hoverColor}`,
+          'h-auto w-56 transition-colors'
+        )}
+      />
+    );
   };
 
   const vehicleIcon = Array.from({ length: 4 }).map((_, i) => (
     <li key={i} className={clsx('w-56', flipClass)}>
-      {getRandomIcon(vehiclesIcons.length)}
+      {getRandomIcon(vehiclesIcons, vehiclesColors)}
     </li>
   ));
 
   return (
-    <div className={clsx('inline-flex w-full', translationClass)}>
-      <ul
-        className={clsx(
-          'flex items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8',
-          animationClass
-        )}
-      >
-        {vehicleIcon}
-      </ul>
-      <ul
-        className={clsx(
-          'flex items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8',
-          animationClass
-        )}
-      >
-        {vehicleIcon}
-      </ul>
-    </div>
+    <>
+      {/* Helps compiling needed Tailwind classes correctly */}
+      <div className="hidden fill-primary-600 fill-secondary-900 hover:fill-primary-600 hover:fill-secondary-900"></div>
+      <div className={clsx('inline-flex w-full', translationClass)}>
+        <ul
+          className={clsx(
+            'flex items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8',
+            animationClass
+          )}
+        >
+          {vehicleIcon}
+        </ul>
+        <ul
+          className={clsx(
+            'flex items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-8',
+            animationClass
+          )}
+        >
+          {vehicleIcon}
+        </ul>
+      </div>
+    </>
   );
 };

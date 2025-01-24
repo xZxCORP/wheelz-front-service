@@ -4,7 +4,7 @@ import { VinForm } from '../../components/vehicle/forms/VinForm';
 export const MainRoot = () => {
   return (
     <div className="flex min-h-screen">
-      <div className="flex flex-1 flex-col justify-around overflow-hidden bg-primary-600">
+      <div className="flex flex-1 flex-col justify-around overflow-hidden bg-primary-50">
         <RandomVehiclesBanner orientation="right"></RandomVehiclesBanner>
         <RandomVehiclesBanner orientation="left"></RandomVehiclesBanner>
         <RandomVehiclesBanner orientation="right"></RandomVehiclesBanner>
