@@ -4,17 +4,20 @@ import { useCallback, useMemo } from 'react';
 import { authTsr } from '../../../../clients/api/auth.api';
 import { useModal } from '../../../../hooks/useModal';
 import { useAuthStore } from '../../../../stores/useAuthStore';
-import { useRegisterStore } from '../../../../stores/useRegisterStore';
+import { RegisterStore } from '../../../../stores/useRegisterStore';
 import { MODAL_IDS } from '../../../../types/modalIds';
 import { Modal } from '../../../shared/Modal';
 import { AccountTypeForm } from '../forms/AccountTypeForm';
 import { BusinessInfosForm } from '../forms/BusinessInfosForm';
 import { PersonalInfosForm } from '../forms/PersonalInfosForm';
+import { RegisterSharedBottomActions } from '../RegisterSharedBottomActions';
 
 export const RegisterModal = () => {
   const { isOpen, close } = useModal(MODAL_IDS.REGISTER);
   const { open } = useModal(MODAL_IDS.LOGIN);
-  const { setAccountType, accountType } = useRegisterStore();
+  const { init, step } = RegisterStore.use();
+  const calculatedTitle = RegisterStore.useCalculatedTitle();
+
   const { setToken } = useAuthStore();
   const { mutate } = authTsr.authentication.login.useMutation({
     onSuccess: (response) => {
@@ -28,19 +31,11 @@ export const RegisterModal = () => {
   }, [close, open]);
   const onAccountTypeSelected = useCallback(
     (type: 'personal' | 'business') => {
-      setAccountType(type);
+      init(type);
     },
-    [setAccountType]
+    [init]
   );
-  const calculatedTitle = useMemo(() => {
-    if (accountType === 'personal') {
-      return "S'inscrire en tant que particulier";
-    }
-    if (accountType === 'business') {
-      return "S'inscrire en tant que professionnel";
-    }
-    return "S'inscrire";
-  }, [accountType]);
+
   const onAccountCreated = useCallback(
     (user: User, password: string) => {
       mutate({ body: { email: user.email, password } });
@@ -48,20 +43,28 @@ export const RegisterModal = () => {
     [mutate]
   );
   const calculatedComponent = useMemo(() => {
-    if (!accountType) {
-      return <AccountTypeForm onAccountTypeSelected={onAccountTypeSelected} />;
+    switch (step) {
+      case 'account-type': {
+        return <AccountTypeForm onAccountTypeSelected={onAccountTypeSelected} />;
+      }
+      case 'personnal-infos': {
+        return (
+          <PersonalInfosForm onSwitchToLogin={switchToLogin} onRegistered={onAccountCreated} />
+        );
+      }
+      case 'business-infos-company': {
+        return <BusinessInfosForm onSwitchToLogin={switchToLogin} />;
+      }
+      case 'business-infos-owner': {
+        return <BusinessInfosForm onSwitchToLogin={switchToLogin} />;
+      }
     }
-    if (accountType === 'personal') {
-      return <PersonalInfosForm onSwitchToLogin={switchToLogin} onRegistered={onAccountCreated} />;
-    }
-    if (accountType === 'business') {
-      return <BusinessInfosForm onSwitchToLogin={switchToLogin} />;
-    }
-  }, [accountType, onAccountCreated, onAccountTypeSelected, switchToLogin]);
+  }, [onAccountCreated, onAccountTypeSelected, step, switchToLogin]);
 
   return (
     <Modal isOpen={isOpen} onClose={() => close()} title={calculatedTitle}>
       {calculatedComponent}
+      <RegisterSharedBottomActions onFinish={() => close()} />
     </Modal>
   );
 };
