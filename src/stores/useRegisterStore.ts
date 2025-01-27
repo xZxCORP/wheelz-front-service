@@ -1,4 +1,4 @@
-import type { Company, Register } from '@zcorp/wheelz-contracts';
+import type { CompanyCreate, Register } from '@zcorp/wheelz-contracts';
 import { create } from 'zustand';
 
 import {
@@ -15,12 +15,12 @@ interface RegisterState {
   step: RegisterStep;
   accountType: AccountType | null;
   personalInfosForm: Register | null;
-  companyForm: Company | null;
+  companyForm: CompanyCreate | null;
 
   // mutations
   setStep: (step: RegisterStep) => void;
   storePersonalInfosForm: (data: Register) => void;
-  storeCompanyForm: (data: Company) => void;
+  storeCompanyForm: (data: CompanyCreate) => void;
   init: (accountType: AccountType) => void;
   progress: () => void;
   previous: () => void;
@@ -43,7 +43,7 @@ const useRegisterStore = create<RegisterState>((set, get) => ({
   //mutations
   setStep: (step: RegisterStep) => set({ step }),
   storePersonalInfosForm: (data: Register) => set({ personalInfosForm: data }),
-  storeCompanyForm: (data: Company) => set({ companyForm: data }),
+  storeCompanyForm: (data: CompanyCreate) => set({ companyForm: data }),
   init(accountType: AccountType) {
     const progressSteps = getProgressSteps(accountType);
     set({ accountType, step: progressSteps[1] });
@@ -72,7 +72,8 @@ const useCanNext = () => {
   const { step, accountType } = useRegisterStore();
   if (!step || !accountType) return false;
   const progressSteps = getProgressSteps(accountType);
-  return progressSteps.indexOf(step) < progressSteps.length - 2;
+  const index = progressSteps.indexOf(step);
+  return index < progressSteps.length - 2 && index > 0;
 };
 const useCanFinish = () => {
   const { step, accountType } = useRegisterStore();

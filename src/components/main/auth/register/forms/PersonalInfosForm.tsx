@@ -13,7 +13,7 @@ import {
 import { Input } from '../../../../shared/form/Input';
 
 type Props = {
-  onSwitchToLogin: () => void;
+  onSwitchToLogin?: () => void;
   form: UseFormReturn<RegisterWithConfirmation>;
 };
 export const PersonalInfosForm = ({ onSwitchToLogin, form }: Props) => {
@@ -87,9 +87,11 @@ export const PersonalInfosForm = ({ onSwitchToLogin, form }: Props) => {
             </FormItem>
           )}
         />
-        <Button onClick={onSwitchToLogin} buttonVariant="ghost">
-          J&apos;ai déjà un compte / Se connecter
-        </Button>
+        {onSwitchToLogin && (
+          <Button onClick={onSwitchToLogin} buttonVariant="ghost">
+            J&apos;ai déjà un compte / Se connecter
+          </Button>
+        )}
       </form>
     </Form>
   );

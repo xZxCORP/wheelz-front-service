@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { type CompanyCreate, companyCreateSchema } from '@zcorp/wheelz-contracts';
 import { useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -12,7 +13,7 @@ import {
 import { MODAL_IDS } from '../../../../../types/modalIds';
 import { Modal } from '../../../../shared/Modal';
 import { AccountTypeForm } from '../forms/AccountTypeForm';
-import { BusinessInfosForm } from '../forms/BusinessInfosForm';
+import { CompanyInfosForm } from '../forms/CompanyInfosForm';
 import { PersonalInfosForm } from '../forms/PersonalInfosForm';
 import { RegisterRecapValues } from '../RegisterRecapValues';
 import { RegisterSharedBottomActions } from '../RegisterSharedBottomActions';
@@ -30,6 +31,7 @@ export const RegisterModal = () => {
     companyForm,
     storeCompanyForm,
     storePersonalInfosForm,
+    reset,
   } = RegisterStore.use();
   const calculatedTitle = RegisterStore.useCalculatedTitle();
 
@@ -47,6 +49,19 @@ export const RegisterModal = () => {
       lastname: '',
     },
   });
+  const companyInfosFormInstance = useForm<CompanyCreate>({
+    resolver: zodResolver(companyCreateSchema),
+    mode: 'onChange',
+    defaultValues: {
+      companySector: 'private',
+      name: '',
+      vatNumber: '',
+      companyType: 'other',
+      companySize: 'micro',
+      country: 'France',
+      headquartersAddress: '',
+    },
+  });
   const switchToLogin = useCallback(() => {
     close();
     open();
@@ -60,6 +75,7 @@ export const RegisterModal = () => {
 
   const onNext = () => {
     switch (step) {
+      case 'business-infos-owner':
       case 'personnal-infos': {
         personalInfosFormInstance.handleSubmit((data) => {
           storePersonalInfosForm({
@@ -70,6 +86,14 @@ export const RegisterModal = () => {
           });
           progress();
         })();
+        break;
+      }
+      case 'business-infos-company': {
+        companyInfosFormInstance.handleSubmit((data) => {
+          storeCompanyForm(data);
+          progress();
+        })();
+        break;
       }
     }
   };
@@ -92,30 +116,28 @@ export const RegisterModal = () => {
         break;
       }
       case 'business': {
+        //TODO: adding register company on auth service
         console.log('register with', personalInfosForm, companyForm);
         break;
       }
     }
   };
   const calculatedComponent = useMemo(() => {
+    console.log(step);
     switch (step) {
       case 'account-type': {
         return <AccountTypeForm onAccountTypeSelected={onAccountTypeSelected} />;
       }
       case 'personnal-infos': {
         return (
-          <PersonalInfosForm
-            key={personalInfosFormInstance.formState.isDirty ? 'dirty' : 'clean'}
-            onSwitchToLogin={switchToLogin}
-            form={personalInfosFormInstance}
-          />
+          <PersonalInfosForm onSwitchToLogin={switchToLogin} form={personalInfosFormInstance} />
         );
       }
       case 'business-infos-company': {
-        return <BusinessInfosForm onSwitchToLogin={switchToLogin} />;
+        return <CompanyInfosForm form={companyInfosFormInstance} />;
       }
       case 'business-infos-owner': {
-        return <BusinessInfosForm onSwitchToLogin={switchToLogin} />;
+        return <PersonalInfosForm form={personalInfosFormInstance} />;
       }
       case 'recap': {
         return <RegisterRecapValues />;
@@ -124,8 +146,19 @@ export const RegisterModal = () => {
         return <RegisterSuccessNotifier />;
       }
     }
-  }, [onAccountTypeSelected, personalInfosFormInstance, step, switchToLogin]);
-  console.log(personalInfosForm);
+  }, [
+    companyInfosFormInstance,
+    onAccountTypeSelected,
+    personalInfosFormInstance,
+    step,
+    switchToLogin,
+  ]);
+  const onClose = () => {
+    reset();
+    personalInfosFormInstance.reset();
+    companyInfosFormInstance.reset();
+    close();
+  };
   return (
     <Modal
       extraButtons={[
@@ -137,9 +170,10 @@ export const RegisterModal = () => {
         />,
       ]}
       isOpen={isOpen}
-      onClose={() => close()}
+      onClose={onClose}
       title={calculatedTitle}
       showBottomCloseButton={false}
+      closeOnOverlayClick={false}
     >
       {calculatedComponent}
     </Modal>
