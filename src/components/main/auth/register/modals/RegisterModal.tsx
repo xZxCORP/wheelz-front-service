@@ -66,11 +66,17 @@ export const RegisterModal = () => {
     close();
     open();
   }, [close, open]);
+  const resetAllComponents = useCallback(() => {
+    reset();
+    personalInfosFormInstance.reset();
+    companyInfosFormInstance.reset();
+  }, [companyInfosFormInstance, personalInfosFormInstance, reset]);
   const onAccountTypeSelected = useCallback(
     (type: 'personal' | 'business') => {
+      resetAllComponents();
       init(type);
     },
-    [init]
+    [init, resetAllComponents]
   );
 
   const onNext = () => {
@@ -153,10 +159,9 @@ export const RegisterModal = () => {
     step,
     switchToLogin,
   ]);
+
   const onClose = () => {
-    reset();
-    personalInfosFormInstance.reset();
-    companyInfosFormInstance.reset();
+    resetAllComponents();
     close();
   };
   return (
