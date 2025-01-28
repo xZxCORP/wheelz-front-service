@@ -4,7 +4,6 @@ import { FaChevronDown } from 'react-icons/fa6';
 
 import type { RouterLink } from '../../../types/navigation';
 import { Button } from '../../shared/button/Button';
-import { MenuItem } from './MenuItem';
 
 interface Props {
   title: string;
@@ -33,8 +32,8 @@ export const DropdownMenu = ({ title, links }: Props) => {
         <div
           className={clsx(
             'absolute left-0 z-10 w-48',
-            'rounded-md bg-secondary-50 shadow-lg',
-            'border border-secondary-200',
+            'bg-secondary-50 rounded-md shadow-lg',
+            'border-secondary-200 border',
             'transition-all duration-300 ease-in-out'
           )}
         >
@@ -43,13 +42,7 @@ export const DropdownMenu = ({ title, links }: Props) => {
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="options-menu"
-          >
-            {links?.map((link) => (
-              <MenuItem key={link.title} to={link.url ?? '#'}>
-                {link.title}
-              </MenuItem>
-            ))}
-          </ul>
+          ></ul>
         </div>
       )}
     </div>

@@ -12,7 +12,7 @@ export const BaseLayout = () => {
   return (
     <div className="flex min-h-screen w-full flex-col">
       <Header />
-      <main className="grow p-4">
+      <main className="grow py-4">
         <Outlet />
       </main>
       <Footer />

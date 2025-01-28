@@ -8,10 +8,10 @@ export const WheelzIcon = ({ link = '/' }: Props) => {
   return (
     <Link
       to={link}
-      className="flex items-center justify-center text-2xl font-bold text-secondary-600 transition-colors hover:text-secondary-700"
+      className="text-secondary-500 hover:text-secondary-700 flex items-center justify-center text-2xl font-bold transition-colors"
     >
       <img src={wheelzLogo} alt="Wheelz Logo" className="mr-2 w-14" />
-      <span className="hidden md:block">WheelZ</span>
+      <h1 className="hidden md:block">WheelZ</h1>
     </Link>
   );
 };
