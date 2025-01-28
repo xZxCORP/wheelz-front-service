@@ -3,6 +3,9 @@ export const mode = 'jit';
 export const content = ['./src/**/*.{js,jsx,ts,tsx}'];
 export const theme = {
   extend: {
+    fontFamily: {
+      sans: 'Lufga Light',
+    },
     colors: {
       'primary': {
         50: '#fff8ed',
