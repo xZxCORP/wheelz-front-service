@@ -20,7 +20,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <header className=" flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
       <WheelzIcon />
       {!isAuthenticated() && (
         <div className="flex justify-start">

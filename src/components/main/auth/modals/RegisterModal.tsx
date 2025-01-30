@@ -22,16 +22,19 @@ export const RegisterModal = () => {
       close();
     },
   });
+
   const switchToLogin = useCallback(() => {
     close();
     open();
   }, [close, open]);
+
   const onAccountTypeSelected = useCallback(
     (type: 'personal' | 'business') => {
       setAccountType(type);
     },
     [setAccountType]
   );
+
   const calculatedTitle = useMemo(() => {
     if (accountType === 'personal') {
       return "S'inscrire en tant que particulier";
@@ -39,8 +42,9 @@ export const RegisterModal = () => {
     if (accountType === 'business') {
       return "S'inscrire en tant que professionnel";
     }
-    return "S'inscrire";
+    return 'Inscription';
   }, [accountType]);
+
   const onAccountCreated = useCallback(
     (user: User, password: string) => {
       mutate({ body: { email: user.email, password } });

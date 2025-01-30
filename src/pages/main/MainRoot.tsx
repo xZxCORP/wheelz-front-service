@@ -3,7 +3,7 @@ import { Switch } from '../../components/shared/Switch';
 
 export const MainRoot = () => {
   return (
-    <div className="bg-primary-100 flex min-h-screen w-screen">
+    <div className="flex min-h-screen w-screen">
       <div className="flex w-full flex-1 flex-col justify-around overflow-hidden">
         <RandomVehiclesBanner className="blur-sm" orientation="right"></RandomVehiclesBanner>
         <RandomVehiclesBanner orientation="left"></RandomVehiclesBanner>

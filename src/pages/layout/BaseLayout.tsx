@@ -10,7 +10,7 @@ import { Footer } from './Footer';
 export const BaseLayout = () => {
   const isLoading = useGlobalLoadingStore((state) => state.isLoading);
   return (
-    <div className="bg-primary-100 flex min-h-screen w-full flex-col">
+    <div className="bg-primary-300 flex min-h-screen w-full flex-col">
       <Header />
       <main className="grow py-4">
         <Outlet />

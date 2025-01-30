@@ -117,7 +117,7 @@ const FormDescription = React.forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={clsx('text-sm italic text-secondary-500', className)}
+      className={clsx('text-primary-500 text-sm italic', className)}
       {...props}
     />
   );
@@ -139,7 +139,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={clsx('text-sm text-error-500', className)}
+      className={clsx('text-error-500 text-sm', className)}
       {...props}
     >
       {body}
