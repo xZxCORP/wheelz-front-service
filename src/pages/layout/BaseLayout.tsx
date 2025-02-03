@@ -5,7 +5,6 @@ import { RegisterModal } from '../../components/main/auth/modals/RegisterModal';
 import { Header } from '../../components/main/MainHeader';
 import { Loader } from '../../components/shared/Loader';
 import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';
-import { Footer } from './Footer';
 
 export const BaseLayout = () => {
   const isLoading = useGlobalLoadingStore((state) => state.isLoading);
@@ -15,7 +14,7 @@ export const BaseLayout = () => {
       <main className="grow py-4">
         <Outlet />
       </main>
-      <Footer />
+
       {isLoading && <Loader fullScreen size="lg" variant="primary" />}
       <RegisterModal />
       <LoginModal />

@@ -8,6 +8,7 @@ import { CreateTransactionPage } from '../pages/admin/transactions/CreateTransac
 import { TransactionsTablePage } from '../pages/admin/transactions/TransactionsTablePage';
 import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
 import { UsersTable } from '../pages/admin/UsersTable';
+import { Dashboard } from '../pages/dashboard/Dashboard';
 import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
 import { MainRoot } from '../pages/main/MainRoot';
@@ -28,6 +29,7 @@ export const routes: RouteObject[] = [
             index: true,
             element: <MainRoot />,
           },
+          { path: 'dashboard', element: <Dashboard /> },
           {
             path: 'report/:vin',
             element: <PrivateRoute element={Report} />,
