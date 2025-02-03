@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 
-import { useModal } from '../../../../hooks/useModal';
-import { MODAL_IDS } from '../../../../types/modalIds';
-import { Modal } from '../../../shared/Modal';
+import { useModal } from '../../../../../hooks/useModal';
+import { MODAL_IDS } from '../../../../../types/modalIds';
+import { Modal } from '../../../../shared/Modal';
 import { LoginForm } from '../forms/LoginForm';
 
 export const LoginModal = () => {
