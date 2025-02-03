@@ -4,6 +4,7 @@ import { AdminRoot } from '../pages/admin/AdminRoot';
 import { ChainTablePage } from '../pages/admin/chain/ChainTablePage';
 import { ViewVehiclePage } from '../pages/admin/chain/ViewVehiclePage';
 import { StatsPage } from '../pages/admin/StatsPage';
+import { CompaniesTablePage } from '../pages/admin/companies/CompaniesTablePage';
 import { CreateTransactionPage } from '../pages/admin/transactions/CreateTransactionPage';
 import { TransactionsTablePage } from '../pages/admin/transactions/TransactionsTablePage';
 import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
@@ -15,6 +16,7 @@ import { Profile } from '../pages/main/Profile';
 import { Report } from '../pages/main/Report';
 import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
 import { PrivateRoute } from './ProtectedRoutes';
+import { ViewCompanyPage } from '../pages/admin/companies/ViewCompanyPage';
 
 export const routes: RouteObject[] = [
   {
@@ -84,6 +86,14 @@ export const routes: RouteObject[] = [
             path: 'stats',
             element: <StatsPage />,
           },
+          {
+            path: 'companies',
+            element: <CompaniesTablePage />
+          },
+          {
+            path: 'companies/:id',
+            element: <ViewCompanyPage/>
+          }
         ],
       },
     ],
