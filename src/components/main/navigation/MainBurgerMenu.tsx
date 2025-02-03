@@ -9,8 +9,8 @@ import { BurgerMenuButton } from '../../shared/BurgerMenuButton';
 import { Button } from '../../shared/button/Button';
 import { LinkButton } from '../../shared/LinkButton';
 import { WheelzIcon } from '../../shared/WheelzIcon';
-import { LoginRegisterPickers } from '../auth/register/LoginRegisterPickers';
 import { LogoutButton } from '../auth/LogoutButton';
+import { LoginRegisterPickers } from '../auth/register/LoginRegisterPickers';
 import { ProfileButton } from '../profile/ProfileButton';
 
 interface Props {
