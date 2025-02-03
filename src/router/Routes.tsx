@@ -8,6 +8,7 @@ import { CreateTransactionPage } from '../pages/admin/transactions/CreateTransac
 import { TransactionsTablePage } from '../pages/admin/transactions/TransactionsTablePage';
 import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
 import { UsersTablePage } from '../pages/admin/users/UsersTablePage';
+import { ViewUserPage } from '../pages/admin/users/ViewUserPage';
 import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
 import { MainRoot } from '../pages/main/MainRoot';
@@ -79,6 +80,10 @@ export const routes: RouteObject[] = [
           {
             path: 'users',
             element: <UsersTablePage />,
+          },
+          {
+            path: 'users/:id',
+            element: <ViewUserPage />,
           },
           {
             path: 'stats',

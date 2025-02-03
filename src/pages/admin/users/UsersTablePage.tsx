@@ -1,8 +1,10 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import type { User } from '@zcorp/wheelz-contracts';
+import { Link } from 'react-router-dom';
 
 import { userTsr } from '../../../clients/api/user.api';
 import { Table } from '../../../components/admin/Table';
+import { Button } from '../../../components/shared/button/Button';
 import { ErrorContainer } from '../../../components/shared/error/ErrorContainer';
 import { usePagination } from '../../../hooks/usePagination';
 import { formatDate } from '../../../utils/date';
@@ -42,23 +44,19 @@ export const UsersTablePage = () => {
       cell: (info) => formatDate(new Date(info.getValue())),
     }),
 
-    // columnHelper.display({
-    //   id: 'actions',
-    //   header: 'Actions',
-    //   cell: (info) => {
-    //     return (
-    //       <div className="flex items-center gap-2">
-    //         <Button asChild>
-    //           <Link to={`/admin/transactions/${info.row.original.id}`}>Voir</Link>
-    //         </Button>
-    //         {info.row.original.action === 'delete' &&
-    //           isLastTransactionIndex(
-    //             info.row.index + pagination.pageIndex * pagination.pageSize
-    //           ) && <RevertDeleteTransactionButton transactionId={info.row.original.id} />}
-    //       </div>
-    //     );
-    //   },
-    // }),
+    columnHelper.display({
+      id: 'actions',
+      header: 'Actions',
+      cell: (info) => {
+        return (
+          <div className="flex items-center gap-2">
+            <Button asChild>
+              <Link to={`/admin/users/${info.row.original.id}`}>Voir</Link>
+            </Button>
+          </div>
+        );
+      },
+    }),
   ];
   if (error && isApiResponse(error)) {
     return <ErrorContainer errorMessage={error.body.message} />;
