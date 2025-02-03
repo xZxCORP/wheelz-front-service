@@ -1,5 +1,5 @@
+import { SwitchLogins } from '../../components/main/auth/SwitchLogins';
 import { RandomVehiclesBanner } from '../../components/main/home/RandomVehiclesBanner';
-import { Switch } from '../../components/shared/Switch';
 
 export const MainRoot = () => {
   return (
@@ -11,7 +11,7 @@ export const MainRoot = () => {
       </div>
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
         <span className="text-5xl">Bienvenue</span>
-        <Switch />
+        <SwitchLogins />
       </div>
     </div>
   );
