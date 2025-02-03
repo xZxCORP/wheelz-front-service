@@ -3,7 +3,12 @@ import { FaBuilding, FaFileInvoice, FaGlobe, FaIndustry, FaUser, FaUsers } from 
 import { MdCategory, MdEmail } from 'react-icons/md';
 
 import { RegisterStore } from '../../../../stores/useRegisterStore';
-import { companyLabels } from '../../../../types/companyLabels';
+import {
+  companyLabels,
+  companySectorsLabels,
+  companySizeLabels,
+  companyTypeLabels,
+} from '../../../../types/companyLabels';
 import { H2 } from '../../../shared/typography/Typography';
 
 export const RegisterRecapValues = () => {
@@ -85,7 +90,9 @@ export const RegisterRecapValues = () => {
                 <FaIndustry className="text-2xl text-primary-500" />
                 <div>
                   <h4 className="text-sm font-medium text-gray-600">{companyLabels.companyType}</h4>
-                  <p className="text-base font-semibold text-gray-800">{companyForm.companyType}</p>
+                  <p className="text-base font-semibold text-gray-800">
+                    {companyTypeLabels[companyForm.companyType]}
+                  </p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -95,7 +102,7 @@ export const RegisterRecapValues = () => {
                     {companyLabels.companySector}
                   </h4>
                   <p className="text-base font-semibold text-gray-800">
-                    {companyForm.companySector}
+                    {companySectorsLabels[companyForm.companySector]}
                   </p>
                 </div>
               </div>
@@ -103,7 +110,9 @@ export const RegisterRecapValues = () => {
                 <FaUsers className="text-2xl text-primary-500" />
                 <div>
                   <h4 className="text-sm font-medium text-gray-600">{companyLabels.companySize}</h4>
-                  <p className="text-base font-semibold text-gray-800">{companyForm.companySize}</p>
+                  <p className="text-base font-semibold text-gray-800">
+                    {companySizeLabels[companyForm.companySize]}
+                  </p>
                 </div>
               </div>
             </div>

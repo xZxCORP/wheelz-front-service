@@ -37,7 +37,8 @@ export const RegisterModal = () => {
 
   const { mutateAsync: registerMutate, isPending: registerIsPending } =
     authTsr.authentication.register.useMutation();
-
+  const { mutateAsync: registerAsCompanyMutate, isPending: registerAsCompanyIsPending } =
+    authTsr.authentication.registerAsCompany.useMutation();
   const personalInfosFormInstance = useForm<RegisterWithConfirmation>({
     resolver: zodResolver(registerWithConfirmationSchema),
     mode: 'onChange',
@@ -109,12 +110,7 @@ export const RegisterModal = () => {
       case 'personal': {
         if (!personalInfosForm) return;
         const registerResponse = await registerMutate({
-          body: {
-            email: personalInfosForm.email,
-            password: personalInfosForm.password,
-            firstname: personalInfosForm.firstname,
-            lastname: personalInfosForm.lastname,
-          },
+          body: personalInfosForm,
         });
         if (registerResponse.status === 201) {
           progress();
@@ -122,14 +118,21 @@ export const RegisterModal = () => {
         break;
       }
       case 'business': {
-        //TODO: adding register company on auth service
-        console.log('register with', personalInfosForm, companyForm);
+        if (!personalInfosForm || !companyForm) return;
+        const registerResponse = await registerAsCompanyMutate({
+          body: {
+            owner: personalInfosForm,
+            company: companyForm,
+          },
+        });
+        if (registerResponse.status === 201) {
+          progress();
+        }
         break;
       }
     }
   };
   const calculatedComponent = useMemo(() => {
-    console.log(step);
     switch (step) {
       case 'account-type': {
         return <AccountTypeForm onAccountTypeSelected={onAccountTypeSelected} />;
@@ -171,7 +174,7 @@ export const RegisterModal = () => {
           key={'register-shared-bottom-actions'}
           onFinish={onFinish}
           onNext={onNext}
-          isLoading={registerIsPending}
+          isLoading={registerIsPending || registerAsCompanyIsPending}
         />,
       ]}
       isOpen={isOpen}
