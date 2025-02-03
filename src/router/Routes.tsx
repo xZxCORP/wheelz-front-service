@@ -7,7 +7,7 @@ import { StatsPage } from '../pages/admin/StatsPage';
 import { CreateTransactionPage } from '../pages/admin/transactions/CreateTransactionPage';
 import { TransactionsTablePage } from '../pages/admin/transactions/TransactionsTablePage';
 import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
-import { UsersTable } from '../pages/admin/UsersTable';
+import { UsersTablePage } from '../pages/admin/users/UsersTablePage';
 import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
 import { MainRoot } from '../pages/main/MainRoot';
@@ -78,7 +78,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'users',
-            element: <UsersTable />,
+            element: <UsersTablePage />,
           },
           {
             path: 'stats',
