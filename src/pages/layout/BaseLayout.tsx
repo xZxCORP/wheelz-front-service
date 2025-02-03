@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
-import { LoginModal } from '../../components/main/auth/modals/LoginModal';
-import { RegisterModal } from '../../components/main/auth/modals/RegisterModal';
+import { LoginModal } from '../../components/main/auth/login/modals/LoginModal';
+import { RegisterModal } from '../../components/main/auth/register/modals/RegisterModal';
 import { Header } from '../../components/main/MainHeader';
 import { Loader } from '../../components/shared/Loader';
 import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';

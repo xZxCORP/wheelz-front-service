@@ -16,6 +16,7 @@ interface ModalProps {
   modalClassName?: string;
   closeOnEscape?: boolean;
   closeOnOverlayClick?: boolean;
+  showBottomCloseButton?: boolean;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -28,6 +29,7 @@ export const Modal: React.FC<ModalProps> = ({
   modalClassName = '',
   closeOnEscape = true,
   closeOnOverlayClick = true,
+  showBottomCloseButton = true,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -78,7 +80,7 @@ export const Modal: React.FC<ModalProps> = ({
           <div className="max-h-[calc(100vh-16rem)] grow overflow-y-auto p-6">{children}</div>
           <div className="flex justify-end gap-2 border-t border-secondary-200 p-4">
             {extraButtons}
-            <Button onClick={onClose}>Fermer</Button>
+            {showBottomCloseButton && <Button onClick={onClose}>Fermer</Button>}
           </div>
         </div>
       </div>
