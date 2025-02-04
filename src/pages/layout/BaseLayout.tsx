@@ -9,9 +9,9 @@ import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';
 export const BaseLayout = () => {
   const isLoading = useGlobalLoadingStore((state) => state.isLoading);
   return (
-    <div className="bg-primary-300 flex min-h-screen w-full flex-col">
+    <div className="bg-primary-400 flex h-screen w-screen flex-col overflow-hidden">
       <Header />
-      <main className="grow py-4">
+      <main className="h-full grow py-4">
         <Outlet />
       </main>
 

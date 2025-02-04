@@ -26,3 +26,22 @@ export const PrivateRoute = ({ element: RouteComponent, roles }: Props) => {
 
   return <RouteComponent />;
 };
+
+export const ClientRoute = ({ element: RouteComponent, roles }: Props) => {
+  const { isInitialized, isAuthenticated, user, roles: userRoles } = useAuthStore();
+  const location = useLocation();
+
+  const isAuthorized = () => {
+    if (!roles) return true;
+    return user && roles.some((role) => userRoles.includes(role));
+  };
+  if (!isInitialized) {
+    return <Loader fullScreen />;
+  }
+
+  if (!isAuthenticated() || !isAuthorized()) {
+    return <Navigate to="/" state={{ from: location }} replace />;
+  }
+
+  return <RouteComponent />;
+};
