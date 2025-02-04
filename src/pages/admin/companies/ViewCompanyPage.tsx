@@ -50,7 +50,7 @@ export const ViewCompanyPage = () => {
 
   return (
     data && (
-      <div className="flex w-full flex-col mx-10">
+      <div className="flex w-full flex-col mx-10 px-20">
         <h2 className="text-3xl font-bold mb-10">
             {company?.name}#{company?.id}
         </h2>
