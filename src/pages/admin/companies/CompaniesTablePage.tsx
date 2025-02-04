@@ -1,10 +1,11 @@
-import { type Company } from '@zcorp/wheelz-contracts';
-import { companyTsr } from '../../../clients/api/company.api';
-import { usePagination } from '../../../hooks/usePagination';
 import { createColumnHelper } from '@tanstack/react-table';
-import { Button } from '../../../components/shared/button/Button';
-import { Table } from '../../../components/admin/Table';
+import { type Company } from '@zcorp/wheelz-contracts';
 import { Link } from 'react-router-dom';
+
+import { companyTsr } from '../../../clients/api/company.api';
+import { Table } from '../../../components/admin/Table';
+import { Button } from '../../../components/shared/button/Button';
+import { usePagination } from '../../../hooks/usePagination';
 
 export const CompaniesTablePage = () => {
   const { pagination, apiPagination, onPaginationChange } = usePagination({
@@ -12,7 +13,7 @@ export const CompaniesTablePage = () => {
     initialPerPage: 10,
   });
 
-  const { data, error } = companyTsr.contract.index.useQuery({
+  const { data } = companyTsr.contract.index.useQuery({
     queryKey: ['companies', apiPagination],
     queryData: {
       query: apiPagination,
@@ -31,7 +32,7 @@ export const CompaniesTablePage = () => {
     }),
     columnHelper.accessor('isIdentified', {
       header: 'IDENTIFIÉ',
-      cell: (info) => info.getValue() ? 'Oui' : 'Non',
+      cell: (info) => (info.getValue() ? 'Oui' : 'Non'),
     }),
     columnHelper.display({
       id: 'actions',
@@ -46,8 +47,7 @@ export const CompaniesTablePage = () => {
         );
       },
     }),
-
-  ]
+  ];
 
   return (
     data && (
@@ -63,4 +63,4 @@ export const CompaniesTablePage = () => {
       </div>
     )
   );
-}
+};

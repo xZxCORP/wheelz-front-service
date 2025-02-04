@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 interface TableRow {
   label: React.ReactNode;
@@ -11,21 +11,14 @@ interface AdminViewTableProps {
   className?: string;
 }
 
-export const AdminViewTable: React.FC<AdminViewTableProps> = ({
-  rows,
-  className = '',
-}) => {
+export const AdminViewTable: React.FC<AdminViewTableProps> = ({ rows, className = '' }) => {
   return (
-    <table className={`w-full py-2.5 px-4 ${className}`}>
+    <table className={`w-full px-4 py-2.5 ${className}`}>
       <tbody>
         {rows.map((row, index) => (
           <tr key={index} className={`border-b text-black ${row.className || ''}`}>
-            <th className="text-left font-normal px-0 py-2.5 uppercase w-72">
-              {row.label}
-            </th>
-            <td className="text-left font-normal px-2 py-2.5">
-              {row.value}
-            </td>
+            <th className="w-72 px-0 py-2.5 text-left font-normal uppercase">{row.label}</th>
+            <td className="px-2 py-2.5 text-left font-normal">{row.value}</td>
           </tr>
         ))}
       </tbody>
