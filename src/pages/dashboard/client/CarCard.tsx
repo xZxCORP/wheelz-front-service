@@ -1,13 +1,16 @@
 type CarCardProps = {
+  id: number;
   brand: string;
   model: string;
   year: number;
   mileage: number;
+  onClick: (id: number) => void;
 };
-export const CarCard = ({ brand, model, year, mileage }: CarCardProps) => {
+export const CarCard = ({ id, brand, model, year, mileage, onClick }: CarCardProps) => {
   return (
     <div
-      className="bg-primary-300 border-primary-300 flex  h-20 w-full cursor-pointer flex-wrap rounded border px-2 transition-all hover:translate-x-2"
+      onClick={() => onClick(id)}
+      className="bg-primary-200 border-primary-300 flex h-20 w-full cursor-pointer flex-wrap rounded border p-2 transition-all hover:translate-x-2"
       key={'i'}
     >
       <div className="flex w-full justify-between ">

@@ -38,13 +38,20 @@ export const routes: RouteObject[] = [
                 path: 'my-garage',
                 //element: <ClientRoute element={MyGarage} />,
                 element: <MyGarage />,
+                children: [
+                  {
+                    path: 'vehicle/:vin',
+                    //element: <ClientRoute element={MyGarage} />,
+                    element: <Report />,
+                  },
+                ],
               },
             ],
           },
-          {
+          /* {
             path: 'report/:vin',
             element: <PrivateRoute element={Report} />,
-          },
+          }, */
           {
             // page with VehicleSearchForm
             path: 'search',

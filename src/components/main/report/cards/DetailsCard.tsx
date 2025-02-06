@@ -84,10 +84,8 @@ export const DetailsCard = ({ vehicle }: { vehicle: any }) => {
     content: (
       <div>
         <div className="mt-6 w-full rounded-lg border bg-white p-4 shadow-md">
-          <h2 className="text-lg font-bold">Spécification</h2>
-          <p className="mb-4 text-sm text-gray-600">
-            Quels sont les spécifications et les équipements pour ce véhicule ?
-          </p>
+          <h2 className="text-lg font-bold">Spécifications</h2>
+          <p className="mb-4 text-sm text-gray-600">Caractéristiques et équipements du véhicule</p>
 
           {/* Note */}
           <div className="mb-4 flex items-start rounded-lg bg-gray-100 p-3">
@@ -96,8 +94,8 @@ export const DetailsCard = ({ vehicle }: { vehicle: any }) => {
             </div>
             <div>
               <p className="text-sm text-gray-800">
-                Vérifie que les spécifications et léquipement de ce véhicule correspondent aux
-                déclarations du vendeur.
+                Vérifiez que les spécifications et l&apos;équipement de ce véhicule correspondent
+                aux déclarations
               </p>
             </div>
           </div>
@@ -151,7 +149,7 @@ export const DetailsCard = ({ vehicle }: { vehicle: any }) => {
               <div className="flex items-center space-x-4">
                 <GiEcology className="text-2xl text-green-400" />
                 <div>
-                  <h4 className="text-sm font-medium text-gray-600">Code de pollution</h4>
+                  <h4 className="text-sm font-medium text-gray-600">Norme environnementale</h4>
                   <p className="text-base font-semibold text-gray-800">
                     {vehicle.features.pollutionCode}
                   </p>
@@ -180,7 +178,7 @@ export const DetailsCard = ({ vehicle }: { vehicle: any }) => {
         </div>
         <div className="mt-6 w-full rounded-lg border bg-white p-4 shadow-md">
           <h2 className="text-lg font-bold">Compteur Kilométrique</h2>
-          <p className="mb-4 text-sm text-gray-600">Voici le kilométrage du véhicule</p>
+          <p className="mb-4 text-sm text-gray-600">Kilométrage</p>
 
           {/* Note */}
           <div className="mb-4 flex items-start rounded-lg bg-gray-100 p-3">
@@ -189,11 +187,11 @@ export const DetailsCard = ({ vehicle }: { vehicle: any }) => {
             </div>
             <div>
               <p className="text-sm text-gray-800">
-                Vérifie que le kilométrage de ce véhicule correspondent aux déclarations du vendeur.
+                Vérifiez que le kilométrage de ce véhicule correspondent aux déclarations
               </p>
             </div>
           </div>
-          <h3 className="mb-4 text-xl font-semibold text-gray-800">Kilométrage</h3>
+
           <div className="rounded-lg border bg-white p-6 shadow-md">
             <div className=" gap-6">
               <KilometerChart data={chartData} />

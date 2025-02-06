@@ -1,16 +1,18 @@
+import { vehicleFixture } from '@zcorp/shared-typing-wheelz';
 import { useMemo, useState } from 'react';
 import { GiCrossedChains } from 'react-icons/gi';
+import { PiShareFatThin } from 'react-icons/pi';
 import { useParams } from 'react-router-dom';
 
 import { createCarImage } from '../../clients/api/carImage.api';
-import { chainTsr } from '../../clients/api/chain.api';
-import { transactionTsr } from '../../clients/api/transaction.api';
 import { DamageCard } from '../../components/main/report/cards/DamagesCard';
 import { DetailsCard } from '../../components/main/report/cards/DetailsCard';
 import { HistoryCard } from '../../components/main/report/cards/HistoryCard';
 import { LegalStatusCard } from '../../components/main/report/cards/LegalStatusCard';
+import { Button } from '../../components/shared/button/Button';
 import { ErrorContainer } from '../../components/shared/error/ErrorContainer';
 import { LoadingAnimation } from '../../components/shared/LoadingAnimation';
+import { useSnackbarStore } from '../../stores/useSnackbar';
 import { formatFrenchDate } from '../../utils/date';
 import { isApiResponse } from '../../utils/errors';
 type PageParams = {
@@ -18,7 +20,8 @@ type PageParams = {
 };
 export const Report = () => {
   const { vin } = useParams<PageParams>();
-  const {
+  const { addSnackbar } = useSnackbarStore();
+  /* const {
     data: vehicleData,
     isPending,
     error,
@@ -35,7 +38,19 @@ export const Report = () => {
       params: { vin: vin! },
     },
     enabled: !!vin,
-  });
+  });} */
+
+  const {
+    data: vehicleData,
+    isPending,
+    error,
+    vinMetadatasData,
+  } = {
+    data: { status: 200, body: vehicleFixture },
+    isPending: false,
+    error: undefined,
+    vinMetadatasData: undefined,
+  };
   const carImage = useMemo(() => {
     if (!vehicleData) return null;
     return createCarImage({
@@ -57,6 +72,11 @@ export const Report = () => {
         ]
       : [];
 
+  const handleCopy = () => {
+    addSnackbar('Url copied !', 'info');
+    navigator.clipboard.writeText('Shared url');
+  };
+
   if (isPending) return <LoadingAnimation />;
   if (error && isApiResponse(error)) {
     return (
@@ -70,8 +90,8 @@ export const Report = () => {
   return (
     vehicleData && (
       <div className="flex w-full">
-        <div className="mx-auto w-full max-w-7xl space-y-6">
-          <div className="rounded-lg bg-primary-50 p-4 shadow-md md:p-6">
+        <div className=" mx-auto w-full max-w-7xl space-y-6">
+          <div className="bg-primary-200 rounded-lg p-4 shadow-md  md:p-6">
             {/* Header avec l'image et les infos principales */}
             <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center">
               {carImage && (
@@ -84,25 +104,33 @@ export const Report = () => {
                   <span className="capitalize">{vehicleData.body.features.brand}</span>
                   <span>{vehicleData.body.features.model}</span>
                 </div>
+
                 <div className="flex flex-wrap gap-2 text-sm">
-                  <p className="rounded-md bg-secondary-700 p-2 text-secondary-200">
+                  <p className="bg-secondary-500 rounded-md p-2 text-white">
                     VIN: <span className="font-bold">{vehicleData.body.vin}</span>
                   </p>
-                  <p className="rounded-md bg-secondary-700 p-2 text-secondary-200">
+                  <p className="bg-secondary-500 rounded-md p-2 text-white">
                     Première immatriculation:{' '}
                     <span className="font-bold">
                       {vehicleData.body.infos.firstSivRegistrationDate}
                     </span>
                   </p>
+                  <Button
+                    buttonVariant="solid"
+                    className="hover:bg-primary-400"
+                    onClick={handleCopy}
+                  >
+                    <PiShareFatThin size={25} />
+                  </Button>
                   {vinMetadatasData && (
                     <>
-                      <p className="rounded-md bg-info-700 p-2 text-secondary-200">
+                      <p className="bg-info-700 text-secondary-200 rounded-md p-2">
                         Date de création:{' '}
                         <span className="font-bold">
                           {formatFrenchDate(new Date(vinMetadatasData.body.firstTransactionDate))}
                         </span>
                       </p>
-                      <p className="rounded-md bg-info-700 p-2 text-secondary-200">
+                      <p className="bg-info-700 text-secondary-200 rounded-md p-2">
                         Date de dernière mise à jour:{' '}
                         <span className="font-bold">
                           {formatFrenchDate(new Date(vinMetadatasData.body.lastTransactionDate))}
@@ -133,7 +161,7 @@ export const Report = () => {
           </div>
 
           {/* Contenu de la carte sélectionnée */}
-          <div className="rounded-lg bg-primary-50 p-4 shadow-md md:p-6">
+          <div className="bg-primary-200 rounded-lg p-4 shadow-md md:p-6">
             <div>
               {selectedCard ? (
                 CARDS.find((card) => card.key === selectedCard)?.content
@@ -146,7 +174,7 @@ export const Report = () => {
           </div>
 
           {/* Vérification par LockChain */}
-          <div className="flex items-center gap-4 rounded-lg bg-primary-50 p-4 shadow-md">
+          <div className="bg-primary-200 flex items-center gap-4 rounded-lg p-4 shadow-md">
             <GiCrossedChains className="shrink-0 text-3xl" />
             <h3 className="text-sm font-medium md:text-base">
               Informations vérifiées par la LockChain
