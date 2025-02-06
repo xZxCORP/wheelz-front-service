@@ -13,7 +13,7 @@ export const MainRoot = () => {
         <RandomVehiclesBanner className="blur-sm" orientation="right"></RandomVehiclesBanner>
       </div>
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
-        <span className="text-5xl">Connexion</span>
+        <h2 className="text-4xl">Connexion</h2>
         <LoginForm onLogged={() => navigate('/dashboard/my-garage')} />
       </div>
     </div>

@@ -4,7 +4,9 @@ export const content = ['./src/**/*.{js,jsx,ts,tsx}'];
 export const theme = {
   extend: {
     fontFamily: {
-      sans: 'Lufga Light',
+      normal: 'Lufga',
+      sans: 'Lufga',
+      mono: 'Lufga',
     },
     colors: {
       'secondary': {
@@ -114,13 +116,15 @@ export const theme = {
               color: 'inherit',
             },
           },
-          h1: { color: 'inherit' },
-          h2: { color: 'inherit' },
-          h3: { color: 'inherit' },
-          h4: { color: 'inherit' },
-          blockquote: { color: 'inherit' },
-          strong: { color: 'inherit' },
-          code: { color: 'inherit' },
+          h1: { color: 'inherit', fontWeight: '700' }, // Bold
+          h2: { color: 'inherit', fontWeight: '600' },
+          h3: { color: 'inherit', fontWeight: '500' },
+          h4: { color: 'inherit', fontWeight: '500' },
+          p: { color: 'inherit', fontWeight: '300' }, // Normal
+          blockquote: { color: 'inherit', fontWeight: '500', fontStyle: 'italic' },
+          strong: { color: 'inherit', fontWeight: '700' },
+          em: { color: 'inherit', fontWeight: '300' }, // Light
+          code: { color: 'inherit', fontWeight: '400' },
         },
       },
     },
