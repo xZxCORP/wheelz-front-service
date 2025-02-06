@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 
 import { chainTsr } from '../../../clients/api/chain.api';
 import { ErrorContainer } from '../../../components/shared/error/ErrorContainer';
+import { VehicleReport } from '../../../components/vehicle/VehicleReport';
 import { isApiResponse } from '../../../utils/errors';
 
 type PageParams = {
@@ -22,11 +23,7 @@ export const ViewVehiclePage = () => {
   return (
     data && (
       <div className="flex w-full flex-col items-center justify-center gap-3">
-        {data && (
-          <div>
-            {data.body.features.brand} {data.body.features.model}
-          </div>
-        )}
+        <VehicleReport vehicle={data.body} />
       </div>
     )
   );
