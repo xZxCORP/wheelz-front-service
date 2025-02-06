@@ -84,7 +84,7 @@ export const DetailsCard = ({ vehicle }: { vehicle: any }) => {
     content: (
       <div>
         <div className="mt-6 w-full rounded-lg border bg-white p-4 shadow-md">
-          <h2 className="text-lg font-bold">Spécifications</h2>
+          <p className="text-lg ">Spécifications</p>
           <p className="mb-4 text-sm text-gray-600">Caractéristiques et équipements du véhicule</p>
 
           {/* Note */}
@@ -99,76 +99,70 @@ export const DetailsCard = ({ vehicle }: { vehicle: any }) => {
               </p>
             </div>
           </div>
-          <h3 className="mb-4 text-xl font-semibold text-gray-800">Spécification</h3>
+
           <div className="rounded-lg border bg-white p-6 shadow-md">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               <div className="flex items-center space-x-4">
                 <GiCargoCrane className="text-2xl text-blue-500" />
                 <div>
                   <h4 className="text-sm font-medium text-gray-600">Marque</h4>
-                  <p className="text-base font-semibold text-gray-800">{vehicle.features.brand}</p>
+                  <p className="text-base text-gray-800">{vehicle.features.brand}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <IoLogoModelS className="text-2xl text-blue-500" />
                 <div>
                   <h4 className="text-sm font-medium text-gray-600">Modèle</h4>
-                  <p className="text-base font-semibold text-gray-800">{vehicle.features.model}</p>
+                  <p className="text-base text-gray-800">{vehicle.features.model}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <BiBrush className="text-2xl text-green-500" />
                 <div>
                   <h4 className="text-sm font-medium text-gray-600">Couleur</h4>
-                  <p className="text-base font-semibold text-gray-800">{vehicle.features.color}</p>
+                  <p className="text-base text-gray-800">{vehicle.features.color}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <BsFuelPumpFill className="text-2xl text-red-500" />
                 <div>
                   <h4 className="text-sm font-medium text-gray-600">Energie</h4>
-                  <p className="text-base font-semibold text-gray-800">{vehicle.features.energy}</p>
+                  <p className="text-base text-gray-800">{vehicle.features.energy}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <MdOutlineAirlineSeatReclineExtra className="text-2xl text-purple-500" />
                 <div>
                   <h4 className="text-sm font-medium text-gray-600">Nombre de places</h4>
-                  <p className="text-base font-semibold text-gray-800">
-                    {vehicle.features.seatingNumber}
-                  </p>
+                  <p className="text-base text-gray-800">{vehicle.features.seatingNumber}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <IoLogoModelS className="text-2xl text-yellow-500" />
                 <div>
                   <h4 className="text-sm font-medium text-gray-600">Type</h4>
-                  <p className="text-base font-semibold text-gray-800">{vehicle.features.ceBody}</p>
+                  <p className="text-base text-gray-800">{vehicle.features.ceBody}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <GiEcology className="text-2xl text-green-400" />
                 <div>
                   <h4 className="text-sm font-medium text-gray-600">Norme environnementale</h4>
-                  <p className="text-base font-semibold text-gray-800">
-                    {vehicle.features.pollutionCode}
-                  </p>
+                  <p className="text-base text-gray-800">{vehicle.features.pollutionCode}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <ImPower className="text-2xl text-indigo-500" />
                 <div>
                   <h4 className="text-sm font-medium text-gray-600">Cylindrée</h4>
-                  <p className="text-base font-semibold text-gray-800">
-                    {vehicle.features.displacement} cc
-                  </p>
+                  <p className="text-base text-gray-800">{vehicle.features.displacement} cc</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
                 <HiSpeakerWave className="text-2xl text-pink-500" />
                 <div>
                   <h4 className="text-sm font-medium text-gray-600">Puissance sonore</h4>
-                  <p className="text-base font-semibold text-gray-800">
+                  <p className="text-base text-gray-800">
                     {vehicle.features.sonorousPowerLevel} dba
                   </p>
                 </div>
@@ -177,7 +171,7 @@ export const DetailsCard = ({ vehicle }: { vehicle: any }) => {
           </div>
         </div>
         <div className="mt-6 w-full rounded-lg border bg-white p-4 shadow-md">
-          <h2 className="text-lg font-bold">Compteur Kilométrique</h2>
+          <h2 className="text-lg ">Compteur Kilométrique</h2>
           <p className="mb-4 text-sm text-gray-600">Kilométrage</p>
 
           {/* Note */}

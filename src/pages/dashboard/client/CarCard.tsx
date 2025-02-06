@@ -15,13 +15,13 @@ export const CarCard = ({ id, brand, model, year, mileage, onClick }: CarCardPro
     >
       <div className="flex w-full justify-between ">
         <div className="flex flex-wrap space-x-1">
-          <h2 className="font-bold">{brand}</h2>
-          <h3>{model}</h3>
+          <p>{brand}</p>
+          <p>{model}</p>
         </div>
         <p className="opacity-0 md:opacity-100">{year}</p>
       </div>
       <div className="flex w-full justify-between opacity-0 md:opacity-100 ">
-        <h2 className="font-bold">{mileage} km</h2>
+        <h2>{mileage} km</h2>
       </div>
     </div>
   );

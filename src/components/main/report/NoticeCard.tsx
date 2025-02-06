@@ -11,7 +11,7 @@ export const NoticeCard = ({ title, icon, warning }: Props) => {
   return (
     <button className="hover:border-secondary-900 flex h-auto min-h-[150px] w-full flex-col items-center justify-center  rounded-lg transition-colors sm:h-1/2 sm:w-52">
       <IconComponent className="text-3xl sm:text-4xl" />
-      <h3 className="text-center text-sm font-semibold sm:text-base">{title}</h3>
+      <h3 className="text-center text-sm  sm:text-base">{title}</h3>
       {warning ? (
         <div className="flex items-center space-x-1 rounded bg-yellow-300 p-1 text-xs sm:text-sm">
           <FaTriangleExclamation className="shrink-0" />

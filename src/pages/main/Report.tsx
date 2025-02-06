@@ -95,12 +95,12 @@ export const Report = () => {
             {/* Header avec l'image et les infos principales */}
             <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center">
               {carImage && (
-                <div className="flex h-40 w-full items-center justify-center rounded-lg text-center font-bold md:h-10 md:w-40">
+                <div className="flex h-40 w-full items-center justify-center rounded-lg text-center md:h-10 md:w-40">
                   <img src={carImage} alt="Car" />
                 </div>
               )}
               <div className="grow">
-                <div className="mb-2 flex gap-2 text-lg font-bold">
+                <div className="mb-2 flex gap-2 text-lg">
                   <span className="capitalize">{vehicleData.body.features.brand}</span>
                   <span>{vehicleData.body.features.model}</span>
                 </div>
