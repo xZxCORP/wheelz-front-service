@@ -1,10 +1,7 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import type { Register } from '@zcorp/wheelz-contracts';
-import registerSchema from '@zcorp/wheelz-contracts/dist/authentication/schemas/register';
-import { useForm } from 'react-hook-form';
+import { type UseFormReturn, useFormState } from 'react-hook-form';
 
-import { authTsr } from '../../../../clients/api/auth.api';
-import { Button } from '../../../shared/button/Button';
+import type { RegisterWithConfirmation } from '../../../../../types/account';
+import { Button } from '../../../../shared/button/Button';
 import {
   Form,
   FormControl,
@@ -12,35 +9,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../shared/form/Form';
-import { Input } from '../../../shared/form/Input';
+} from '../../../../shared/form/Form';
+import { Input } from '../../../../shared/form/Input';
 
 type Props = {
-  onSwitchToLogin: () => void;
+  onSwitchToLogin?: () => void;
+  form: UseFormReturn<RegisterWithConfirmation>;
 };
-export const BusinessInfosForm = ({ onSwitchToLogin }: Props) => {
-  const form = useForm<Register>({
-    resolver: zodResolver(registerSchema),
-    mode: 'onChange',
-    defaultValues: {
-      email: '',
-      password: '',
-      firstname: '',
-      lastname: '',
-    },
-  });
-  const { mutate } = authTsr.authentication.register.useMutation({
-    onSuccess: () => {
-      console.log('test');
-    },
-  });
-
+export const PersonalInfosForm = ({ onSwitchToLogin, form }: Props) => {
+  const { errors } = useFormState(form);
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit((data) => mutate({ body: data }))}
-        className="flex flex-col gap-4"
-      >
+      <form className="flex flex-col gap-4">
         <FormField
           control={form.control}
           name="lastname"
@@ -50,7 +30,7 @@ export const BusinessInfosForm = ({ onSwitchToLogin }: Props) => {
               <FormControl>
                 <Input placeholder="Nom" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage>{errors.lastname?.message}</FormMessage>
             </FormItem>
           )}
         />
@@ -63,7 +43,7 @@ export const BusinessInfosForm = ({ onSwitchToLogin }: Props) => {
               <FormControl>
                 <Input placeholder="Prénom" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage>{errors.firstname?.message}</FormMessage>
             </FormItem>
           )}
         />
@@ -77,7 +57,7 @@ export const BusinessInfosForm = ({ onSwitchToLogin }: Props) => {
               <FormControl>
                 <Input placeholder="Email" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage>{errors.email?.message}</FormMessage>
             </FormItem>
           )}
         />
@@ -90,14 +70,28 @@ export const BusinessInfosForm = ({ onSwitchToLogin }: Props) => {
               <FormControl>
                 <Input type="password" placeholder="Mot de passe" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage>{errors.password?.message}</FormMessage>
             </FormItem>
           )}
         />
-        <Button type="submit">S&apos;inscrire</Button>
-        <Button onClick={onSwitchToLogin} buttonVariant="ghost">
-          J&apos;ai déjà un compte / Se connecter
-        </Button>
+        <FormField
+          control={form.control}
+          name="passwordConfirmation"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirmer le mot de passe</FormLabel>
+              <FormControl>
+                <Input type="password" placeholder="Confirmer le mot de passe" {...field} />
+              </FormControl>
+              <FormMessage>{errors.passwordConfirmation?.message}</FormMessage>
+            </FormItem>
+          )}
+        />
+        {onSwitchToLogin && (
+          <Button onClick={onSwitchToLogin} buttonVariant="ghost">
+            J&apos;ai déjà un compte / Se connecter
+          </Button>
+        )}
       </form>
     </Form>
   );

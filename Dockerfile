@@ -1,9 +1,8 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-
-RUN npm install
+COPY package.json pnpm-lock.yaml ./
+RUN npm install -g pnpm && pnpm install --frozen-lockfile
 
 COPY . .
 
@@ -15,7 +14,7 @@ ARG VITE_BASE_TRANSACTION_SERVICE_URL=https://wheelz-transaction.zcorp.ovh
 ENV VITE_BASE_TRANSACTION_SERVICE_URL=${VITE_BASE_TRANSACTION_SERVICE_URL}
 ARG VITE_BASE_CHAIN_SERVICE_URL=https://wheelz-chain.zcorp.ovh
 ENV VITE_BASE_CHAIN_SERVICE_URL=${VITE_BASE_CHAIN_SERVICE_URL}
-RUN npm run build
+RUN pnpm run build
 
 FROM caddy:2.8-alpine
 COPY --from=build /app/dist /usr/share/caddy

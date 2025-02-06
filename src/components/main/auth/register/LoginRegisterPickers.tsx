@@ -1,6 +1,6 @@
-import { useModal } from '../../../hooks/useModal';
-import { MODAL_IDS } from '../../../types/modalIds';
-import { Button } from '../../shared/button/Button';
+import { useModal } from '../../../../hooks/useModal';
+import { MODAL_IDS } from '../../../../types/modalIds';
+import { Button } from '../../../shared/button/Button';
 
 export const LoginRegisterPickers = () => {
   const { open: openRegister } = useModal(MODAL_IDS.REGISTER);

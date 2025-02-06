@@ -1,4 +1,4 @@
-import { SwitchLogins } from '../../components/main/auth/SwitchLogins';
+import { LoginForm } from '../../components/main/auth/login/forms/LoginForm';
 import { RandomVehiclesBanner } from '../../components/main/home/RandomVehiclesBanner';
 
 export const MainRoot = () => {
@@ -10,8 +10,8 @@ export const MainRoot = () => {
         <RandomVehiclesBanner className="blur-sm" orientation="right"></RandomVehiclesBanner>
       </div>
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
-        <span className="text-5xl">Bienvenue</span>
-        <SwitchLogins />
+        <span className="text-5xl">Connexion</span>
+        <LoginForm />
       </div>
     </div>
   );

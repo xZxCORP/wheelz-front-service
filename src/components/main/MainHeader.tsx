@@ -1,7 +1,7 @@
 import { useAuthStore } from '../../stores/useAuthStore';
 import { WheelzIcon } from '../shared/WheelzIcon';
-import { LoginRegisterPickers } from './auth/LoginRegisterPickers';
 import { LogoutButton } from './auth/LogoutButton';
+import { LoginRegisterPickers } from './auth/register/LoginRegisterPickers';
 import { ProfileButton } from './profile/ProfileButton';
 
 export const Header = () => {

@@ -30,11 +30,11 @@ export const solidButton = tv({
   extend: baseButton,
   variants: {
     color: {
-      primary: 'bg-primary-200 hover:bg-primary-700 active:bg-primary-800',
+      primary: 'bg-primary-200 hover:bg-primary-500 active:bg-primary-800',
       secondary: 'bg-secondary-300 hover:bg-secondary-400 active:bg-secondary-500',
-      error: 'bg-error-600 hover:bg-error-700 active:bg-error-800 text-white',
-      success: 'bg-success-600 hover:bg-success-700 active:bg-success-800 text-white',
-      warning: 'bg-warning-600 hover:bg-warning-700 active:bg-warning-800 text-white',
+      error: 'bg-error-600 hover:bg-error-500 active:bg-error-800 text-white',
+      success: 'bg-success-600 hover:bg-success-500 active:bg-success-800 text-white',
+      warning: 'bg-warning-600 hover:bg-warning-500 active:bg-warning-800 text-white',
     },
   },
   defaultVariants: {
