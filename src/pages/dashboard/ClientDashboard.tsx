@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { PiCarProfileThin, PiGarageThin, PiUserCircleGearThin } from 'react-icons/pi';
-import { Outlet } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import { Button } from '../../components/shared/button/Button';
 
