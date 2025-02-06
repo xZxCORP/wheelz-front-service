@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import loginSchema, { type Login } from '@zcorp/wheelz-contracts/dist/authentication/schemas/login';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { authTsr } from '../../../../../clients/api/auth.api';
@@ -16,7 +17,7 @@ import {
 import { Input } from '../../../../shared/form/Input';
 
 type Props = {
-  onSwitchToRegister: () => void;
+  onSwitchToRegister?: () => void;
   onLogged: () => void;
 };
 export const LoginForm = ({ onSwitchToRegister, onLogged }: Props) => {
@@ -28,13 +29,15 @@ export const LoginForm = ({ onSwitchToRegister, onLogged }: Props) => {
       password: '',
     },
   });
-  const { setToken } = useAuthStore();
+  const { setToken, setIsPro } = useAuthStore();
   const { mutate } = authTsr.authentication.login.useMutation({
     onSuccess: (response) => {
       setToken(response.body.token);
+      setIsPro(checkedIsPro);
       onLogged();
     },
   });
+  const [checkedIsPro, setCheckedIsPro] = useState<boolean>(false);
 
   return (
     <Form {...form}>
@@ -70,16 +73,19 @@ export const LoginForm = ({ onSwitchToRegister, onLogged }: Props) => {
         />
         <div className="flex w-full items-center gap-2 rounded">
           <input
+            checked={checkedIsPro}
+            onChange={() => setCheckedIsPro(!checkedIsPro)}
             type="checkbox"
             className=" active:bg-secondary-500 text-secondary-500 rounded border-none outline-none focus:ring-0"
           />
           <p>Je suis un professionnel</p>
         </div>
-
         <Button type="submit">Se connecter</Button>
-        <Button onClick={onSwitchToRegister} buttonVariant="ghost">
-          Je n&apos;ai pas de compte / S&apos;inscrire
-        </Button>
+        {onSwitchToRegister && (
+          <Button onClick={onSwitchToRegister} buttonVariant="ghost">
+            Je n&apos;ai pas de compte / S&apos;inscrire
+          </Button>
+        )}
       </form>
     </Form>
   );

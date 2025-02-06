@@ -17,7 +17,7 @@ import { MainRoot } from '../pages/main/MainRoot';
 import { Profile } from '../pages/main/Profile';
 import { Report } from '../pages/main/Report';
 import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
-import { PrivateRoute } from './ProtectedRoutes';
+import { ClientRoute, PrivateRoute } from './ProtectedRoutes';
 
 export const routes: RouteObject[] = [
   {
@@ -37,8 +37,7 @@ export const routes: RouteObject[] = [
             children: [
               {
                 path: 'my-garage',
-                //element: <ClientRoute element={MyGarage} />,
-                element: <MyGarage />,
+                element: <ClientRoute element={MyGarage} />,
                 children: [
                   {
                     path: 'vehicle/:vin',

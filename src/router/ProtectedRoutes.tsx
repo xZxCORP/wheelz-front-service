@@ -27,13 +27,12 @@ export const PrivateRoute = ({ element: RouteComponent, roles }: Props) => {
   return <RouteComponent />;
 };
 
-export const ClientRoute = ({ element: RouteComponent, roles }: Props) => {
-  const { isInitialized, isAuthenticated, user, roles: userRoles } = useAuthStore();
+export const ClientRoute = ({ element: RouteComponent }: Props) => {
+  const { isInitialized, isAuthenticated, user, isPro } = useAuthStore();
   const location = useLocation();
 
   const isAuthorized = () => {
-    if (!roles) return true;
-    return user && roles.some((role) => userRoles.includes(role));
+    return user && !isPro;
   };
   if (!isInitialized) {
     return <Loader fullScreen />;
