@@ -37,18 +37,10 @@ export const MyGarage = () => {
     <div className="flex size-full gap-2">
       <div className="m-4 flex w-1/4 flex-col justify-start space-y-1 overflow-scroll">
         {[vehicleData.body, vehicleData.body].map((e: typeof vehicleFixture, index) => (
-          <MyCarCard
-            key={e.vin}
-            id={index}
-            onClick={handleCards}
-            brand={e.features.brand}
-            model={e.features.model}
-            firstRegistrationDate={e.infos.firstSivRegistrationDate}
-            mileage={39_182}
-          />
+          <MyCarCard key={e.vin} id={index} vehicle={vehicleData.body} onClick={handleCards} />
         ))}
       </div>
-      <div className="m-4 w-3/4 overflow-scroll rounded bg-primary-100">
+      <div className="bg-primary-100 m-4 w-3/4 overflow-scroll rounded">
         <Outlet />
       </div>
     </div>

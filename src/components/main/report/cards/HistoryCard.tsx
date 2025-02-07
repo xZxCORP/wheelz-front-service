@@ -23,8 +23,7 @@ export const HistoryCard = ({ vehicle }: Props) => ({
           </div>
           <div>
             <p className="text-sm text-gray-800">
-              Vérifie que l&apos;historique de ce véhicule correspondent aux déclarations du
-              vendeur.
+              Vérifiez que l&apos;historique de ce véhicule correspondent aux déclarations
             </p>
           </div>
         </div>
