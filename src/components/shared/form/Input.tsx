@@ -15,7 +15,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
           // Colors
           'bg-primary-200',
-          'border-primary-300 border',
+          'border border-primary-300',
           'placeholder:text-primary-500',
 
           // Focus
