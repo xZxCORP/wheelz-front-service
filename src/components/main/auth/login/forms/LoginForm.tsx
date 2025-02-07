@@ -76,7 +76,7 @@ export const LoginForm = ({ onSwitchToRegister, onLogged }: Props) => {
             checked={checkedIsPro}
             onChange={() => setCheckedIsPro(!checkedIsPro)}
             type="checkbox"
-            className=" active:bg-secondary-500 text-secondary-500 rounded outline-none focus:ring-0"
+            className=" rounded text-secondary-500 outline-none focus:ring-0 active:bg-secondary-500"
           />
           <p>Je suis un professionnel</p>
         </div>

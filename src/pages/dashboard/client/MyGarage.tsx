@@ -48,7 +48,7 @@ export const MyGarage = () => {
           />
         ))}
       </div>
-      <div className="bg-primary-100 m-4 w-3/4 overflow-scroll rounded">
+      <div className="m-4 w-3/4 overflow-scroll rounded bg-primary-100">
         <Outlet />
       </div>
     </div>

@@ -11,7 +11,7 @@ export const WheelzIcon = ({ link = '/' }: Props) => {
   return (
     <Link
       to={link}
-      className="text-secondary-500 hover:text-secondary-700 flex items-center justify-center text-2xl font-bold transition-colors"
+      className="flex items-center justify-center text-2xl font-bold text-secondary-500 transition-colors hover:text-secondary-700"
     >
       <WheelZ className="mr-2 w-14 text-black" />
       {!user && <h1 className="hidden md:block">WheelZ</h1>}

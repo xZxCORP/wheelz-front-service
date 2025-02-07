@@ -8,7 +8,7 @@ export const LoginRegisterPickers = () => {
   return (
     <div className="flex flex-col gap-2 lg:flex-row">
       <Button
-        className="bg-primary-200 hover:bg-primary-300 text-black transition-transform hover:scale-105"
+        className="bg-primary-200 text-black transition-transform hover:scale-105 hover:bg-primary-300"
         onClick={() => openRegister()}
       >
         S&apos;inscrire

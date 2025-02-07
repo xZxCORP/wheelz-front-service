@@ -17,7 +17,7 @@ export const MyCarCard = ({
   return (
     <div
       onClick={() => onClick(id)}
-      className="bg-primary-200 border-primary-300 flex h-20 w-full cursor-pointer flex-wrap rounded border p-2 transition-all hover:translate-x-2"
+      className="flex h-20 w-full cursor-pointer flex-wrap rounded border border-primary-300 bg-primary-200 p-2 transition-all hover:translate-x-2"
     >
       <div className="flex w-full justify-between ">
         <div className="flex flex-wrap space-x-1">

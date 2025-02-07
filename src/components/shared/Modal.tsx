@@ -63,9 +63,9 @@ export const Modal: React.FC<ModalProps> = ({
       className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden backdrop-blur ${overlayClassName}`}
     >
       <div ref={modalRef} className={`relative m-auto w-full max-w-3xl p-6 ${modalClassName}`}>
-        <div className="bg-primary-50 flex w-full translate-y-0 flex-col rounded-lg opacity-100 shadow-lg transition-all duration-300 ease-out">
+        <div className="flex w-full translate-y-0 flex-col rounded-lg bg-primary-50 opacity-100 shadow-lg transition-all duration-300 ease-out">
           <div className="flex items-center justify-between p-4">
-            <h2 id="modal-title" className="text-primary-700 text-xl font-semibold">
+            <h2 id="modal-title" className="text-xl font-semibold text-primary-700">
               {title}
             </h2>
           </div>

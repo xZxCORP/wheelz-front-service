@@ -50,7 +50,7 @@ export const VehicleReport = ({ vehicle }: Props) => {
   return (
     <div className="flex w-full">
       <div className=" mx-auto w-full max-w-7xl space-y-6">
-        <div className="bg-primary-200 rounded-lg p-4 shadow-md  md:p-6">
+        <div className="rounded-lg bg-primary-200 p-4 shadow-md  md:p-6">
           {/* Header avec l'image et les infos principales */}
           <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center">
             {carImage && (
@@ -65,10 +65,10 @@ export const VehicleReport = ({ vehicle }: Props) => {
               </div>
 
               <div className="flex flex-wrap gap-2 text-sm">
-                <p className="bg-secondary-500 rounded-md p-2 text-white">
+                <p className="rounded-md bg-secondary-500 p-2 text-white">
                   VIN: <span className="font-bold">{vehicle.vin}</span>
                 </p>
-                <p className="bg-secondary-500 rounded-md p-2 text-white">
+                <p className="rounded-md bg-secondary-500 p-2 text-white">
                   Première immatriculation:{' '}
                   <span className="font-bold">{vehicle.infos.firstSivRegistrationDate}</span>
                 </p>
@@ -77,13 +77,13 @@ export const VehicleReport = ({ vehicle }: Props) => {
                 </Button>
                 {vinMetadatasData && (
                   <>
-                    <p className="bg-info-700 text-secondary-200 rounded-md p-2">
+                    <p className="rounded-md bg-info-700 p-2 text-secondary-200">
                       Date de création:{' '}
                       <span className="font-bold">
                         {formatFrenchDate(new Date(vinMetadatasData.body.firstTransactionDate))}
                       </span>
                     </p>
-                    <p className="bg-info-700 text-secondary-200 rounded-md p-2">
+                    <p className="rounded-md bg-info-700 p-2 text-secondary-200">
                       Date de dernière mise à jour:{' '}
                       <span className="font-bold">
                         {formatFrenchDate(new Date(vinMetadatasData.body.lastTransactionDate))}
@@ -114,7 +114,7 @@ export const VehicleReport = ({ vehicle }: Props) => {
         </div>
 
         {/* Contenu de la carte sélectionnée */}
-        <div className="bg-primary-200 rounded-lg p-4 shadow-md md:p-6">
+        <div className="rounded-lg bg-primary-200 p-4 shadow-md md:p-6">
           <div>
             {selectedCard ? (
               CARDS.find((card) => card.key === selectedCard)?.content
@@ -127,7 +127,7 @@ export const VehicleReport = ({ vehicle }: Props) => {
         </div>
 
         {/* Vérification par LockChain */}
-        <div className="bg-primary-200 flex items-center gap-4 rounded-lg p-4 shadow-md">
+        <div className="flex items-center gap-4 rounded-lg bg-primary-200 p-4 shadow-md">
           <GiCrossedChains className="shrink-0 text-3xl" />
           <h3 className="text-sm font-medium md:text-base">
             Informations vérifiées par la LockChain

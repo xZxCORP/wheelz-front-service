@@ -22,19 +22,19 @@ export const ClientDashboard = () => {
       <div className="flex flex-row space-x-6 py-2 ">
         <Button
           onClick={() => handleNavigation('my-garage')}
-          className={`${activeButton === 'my-garage' ? 'bg-primary-500 pointer-events-none' : 'bg-primary-300'}  hover:bg-primary-500 active:bg-primary-500 size-14 text-black transition-transform hover:scale-105`}
+          className={`${activeButton === 'my-garage' ? 'pointer-events-none bg-primary-500' : 'bg-primary-300'}  size-14 text-black transition-transform hover:scale-105 hover:bg-primary-500 active:bg-primary-500`}
         >
           <PiCarProfileThin size={25} />
         </Button>
         <Button
           onClick={() => handleNavigation('garages')}
-          className={`${activeButton === 'garages' ? 'bg-primary-500 pointer-events-none' : 'bg-primary-300'}  hover:bg-primary-500 active:bg-primary-500 size-14 text-black transition-transform hover:scale-105`}
+          className={`${activeButton === 'garages' ? 'pointer-events-none bg-primary-500' : 'bg-primary-300'}  size-14 text-black transition-transform hover:scale-105 hover:bg-primary-500 active:bg-primary-500`}
         >
           <PiGarageThin size={25} />
         </Button>
         <Button
           onClick={() => handleNavigation('profile')}
-          className={`${activeButton === 'profile' ? 'bg-primary-500 pointer-events-none' : 'bg-primary-300'}  hover:bg-primary-500 active:bg-primary-500 size-14 text-black transition-transform hover:scale-105`}
+          className={`${activeButton === 'profile' ? 'pointer-events-none bg-primary-500' : 'bg-primary-300'}  size-14 text-black transition-transform hover:scale-105 hover:bg-primary-500 active:bg-primary-500`}
         >
           <PiUserCircleGearThin size={25} />
         </Button>

@@ -35,7 +35,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           // Disabled
           'disabled:cursor-not-allowed',
           'disabled:opacity-50',
-          'disabled:bg-primar-50',
+          'disabled:bg-primary-50',
 
           // Invalid/Error state - à utiliser avec aria-invalid
           'aria-[invalid=true]:border-error-500',
