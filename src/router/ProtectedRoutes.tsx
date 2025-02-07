@@ -32,15 +32,15 @@ export const ClientRoute = ({ element: RouteComponent }: Props) => {
   const location = useLocation();
 
   const isAuthorized = () => {
-    return true;
+    return user && !isPro;
   };
   if (!isInitialized) {
     return <Loader fullScreen />;
   }
 
-  /* if (!isAuthenticated() || !isAuthorized()) {
+  if (!isAuthenticated() || !isAuthorized()) {
     return <Navigate to="/" state={{ from: location }} replace />;
-  } */
+  }
 
   return <RouteComponent />;
 };
