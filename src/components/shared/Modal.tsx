@@ -60,25 +60,17 @@ export const Modal: React.FC<ModalProps> = ({
 
   const modalContent = (
     <div
-      className={`fixed inset-0 z-40 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-secondary-950/50 ${overlayClassName}`}
+      className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden backdrop-blur ${overlayClassName}`}
     >
       <div ref={modalRef} className={`relative m-auto w-full max-w-3xl p-6 ${modalClassName}`}>
-        <div className="flex w-full translate-y-0 flex-col rounded-lg bg-secondary-50 opacity-100 shadow-lg transition-all duration-300 ease-out">
-          <div className="flex items-center justify-between border-b border-secondary-200 p-4">
+        <div className="flex w-full translate-y-0 flex-col rounded-lg bg-primary-50 opacity-100 shadow-lg transition-all duration-300 ease-out">
+          <div className="flex items-center justify-between p-4">
             <h2 id="modal-title" className="text-xl font-semibold text-primary-700">
               {title}
             </h2>
-            <Button
-              buttonStyle={{ color: 'secondary' }}
-              buttonVariant="ghost"
-              onClick={onClose}
-              aria-label="Fermer"
-            >
-              X
-            </Button>
           </div>
           <div className="max-h-[calc(100vh-16rem)] grow overflow-y-auto p-6">{children}</div>
-          <div className="flex justify-end gap-2 border-t border-secondary-200 p-4">
+          <div className="flex justify-end gap-2  p-4">
             {extraButtons}
             {showBottomCloseButton && <Button onClick={onClose}>Fermer</Button>}
           </div>

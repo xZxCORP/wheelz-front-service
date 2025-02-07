@@ -9,13 +9,15 @@ import { TransactionsTablePage } from '../pages/admin/transactions/TransactionsT
 import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
 import { UsersTablePage } from '../pages/admin/users/UsersTablePage';
 import { ViewUserPage } from '../pages/admin/users/ViewUserPage';
+import { MyGarage } from '../pages/dashboard/client/MyGarage';
+import { Dashboard } from '../pages/dashboard/Dashboard';
 import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
 import { MainRoot } from '../pages/main/MainRoot';
 import { Profile } from '../pages/main/Profile';
 import { Report } from '../pages/main/Report';
 import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
-import { PrivateRoute } from './ProtectedRoutes';
+import { ClientRoute, PrivateRoute } from './ProtectedRoutes';
 
 export const routes: RouteObject[] = [
   {
@@ -30,9 +32,26 @@ export const routes: RouteObject[] = [
             element: <MainRoot />,
           },
           {
+            path: 'dashboard',
+            element: <Dashboard />,
+            children: [
+              {
+                path: 'my-garage',
+                element: <ClientRoute element={MyGarage} />,
+                children: [
+                  {
+                    path: 'vehicle/:vin',
+                    //element: <ClientRoute element={MyGarage} />,
+                    element: <Report />,
+                  },
+                ],
+              },
+            ],
+          },
+          /* {
             path: 'report/:vin',
             element: <PrivateRoute element={Report} />,
-          },
+          }, */
           {
             // page with VehicleSearchForm
             path: 'search',

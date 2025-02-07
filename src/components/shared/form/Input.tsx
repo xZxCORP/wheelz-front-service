@@ -14,10 +14,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           'h-10 px-3 py-2',
 
           // Colors
-          'bg-white',
-          'border border-secondary-300',
-          'text-secondary-900',
-          'placeholder:text-secondary-500',
+          'bg-primary-200',
+          'border border-primary-300',
+          'placeholder:text-primary-500',
 
           // Focus
           'focus:outline-none',
@@ -36,7 +35,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           // Disabled
           'disabled:cursor-not-allowed',
           'disabled:opacity-50',
-          'disabled:bg-secondary-50',
+          'disabled:bg-primary-50',
 
           // Invalid/Error state - à utiliser avec aria-invalid
           'aria-[invalid=true]:border-error-500',

@@ -5,17 +5,16 @@ import { RegisterModal } from '../../components/main/auth/register/modals/Regist
 import { Header } from '../../components/main/MainHeader';
 import { Loader } from '../../components/shared/Loader';
 import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';
-import { Footer } from './Footer';
 
 export const BaseLayout = () => {
   const isLoading = useGlobalLoadingStore((state) => state.isLoading);
   return (
-    <div className="flex min-h-screen w-full flex-col">
+    <div className="flex h-screen w-screen flex-col overflow-hidden bg-primary-100">
       <Header />
-      <main className="grow p-4">
+      <main className="h-full grow py-4">
         <Outlet />
       </main>
-      <Footer />
+
       {isLoading && <Loader fullScreen size="lg" variant="primary" />}
       <RegisterModal />
       <LoginModal />

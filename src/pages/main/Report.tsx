@@ -5,6 +5,7 @@ import { ErrorContainer } from '../../components/shared/error/ErrorContainer';
 import { LoadingAnimation } from '../../components/shared/LoadingAnimation';
 import { VehicleReport } from '../../components/vehicle/VehicleReport';
 import { isApiResponse } from '../../utils/errors';
+
 type PageParams = {
   vin: string;
 };
@@ -27,7 +28,7 @@ export const Report = () => {
     return (
       <ErrorContainer
         errorMessage={
-          error.body.message ?? 'Impossible de récuperer les informations sur ce véhicule'
+          error.body.message ?? 'Impossible de récupérer les informations sur ce véhicule'
         }
       />
     );

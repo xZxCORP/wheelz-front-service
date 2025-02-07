@@ -6,14 +6,15 @@ import { TruckIcon } from './icons/TruckIcon';
 
 type Props = {
   orientation: 'left' | 'right';
+  className?: string;
 };
-export const RandomVehiclesBanner = ({ orientation }: Props) => {
+export const RandomVehiclesBanner = ({ orientation, className }: Props) => {
   const vehiclesIcons: React.ComponentType<{ className: string }>[] = [
     CarIcon,
     MotorcycleIcon,
     TruckIcon,
   ];
-  const vehiclesColors: string[] = ['secondary-900', 'primary-600'];
+  const vehiclesColors: string[] = ['primary-900', 'secondary-500'];
 
   const translationClass: string =
     orientation === 'left'
@@ -31,9 +32,9 @@ export const RandomVehiclesBanner = ({ orientation }: Props) => {
     const randomIndex: number = Math.floor(Math.random() * colors.length);
     const baseColor = colors[randomIndex];
     const hoverColor = colors[colors.length - randomIndex - 1];
-    const fillColor = baseColor === 'secondary-900' ? 'fill-secondary-900' : 'fill-primary-600';
+    const fillColor = baseColor === 'secondary-500' ? 'fill-secondary-500' : 'fill-primary-600';
     const hoverFillColor =
-      hoverColor === 'secondary-900' ? 'hover:fill-secondary-900' : 'hover:fill-primary-600';
+      hoverColor === 'secondary-500' ? 'hover:fill-secondary-500' : 'hover:fill-primary-600';
     return (
       <IconComponent className={clsx(fillColor, hoverFillColor, 'h-auto w-56 transition-colors')} />
     );
@@ -46,7 +47,7 @@ export const RandomVehiclesBanner = ({ orientation }: Props) => {
   ));
 
   return (
-    <>
+    <div className={className}>
       <div className={clsx('inline-flex w-full', translationClass)}>
         <ul
           className={clsx(
@@ -65,6 +66,6 @@ export const RandomVehiclesBanner = ({ orientation }: Props) => {
           {vehicleIcon}
         </ul>
       </div>
-    </>
+    </div>
   );
 };

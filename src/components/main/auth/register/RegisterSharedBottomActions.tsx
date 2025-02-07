@@ -15,7 +15,7 @@ export const RegisterSharedBottomActions = ({ onFinish, onNext, isLoading }: Pro
   return (
     <div className="flex justify-between gap-2">
       {canPrevious && (
-        <Button onClick={previous} buttonStyle={{ color: 'secondary' }} disabled={isLoading}>
+        <Button onClick={previous} buttonStyle={{ color: 'primary' }} disabled={isLoading}>
           Précédent
         </Button>
       )}

@@ -1,17 +1,20 @@
 import { Link } from 'react-router-dom';
 
-import wheelzLogo from '/wheelz_logo.svg';
+import { useAuthStore } from '../../stores/useAuthStore';
+import { WheelZ } from '../main/home/icons/WheelZ';
 interface Props {
   link?: string;
 }
 export const WheelzIcon = ({ link = '/' }: Props) => {
+  const { user } = useAuthStore();
+
   return (
     <Link
       to={link}
-      className="flex items-center justify-center text-2xl font-bold text-secondary-600 transition-colors hover:text-secondary-700"
+      className="flex items-center justify-center text-2xl font-bold text-secondary-500 transition-colors hover:text-secondary-700"
     >
-      <img src={wheelzLogo} alt="Wheelz Logo" className="mr-2 w-14" />
-      <span className="hidden md:block">WheelZ</span>
+      <WheelZ className="mr-2 w-14 text-black" />
+      {!user && <h1 className="hidden md:block">WheelZ</h1>}
     </Link>
   );
 };

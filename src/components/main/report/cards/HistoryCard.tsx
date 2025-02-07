@@ -13,7 +13,7 @@ export const HistoryCard = ({ vehicle }: Props) => ({
   content: (
     <div>
       <div className="mt-6 w-full rounded-lg border bg-white p-4 shadow-md">
-        <h2 className="text-lg font-bold">Historique</h2>
+        <h2 className="text-lg ">Historique</h2>
         <p className="mb-4 text-sm text-gray-600">Quel est l&apos;historique pour ce véhicule ?</p>
 
         {/* Note */}
@@ -23,8 +23,7 @@ export const HistoryCard = ({ vehicle }: Props) => ({
           </div>
           <div>
             <p className="text-sm text-gray-800">
-              Vérifie que l&apos;historique de ce véhicule correspondent aux déclarations du
-              vendeur.
+              Vérifiez que l&apos;historique de ce véhicule correspondent aux déclarations
             </p>
           </div>
         </div>
@@ -63,10 +62,10 @@ export const HistoryCard = ({ vehicle }: Props) => ({
                     index === 0 ? 'rounded-lg border border-blue-400 bg-blue-100 p-4' : ''
                   }`}
                 >
-                  <div className={`text-gray-500 ${index === 0 ? 'text-lg font-bold' : ''}`}>
+                  <div className={`text-gray-500 ${index === 0 ? 'text-lg ' : ''}`}>
                     <strong>Date :</strong> {entry.date}
                   </div>
-                  <div className={`text-gray-800 ${index === 0 ? 'text-lg font-semibold' : ''}`}>
+                  <div className={`text-gray-800 ${index === 0 ? 'text-lg' : ''}`}>
                     <strong>Événement :</strong> {entry.type}
                   </div>
                 </li>

@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants';
 
 export const baseButton = tv({
-  base: 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  base: 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:min-w-4 [&_svg]:shrink-0',
   variants: {
     size: {
       xs: 'px-2 py-1 text-xs',
@@ -30,11 +30,11 @@ export const solidButton = tv({
   extend: baseButton,
   variants: {
     color: {
-      primary: 'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800',
+      primary: 'bg-primary-200 hover:bg-primary-500 active:bg-primary-800',
       secondary: 'bg-secondary-300 hover:bg-secondary-400 active:bg-secondary-500',
-      error: 'bg-error-600 text-white hover:bg-error-700 active:bg-error-800',
-      success: 'bg-success-600 text-white hover:bg-success-700 active:bg-success-800',
-      warning: 'bg-warning-600 text-white hover:bg-warning-700 active:bg-warning-800',
+      error: 'bg-error-600 text-white hover:bg-error-500 active:bg-error-800',
+      success: 'bg-success-600 text-white hover:bg-success-500 active:bg-success-800',
+      warning: 'bg-warning-600 text-white hover:bg-warning-500 active:bg-warning-800',
     },
   },
   defaultVariants: {
