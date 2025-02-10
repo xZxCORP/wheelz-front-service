@@ -1,9 +1,9 @@
 import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 
 type CarCardProps = {
-  id: number;
+  id: string;
   vehicle: Vehicle;
-  onClick: (id: number) => void;
+  onClick: (id: string) => void;
 };
 export const MyCarCard = ({ id, vehicle, onClick }: CarCardProps) => {
   return (

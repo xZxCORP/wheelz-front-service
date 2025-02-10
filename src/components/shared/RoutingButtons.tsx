@@ -17,7 +17,7 @@ export const RoutingButtons = () => {
   };
   useEffect(() => {
     navigate(activeButton);
-  }, []);
+  }, [activeButton, navigate]);
   return (
     <>
       <ToggleButton
