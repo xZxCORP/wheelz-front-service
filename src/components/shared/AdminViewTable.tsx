@@ -6,12 +6,12 @@ interface TableRow {
   className?: string;
 }
 
-interface AdminViewTableProps {
+interface Props {
   rows: TableRow[];
   className?: string;
 }
 
-export const AdminViewTable: React.FC<AdminViewTableProps> = ({ rows, className = '' }) => {
+export const AdminViewTable = ({ rows, className = '' }: Props) => {
   return (
     <table className={`w-full px-4 py-2.5 ${className}`}>
       <tbody>

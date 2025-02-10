@@ -1,16 +1,17 @@
 import type React from 'react';
+import clsx from 'clsx';
 
-interface AdminPanelProps {
+interface Props {
   name: string;
   className?: string;
   children: React.ReactNode;
 }
 
-export const AdminPanel: React.FC<AdminPanelProps> = ({ name, className = '', children }) => {
-  const combinedClasses = `flex-col border bg-white ${className}`;
-
+export const AdminPanel = ({ name, className = '', children }: Props) => {
   return (
-    <div className={combinedClasses}>
+    <div className={
+      clsx("flex-col border bg-white", className)
+    }>
       <div className="w-full bg-secondary-400 p-2">
         <h3 className="text-xs font-semibold text-black">{name}</h3>
       </div>
