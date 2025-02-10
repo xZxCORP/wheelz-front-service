@@ -17,7 +17,7 @@ import { MainRoot } from '../pages/main/MainRoot';
 import { Profile } from '../pages/main/Profile';
 import { Report } from '../pages/main/Report';
 import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
-import { ClientRoute, PrivateRoute } from './ProtectedRoutes';
+import { ClientRoute, PrivateRoute, UnauthenticatedRoute } from './ProtectedRoutes';
 
 export const routes: RouteObject[] = [
   {
@@ -29,7 +29,7 @@ export const routes: RouteObject[] = [
         children: [
           {
             index: true,
-            element: <MainRoot />,
+            element: <UnauthenticatedRoute element={MainRoot} />,
           },
           {
             path: 'dashboard',

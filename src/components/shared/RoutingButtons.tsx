@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PiCarProfileThin, PiGarageThin, PiUserCircleGearThin } from 'react-icons/pi';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,6 +15,9 @@ export const RoutingButtons = () => {
     navigate(buttonTarget);
     setActiveButton(buttonTarget);
   };
+  useEffect(() => {
+    navigate(activeButton);
+  }, []);
   return (
     <>
       <ToggleButton

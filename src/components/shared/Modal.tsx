@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import type React from 'react';
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { MdClose } from 'react-icons/md';
 
 import { useClickOutside } from '../../hooks/useClickOutside';
 import { Button } from './button/Button';
@@ -60,7 +61,7 @@ export const Modal: React.FC<ModalProps> = ({
 
   const modalContent = (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden backdrop-blur ${overlayClassName}`}
+      className={`fixed inset-0 flex items-center justify-center overflow-y-auto overflow-x-hidden backdrop-blur ${overlayClassName}`}
     >
       <div ref={modalRef} className={`relative m-auto w-full max-w-3xl p-6 ${modalClassName}`}>
         <div className="flex w-full translate-y-0 flex-col rounded-lg bg-primary-50 opacity-100 shadow-lg transition-all duration-300 ease-out">
@@ -68,6 +69,9 @@ export const Modal: React.FC<ModalProps> = ({
             <h2 id="modal-title" className="text-xl font-semibold text-primary-700">
               {title}
             </h2>
+            <Button buttonVariant="ghost" onClick={onClose}>
+              <MdClose />
+            </Button>
           </div>
           <div className="max-h-[calc(100vh-16rem)] grow overflow-y-auto p-6">{children}</div>
           <div className="flex justify-end gap-2  p-4">
