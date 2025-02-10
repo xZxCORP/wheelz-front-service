@@ -17,4 +17,8 @@ export const adminNavLinks: RouterLink[] = [
     title: 'Utilisateurs',
     url: '/admin/users',
   },
+  {
+    title: 'Entreprises',
+    url: '/admin/companies',
+  },
 ];
