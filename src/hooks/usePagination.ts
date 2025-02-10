@@ -22,10 +22,21 @@ export const usePagination = (options: UsePaginationOptions = {}) => {
     }),
     [apiPagination.page, apiPagination.perPage]
   );
-
+  const onNextPage = () =>
+    setApiPagination({ page: apiPagination.page + 1, perPage: apiPagination.perPage });
+  const onPreviousPage = () =>
+    setApiPagination({ page: apiPagination.page - 1, perPage: apiPagination.perPage });
+  const canNextPage = (total: number) => apiPagination.page * apiPagination.perPage < total;
+  const canPreviousPage = () => apiPagination.page > 1;
+  const pagesCount = (total: number) => Math.ceil(total / apiPagination.perPage);
   return {
     pagination,
     apiPagination,
     onPaginationChange: setApiPagination,
+    onNextPage,
+    onPreviousPage,
+    canNextPage,
+    canPreviousPage,
+    pagesCount,
   };
 };

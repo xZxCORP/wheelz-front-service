@@ -2,6 +2,7 @@ import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 
 export const vehicleLabels: Record<keyof Vehicle, string> = {
   vin: 'Numéro de série du véhicule (VIN)',
+  userId: "Identifiant de l'utilisateur",
   features: 'Caractéristiques du véhicule',
   infos: 'Informations sur le véhicule',
   history: 'Historique du véhicule',

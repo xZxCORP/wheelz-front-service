@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import loginSchema, { type Login } from '@zcorp/wheelz-contracts/dist/authentication/schemas/login';
+import { type Login, loginSchema } from '@zcorp/wheelz-contracts';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 

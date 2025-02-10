@@ -1,4 +1,4 @@
-import registerSchema from '@zcorp/wheelz-contracts/dist/authentication/schemas/register';
+import { registerSchema } from '@zcorp/wheelz-contracts';
 import { z } from 'zod';
 
 export type AccountType = 'personal' | 'business';
