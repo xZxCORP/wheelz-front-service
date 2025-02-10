@@ -72,9 +72,7 @@ export const VehicleReport = ({ vehicle }: Props) => {
                   Première immatriculation:{' '}
                   <span className="font-bold">{vehicle.infos.firstSivRegistrationDate}</span>
                 </p>
-                <Button buttonVariant="solid" className="hover:bg-primary-400" onClick={handleCopy}>
-                  <PiShareFatThin size={25} />
-                </Button>
+
                 {vinMetadatasData && (
                   <>
                     <p className="rounded-md bg-info-700 p-2 text-secondary-200">
@@ -91,6 +89,9 @@ export const VehicleReport = ({ vehicle }: Props) => {
                     </p>
                   </>
                 )}
+                <Button buttonVariant="solid" className="hover:bg-primary-400" onClick={handleCopy}>
+                  <PiShareFatThin size={25} />
+                </Button>
               </div>
             </div>
           </div>
