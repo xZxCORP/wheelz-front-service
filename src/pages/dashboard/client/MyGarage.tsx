@@ -31,7 +31,8 @@ export const MyGarage = () => {
   }
 
   return (
-    allVehiclesData && (
+    allVehiclesData &&
+    allVehiclesData.body.items && (
       <div className="flex size-full flex-col gap-2 md:flex-row">
         <div className="m-4 flex flex-col justify-start space-y-1 md:w-1/4">
           {allVehiclesData.body.items.map((vehicle) => (

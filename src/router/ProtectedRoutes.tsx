@@ -48,7 +48,7 @@ export const PrivateRoute = ({ element: RouteComponent, roles }: Props) => {
 export const ClientRoute = ({ element: RouteComponent }: Props) => {
   const { isInitialized, isAuthenticated, user, isPro } = useAuthStore();
   const location = useLocation();
-
+  return <RouteComponent />;
   const isAuthorized = () => {
     return user && !isPro;
   };
