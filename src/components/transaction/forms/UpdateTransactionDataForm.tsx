@@ -25,6 +25,7 @@ import {
 } from '../../shared/form/Form';
 import { Input } from '../../shared/form/Input';
 import { H2 } from '../../shared/typography/Typography';
+import { AttachedClientsIdsArrayField } from '../fields/AttachedClientsIdsArrayField';
 import { GeneralInformationsFields } from '../fields/GeneralInformationsFields';
 import { HistoryArrayField } from '../fields/HistoryArrayField';
 import { SinisterInformationsFields } from '../fields/SinisterInformationsFields';
@@ -85,6 +86,10 @@ export const UpdateTransactionDataForm = ({ onSubmit }: Props) => {
     const isHistoryArrayChanged =
       Array.isArray(dirtyFields.history) &&
       JSON.stringify(data.history) !== JSON.stringify(previousVehiculeData!.body.history);
+    const isAttachedClientsIdsArrayChanged =
+      dirtyFields.attachedClientsIds &&
+      JSON.stringify(data.attachedClientsIds) !==
+        JSON.stringify(previousVehiculeData!.body.attachedClientsIds);
 
     const finalData: UpdateVehicleTransactionData = {
       vin: data.vin,
@@ -92,6 +97,7 @@ export const UpdateTransactionDataForm = ({ onSubmit }: Props) => {
         ...cleanedValuesObjects,
         technicalControls: isTechnicalControlArrayChanged ? data.technicalControls : undefined,
         history: isHistoryArrayChanged ? data.history : undefined,
+        attachedClientsIds: isAttachedClientsIdsArrayChanged ? data.attachedClientsIds : undefined,
       },
     };
     if (onSubmit) onSubmit(finalData);
@@ -105,6 +111,7 @@ export const UpdateTransactionDataForm = ({ onSubmit }: Props) => {
         sinisterInfos: previousVehiculeData.body.sinisterInfos,
         history: previousVehiculeData.body.history,
         technicalControls: previousVehiculeData.body.technicalControls,
+        attachedClientsIds: previousVehiculeData.body.attachedClientsIds,
       });
       addSnackbar('Véhicule trouvé', 'success');
     }
@@ -118,6 +125,7 @@ export const UpdateTransactionDataForm = ({ onSubmit }: Props) => {
         sinisterInfos: undefined,
         history: undefined,
         technicalControls: undefined,
+        attachedClientsIds: undefined,
       });
       addSnackbar('Véhicule non trouvé', 'error');
     }
@@ -126,7 +134,7 @@ export const UpdateTransactionDataForm = ({ onSubmit }: Props) => {
     return <ErrorContainer errorMessage={error.body.message} />;
   }
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       <H2>Chercher un véhicule à modifier</H2>
       <Form {...searchVehicleForm}>
         <form
@@ -160,6 +168,8 @@ export const UpdateTransactionDataForm = ({ onSubmit }: Props) => {
             <TechnicalInformationsFields control={updateVehicleForm.control} />
             <HistoryArrayField control={updateVehicleForm.control} />
             <TechnicalControlArrayField control={updateVehicleForm.control} />
+
+            <AttachedClientsIdsArrayField control={updateVehicleForm.control} />
 
             <Button type="submit">Soumettre</Button>
           </form>

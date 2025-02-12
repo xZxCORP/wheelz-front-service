@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { baseCreateTransactionData } from '../../../utils/transaction';
 import { Button } from '../../shared/button/Button';
 import { Form } from '../../shared/form/Form';
+import { AttachedClientsIdsArrayField } from '../fields/AttachedClientsIdsArrayField';
 import { GeneralInformationsFields } from '../fields/GeneralInformationsFields';
 import { HistoryArrayField } from '../fields/HistoryArrayField';
 import { SinisterInformationsFields } from '../fields/SinisterInformationsFields';
@@ -51,6 +52,7 @@ export const CreateTransactionDataForm = ({
         <SinisterInformationsFields control={form.control} />
         <HistoryArrayField onlyView={onlyView} control={form.control} />
         <TechnicalControlArrayField onlyView={onlyView} control={form.control} />
+        <AttachedClientsIdsArrayField onlyView={onlyView} control={form.control} />
 
         {!onlyView && <Button type="submit">Soumettre</Button>}
       </form>
