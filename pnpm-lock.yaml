@@ -45,11 +45,11 @@ importers:
         specifier: ^3.51.0
         version: 3.51.0(@tanstack/react-query@5.64.2(react@18.3.1))(@ts-rest/core@3.51.0(zod@3.24.1))(react@18.3.1)(zod@3.24.1)
       '@zcorp/shared-typing-wheelz':
-        specifier: ^1.0.44
-        version: 1.0.44
+        specifier: ^1.0.45
+        version: 1.0.45
       '@zcorp/wheelz-contracts':
-        specifier: ^1.1.25
-        version: 1.1.25
+        specifier: ^1.1.27
+        version: 1.1.27
       axios:
         specifier: ^1.7.7
         version: 1.7.9
@@ -1234,14 +1234,14 @@ packages:
   '@zcorp/prettier-config@1.0.11':
     resolution: {integrity: sha512-Av4HG9KnZ1dRqBLBxZY+EGJgRqhtErzQ9QB2afBXUTXTTHBhxbNwi7krI3piJboAod0ZRy3MV7ID/s2zUMXP8Q==}
 
-  '@zcorp/shared-typing-wheelz@1.0.44':
-    resolution: {integrity: sha512-0nrTwhjXZbIq++ykLt2dgrVzYocQl4fqwCZ34sYrzT+Q3+Eb02n4vSc1+pKoK36DdkcWmssktOG+DalFet8G9A==}
+  '@zcorp/shared-typing-wheelz@1.0.45':
+    resolution: {integrity: sha512-4GrpyVAmLOW0I7HdO7OJPzLVLSCyFEGrp9GS8b3VkbjAVwt3eIdf7ziKEtl978rk0WFBO/XxaH62GQy6mbqagg==}
 
   '@zcorp/tsconfig@1.0.11':
     resolution: {integrity: sha512-Fpv2qGqdedztjMnA7MY1vTV9L28/pXZgZFdXb/oTJYc3VUxpL2SS6EcvALvhEO/xqhfiqn3bQ2nV1tH7n+fkeg==}
 
-  '@zcorp/wheelz-contracts@1.1.25':
-    resolution: {integrity: sha512-fRARI0chl580JuJc6+wugs0bVD55lzZ3xpCQGUli/FwB2FRTE6/7E+eraA5bxgYN7Q8H8LqZ7DyEO0z0ZB7Ikw==}
+  '@zcorp/wheelz-contracts@1.1.27':
+    resolution: {integrity: sha512-x7gP5Dq1E5dUCLsJIunGmkgFxAPunttvJvhboMhiBQLH6XNLzLd/o8PGkIiyusdacFDXf4Aq0/FHLCuKdnd7ng==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -4112,13 +4112,13 @@ snapshots:
 
   '@zcorp/prettier-config@1.0.11': {}
 
-  '@zcorp/shared-typing-wheelz@1.0.44':
+  '@zcorp/shared-typing-wheelz@1.0.45':
     dependencies:
       zod: 3.24.1
 
   '@zcorp/tsconfig@1.0.11': {}
 
-  '@zcorp/wheelz-contracts@1.1.25':
+  '@zcorp/wheelz-contracts@1.1.27':
     dependencies:
       '@ts-rest/core': 3.51.0(zod@3.24.1)
       zod: 3.24.1

@@ -35,7 +35,6 @@ export const SearchUserCombobox = ({ onUserClicked }: Props) => {
     },
   });
 
-  console.log(findedUsers);
   return (
     <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
       <PopoverTrigger asChild>
