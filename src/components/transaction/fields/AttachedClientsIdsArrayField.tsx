@@ -1,11 +1,12 @@
 import type { Vehicle } from '@zcorp/shared-typing-wheelz';
-import { type Control } from 'react-hook-form';
+import type { UserWithCompany } from '@zcorp/wheelz-contracts';
+import { useState } from 'react';
+import { type Control, useController } from 'react-hook-form';
 
-import { technicalControlLabels } from '../../../types/vehicleLabels';
 import { Button } from '../../shared/button/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '../../shared/Card';
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../shared/form/Form';
-import { Input } from '../../shared/form/Input';
+import { SearchUserCombobox } from '../../users/buttons/SearchUserCombobox';
+import { ViewUserById } from '../../users/ViewUserById';
 
 type Props = {
   control: Control<Vehicle>;
@@ -13,12 +14,24 @@ type Props = {
 };
 
 export const AttachedClientsIdsArrayField = ({ control, onlyView }: Props) => {
-  // const { fields, append, remove } = useFormField({
-  //   control,
-  //   name: 'technicalControls',
-  // });
+  const [currentSelectedClient, setCurrentSelectedClient] = useState<UserWithCompany | undefined>();
+  const { field } = useController({
+    control,
+    name: 'attachedClientsIds',
+  });
   const onAddClient = () => {
-    cons;
+    if (currentSelectedClient) {
+      const newId = currentSelectedClient.id.toString();
+      if (!(field.value || []).includes(newId)) {
+        const newIds = [...(field.value || []), newId];
+        field.onChange(newIds);
+      }
+    }
+  };
+
+  const onRemoveClient = (idToRemove: string) => {
+    const newIds = (field.value || []).filter((id) => id !== idToRemove);
+    field.onChange(newIds);
   };
 
   return (
@@ -27,120 +40,33 @@ export const AttachedClientsIdsArrayField = ({ control, onlyView }: Props) => {
         <CardTitle>Clients attachés</CardTitle>
       </CardHeader>
       <CardContent>
-        {!onlyView && (
-          <Button
-            type="button"
-            buttonStyle={{ color: 'secondary' }}
-            onClick={() =>
-              append({
-                date: '',
-                result: '',
-                resultRaw: '',
-                nature: '',
-                km: 0,
-              })
-            }
-          >
-            Ajouter un controle technique
-          </Button>
-        )}
-        {fields.map((field, index) => (
-          <div key={field.id} className="flex w-full gap-4">
-            <FormField
-              control={control}
-              name={`technicalControls.${index}.date`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{technicalControlLabels.date}</FormLabel>
-                  <FormControl>
-                    <Input type="date" className="w-full" {...field} value={field.value ?? ''} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={control}
-              name={`technicalControls.${index}.result`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{technicalControlLabels.result}</FormLabel>
-
-                  <FormControl>
-                    <Input
-                      className="w-full"
-                      {...field}
-                      placeholder={technicalControlLabels.result}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={control}
-              name={`technicalControls.${index}.resultRaw`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{technicalControlLabels.resultRaw}</FormLabel>
-
-                  <FormControl>
-                    <Input
-                      className="w-full"
-                      {...field}
-                      placeholder={technicalControlLabels.resultRaw}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={control}
-              name={`technicalControls.${index}.nature`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{technicalControlLabels.nature}</FormLabel>
-
-                  <FormControl>
-                    <Input
-                      className="w-full"
-                      {...field}
-                      placeholder={technicalControlLabels.nature}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={control}
-              name={`technicalControls.${index}.km`}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{technicalControlLabels.km}</FormLabel>
-
-                  <FormControl>
-                    <Input
-                      type="number"
-                      className="w-full"
-                      {...field}
-                      placeholder={technicalControlLabels.km}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {!onlyView && (
-              <Button buttonStyle={{ color: 'error' }} onClick={() => remove(index)}>
-                Supprimer
+        <div className="flex flex-col gap-4">
+          {!onlyView && (
+            <div className="flex flex-col gap-2">
+              <SearchUserCombobox onUserClicked={(user) => setCurrentSelectedClient(user)} />
+              <Button
+                type="button"
+                onClick={onAddClient}
+                disabled={currentSelectedClient === undefined}
+              >
+                Ajouter
               </Button>
-            )}
-          </div>
-        ))}
+            </div>
+          )}
+          {(field.value || []).map((userId: string) => (
+            <div
+              key={userId}
+              className="flex items-center justify-between gap-2 rounded border p-2"
+            >
+              <ViewUserById userId={userId} />
+              {!onlyView && (
+                <Button buttonStyle={{ color: 'error' }} onClick={() => onRemoveClient(userId)}>
+                  Supprimer
+                </Button>
+              )}
+            </div>
+          ))}
+        </div>
       </CardContent>
     </Card>
   );
