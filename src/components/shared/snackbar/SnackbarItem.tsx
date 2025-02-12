@@ -67,7 +67,7 @@ export const SnackbarItem = ({ snackbar, onClose }: Props) => {
 
   return (
     <div
-      className={`${getSnackbarStyles(snackbar.type)} overflow-hidden rounded-lg shadow-lg`}
+      className={`${getSnackbarStyles(snackbar.type)} z-50 overflow-hidden rounded-lg shadow-lg`}
       style={{ width: '300px' }}
     >
       <div className="flex items-center justify-between p-4">

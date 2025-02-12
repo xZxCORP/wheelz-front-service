@@ -18,7 +18,7 @@ export const LegalStatusCard = ({ vehicle }: Props) => {
     key: 'legal',
     content: (
       <div className="rounded-lg bg-gray-50 p-4 shadow-md">
-        <h2 className="text-lg font-bold">Statut légal</h2>
+        <p className="text-lg ">Statut légal</p>
         <p className="mb-4 text-sm text-gray-600">
           Le véhicule a-t-il passé le contrôle technique ? A-t-il été marqué comme mis à la casse ?
         </p>
@@ -30,18 +30,18 @@ export const LegalStatusCard = ({ vehicle }: Props) => {
           </div>
           <div>
             <p className="text-sm text-gray-800">
-              Contrôle technique effectué en {vehicle.technicalControls[0]?.date}
+              Contrôle technique effectué le {vehicle.technicalControls[0]?.date}
             </p>
           </div>
         </div>
 
         {/* Juridique */}
-        <h3 className="mb-3 text-base font-bold">Juridique</h3>
+        <h3 className="mb-3 text-base ">Juridique</h3>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {/* Contrôle technique */}
           <div className="rounded-lg border bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
-              <h4 className="text-sm font-bold">Contrôle technique</h4>
+              <h4 className="text-sm ">Contrôle technique</h4>
               {vehicle.technicalControls[0]?.resultRaw === 'A' ? (
                 <div className="flex items-center space-x-1 text-green-600">
                   <FaCheckCircle className="text-xl" />
@@ -63,7 +63,7 @@ export const LegalStatusCard = ({ vehicle }: Props) => {
           {/* Épave */}
           <div className="rounded-lg border bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
-              <h4 className="text-sm font-bold">Épave</h4>
+              <h4 className="text-sm ">Épave</h4>
               <div className="flex items-center space-x-1 text-green-600">
                 <FaCheckCircle className="text-xl" />
                 <span className="text-sm font-medium">Aucun enregistrement trouvé</span>

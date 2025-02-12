@@ -146,7 +146,16 @@ export const Table = <T extends object>({
             );
           })}
         </div>
-        {pagination && <PaginationControls table={table} />}
+        {pagination && (
+          <PaginationControls
+            onNextPage={() => table.nextPage()}
+            onPreviousPage={() => table.previousPage()}
+            canNextPage={table.getCanNextPage()}
+            canPreviousPage={table.getCanPreviousPage()}
+            currentPage={table.getState().pagination.pageIndex + 1}
+            totalPages={table.getPageCount()}
+          />
+        )}
       </div>
     </div>
   );

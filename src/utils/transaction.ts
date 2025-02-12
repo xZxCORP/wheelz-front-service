@@ -45,4 +45,5 @@ export const baseCreateTransactionData: CreateVehicleTransactionData = {
     lastResolutionDate: '',
     lastSinisterDate: '',
   },
+  attachedClientsIds: [],
 };

@@ -7,6 +7,7 @@ import {
 } from '../../../types/vehicleLabels';
 import { Card, CardContent, CardHeader, CardTitle } from '../../shared/Card';
 import { InfoField } from '../../shared/InfoField';
+import { ViewUserById } from '../../users/ViewUserById';
 import { HistoryTable } from '../tables/HistoryTable';
 import { TechnicalControlTable } from '../tables/TechnicalControlTable';
 
@@ -66,6 +67,20 @@ export const ViewUpdateTransaction = ({ data }: Props) => {
         <Card className="w-full">
           <CardContent>
             <TechnicalControlTable data={data.changes.technicalControls} />
+          </CardContent>
+        </Card>
+      )}
+      {!!data.changes.attachedClientsIds && (
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Clients attachés</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col gap-4">
+              {data.changes.attachedClientsIds.map((userId) => (
+                <ViewUserById key={userId} userId={userId} />
+              ))}
+            </div>
           </CardContent>
         </Card>
       )}

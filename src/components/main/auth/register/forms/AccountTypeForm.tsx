@@ -12,7 +12,7 @@ export const AccountTypeForm = ({ onAccountTypeSelected }: Props) => {
       <div className="flex flex-col gap-2">
         {Object.entries(accountTypeLabels).map(([key, label]) => (
           <Button
-            buttonStyle={{ color: 'secondary' }}
+            buttonStyle={{ color: 'primary' }}
             onClick={() => onAccountTypeSelected(key as AccountType)}
             key={key}
           >

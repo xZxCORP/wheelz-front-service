@@ -7,12 +7,14 @@ interface AuthState {
   token: string | null;
   user: User | null;
   roles: string[];
+  isPro: boolean;
 
   setToken: (token: string) => void;
   clearAuth: () => void;
   isAuthenticated: () => boolean;
 
   setUser: (user: User | null) => void;
+  setIsPro: (isPro: boolean) => void;
   setRoles: (roles: string[]) => void;
   isInitialized: boolean;
   setIsInitialized: (isInitialized: boolean) => void;
@@ -23,6 +25,7 @@ export const useAuthStore = create<AuthState>()(
     (set, get) => ({
       token: null,
       user: null,
+      isPro: false,
       isInitialized: false,
       roles: [],
 
@@ -30,6 +33,7 @@ export const useAuthStore = create<AuthState>()(
         set({ token });
       },
       setUser: (user: User | null) => set({ user }),
+      setIsPro: (isPro) => set({ isPro }),
       clearAuth: () => set({ token: null, user: null, roles: [] }),
       isAuthenticated: () => !!get().token && !!get().user,
       setIsInitialized: (isInitialized: boolean) => set({ isInitialized }),

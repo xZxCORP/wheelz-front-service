@@ -3,18 +3,23 @@ import type { RouteObject } from 'react-router-dom';
 import { AdminRoot } from '../pages/admin/AdminRoot';
 import { ChainTablePage } from '../pages/admin/chain/ChainTablePage';
 import { ViewVehiclePage } from '../pages/admin/chain/ViewVehiclePage';
+import { CompaniesTablePage } from '../pages/admin/companies/CompaniesTablePage';
+import { ViewCompanyPage } from '../pages/admin/companies/ViewCompanyPage';
 import { StatsPage } from '../pages/admin/StatsPage';
 import { CreateTransactionPage } from '../pages/admin/transactions/CreateTransactionPage';
 import { TransactionsTablePage } from '../pages/admin/transactions/TransactionsTablePage';
 import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
-import { UsersTable } from '../pages/admin/UsersTable';
+import { UsersTablePage } from '../pages/admin/users/UsersTablePage';
+import { ViewUserPage } from '../pages/admin/users/ViewUserPage';
+import { MyGarage } from '../pages/dashboard/client/MyGarage';
+import { Dashboard } from '../pages/dashboard/Dashboard';
 import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
 import { MainRoot } from '../pages/main/MainRoot';
 import { Profile } from '../pages/main/Profile';
 import { Report } from '../pages/main/Report';
 import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
-import { PrivateRoute } from './ProtectedRoutes';
+import { ClientRoute, PrivateRoute, UnauthenticatedRoute } from './ProtectedRoutes';
 
 export const routes: RouteObject[] = [
   {
@@ -26,12 +31,29 @@ export const routes: RouteObject[] = [
         children: [
           {
             index: true,
-            element: <MainRoot />,
+            element: <UnauthenticatedRoute element={MainRoot} />,
           },
           {
+            path: 'dashboard',
+            element: <Dashboard />,
+            children: [
+              {
+                path: 'my-garage',
+                element: <ClientRoute element={MyGarage} />,
+                children: [
+                  {
+                    path: 'vehicle/:vin',
+                    //element: <ClientRoute element={MyGarage} />,
+                    element: <Report />,
+                  },
+                ],
+              },
+            ],
+          },
+          /* {
             path: 'report/:vin',
             element: <PrivateRoute element={Report} />,
-          },
+          }, */
           {
             // page with VehicleSearchForm
             path: 'search',
@@ -78,11 +100,23 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'users',
-            element: <UsersTable />,
+            element: <UsersTablePage />,
+          },
+          {
+            path: 'users/:id',
+            element: <ViewUserPage />,
           },
           {
             path: 'stats',
             element: <StatsPage />,
+          },
+          {
+            path: 'companies',
+            element: <CompaniesTablePage />,
+          },
+          {
+            path: 'companies/:id',
+            element: <ViewCompanyPage />,
           },
         ],
       },
