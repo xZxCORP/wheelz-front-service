@@ -1,8 +1,9 @@
-import type { Vehicle } from '@zcorp/shared-typing-wheelz';
+import type { Vehicle, VehicleWithUserId } from '@zcorp/shared-typing-wheelz';
 
-export const vehicleLabels: Record<keyof Vehicle, string> = {
+export const vehicleLabels: Record<keyof VehicleWithUserId, string> = {
   vin: 'Numéro de série du véhicule (VIN)',
   userId: "Identifiant de l'utilisateur",
+  attachedClientsIds: 'Identifiants des clients attachés',
   features: 'Caractéristiques du véhicule',
   infos: 'Informations sur le véhicule',
   history: 'Historique du véhicule',

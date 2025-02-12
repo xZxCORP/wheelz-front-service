@@ -15,7 +15,7 @@ export const UsersTablePage = () => {
     initialPage: 1,
     initialPerPage: 10,
   });
-  const { data, error } = userTsr.users.getUsers.useQuery({
+  const { data, error } = userTsr.users.getPaginatedUsers.useQuery({
     queryKey: ['users', apiPagination],
     queryData: {
       query: apiPagination,

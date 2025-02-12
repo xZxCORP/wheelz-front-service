@@ -2,7 +2,6 @@ import type { CreateVehicleTransactionData } from '@zcorp/shared-typing-wheelz';
 
 export const baseCreateTransactionData: CreateVehicleTransactionData = {
   vin: '',
-  userId: '',
   features: {
     brand: '',
     model: '',
@@ -46,4 +45,5 @@ export const baseCreateTransactionData: CreateVehicleTransactionData = {
     lastResolutionDate: '',
     lastSinisterDate: '',
   },
+  attachedClientsIds: [],
 };
