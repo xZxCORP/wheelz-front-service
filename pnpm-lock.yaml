@@ -42,8 +42,8 @@ importers:
         specifier: ^1.0.44
         version: 1.0.44
       '@zcorp/wheelz-contracts':
-        specifier: ^1.1.21
-        version: 1.1.21
+        specifier: ^1.1.23
+        version: 1.1.23
       axios:
         specifier: ^1.7.7
         version: 1.7.9
@@ -1115,8 +1115,8 @@ packages:
   '@zcorp/tsconfig@1.0.11':
     resolution: {integrity: sha512-Fpv2qGqdedztjMnA7MY1vTV9L28/pXZgZFdXb/oTJYc3VUxpL2SS6EcvALvhEO/xqhfiqn3bQ2nV1tH7n+fkeg==}
 
-  '@zcorp/wheelz-contracts@1.1.21':
-    resolution: {integrity: sha512-8lGBcnpmOpl3nZ5Z/xaeyja4kucZk/CtdsVPBYtbdkjwnozae80V5fGfo4kSOJ5wEMfoXW1qj8DUPozpUphjHg==}
+  '@zcorp/wheelz-contracts@1.1.23':
+    resolution: {integrity: sha512-9ovp0pQ076KYgUx3WcY1yFr+iPqF1doLxKkrKpads40FBi4vE83hlsxKFFdSkFvqc/ufuiPlo6B1dKGLuzBSYQ==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -3859,7 +3859,7 @@ snapshots:
 
   '@zcorp/tsconfig@1.0.11': {}
 
-  '@zcorp/wheelz-contracts@1.1.21':
+  '@zcorp/wheelz-contracts@1.1.23':
     dependencies:
       '@ts-rest/core': 3.51.0(zod@3.24.1)
       zod: 3.24.1
