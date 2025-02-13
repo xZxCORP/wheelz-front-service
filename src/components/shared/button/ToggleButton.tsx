@@ -17,7 +17,7 @@ export const ToggleButton = ({ id, Icon }: Props) => {
   }, [id, location.pathname]);
   return (
     <Button
-      className={`${active ? 'pointer-events-none bg-secondary-500 font-semibold text-white' : 'bg-primary-100 text-black'}  size-14 transition-transform hover:scale-105  hover:bg-primary-50 active:bg-primary-500`}
+      className={`${active ? 'bg-secondary-500 pointer-events-none font-semibold text-white' : 'bg-primary-200 text-black'}  hover:bg-primary-50 active:bg-primary-500 size-14  transition-transform hover:scale-105`}
       asChild
     >
       <Link to={id}>
