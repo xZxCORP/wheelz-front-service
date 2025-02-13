@@ -1,10 +1,10 @@
-import { useAuthStore } from '../../stores/useAuthStore';
+import { AuthStore } from '../../stores/useAuthStore';
 import { WheelzIcon } from '../shared/WheelzIcon';
 import { LogoutButton } from './auth/LogoutButton';
 import { LoginRegisterPickers } from './auth/register/LoginRegisterPickers';
 
 export const Header = () => {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated } = AuthStore.use();
 
   const AccountCell = () => {
     if (isAuthenticated()) {

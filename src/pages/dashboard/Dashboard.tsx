@@ -1,10 +1,10 @@
-import { useAuthStore } from '../../stores/useAuthStore';
+import { AuthStore } from '../../stores/useAuthStore';
 import { ClientDashboard } from './ClientDashboard';
 
 export const Dashboard = () => {
-  const { isPro } = useAuthStore();
+  const { useGetIsPro } = AuthStore;
   // Check client or garage
-  console.log(`This user ${isPro ? 'is pro' : 'is a client'}`);
+  console.log(`This user ${useGetIsPro() ? 'is pro' : 'is a client'}`);
 
   return <ClientDashboard />;
 };

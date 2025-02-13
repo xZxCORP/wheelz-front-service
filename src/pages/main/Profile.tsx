@@ -15,11 +15,11 @@ import {
 } from '../../components/shared/form/Form';
 import { Input } from '../../components/shared/form/Input';
 import { H2 } from '../../components/shared/typography/Typography';
-import { useAuthStore } from '../../stores/useAuthStore';
+import { AuthStore } from '../../stores/useAuthStore';
 import { useSnackbarStore } from '../../stores/useSnackbar';
 
 export const Profile = () => {
-  const { user, setUser } = useAuthStore();
+  const { user, setUser } = AuthStore.use();
   const { addSnackbar } = useSnackbarStore();
 
   const form = useForm<UserUpdate>({

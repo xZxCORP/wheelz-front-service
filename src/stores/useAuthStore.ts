@@ -1,26 +1,24 @@
-import type { User } from '@zcorp/wheelz-contracts';
+import type { User, UserWithCompany } from '@zcorp/wheelz-contracts';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 const AUTH_TOKEN_KEY = 'auth-token-storage';
 interface AuthState {
   token: string | null;
-  user: User | null;
+  user: UserWithCompany | null;
   roles: string[];
-  isPro: boolean;
 
   setToken: (token: string) => void;
   clearAuth: () => void;
   isAuthenticated: () => boolean;
 
   setUser: (user: User | null) => void;
-  setIsPro: (isPro: boolean) => void;
   setRoles: (roles: string[]) => void;
   isInitialized: boolean;
   setIsInitialized: (isInitialized: boolean) => void;
 }
 
-export const useAuthStore = create<AuthState>()(
+const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
       token: null,
@@ -33,7 +31,6 @@ export const useAuthStore = create<AuthState>()(
         set({ token });
       },
       setUser: (user: User | null) => set({ user }),
-      setIsPro: (isPro) => set({ isPro }),
       clearAuth: () => set({ token: null, user: null, roles: [] }),
       isAuthenticated: () => !!get().token && !!get().user,
       setIsInitialized: (isInitialized: boolean) => set({ isInitialized }),
@@ -45,3 +42,18 @@ export const useAuthStore = create<AuthState>()(
     }
   )
 );
+
+const useGetIsPro = () => {
+  const { user } = useAuthStore();
+  return !!user && !!user.company;
+};
+const useGetIsClient = () => {
+  const { roles, user } = useAuthStore();
+  return !!user && !user.company && roles.includes('user');
+};
+
+export const AuthStore = {
+  use: useAuthStore,
+  useGetIsPro,
+  useGetIsClient,
+};

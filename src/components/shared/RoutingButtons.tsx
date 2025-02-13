@@ -20,24 +20,9 @@ export const RoutingButtons = () => {
   }, [activeButton, navigate]);
   return (
     <>
-      <ToggleButton
-        onClick={handleNavigation}
-        id={'my-garage'}
-        active={activeButton === 'my-garage'}
-        Icon={PiCarProfileThin}
-      />
-      <ToggleButton
-        onClick={handleNavigation}
-        id={'garages'}
-        active={activeButton === 'garages'}
-        Icon={PiGarageThin}
-      />
-      <ToggleButton
-        onClick={handleNavigation}
-        id={'profile'}
-        active={activeButton === 'profile'}
-        Icon={PiUserCircleGearThin}
-      />
+      <ToggleButton id={'my-garage'} Icon={PiCarProfileThin} />
+      <ToggleButton id={'garages'} Icon={PiGarageThin} />
+      <ToggleButton id={'profile'} Icon={PiUserCircleGearThin} />
     </>
   );
 };
