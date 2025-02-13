@@ -1,9 +1,11 @@
 import { GoZap } from 'react-icons/go';
 import { PiCarThin, PiMotorcycleThin } from 'react-icons/pi';
+import { useNavigate } from 'react-router-dom';
 
 type GarageType = 'auto' | 'moto' | 'controle technique';
 
 type Props = {
+  id: number;
   name: string;
   tags: GarageType[];
   garageLocalization?: {
@@ -12,9 +14,14 @@ type Props = {
   }; // Opt for now because it's not implemented
 };
 
-export const GarageCard = ({ name, tags }: Props) => {
+export const GarageCard = ({ name, tags, id }: Props) => {
+  const navigate = useNavigate();
+
   return (
-    <button className="mt-5 h-1/3 w-full rounded bg-white backdrop-blur transition-all hover:scale-105">
+    <button
+      onClick={() => navigate(`/dashboard/garage/${id}`)}
+      className="mt-5 h-1/3 w-full rounded bg-white backdrop-blur transition-all hover:scale-105"
+    >
       <div className="m-2 flex gap-2">
         {tags.map((tag) => (
           <div

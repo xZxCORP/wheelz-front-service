@@ -38,6 +38,7 @@ export const Garages = () => {
           <div className="grid h-3/4 w-full grid-cols-3 flex-row justify-around gap-3">
             {companiesData.body.items.map((one) => (
               <GarageCard
+                id={one.id}
                 key={one.id}
                 name={one.name}
                 tags={['auto', 'moto', 'controle technique']}
