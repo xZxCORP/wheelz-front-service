@@ -43,22 +43,22 @@ export const MyGarage = () => {
   }
 
   return (
-    allVehiclesData && (
+    allVehiclesData &&
+    allVehiclesData.body.items && (
       <div className="flex size-full flex-col gap-2 md:flex-row">
         <div className="m-4 flex flex-col justify-start space-y-1 md:w-1/4">
           {allVehiclesData.body.items.map((vehicle) => (
             <MyCarCard key={vehicle.vin} id={vehicle.vin} vehicle={vehicle} onClick={handleCards} />
           ))}
-          {allVehiclesData.body.meta.page > 1 && (
-            <PaginationControls
-              onNextPage={onNextPage}
-              onPreviousPage={onPreviousPage}
-              canNextPage={canNextPage(allVehiclesData.body.meta.total)}
-              canPreviousPage={canPreviousPage()}
-              currentPage={apiPagination.page}
-              totalPages={pagesCount(allVehiclesData.body.meta.total)}
-            />
-          )}
+          <PaginationControls
+            onNextPage={onNextPage}
+            onPreviousPage={onPreviousPage}
+            canNextPage={canNextPage(allVehiclesData.body.meta.total)}
+            canPreviousPage={canPreviousPage()}
+            currentPage={apiPagination.page}
+            totalPages={pagesCount(allVehiclesData.body.meta.total)}
+          />
+
           {allVehiclesData.body.meta.total === 0 && noVehicleCalculatedComponent}
         </div>
         <div className="m-4 overflow-y-scroll rounded bg-primary-100 md:w-3/4">

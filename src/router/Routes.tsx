@@ -12,6 +12,8 @@ import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransaction
 import { UsersTablePage } from '../pages/admin/users/UsersTablePage';
 import { ViewUserPage } from '../pages/admin/users/ViewUserPage';
 import { ClientDashboard } from '../pages/dashboard/client/ClientDashboard';
+import { FullGarage } from '../pages/dashboard/client/FullGarage';
+import { Garages } from '../pages/dashboard/client/Garages';
 import { MyGarage } from '../pages/dashboard/MyGarage';
 import { AddVehicle } from '../pages/dashboard/pro/AddVehicle';
 import { ProDashboard } from '../pages/dashboard/pro/ProDashboard';
@@ -68,6 +70,14 @@ export const routes: RouteObject[] = [
                     path: 'my-garage',
                     element: <MyGarage />,
                     children: [{ path: 'vehicle/:vin', element: <Report /> }],
+                  },
+                  {
+                    path: 'garages',
+                    element: <Garages />,
+                  },
+                  {
+                    path: 'garages/:id',
+                    element: <FullGarage />,
                   },
                 ],
               },
