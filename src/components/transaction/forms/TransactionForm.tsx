@@ -74,7 +74,10 @@ export const TransactionForm = () => {
     switch (action) {
       case 'create': {
         return (
-          <CreateTransactionDataForm onSubmit={(data) => createTransactionMutate({ body: data })} />
+          <CreateTransactionDataForm
+            onSubmit={(data) => createTransactionMutate({ body: data })}
+            allowRapidFill
+          />
         );
       }
       case 'update': {
