@@ -53,7 +53,7 @@ export const MyGarage = () => {
             </div>
           )}
         </div>
-        <div className="bg-primary-100 m-4 overflow-y-scroll rounded md:w-3/4">
+        <div className="m-4 overflow-y-scroll rounded bg-primary-100 md:w-3/4">
           <Outlet />
         </div>
       </div>

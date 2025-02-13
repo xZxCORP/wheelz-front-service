@@ -26,7 +26,7 @@ export const GarageCard = ({ name, tags, id }: Props) => {
         {tags.map((tag) => (
           <div
             key={tag}
-            className="bg-secondary-500 cursor-pointer rounded-lg px-2 py-1 text-white"
+            className="cursor-pointer rounded-lg bg-secondary-500 px-2 py-1 text-white"
           >
             {tag === 'auto' ? (
               <PiCarThin size={25} />

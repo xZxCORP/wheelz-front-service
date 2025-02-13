@@ -1,14 +1,11 @@
-import { useEffect, useState } from 'react';
-
 import { companyTsr } from '../../../clients/api/company.api';
 import { PaginationControls } from '../../../components/admin/PaginationControls';
 import { usePagination } from '../../../hooks/usePagination';
-import { useSnackbarStore } from '../../../stores/useSnackbar';
 import { GarageCard } from './GarageCard';
 
 export const Garages = () => {
-  const [location, setCurrentLocation] = useState<GeolocationCoordinates>();
-  const { addSnackbar } = useSnackbarStore();
+  //const [location, setCurrentLocation] = useState<GeolocationCoordinates>();
+  //const { addSnackbar } = useSnackbarStore();
 
   const { apiPagination, onNextPage, onPreviousPage, canNextPage, canPreviousPage, pagesCount } =
     usePagination({
@@ -23,16 +20,16 @@ export const Garages = () => {
     },
   });
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         setCurrentLocation(position.coords);
       });
     } else addSnackbar('Accès impossible à la position actuelle', 'warning');
-  }, [addSnackbar]);
+  }, [addSnackbar]); */
 
   return (
-    <div className="bg-primary-50 m-10 flex h-4/5 w-full  rounded-xl px-5">
+    <div className="m-10 flex h-4/5 w-full rounded-xl  bg-primary-50 px-5">
       {companiesData ? (
         <div className="size-full flex-col">
           <div className="grid h-3/4 w-full grid-cols-3 flex-row justify-around gap-3">
