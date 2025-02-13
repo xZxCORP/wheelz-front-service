@@ -31,10 +31,10 @@ export const solidButton = tv({
   variants: {
     color: {
       primary: 'bg-primary-200 hover:bg-primary-500 active:bg-primary-800',
-      secondary: 'bg-secondary-300 hover:bg-secondary-400 active:bg-secondary-500',
-      error: 'bg-error-600 text-white hover:bg-error-500 active:bg-error-800',
-      success: 'bg-success-600 text-white hover:bg-success-500 active:bg-success-800',
-      warning: 'bg-warning-600 text-white hover:bg-warning-500 active:bg-warning-800',
+      secondary: 'bg-secondary-300 hover:bg-secondary-500 active:bg-secondary-500',
+      error: 'bg-error-600 hover:bg-error-500 active:bg-error-800 text-white',
+      success: 'bg-success-600 hover:bg-success-500 active:bg-success-800 text-white',
+      warning: 'bg-warning-600 hover:bg-warning-500 active:bg-warning-800 text-white',
     },
   },
   defaultVariants: {
@@ -63,14 +63,14 @@ export const outlineButton = tv({
   variants: {
     color: {
       primary:
-        'border border-primary-600 text-primary-600 hover:bg-primary-50 active:bg-primary-100',
+        'border-primary-600 text-primary-600 hover:bg-primary-50 active:bg-primary-100 border',
       secondary:
-        'border border-secondary-600 text-secondary-600 hover:bg-secondary-50 active:bg-secondary-100',
-      error: 'border border-error-600 text-error-600 hover:bg-error-50 active:bg-error-100',
+        'border-secondary-600 text-secondary-600 hover:bg-secondary-50 active:bg-secondary-100 border',
+      error: 'border-error-600 text-error-600 hover:bg-error-50 active:bg-error-100 border',
       success:
-        'border border-success-600 text-success-600 hover:bg-success-50 active:bg-success-100',
+        'border-success-600 text-success-600 hover:bg-success-50 active:bg-success-100 border',
       warning:
-        'border border-warning-600 text-warning-600 hover:bg-warning-50 active:bg-warning-100',
+        'border-warning-600 text-warning-600 hover:bg-warning-50 active:bg-warning-100 border',
     },
   },
   defaultVariants: {

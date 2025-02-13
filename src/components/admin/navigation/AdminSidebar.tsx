@@ -10,7 +10,7 @@ export const AdminSidebar = ({ className }: Props) => {
   return (
     <div
       className={clsx(
-        'sticky top-0 flex h-screen flex-col justify-between bg-secondary-400 p-4',
+        'bg-secondary-500 sticky top-0 flex h-screen flex-col justify-between p-4',
         className
       )}
     >
