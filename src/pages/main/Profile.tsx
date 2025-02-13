@@ -65,9 +65,9 @@ export const Profile = () => {
 
   return (
     <Form {...form}>
-      <Card className="w-full">
+      <Card className="m-10 h-4/5 w-full rounded bg-primary-200">
         <CardHeader>
-          <H2>
+          <H2 className="text-neutral-600">
             Profil de {user.firstname} {user.lastname}
           </H2>
         </CardHeader>
@@ -81,7 +81,7 @@ export const Profile = () => {
               control={form.control}
               name="firstname"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="text-neutral-600">
                   <FormLabel>Prénom</FormLabel>
                   <FormControl>
                     <Input placeholder="Prénom" {...field} />
@@ -95,7 +95,7 @@ export const Profile = () => {
               control={form.control}
               name="lastname"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="text-neutral-600">
                   <FormLabel>Nom</FormLabel>
                   <FormControl>
                     <Input placeholder="Nom" {...field} />
@@ -104,13 +104,13 @@ export const Profile = () => {
                 </FormItem>
               )}
             />
-            <FormItem>
+            <FormItem className="text-neutral-600">
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input value={user.email} disabled />
               </FormControl>
             </FormItem>
-            <Button type="submit" disabled={isPending}>
+            <Button type="submit" disabled={isPending} className="bg-secondary-500 text-white">
               {isPending ? 'En cours...' : 'Mettre à jour'}
             </Button>
           </form>

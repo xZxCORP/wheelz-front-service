@@ -2,16 +2,14 @@ import { useAuthStore } from '../../stores/useAuthStore';
 import { WheelzIcon } from '../shared/WheelzIcon';
 import { LogoutButton } from './auth/LogoutButton';
 import { LoginRegisterPickers } from './auth/register/LoginRegisterPickers';
-import { ProfileButton } from './profile/ProfileButton';
 
 export const Header = () => {
-  const { isAuthenticated, user } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
 
   const AccountCell = () => {
     if (isAuthenticated()) {
       return (
         <div className="flex gap-3">
-          <ProfileButton data={user!} />
           <LogoutButton />
         </div>
       );
