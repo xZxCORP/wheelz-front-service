@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-import { useAuthStore } from '../../stores/useAuthStore';
+import { AuthStore } from '../../stores/useAuthStore';
 import { WheelZ } from '../main/home/icons/WheelZ';
 interface Props {
   link?: string;
 }
 export const WheelzIcon = ({ link = '/' }: Props) => {
-  const { user } = useAuthStore();
+  const { user } = AuthStore.use();
 
   return (
     <Link
