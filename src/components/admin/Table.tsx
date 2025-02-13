@@ -87,11 +87,11 @@ export const Table = <T extends object>({
                 </tr>
               ))}
             </thead>
-            <tbody className="divide-primary-500 divide-y bg-white">
+            <tbody className="divide-y divide-primary-500 bg-white">
               {table.getRowModel().rows.map((row, index) => (
                 <tr key={row.id} className={index % 2 === 0 ? 'bg-white' : 'bg-secondary-50'}>
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="text-secondary-500 px-4 py-2 text-sm">
+                    <td key={cell.id} className="px-4 py-2 text-sm text-secondary-500">
                       <div className="max-w-xs truncate">
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </div>
@@ -110,7 +110,7 @@ export const Table = <T extends object>({
             return (
               <div
                 key={row.id}
-                className="border-secondary-200 mb-4 rounded-lg border bg-white p-4 shadow-sm"
+                className="mb-4 rounded-lg border border-secondary-200 bg-white p-4 shadow-sm"
               >
                 <div
                   className="flex cursor-pointer items-center justify-between font-semibold"
@@ -129,13 +129,13 @@ export const Table = <T extends object>({
                       .slice(1)
                       .map((cell) => (
                         <div key={cell.id} className="flex flex-col">
-                          <span className="text-secondary-500 text-xs font-semibold">
+                          <span className="text-xs font-semibold text-secondary-500">
                             {cell.column.columnDef.header &&
                             typeof cell.column.columnDef.header === 'string'
                               ? cell.column.columnDef.header
                               : cell.id}
                           </span>
-                          <span className="text-secondary-700 text-sm">
+                          <span className="text-sm text-secondary-700">
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </span>
                         </div>
