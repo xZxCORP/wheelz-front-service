@@ -17,7 +17,7 @@ export const MyGarage = () => {
   const isPro = AuthStore.useGetIsPro();
 
   const handleCards = (vin: string) => {
-    navigate(`/dashboard/my-garage/vehicle/${vin}`);
+    navigate(`vehicle/${vin}`);
   };
   const { apiPagination, onNextPage, onPreviousPage, canNextPage, canPreviousPage, pagesCount } =
     usePagination({
