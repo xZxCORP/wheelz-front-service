@@ -46,6 +46,24 @@ export const PrivateRoute = ({ element: RouteComponent, roles }: Props) => {
   return <RouteComponent />;
 };
 
+export const ProRoute = ({ element: RouteComponent }: Props) => {
+  const { isInitialized, isAuthenticated, user } = AuthStore.use();
+  const isPro = AuthStore.useGetIsPro();
+  const location = useLocation();
+  const isAuthorized = useCallback(() => {
+    return user && isPro;
+  }, [isPro, user]);
+
+  if (!isInitialized) {
+    return <Loader fullScreen />;
+  }
+  if (!isAuthenticated() || !isAuthorized()) {
+    return <Navigate to="/" state={{ from: location }} replace />;
+  }
+
+  return <RouteComponent />;
+};
+
 export const ClientRoute = ({ element: RouteComponent }: Props) => {
   const { isInitialized, isAuthenticated, user } = AuthStore.use();
   const isClient = AuthStore.useGetIsClient();

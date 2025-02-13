@@ -14,7 +14,7 @@ export const MainRoot = () => {
       </div>
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
         <h2 className="text-4xl">Connexion</h2>
-        <LoginForm onLogged={() => navigate('/dashboard/my-garage')} />
+        <LoginForm onLogged={() => navigate('/dashboard')} />
       </div>
     </div>
   );

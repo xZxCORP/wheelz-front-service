@@ -48,8 +48,8 @@ const useGetIsPro = () => {
   return !!user && !!user.company;
 };
 const useGetIsClient = () => {
-  const { roles } = useAuthStore();
-  return roles.includes('user');
+  const { roles, user } = useAuthStore();
+  return !!user && !user.company && roles.includes('user');
 };
 
 export const AuthStore = {
