@@ -11,6 +11,7 @@ import { TransactionsTablePage } from '../pages/admin/transactions/TransactionsT
 import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
 import { UsersTablePage } from '../pages/admin/users/UsersTablePage';
 import { ViewUserPage } from '../pages/admin/users/ViewUserPage';
+import { Garages } from '../pages/dashboard/client/Garages';
 import { MyGarage } from '../pages/dashboard/client/MyGarage';
 import { Dashboard } from '../pages/dashboard/Dashboard';
 import { AdminLayout } from '../pages/layout/AdminLayout';
@@ -48,6 +49,7 @@ export const routes: RouteObject[] = [
                   },
                 ],
               },
+              { path: 'garages', element: <ClientRoute element={Garages} /> },
             ],
           },
           /* {

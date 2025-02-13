@@ -2,7 +2,6 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 import { chainTsr } from '../../../clients/api/chain.api';
 import { PaginationControls } from '../../../components/admin/PaginationControls';
-import { Button } from '../../../components/shared/button/Button';
 import { ErrorContainer } from '../../../components/shared/error/ErrorContainer';
 import { usePagination } from '../../../hooks/usePagination';
 import { isApiResponse } from '../../../utils/errors';
@@ -51,7 +50,6 @@ export const MyGarage = () => {
           {allVehiclesData.body.meta.total === 0 && (
             <div className="flex flex-col items-center justify-center gap-2">
               <p>Vous n&apos;avez pas encore de véhicule dans votre garage.</p>
-              <Button>Ajouter un véhicule</Button>
             </div>
           )}
         </div>
