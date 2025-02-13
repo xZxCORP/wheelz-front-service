@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type Login, loginSchema } from '@zcorp/wheelz-contracts';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { authTsr } from '../../../../../clients/api/auth.api';
@@ -29,15 +28,13 @@ export const LoginForm = ({ onSwitchToRegister, onLogged }: Props) => {
       password: '',
     },
   });
-  const { setToken, setIsPro } = useAuthStore();
+  const { setToken } = useAuthStore();
   const { mutate } = authTsr.authentication.login.useMutation({
     onSuccess: (response) => {
       setToken(response.body.token);
-      setIsPro(checkedIsPro);
       onLogged();
     },
   });
-  const [checkedIsPro, setCheckedIsPro] = useState<boolean>(false);
 
   return (
     <Form {...form}>
@@ -71,15 +68,7 @@ export const LoginForm = ({ onSwitchToRegister, onLogged }: Props) => {
             </FormItem>
           )}
         />
-        <div className="flex w-full items-center gap-2 rounded">
-          <input
-            checked={checkedIsPro}
-            onChange={() => setCheckedIsPro(!checkedIsPro)}
-            type="checkbox"
-            className=" rounded text-secondary-500 outline-none focus:ring-0 active:bg-secondary-500"
-          />
-          <p>Je suis un professionnel</p>
-        </div>
+
         <Button type="submit">Se connecter</Button>
         {onSwitchToRegister && (
           <Button onClick={onSwitchToRegister} buttonVariant="ghost">

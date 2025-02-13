@@ -1,4 +1,5 @@
 import type React from 'react';
+import { useMemo } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { Loader } from '../components/shared/Loader';
@@ -7,16 +8,17 @@ import { useAuthStore } from '../stores/useAuthStore';
 interface Props {
   element: React.ComponentType;
   roles?: string[];
-  defaultRedirect?: string;
 }
 
-export const UnauthenticatedRoute = ({
-  element: RouteComponent,
-  defaultRedirect = '/dashboard',
-}: Props) => {
-  const { isInitialized, isAuthenticated } = useAuthStore();
+export const UnauthenticatedRoute = ({ element: RouteComponent }: Props) => {
+  const { isInitialized, isAuthenticated, roles } = useAuthStore();
   const location = useLocation();
-
+  const defaultRedirect = useMemo(() => {
+    if (roles.includes('admin')) {
+      return '/admin';
+    }
+    return '/dashboard';
+  }, [roles]);
   if (!isInitialized) {
     return <Loader fullScreen />;
   }
@@ -46,11 +48,11 @@ export const PrivateRoute = ({ element: RouteComponent, roles }: Props) => {
 };
 
 export const ClientRoute = ({ element: RouteComponent }: Props) => {
-  const { isInitialized, isAuthenticated, user, isPro } = useAuthStore();
+  const { isInitialized, isAuthenticated, user, getIsClient } = useAuthStore();
   const location = useLocation();
 
   const isAuthorized = () => {
-    return user && !isPro;
+    return user && getIsClient();
   };
   if (!isInitialized) {
     return <Loader fullScreen />;

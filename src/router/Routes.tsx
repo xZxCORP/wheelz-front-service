@@ -50,10 +50,7 @@ export const routes: RouteObject[] = [
               },
             ],
           },
-          /* {
-            path: 'report/:vin',
-            element: <PrivateRoute element={Report} />,
-          }, */
+
           {
             // page with VehicleSearchForm
             path: 'search',
