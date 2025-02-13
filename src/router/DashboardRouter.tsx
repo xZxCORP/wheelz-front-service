@@ -10,7 +10,6 @@ export const DashboardRouter = () => {
   if (!isAuthenticated()) {
     return <Navigate to="/" replace />;
   }
-  console.log(isClient, isPro);
   if (isClient) {
     return <Navigate to="/dashboard/client" replace />;
   }
