@@ -2,7 +2,6 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 import { chainTsr } from '../../../clients/api/chain.api';
 import { PaginationControls } from '../../../components/admin/PaginationControls';
-import { Button } from '../../../components/shared/button/Button';
 import { ErrorContainer } from '../../../components/shared/error/ErrorContainer';
 import { usePagination } from '../../../hooks/usePagination';
 import { isApiResponse } from '../../../utils/errors';
@@ -31,7 +30,8 @@ export const MyGarage = () => {
   }
 
   return (
-    allVehiclesData && (
+    allVehiclesData &&
+    allVehiclesData.body.items && (
       <div className="flex size-full flex-col gap-2 md:flex-row">
         <div className="m-4 flex flex-col justify-start space-y-1 md:w-1/4">
           {allVehiclesData.body.items.map((vehicle) => (
@@ -50,7 +50,6 @@ export const MyGarage = () => {
           {allVehiclesData.body.meta.total === 0 && (
             <div className="flex flex-col items-center justify-center gap-2">
               <p>Vous n&apos;avez pas encore de véhicule dans votre garage.</p>
-              <Button>Ajouter un véhicule</Button>
             </div>
           )}
         </div>
