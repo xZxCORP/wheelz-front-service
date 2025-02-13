@@ -60,6 +60,10 @@ export const routes: RouteObject[] = [
                     path: 'update-vehicle',
                     element: <UpdateVehicle />,
                   },
+                  {
+                    path: 'profile',
+                    element: <ClientRoute element={Profile} />,
+                  },
                 ],
               },
               {
@@ -79,6 +83,10 @@ export const routes: RouteObject[] = [
                     path: 'garages/:id',
                     element: <FullGarage />,
                   },
+                  {
+                    path: 'profile',
+                    element: <ClientRoute element={Profile} />,
+                  },
                 ],
               },
             ],
@@ -88,10 +96,6 @@ export const routes: RouteObject[] = [
             // page with VehicleSearchForm
             path: 'search',
             element: <VehicleSearchPage />,
-          },
-          {
-            path: '/profile',
-            element: <PrivateRoute element={Profile} />,
           },
         ],
       },

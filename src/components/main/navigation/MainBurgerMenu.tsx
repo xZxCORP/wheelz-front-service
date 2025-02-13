@@ -11,7 +11,6 @@ import { LinkButton } from '../../shared/LinkButton';
 import { WheelzIcon } from '../../shared/WheelzIcon';
 import { LogoutButton } from '../auth/LogoutButton';
 import { LoginRegisterPickers } from '../auth/register/LoginRegisterPickers';
-import { ProfileButton } from '../profile/ProfileButton';
 
 interface Props {
   className?: string;
@@ -20,13 +19,12 @@ interface Props {
 
 export const MainBurgerMenu = ({ className, links }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, isAuthenticated } = AuthStore.use();
+  const { isAuthenticated } = AuthStore.use();
 
   const AccountCell = () => {
     if (isAuthenticated()) {
       return (
         <div className="flex flex-col gap-2">
-          <ProfileButton data={user!} />
           <LogoutButton variant="text" />
         </div>
       );

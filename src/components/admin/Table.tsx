@@ -87,11 +87,11 @@ export const Table = <T extends object>({
                 </tr>
               ))}
             </thead>
-            <tbody className="divide-y divide-secondary-200 bg-white">
+            <tbody className="divide-y divide-primary-500 bg-white">
               {table.getRowModel().rows.map((row, index) => (
                 <tr key={row.id} className={index % 2 === 0 ? 'bg-white' : 'bg-secondary-50'}>
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-4 py-2 text-sm text-secondary-700">
+                    <td key={cell.id} className="px-4 py-2 text-sm text-secondary-500">
                       <div className="max-w-xs truncate">
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </div>

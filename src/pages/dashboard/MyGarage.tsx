@@ -50,14 +50,16 @@ export const MyGarage = () => {
           {allVehiclesData.body.items.map((vehicle) => (
             <MyCarCard key={vehicle.vin} id={vehicle.vin} vehicle={vehicle} onClick={handleCards} />
           ))}
-          <PaginationControls
-            onNextPage={onNextPage}
-            onPreviousPage={onPreviousPage}
-            canNextPage={canNextPage(allVehiclesData.body.meta.total)}
-            canPreviousPage={canPreviousPage()}
-            currentPage={apiPagination.page}
-            totalPages={pagesCount(allVehiclesData.body.meta.total)}
-          />
+          {allVehiclesData.body.meta.total > 0 && (
+            <PaginationControls
+              onNextPage={onNextPage}
+              onPreviousPage={onPreviousPage}
+              canNextPage={canNextPage(allVehiclesData.body.meta.total)}
+              canPreviousPage={canPreviousPage()}
+              currentPage={apiPagination.page}
+              totalPages={pagesCount(allVehiclesData.body.meta.total)}
+            />
+          )}
 
           {allVehiclesData.body.meta.total === 0 && noVehicleCalculatedComponent}
         </div>
