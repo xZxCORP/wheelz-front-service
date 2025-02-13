@@ -13,7 +13,9 @@ import { UsersTablePage } from '../pages/admin/users/UsersTablePage';
 import { ViewUserPage } from '../pages/admin/users/ViewUserPage';
 import { ClientDashboard } from '../pages/dashboard/client/ClientDashboard';
 import { MyGarage } from '../pages/dashboard/MyGarage';
+import { AddVehicle } from '../pages/dashboard/pro/AddVehicle';
 import { ProDashboard } from '../pages/dashboard/pro/ProDashboard';
+import { UpdateVehicle } from '../pages/dashboard/pro/UpdateVehicle';
 import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
 import { MainRoot } from '../pages/main/MainRoot';
@@ -47,6 +49,14 @@ export const routes: RouteObject[] = [
                     path: 'my-garage',
                     element: <MyGarage />,
                     children: [{ path: 'vehicle/:vin', element: <Report /> }],
+                  },
+                  {
+                    path: 'add-vehicle',
+                    element: <AddVehicle />,
+                  },
+                  {
+                    path: 'update-vehicle',
+                    element: <UpdateVehicle />,
                   },
                 ],
               },

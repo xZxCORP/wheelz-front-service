@@ -19,12 +19,14 @@ type Props = {
   onSubmit?: (data: CreateVehicleTransactionData) => void;
   onlyView?: boolean;
   baseData?: CreateVehicleTransactionData;
+  allowRapidFill?: boolean;
 };
 
 export const CreateTransactionDataForm = ({
   onSubmit,
   onlyView,
   baseData = baseCreateTransactionData,
+  allowRapidFill,
 }: Props) => {
   const form = useForm<CreateVehicleTransactionData>({
     resolver: zodResolver(createVehicleTransactionDataSchema),
@@ -42,7 +44,7 @@ export const CreateTransactionDataForm = ({
         className="flex w-full flex-col gap-4"
         onSubmit={onSubmit ? form.handleSubmit(onSubmit) : undefined}
       >
-        {!onlyView && (
+        {!onlyView && allowRapidFill && (
           <Button onClick={onLoadQuickFill} buttonStyle={{ color: 'secondary' }} type="button">
             Remplir rapidement
           </Button>

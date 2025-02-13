@@ -24,7 +24,7 @@ export const ViewTransactionPage = () => {
   const getTransactionVehicleCard = useCallback((transaction: VehicleTransaction) => {
     switch (transaction.action) {
       case 'create': {
-        return <CreateTransactionDataForm baseData={transaction.data} onlyView />;
+        return <CreateTransactionDataForm baseData={transaction.data} onlyView allowRapidFill />;
       }
       case 'update': {
         return <ViewUpdateTransaction data={transaction.data} />;

@@ -11,9 +11,9 @@ export const DashboardRouter = () => {
     return <Navigate to="/" replace />;
   }
   if (isClient) {
-    return <Navigate to="/dashboard/client" replace />;
+    return <Navigate to="/dashboard/client/my-garage" replace />;
   }
   if (isPro) {
-    return <Navigate to="/dashboard/pro" replace />;
+    return <Navigate to="/dashboard/pro/my-garage" replace />;
   }
 };
