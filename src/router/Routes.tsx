@@ -11,17 +11,21 @@ import { TransactionsTablePage } from '../pages/admin/transactions/TransactionsT
 import { ViewTransactionPage } from '../pages/admin/transactions/ViewTransactionPage';
 import { UsersTablePage } from '../pages/admin/users/UsersTablePage';
 import { ViewUserPage } from '../pages/admin/users/ViewUserPage';
+import { ClientDashboard } from '../pages/dashboard/client/ClientDashboard';
 import { FullGarage } from '../pages/dashboard/client/FullGarage';
 import { Garages } from '../pages/dashboard/client/Garages';
-import { MyGarage } from '../pages/dashboard/client/MyGarage';
-import { Dashboard } from '../pages/dashboard/Dashboard';
+import { MyGarage } from '../pages/dashboard/MyGarage';
+import { AddVehicle } from '../pages/dashboard/pro/AddVehicle';
+import { ProDashboard } from '../pages/dashboard/pro/ProDashboard';
+import { UpdateVehicle } from '../pages/dashboard/pro/UpdateVehicle';
 import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
 import { MainRoot } from '../pages/main/MainRoot';
 import { Profile } from '../pages/main/Profile';
 import { Report } from '../pages/main/Report';
 import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
-import { ClientRoute, PrivateRoute, UnauthenticatedRoute } from './ProtectedRoutes';
+import { DashboardRouter } from './DashboardRouter';
+import { ClientRoute, PrivateRoute, ProRoute, UnauthenticatedRoute } from './ProtectedRoutes';
 
 export const routes: RouteObject[] = [
   {
@@ -37,32 +41,49 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'dashboard',
-            element: <Dashboard />,
             children: [
+              { index: true, element: <DashboardRouter /> },
               {
-                path: 'my-garage',
-                element: <ClientRoute element={MyGarage} />,
+                path: 'pro',
+                element: <ProRoute element={ProDashboard} />,
                 children: [
                   {
-                    path: 'vehicle/:vin',
-                    element: <Report />,
+                    path: 'my-garage',
+                    element: <MyGarage />,
+                    children: [{ path: 'vehicle/:vin', element: <Report /> }],
+                  },
+                  {
+                    path: 'add-vehicle',
+                    element: <AddVehicle />,
+                  },
+                  {
+                    path: 'update-vehicle',
+                    element: <UpdateVehicle />,
                   },
                 ],
               },
               {
-                path: 'garages',
-                element: <ClientRoute element={Garages} />,
-              },
-              {
-                path: 'garage/:id',
-                element: <ClientRoute element={FullGarage} />,
+                path: 'client',
+                element: <ClientRoute element={ClientDashboard} />,
+                children: [
+                  {
+                    path: 'my-garage',
+                    element: <MyGarage />,
+                    children: [{ path: 'vehicle/:vin', element: <Report /> }],
+                  },
+                  {
+                    path: 'garages',
+                    element: <Garages />,
+                  },
+                  {
+                    path: 'garages/:id',
+                    element: <FullGarage />,
+                  },
+                ],
               },
             ],
           },
-          /* {
-            path: 'report/:vin',
-            element: <PrivateRoute element={Report} />,
-          }, */
+
           {
             // page with VehicleSearchForm
             path: 'search',

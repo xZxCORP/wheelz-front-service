@@ -2,7 +2,8 @@ import type { ApiFetcher } from '@ts-rest/core';
 import type { AxiosError, AxiosResponse } from 'axios';
 import axios, { type Method } from 'axios';
 
-import { useAuthStore } from '../../stores/useAuthStore';
+import { AuthStore } from '../../stores/useAuthStore';
+
 export interface ApiError {
   status: number;
   body: unknown;
@@ -10,7 +11,7 @@ export interface ApiError {
 }
 export const createApiHandler = (): ApiFetcher => {
   return async ({ path, method, headers, body }) => {
-    const token = useAuthStore.getState().token;
+    const token = AuthStore.use.getState().token;
     try {
       const result = await axios.request({
         method: method as Method,
@@ -32,7 +33,7 @@ export const createApiHandler = (): ApiFetcher => {
       const response = error.response as AxiosResponse;
 
       if (response.status === 401) {
-        useAuthStore.getState().clearAuth();
+        AuthStore.use.getState().clearAuth();
       }
       return {
         status: response.status,

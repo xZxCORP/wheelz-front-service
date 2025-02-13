@@ -19,7 +19,7 @@ export const GarageCard = ({ name, tags, id }: Props) => {
 
   return (
     <button
-      onClick={() => navigate(`/dashboard/garage/${id}`)}
+      onClick={() => navigate(`/dashboard/client/garages/${id}`)}
       className="mt-5 h-1/3 w-full rounded bg-white backdrop-blur transition-all hover:scale-105"
     >
       <div className="m-2 flex gap-2">

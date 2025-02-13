@@ -134,7 +134,7 @@ export const UpdateTransactionDataForm = ({ onSubmit }: Props) => {
     return <ErrorContainer errorMessage={error.body.message} />;
   }
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex w-full flex-col gap-4">
       <H2>Chercher un véhicule à modifier</H2>
       <Form {...searchVehicleForm}>
         <form
