@@ -14,8 +14,8 @@ type Props = {
 
 export const GarageCard = ({ name, tags }: Props) => {
   return (
-    <button className="m-5 h-1/3 w-full rounded bg-white py-2 backdrop-blur transition-all hover:scale-105">
-      <div className="ml-2 flex gap-2">
+    <button className="mt-5 h-1/3 w-full rounded bg-white backdrop-blur transition-all hover:scale-105">
+      <div className="m-2 flex gap-2">
         {tags.map((tag) => (
           <div
             key={tag}
@@ -32,7 +32,7 @@ export const GarageCard = ({ name, tags }: Props) => {
         ))}
       </div>
       <hr className="my-3 h-1 w-3/4 justify-self-center border-t" />
-      <div className="m-3 flex size-full flex-col">
+      <div className="m-3 flex flex-col justify-around">
         <h2 className="font-semibold">{name}</h2>
         <p>Situé à 2.3km</p>
       </div>
