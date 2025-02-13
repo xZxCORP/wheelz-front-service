@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { FaXmark } from 'react-icons/fa6';
 
-import { useAuthStore } from '../../../stores/useAuthStore';
+import { AuthStore } from '../../../stores/useAuthStore';
 import type { RouterLink } from '../../../types/navigation';
 import { Accordion } from '../../shared/Accordion';
 import { BurgerMenuButton } from '../../shared/BurgerMenuButton';
@@ -20,7 +20,7 @@ interface Props {
 
 export const MainBurgerMenu = ({ className, links }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, isAuthenticated } = useAuthStore();
+  const { user, isAuthenticated } = AuthStore.use();
 
   const AccountCell = () => {
     if (isAuthenticated()) {

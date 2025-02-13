@@ -1,12 +1,11 @@
 import type { IconType } from 'react-icons';
 
-import type { ClientDashboardPages } from '../../../pages/dashboard/ClientDashboard';
 import { Button } from './Button';
 
 type Props = {
-  id: ClientDashboardPages;
+  id: any;
   active: boolean;
-  onClick: (id: ClientDashboardPages) => void;
+  onClick: (id: any) => void;
   Icon: IconType;
 };
 export const ToggleButton = ({ onClick, id, active, Icon }: Props) => {

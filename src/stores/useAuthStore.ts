@@ -16,11 +16,9 @@ interface AuthState {
   setRoles: (roles: string[]) => void;
   isInitialized: boolean;
   setIsInitialized: (isInitialized: boolean) => void;
-  getIsPro: () => boolean;
-  getIsClient: () => boolean;
 }
 
-export const useAuthStore = create<AuthState>()(
+const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
       token: null,
@@ -37,11 +35,6 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: () => !!get().token && !!get().user,
       setIsInitialized: (isInitialized: boolean) => set({ isInitialized }),
       setRoles: (roles: string[]) => set({ roles }),
-      getIsPro: () => {
-        const { user } = get();
-        return !!user && !!user.company;
-      },
-      getIsClient: () => get().roles.includes('user'),
     }),
     {
       name: AUTH_TOKEN_KEY,
@@ -49,3 +42,18 @@ export const useAuthStore = create<AuthState>()(
     }
   )
 );
+
+const useGetIsPro = () => {
+  const { user } = useAuthStore();
+  return !!user && !!user.company;
+};
+const useGetIsClient = () => {
+  const { roles } = useAuthStore();
+  return roles.includes('user');
+};
+
+export const AuthStore = {
+  use: useAuthStore,
+  useGetIsPro,
+  useGetIsClient,
+};

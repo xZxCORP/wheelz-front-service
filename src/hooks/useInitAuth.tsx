@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 
 import { authTsr } from '../clients/api/auth.api';
 import { userTsr } from '../clients/api/user.api';
-import { useAuthStore } from '../stores/useAuthStore';
+import { AuthStore } from '../stores/useAuthStore';
 import { useGlobalLoadingStore } from '../stores/useGlobalLoadingStore';
 
 export const useInitAuth = () => {
-  const { token, setUser, setRoles, clearAuth, setIsInitialized } = useAuthStore();
+  const { token, setUser, setRoles, clearAuth, setIsInitialized } = AuthStore.use();
   const { setLoading } = useGlobalLoadingStore();
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { type Login, loginSchema } from '@zcorp/wheelz-contracts';
 import { useForm } from 'react-hook-form';
 
 import { authTsr } from '../../../../../clients/api/auth.api';
-import { useAuthStore } from '../../../../../stores/useAuthStore';
+import { AuthStore } from '../../../../../stores/useAuthStore';
 import { Button } from '../../../../shared/button/Button';
 import {
   Form,
@@ -28,7 +28,7 @@ export const LoginForm = ({ onSwitchToRegister, onLogged }: Props) => {
       password: '',
     },
   });
-  const { setToken } = useAuthStore();
+  const { setToken } = AuthStore.use();
   const { mutate } = authTsr.authentication.login.useMutation({
     onSuccess: (response) => {
       setToken(response.body.token);

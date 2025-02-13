@@ -35,7 +35,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'dashboard',
-            element: <Dashboard />,
+            element: <ClientRoute element={Dashboard} />,
             children: [
               {
                 path: 'my-garage',
@@ -43,7 +43,6 @@ export const routes: RouteObject[] = [
                 children: [
                   {
                     path: 'vehicle/:vin',
-                    //element: <ClientRoute element={MyGarage} />,
                     element: <Report />,
                   },
                 ],
