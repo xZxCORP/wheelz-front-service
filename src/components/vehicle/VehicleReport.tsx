@@ -43,14 +43,14 @@ export const VehicleReport = ({ vehicle }: Props) => {
     LegalStatusCard({ vehicle: vehicle }),
   ];
   const handleCopy = () => {
-    addSnackbar('Url copied !', 'info');
+    addSnackbar('Lien de partage copié !', 'info');
     navigator.clipboard.writeText('Shared url');
   };
 
   return (
     <div className="flex w-full">
       <div className=" mx-auto w-full max-w-7xl space-y-6">
-        <div className="rounded-lg bg-primary-200 p-4 shadow-md  md:p-6">
+        <div className="bg-primary-200 rounded-lg p-4 shadow-md  md:p-6">
           {/* Header avec l'image et les infos principales */}
           <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center">
             {carImage && (
@@ -65,23 +65,23 @@ export const VehicleReport = ({ vehicle }: Props) => {
               </div>
 
               <div className="flex flex-wrap gap-2 text-sm">
-                <p className="rounded-md bg-secondary-500 p-2 text-white">
+                <p className="bg-secondary-500 rounded-md p-2 text-white">
                   VIN: <span className="font-bold">{vehicle.vin}</span>
                 </p>
-                <p className="rounded-md bg-secondary-500 p-2 text-white">
+                <p className="bg-secondary-500 rounded-md p-2 text-white">
                   Première immatriculation:{' '}
                   <span className="font-bold">{vehicle.infos.firstSivRegistrationDate}</span>
                 </p>
 
                 {vinMetadatasData && (
                   <>
-                    <p className="rounded-md bg-info-700 p-2 text-secondary-200">
+                    <p className="bg-primary-100 rounded-md p-2">
                       Date de création:{' '}
                       <span className="font-bold">
                         {formatFrenchDate(new Date(vinMetadatasData.body.firstTransactionDate))}
                       </span>
                     </p>
-                    <p className="rounded-md bg-info-700 p-2 text-secondary-200">
+                    <p className="bg-primary-100 rounded-md p-2">
                       Date de dernière mise à jour:{' '}
                       <span className="font-bold">
                         {formatFrenchDate(new Date(vinMetadatasData.body.lastTransactionDate))}
@@ -103,7 +103,7 @@ export const VehicleReport = ({ vehicle }: Props) => {
                 key={card.key}
                 className={`cursor-pointer rounded-lg border-2 p-4 ${
                   selectedCard === card.key
-                    ? 'border-blue-500 bg-blue-50'
+                    ? 'border-secondary-500 bg-secondary-50'
                     : 'border-gray-200 bg-white'
                 } shadow hover:shadow-md`}
                 onClick={() => setSelectedCard(card.key)}
@@ -115,7 +115,7 @@ export const VehicleReport = ({ vehicle }: Props) => {
         </div>
 
         {/* Contenu de la carte sélectionnée */}
-        <div className="rounded-lg bg-primary-200 p-4 shadow-md md:p-6">
+        <div className="bg-primary-200 rounded-lg p-4 shadow-md md:p-6">
           <div>
             {selectedCard ? (
               CARDS.find((card) => card.key === selectedCard)?.content
@@ -128,7 +128,7 @@ export const VehicleReport = ({ vehicle }: Props) => {
         </div>
 
         {/* Vérification par LockChain */}
-        <div className="flex items-center gap-4 rounded-lg bg-primary-200 p-4 shadow-md">
+        <div className="bg-primary-200 flex items-center gap-4 rounded-lg p-4 shadow-md">
           <GiCrossedChains className="shrink-0 text-3xl" />
           <h3 className="text-sm font-medium md:text-base">
             Informations vérifiées par la LockChain

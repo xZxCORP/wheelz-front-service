@@ -18,11 +18,10 @@ export const LinkButton = ({ link, variant = 'solid', onClick }: Props) => {
       buttonStyle={{
         rounded: 'lg',
         size: 'lg',
-        color: location.pathname.includes(link.url ?? '#') ? 'primary' : 'secondary',
       }}
       onClick={onClick}
       asChild
-      className="w-full"
+      className={`w-full ${location.pathname.includes(link.url ?? '#') ? 'bg-primary-200' : 'bg-primary-100'}`}
     >
       <Link to={link.url ?? '#'}>{link.title}</Link>
     </Button>
