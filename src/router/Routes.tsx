@@ -62,7 +62,7 @@ export const routes: RouteObject[] = [
                   },
                   {
                     path: 'profile',
-                    element: <ClientRoute element={Profile} />,
+                    element: <Profile />,
                   },
                 ],
               },
@@ -85,7 +85,7 @@ export const routes: RouteObject[] = [
                   },
                   {
                     path: 'profile',
-                    element: <ClientRoute element={Profile} />,
+                    element: <Profile />,
                   },
                 ],
               },

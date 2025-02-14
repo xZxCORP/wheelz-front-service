@@ -1,3 +1,4 @@
+import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 import { BiBrush } from 'react-icons/bi';
 import { BsFuelPumpFill } from 'react-icons/bs';
 import { FaInfoCircle } from 'react-icons/fa';
@@ -44,11 +45,11 @@ const KilometerChart = ({ data }: Props) => {
   );
 };
 
-const getChartData = (vehicle: any): KilometerData[] =>
+const getChartData = (vehicle: Vehicle): KilometerData[] =>
   vehicle.technicalControls
-    .map((control: any) => ({
+    .map((control) => ({
       date: control.date,
-      kilometers: control.km,
+      kilometers: Number(control.km),
     }))
     .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
 

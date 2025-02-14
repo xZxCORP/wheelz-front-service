@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { type Login, loginSchema } from '@zcorp/wheelz-contracts';
 import { useForm } from 'react-hook-form';
 
@@ -20,6 +21,7 @@ type Props = {
   onLogged: () => void;
 };
 export const LoginForm = ({ onSwitchToRegister, onLogged }: Props) => {
+  const queryClient = useQueryClient();
   const form = useForm<Login>({
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
@@ -30,9 +32,10 @@ export const LoginForm = ({ onSwitchToRegister, onLogged }: Props) => {
   });
   const { setToken } = AuthStore.use();
   const { mutate } = authTsr.authentication.login.useMutation({
-    onSuccess: (response) => {
+    onSuccess: async (response) => {
       setToken(response.body.token);
       onLogged();
+      queryClient.removeQueries({ queryKey: ['chain'] });
     },
   });
 
