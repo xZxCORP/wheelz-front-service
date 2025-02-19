@@ -54,7 +54,7 @@ export const TransactionsTablePage = () => {
       cell: (info) => {
         return (
           <div className="flex items-center gap-2">
-            <Button asChild>
+            <Button asChild className="bg-primary-50 text-black hover:bg-white">
               <Link to={`/admin/transactions/${info.row.original.id}`}>Voir</Link>
             </Button>
             {info.row.original.action === 'delete' &&

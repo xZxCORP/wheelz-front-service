@@ -66,7 +66,7 @@ export const Table = <T extends object>({
 
   return (
     <div className="flex flex-col gap-4">
-      <H1 variant="primary">{title}</H1>
+      <H1 variant="accent">{title}</H1>
       <div className="w-full overflow-hidden rounded-lg shadow-md">
         {/* Desktop view */}
         <div className="hidden overflow-x-auto lg:block">
@@ -87,11 +87,14 @@ export const Table = <T extends object>({
                 </tr>
               ))}
             </thead>
-            <tbody className="divide-y divide-primary-500 bg-white">
+            <tbody className="divide-primary-500 divide-y bg-white">
               {table.getRowModel().rows.map((row, index) => (
-                <tr key={row.id} className={index % 2 === 0 ? 'bg-white' : 'bg-secondary-50'}>
+                <tr
+                  key={row.id}
+                  className={`${index % 2 === 0 ? 'bg-primary-300' : 'bg-primary-50'}`}
+                >
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-4 py-2 text-sm text-secondary-500">
+                    <td key={cell.id} className="text-secondary-500 px-4 py-2 text-sm">
                       <div className="max-w-xs truncate">
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </div>
@@ -110,7 +113,7 @@ export const Table = <T extends object>({
             return (
               <div
                 key={row.id}
-                className="mb-4 rounded-lg border border-secondary-200 bg-white p-4 shadow-sm"
+                className="border-primary-500 mb-4 rounded-lg border bg-white p-4 shadow-sm"
               >
                 <div
                   className="flex cursor-pointer items-center justify-between font-semibold"
@@ -129,13 +132,13 @@ export const Table = <T extends object>({
                       .slice(1)
                       .map((cell) => (
                         <div key={cell.id} className="flex flex-col">
-                          <span className="text-xs font-semibold text-secondary-500">
+                          <span className="text-secondary-500 text-xs font-semibold">
                             {cell.column.columnDef.header &&
                             typeof cell.column.columnDef.header === 'string'
                               ? cell.column.columnDef.header
                               : cell.id}
                           </span>
-                          <span className="text-sm text-secondary-700">
+                          <span className="text-sm">
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </span>
                         </div>
