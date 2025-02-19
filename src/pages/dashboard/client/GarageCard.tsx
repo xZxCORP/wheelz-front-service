@@ -20,13 +20,13 @@ export const GarageCard = ({ name, tags, id }: Props) => {
   return (
     <button
       onClick={() => navigate(`/dashboard/client/garages/${id}`)}
-      className="mt-5 h-1/3 w-full rounded bg-white backdrop-blur transition-all hover:scale-105"
+      className="mt-5 w-full cursor-pointer rounded bg-white backdrop-blur transition-all hover:scale-105"
     >
       <div className="m-2 flex gap-2">
         {tags.map((tag) => (
           <div
             key={tag}
-            className="cursor-pointer rounded-lg bg-secondary-500 px-2 py-1 text-white"
+            className="bg-secondary-500 cursor-pointer rounded-lg px-2 py-1 text-white"
           >
             {tag === 'auto' ? (
               <PiCarThin size={25} />
