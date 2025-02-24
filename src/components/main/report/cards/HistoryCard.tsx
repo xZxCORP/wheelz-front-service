@@ -18,7 +18,7 @@ export const HistoryCard = ({ vehicle }: Props) => ({
 
         {/* Note */}
         <div className="mb-4 flex items-start rounded-lg bg-gray-100 p-3">
-          <div className="mr-3 shrink-0 text-xl text-blue-500">
+          <div className="text-secondary-500 mr-3 shrink-0 text-xl">
             <FaInfoCircle />
           </div>
           <div>
@@ -32,11 +32,11 @@ export const HistoryCard = ({ vehicle }: Props) => ({
           <ul className="space-y-4">
             {/* Première ligne spéciale pour le dernier événement */}
             {[
-              ...vehicle.history.map((entry: any) => ({
+              ...vehicle.history.map((entry) => ({
                 date: entry.date,
                 type: `Historique : ${entry.type}`,
               })),
-              ...vehicle.technicalControls.map((control: any) => ({
+              ...vehicle.technicalControls.map((control) => ({
                 date: control.date,
                 type: `Contrôle technique : ${control.nature} (${control.result}) - ${control.resultRaw}`,
               })),
@@ -59,7 +59,7 @@ export const HistoryCard = ({ vehicle }: Props) => ({
                 <li
                   key={index}
                   className={`flex items-start space-x-4 ${
-                    index === 0 ? 'rounded-lg border border-blue-400 bg-blue-100 p-4' : ''
+                    index === 0 ? 'border-secondary-500 bg-secondary-100 rounded-lg border p-4' : ''
                   }`}
                 >
                   <div className={`text-gray-500 ${index === 0 ? 'text-lg ' : ''}`}>
