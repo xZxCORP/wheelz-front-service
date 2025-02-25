@@ -9,7 +9,7 @@ type Props = {
 };
 export const AdminHeader = ({ className }: Props) => {
   return (
-    <header className={clsx('bg-secondary-100 shadow-md', className)}>
+    <header className={clsx('bg-secondary-500 shadow-md', className)}>
       <div className="flex items-center justify-between gap-2 px-4 py-3 sm:px-6 lg:px-8">
         <WheelzIcon link="/admin" />
 

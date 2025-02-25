@@ -43,7 +43,7 @@ export const VehicleReport = ({ vehicle }: Props) => {
     LegalStatusCard({ vehicle: vehicle }),
   ];
   const handleCopy = () => {
-    addSnackbar('Url copied !', 'info');
+    addSnackbar('Lien de partage copié !', 'info');
     navigator.clipboard.writeText('Shared url');
   };
 
@@ -75,13 +75,13 @@ export const VehicleReport = ({ vehicle }: Props) => {
 
                 {vinMetadatasData && (
                   <>
-                    <p className="rounded-md bg-info-700 p-2 text-secondary-200">
+                    <p className="rounded-md bg-primary-100 p-2">
                       Date de création:{' '}
                       <span className="font-bold">
                         {formatFrenchDate(new Date(vinMetadatasData.body.firstTransactionDate))}
                       </span>
                     </p>
-                    <p className="rounded-md bg-info-700 p-2 text-secondary-200">
+                    <p className="rounded-md bg-primary-100 p-2">
                       Date de dernière mise à jour:{' '}
                       <span className="font-bold">
                         {formatFrenchDate(new Date(vinMetadatasData.body.lastTransactionDate))}
@@ -103,7 +103,7 @@ export const VehicleReport = ({ vehicle }: Props) => {
                 key={card.key}
                 className={`cursor-pointer rounded-lg border-2 p-4 ${
                   selectedCard === card.key
-                    ? 'border-blue-500 bg-blue-50'
+                    ? 'border-secondary-500 bg-secondary-50'
                     : 'border-gray-200 bg-white'
                 } shadow hover:shadow-md`}
                 onClick={() => setSelectedCard(card.key)}

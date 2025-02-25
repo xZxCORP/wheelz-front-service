@@ -66,7 +66,7 @@ export const Table = <T extends object>({
 
   return (
     <div className="flex flex-col gap-4">
-      <H1 variant="primary">{title}</H1>
+      <H1 variant="accent">{title}</H1>
       <div className="w-full overflow-hidden rounded-lg shadow-md">
         {/* Desktop view */}
         <div className="hidden overflow-x-auto lg:block">
@@ -89,7 +89,10 @@ export const Table = <T extends object>({
             </thead>
             <tbody className="divide-y divide-primary-500 bg-white">
               {table.getRowModel().rows.map((row, index) => (
-                <tr key={row.id} className={index % 2 === 0 ? 'bg-white' : 'bg-secondary-50'}>
+                <tr
+                  key={row.id}
+                  className={`${index % 2 === 0 ? 'bg-primary-300' : 'bg-primary-50'}`}
+                >
                   {row.getVisibleCells().map((cell) => (
                     <td key={cell.id} className="px-4 py-2 text-sm text-secondary-500">
                       <div className="max-w-xs truncate">
@@ -110,7 +113,7 @@ export const Table = <T extends object>({
             return (
               <div
                 key={row.id}
-                className="mb-4 rounded-lg border border-secondary-200 bg-white p-4 shadow-sm"
+                className="mb-4 rounded-lg border border-primary-500 bg-white p-4 shadow-sm"
               >
                 <div
                   className="flex cursor-pointer items-center justify-between font-semibold"
@@ -135,7 +138,7 @@ export const Table = <T extends object>({
                               ? cell.column.columnDef.header
                               : cell.id}
                           </span>
-                          <span className="text-sm text-secondary-700">
+                          <span className="text-sm">
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </span>
                         </div>

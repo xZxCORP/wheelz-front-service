@@ -34,7 +34,7 @@ export const HistoryArrayField = ({ control, onlyView }: Props) => {
           </Button>
         )}
         {fields.map((field, index) => (
-          <div key={field.id} className="flex w-full gap-4">
+          <div key={field.id} className="flex w-full gap-4 space-y-2">
             <FormField
               control={control}
               name={`history.${index}.date`}

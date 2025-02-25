@@ -12,7 +12,7 @@ export const LogoutButton = ({ variant = 'icon' }: Props) => {
     <Button
       buttonStyle={{ size: 'lg', color: 'secondary', rounded: 'lg' }}
       onClick={clearAuth}
-      className="bg-transparent text-black hover:bg-primary-300"
+      className="bg-transparent  text-white transition-all hover:scale-105"
     >
       {variant === 'text' && 'Se déconnecter'}
       {variant === 'icon' && <FaRightFromBracket />}
