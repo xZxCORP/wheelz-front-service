@@ -22,22 +22,22 @@ export const FullGarage = () => {
   }
 
   return (
-    <div className="bg-primary-100 m-5 flex size-full flex-col items-center overflow-scroll rounded-xl">
+    <div className="m-5 flex size-full flex-col items-center overflow-scroll rounded-xl bg-primary-100">
       <h2 className="mt-5 text-xl font-bold">{garage?.body.data.name}</h2>
       <hr className="my-3 h-1 w-10/12 justify-self-center border-t" />
       <div className="w-10/12 justify-start">
-        <div className="bg-primary-300 m-5 flex max-w-fit justify-center space-x-1 rounded-lg px-2 py-1 text-center">
+        <div className="m-5 flex max-w-fit justify-center space-x-1 rounded-lg bg-primary-300 px-2 py-1 text-center">
           <h3 className="font-semibold">VAT:</h3>
           <p>{garage?.body.data.vatNumber}</p>
         </div>
-        <div className="bg-primary-300 m-5 flex max-w-fit justify-center space-x-1 rounded-lg px-2 py-1 text-center">
+        <div className="m-5 flex max-w-fit justify-center space-x-1 rounded-lg bg-primary-300 px-2 py-1 text-center">
           <h3 className="font-semibold">Adresse :</h3>
           <p>{garage?.body.data.headquartersAddress}</p>
         </div>
       </div>
       <hr className="my-3 h-1 w-10/12 justify-self-center border-t" />
       <div className="w-10/12">
-        <h2 className="text-secondary-500 m-2 text-center text-xl font-semibold">Historique</h2>
+        <h2 className="m-2 text-center text-xl font-semibold text-secondary-500">Historique</h2>
         <MaintenancesTable />
       </div>
     </div>
