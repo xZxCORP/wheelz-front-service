@@ -1,23 +1,18 @@
 import type { Vehicle } from '@zcorp/shared-typing-wheelz';
 import { useMemo, useState } from 'react';
 import { GiCrossedChains } from 'react-icons/gi';
-import { PiShareFatThin } from 'react-icons/pi';
 
 import { createCarImage } from '../../clients/api/carImage.api';
 import { transactionTsr } from '../../clients/api/transaction.api';
-import { useSnackbarStore } from '../../stores/useSnackbar';
 import { formatFrenchDate } from '../../utils/date';
-import { DamageCard } from '../main/report/cards/DamagesCard';
 import { DetailsCard } from '../main/report/cards/DetailsCard';
 import { HistoryCard } from '../main/report/cards/HistoryCard';
 import { LegalStatusCard } from '../main/report/cards/LegalStatusCard';
-import { Button } from '../shared/button/Button';
 
 type Props = {
   vehicle: Vehicle;
 };
-export const VehicleReport = ({ vehicle }: Props) => {
-  const { addSnackbar } = useSnackbarStore();
+export const SharedVehicleReport = ({ vehicle }: Props) => {
   const { data: vinMetadatasData } = transactionTsr.transactions.getVinMetadatas.useQuery({
     queryKey: ['vehicles', vehicle.vin, 'metadatas'],
     queryData: {
@@ -39,14 +34,8 @@ export const VehicleReport = ({ vehicle }: Props) => {
   const CARDS = [
     DetailsCard({ vehicle: vehicle }),
     HistoryCard({ vehicle: vehicle }),
-    DamageCard({ vehicle: vehicle }),
     LegalStatusCard({ vehicle: vehicle }),
   ];
-  const handleCopy = () => {
-    const sharedReportUrl = `${window.location.origin}/report/${vehicle.vin}`;
-    navigator.clipboard.writeText(sharedReportUrl);
-    addSnackbar('Lien de partage copié !', 'info');
-  };
 
   return (
     <div className="flex w-full">
@@ -66,7 +55,7 @@ export const VehicleReport = ({ vehicle }: Props) => {
               </div>
 
               <div className="flex flex-wrap gap-2 text-sm">
-                <p className="bg-secondary-500 rounded-md p-2 text-white">
+                <p className="bg-secondary-500 hidden rounded-md p-2 text-white">
                   VIN: <span className="font-bold">{vehicle.vin}</span>
                 </p>
                 <p className="bg-secondary-500 rounded-md p-2 text-white">
@@ -76,13 +65,13 @@ export const VehicleReport = ({ vehicle }: Props) => {
 
                 {vinMetadatasData && (
                   <>
-                    <p className="bg-primary-100 rounded-md p-2">
+                    <p className="bg-primary-100 hidden rounded-md p-2">
                       Date de création:{' '}
                       <span className="font-bold">
                         {formatFrenchDate(new Date(vinMetadatasData.body.firstTransactionDate))}
                       </span>
                     </p>
-                    <p className="bg-primary-100 rounded-md p-2">
+                    <p className="bg-primary-100 hidden rounded-md p-2">
                       Date de dernière mise à jour:{' '}
                       <span className="font-bold">
                         {formatFrenchDate(new Date(vinMetadatasData.body.lastTransactionDate))}
@@ -90,9 +79,6 @@ export const VehicleReport = ({ vehicle }: Props) => {
                     </p>
                   </>
                 )}
-                <Button buttonVariant="solid" className="hover:bg-primary-400" onClick={handleCopy}>
-                  <PiShareFatThin size={25} />
-                </Button>
               </div>
             </div>
           </div>
