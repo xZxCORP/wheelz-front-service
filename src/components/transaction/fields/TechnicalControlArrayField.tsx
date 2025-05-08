@@ -7,6 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../shared/Card';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../shared/form/Form';
 import { Input } from '../../shared/form/Input';
 
+import { FaFileInvoiceDollar, FaRegCommentAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { useSnackbarStore } from '../../../stores/useSnackbar';
+
 type Props = {
   control: Control<Vehicle>;
   onlyView?: boolean;
@@ -17,11 +21,12 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
     control,
     name: 'technicalControls',
   });
+  const { addSnackbar } = useSnackbarStore();
 
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Controle techniques</CardTitle>
+        <CardTitle>Contrôles techniques</CardTitle>
       </CardHeader>
       <CardContent>
         {!onlyView && (
@@ -38,7 +43,7 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
               })
             }
           >
-            Ajouter un controle technique
+            Ajouter un contrôle technique
           </Button>
         )}
         {fields.map((field, index) => (
@@ -132,9 +137,18 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
             />
 
             {!onlyView && (
+              <>
+              <Button onClick={() => addSnackbar('WIP - Invoice feature', 'warning')} className='flex items-center bg-transparent hover:bg-transparent hover:text-green-950'>
+                <FaFileInvoiceDollar size={25} />
+              </Button>
+              <Button onClick={() => addSnackbar('TODO - Comment feature', 'error')} className='flex items-center bg-transparent hover:bg-transparent hover:text-green-950'>
+                <FaRegCommentAlt size={25} />
+              </Button>
+
               <Button buttonStyle={{ color: 'error' }} onClick={() => remove(index)}>
                 Supprimer
               </Button>
+              </>
             )}
           </div>
         ))}
