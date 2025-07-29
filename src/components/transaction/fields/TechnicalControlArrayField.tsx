@@ -7,9 +7,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../shared/Card';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../shared/form/Form';
 import { Input } from '../../shared/form/Input';
 
-import { FaFileInvoiceDollar, FaRegCommentAlt } from 'react-icons/fa';
+import { FaRegCommentAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useSnackbarStore } from '../../../stores/useSnackbar';
+import { Label } from '../../shared/form/Label';
+import { IconFileInput } from '../../shared/form/IconFileInput';
+import { uploadTsr } from '../../../clients/api/upload.api';
+import { FaTrash } from 'react-icons/fa6';
 
 type Props = {
   control: Control<Vehicle>;
@@ -17,7 +21,7 @@ type Props = {
 };
 
 export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, update } = useFieldArray({
     control,
     name: 'technicalControls',
   });
@@ -40,6 +44,7 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
                 resultRaw: '',
                 nature: '',
                 km: 0,
+                fileUrl: null
               })
             }
           >
@@ -137,18 +142,47 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
             />
 
             {!onlyView && (
-              <>
-              <Button onClick={() => addSnackbar('WIP - Invoice feature', 'warning')} className='flex items-center bg-transparent hover:bg-transparent hover:text-green-950'>
-                <FaFileInvoiceDollar size={25} />
-              </Button>
-              <Button onClick={() => addSnackbar('TODO - Comment feature', 'error')} className='flex items-center bg-transparent hover:bg-transparent hover:text-green-950'>
-                <FaRegCommentAlt size={25} />
-              </Button>
+              <Input
+                type="file"
+                className="w-full"
+                {...field}
+                onChange={async (e)=>{
+                  //TODO - checker si field.url est pas vide, si pas vide appeler deleteFile
+                  if(!e.target.files){
+                    return
+                  }
+                  const file = e.target.files[0]
+                  if(!file){
+                    return
+                  }
 
-              <Button buttonStyle={{ color: 'error' }} onClick={() => remove(index)}>
-                Supprimer
+                  const uploadResponse = await uploadTsr.upload.uploadFile.mutate({
+                    body:{
+                      file
+                    },
+                    extraHeaders: {
+                      'Content-Type': 'multipart/form-data',
+                    },
+                  })
+                  if(uploadResponse.status===201 || uploadResponse.status===200){
+                    update(index, {
+                    ...field,
+                    fileUrl: uploadResponse.body.url
+                  })
+                  }
+                }}
+              />
+              )}
+              {field.fileUrl && (
+                <a href={field.fileUrl} target='_blank' onClick={()=>console.log(field.fileUrl)}>Voir</a>
+              )}
+              {!onlyView && (
+              <Button asChild buttonStyle={{ color: 'error' }} onClick={()=>{
+                //checker si field.url est pas vide, si pas vide appeler deleteFile
+                remove(index)
+              }}>
+                <FaTrash />
               </Button>
-              </>
             )}
           </div>
         ))}
