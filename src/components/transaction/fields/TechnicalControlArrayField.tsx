@@ -37,6 +37,7 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
           <Button
             type="button"
             buttonStyle={{ color: 'secondary' }}
+            className='mb-6'
             onClick={() =>
               append({
                 date: '',
@@ -51,8 +52,11 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
             Ajouter un contrôle technique
           </Button>
         )}
+
         {fields.map((field, index) => (
-          <div key={field.id} className="flex w-full gap-4">
+          <div key={field.id} className="flex flex-col w-full gap-4">
+            {index != 0 && (<div className='w-full border-b border-secondary-200 mt-6'></div>)}
+            <span className='underline'>Contrôle technique N°{index + 1}</span>
             <FormField
               control={control}
               name={`technicalControls.${index}.date`}
@@ -66,7 +70,6 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={control}
               name={`technicalControls.${index}.result`}
@@ -140,52 +143,85 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
                 </FormItem>
               )}
             />
-
+            
             {!onlyView && (
-              <Input
-                type="file"
-                className="w-full"
-                {...field}
-                onChange={async (e)=>{
-                  //TODO - checker si field.url est pas vide, si pas vide appeler deleteFile
-                  if(!e.target.files){
-                    return
-                  }
-                  const file = e.target.files[0]
-                  if(!file){
-                    return
-                  }
+              <div className='flex items-center justify-between'>
+                <Input
+                  type="file"
+                  className="w-1/4"
+                  {...field}
+                  onChange={async (e)=>{
+                    //TODO - checker si field.url est pas vide, si pas vide appeler deleteFile
+                    if(!e.target.files){
+                      return
+                    }
+                    const file = e.target.files[0]
+                    if(!file){
+                      return
+                    }
 
-                  const uploadResponse = await uploadTsr.upload.uploadFile.mutate({
-                    body:{
-                      file
-                    },
-                    extraHeaders: {
-                      'Content-Type': 'multipart/form-data',
-                    },
-                  })
-                  if(uploadResponse.status===201 || uploadResponse.status===200){
-                    update(index, {
-                    ...field,
-                    fileUrl: uploadResponse.body.url
-                  })
-                  }
-                }}
-              />
-              )}
+                    console.log("Trying to remove file: " + field.fileUrl)
+                    if (field.fileUrl) {
+                      const deleteResponse = await uploadTsr.upload.deleteFile.mutate({
+                        body:{
+                          url: field.fileUrl
+                        }
+                      })
+                      console.log(deleteResponse)
+                    }
+
+                    const uploadResponse = await uploadTsr.upload.uploadFile.mutate({
+                      body:{
+                        file
+                      },
+                      extraHeaders: {
+                        'Content-Type': 'multipart/form-data',
+                      },
+                    })
+                    if(uploadResponse.status===201){
+                      update(index, {
+                      ...field,
+                      fileUrl: uploadResponse.body.url
+                    })
+                    }
+                  }}
+                />
+
               {field.fileUrl && (
-                <a href={field.fileUrl} target='_blank' onClick={()=>console.log(field.fileUrl)}>Voir</a>
+                <>
+                  <span>Fichier actuel : {field.fileUrl.split('/')[field.fileUrl.split('/').length - 1]}</span>
+                  <Button>
+                    <a href={field.fileUrl} target='_blank' onClick={()=>console.log(field.fileUrl)}>Voir</a>
+                  </Button>
+                </>
               )}
-              {!onlyView && (
-              <Button asChild buttonStyle={{ color: 'error' }} onClick={()=>{
-                //checker si field.url est pas vide, si pas vide appeler deleteFile
+              
+              <Button buttonStyle={{ color: 'error' }} onClick={async ()=>{
                 remove(index)
+
+                //checker si field.url est pas vide, si pas vide appeler deleteFile
+                console.log("Trying to remove file: " + field.fileUrl)
+                if (field.fileUrl) {
+                  const deleteResponse = await uploadTsr.upload.deleteFile.mutate({
+                    body:{
+                      url: field.fileUrl
+                    }
+                  })
+                  console.log(deleteResponse)
+                }
               }}>
                 <FaTrash />
               </Button>
+            
+
+              </div>
             )}
           </div>
         ))}
+
+      
+
+
       </CardContent>
     </Card>
   );
