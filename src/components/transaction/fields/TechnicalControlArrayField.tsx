@@ -27,6 +27,15 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
   });
   const { addSnackbar } = useSnackbarStore();
 
+  const deleteFile = async (fileUrl: string) => {
+    const deleteResponse = await uploadTsr.upload.deleteFile.mutate({
+      body:{
+        url: fileUrl
+      }
+    })
+    return deleteResponse
+  }
+
   return (
     <Card className="w-full">
       <CardHeader>
@@ -151,7 +160,6 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
                   className="w-1/4"
                   {...field}
                   onChange={async (e)=>{
-                    //TODO - checker si field.url est pas vide, si pas vide appeler deleteFile
                     if(!e.target.files){
                       return
                     }
@@ -160,14 +168,8 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
                       return
                     }
 
-                    console.log("Trying to remove file: " + field.fileUrl)
                     if (field.fileUrl) {
-                      const deleteResponse = await uploadTsr.upload.deleteFile.mutate({
-                        body:{
-                          url: field.fileUrl
-                        }
-                      })
-                      console.log(deleteResponse)
+                      deleteFile(field.fileUrl);
                     }
 
                     const uploadResponse = await uploadTsr.upload.uploadFile.mutate({
@@ -191,23 +193,15 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
                 <>
                   <span>Fichier actuel : {field.fileUrl.split('/')[field.fileUrl.split('/').length - 1]}</span>
                   <Button>
-                    <a href={field.fileUrl} target='_blank' onClick={()=>console.log(field.fileUrl)}>Voir</a>
+                    <a href={field.fileUrl} target='_blank'>Voir</a>
                   </Button>
                 </>
               )}
               
               <Button buttonStyle={{ color: 'error' }} onClick={async ()=>{
                 remove(index)
-
-                //checker si field.url est pas vide, si pas vide appeler deleteFile
-                console.log("Trying to remove file: " + field.fileUrl)
                 if (field.fileUrl) {
-                  const deleteResponse = await uploadTsr.upload.deleteFile.mutate({
-                    body:{
-                      url: field.fileUrl
-                    }
-                  })
-                  console.log(deleteResponse)
+                  deleteFile(field.fileUrl);
                 }
               }}>
                 <FaTrash />
