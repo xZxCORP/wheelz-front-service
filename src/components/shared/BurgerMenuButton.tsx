@@ -7,10 +7,10 @@ interface Props {
 export const BurgerMenuButton = ({ onClick }: Props) => {
   return (
     <Button
-      buttonStyle={{ rounded: 'lg', color: 'secondary' }}
-      buttonVariant="outline"
+      buttonStyle={{ rounded: 'lg', color: 'primary' }}
+      buttonVariant="ghost"
       onClick={onClick}
-      className="border-white text-white"
+      className="text-white hover:bg-white/10"
     >
       <CiMenuBurger className="size-6" />
     </Button>

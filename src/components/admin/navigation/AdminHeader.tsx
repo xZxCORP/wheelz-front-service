@@ -15,7 +15,11 @@ export const AdminHeader = ({ className }: Props) => {
 
         <div className="flex gap-2">
           <LogoutButton />
-          <MainBurgerMenu className="flex lg:hidden" links={adminNavLinks} />
+          <MainBurgerMenu
+            className="flex lg:hidden"
+            links={adminNavLinks}
+            bgColor="bg-secondary-500"
+          />
         </div>
       </div>
     </header>
