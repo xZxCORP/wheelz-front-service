@@ -77,7 +77,7 @@ export const HistoryComponent = ({ vehicle }: { vehicle: Vehicle }) => {
                   className={`flex cursor-pointer items-start space-x-1 transition-all hover:translate-x-1 ${
                     index === 0 ? 'rounded-lg border border-secondary-500 bg-secondary-100 p-4' : ''
                   }`}
-                  onClick={() => entry.fileUrl ? getCurrentPdfFile(entry.fileUrl) : null} //TODO pass the args to get the file from s3
+                  onClick={() => entry.fileUrl ? getCurrentPdfFile(entry.fileUrl) : null}
                 >
                   <div className={`text-gray-500 ${index === 0 ? 'text-lg ' : ''}`}>
                     <strong>Date :</strong> {entry.date}
@@ -96,7 +96,6 @@ export const HistoryComponent = ({ vehicle }: { vehicle: Vehicle }) => {
                   target="_blank"
                   rel="noreferrer"
                   className="cursor-pointer"
-                  href={'https://blogs.mtdv.me/wheelz'} //change href???
                 >
                   <u className="text-secondary-500">{currentPdfFile}</u>
                 </a>

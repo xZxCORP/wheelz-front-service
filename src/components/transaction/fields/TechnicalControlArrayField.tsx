@@ -7,13 +7,21 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../shared/Card';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../shared/form/Form';
 import { Input } from '../../shared/form/Input';
 
-import { FaRegCommentAlt } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { useSnackbarStore } from '../../../stores/useSnackbar';
-import { Label } from '../../shared/form/Label';
-import { IconFileInput } from '../../shared/form/IconFileInput';
 import { uploadTsr } from '../../../clients/api/upload.api';
 import { FaTrash } from 'react-icons/fa6';
+import { useSnackbarStore } from '../../../stores/useSnackbar';
+
+// TODO - move to intended service
+const deleteFile = async (fileUrl: string) => {
+  const deleteResponse = await uploadTsr.upload.deleteFile.mutate({
+    body:{
+      url: fileUrl
+    }
+  })
+  return deleteResponse
+}
+
+type TechnicalControlField = Vehicle['technicalControls'][number] & { id: string };
 
 type Props = {
   control: Control<Vehicle>;
@@ -27,13 +35,50 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
   });
   const { addSnackbar } = useSnackbarStore();
 
-  const deleteFile = async (fileUrl: string) => {
-    const deleteResponse = await uploadTsr.upload.deleteFile.mutate({
+  const onFileChange = async (files: FileList | null, field: TechnicalControlField, index: number) => {
+    if(!files) {
+      return
+    }
+    const file = files[0]
+    if(!file) {
+      return
+    }
+    if (field.fileUrl) {
+      await onDeleteFile(field.fileUrl);
+    }
+    const uploadResponse = await uploadTsr.upload.uploadFile.mutate({
       body:{
-        url: fileUrl
-      }
+        file
+      },
+      extraHeaders: {
+        'Content-Type': 'multipart/form-data',
+      },
     })
-    return deleteResponse
+    if(uploadResponse.status===201) {
+      update(index, {
+      ...field,
+      fileUrl: uploadResponse.body.url
+    })
+    }
+  }
+
+  const onDeleteFile = async (fileUrl: string) => {
+    const deleteResponse = await deleteFile(fileUrl);
+    console.log(deleteResponse)
+    if (deleteResponse.status === 200) {
+      addSnackbar("Fichier supprimé", "warning");
+    }
+  }
+
+  const onTechnicalControlDelete = async (index: number, fileUrl: string | null) => {
+    remove(index)
+    if (fileUrl) {
+      await onDeleteFile(fileUrl);
+    }
+  }
+
+  const fileName = (fileUrl: string) => {
+    return fileUrl.split('/')[fileUrl.split('/').length - 1]
   }
 
   return (
@@ -157,57 +202,27 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
               <div className='flex items-center justify-between'>
                 <Input
                   type="file"
-                  className="w-1/4"
+                  className="w-1/3"
                   {...field}
                   onChange={async (e)=>{
-                    if(!e.target.files){
-                      return
-                    }
-                    const file = e.target.files[0]
-                    if(!file){
-                      return
-                    }
-
-                    if (field.fileUrl) {
-                      deleteFile(field.fileUrl);
-                    }
-
-                    const uploadResponse = await uploadTsr.upload.uploadFile.mutate({
-                      body:{
-                        file
-                      },
-                      extraHeaders: {
-                        'Content-Type': 'multipart/form-data',
-                      },
-                    })
-                    if(uploadResponse.status===201){
-                      update(index, {
-                      ...field,
-                      fileUrl: uploadResponse.body.url
-                    })
-                    }
+                    await onFileChange(e?.target?.files, field, index);
                   }}
                 />
 
-              {field.fileUrl && (
-                <>
-                  <span>Fichier actuel : {field.fileUrl.split('/')[field.fileUrl.split('/').length - 1]}</span>
-                  <Button>
-                    <a href={field.fileUrl} target='_blank'>Voir</a>
-                  </Button>
-                </>
-              )}
-              
-              <Button buttonStyle={{ color: 'error' }} onClick={async ()=>{
-                remove(index)
-                if (field.fileUrl) {
-                  deleteFile(field.fileUrl);
-                }
-              }}>
-                <FaTrash />
-              </Button>
-            
-
+                {field.fileUrl && (
+                  <div className='flex justify-around items-center w-1/2'>
+                    <span className='text-sm lg:text-base'>Fichier actuel : {fileName(field.fileUrl)}</span>
+                    <Button asChild>
+                      <a href={field.fileUrl} target='_blank'>Voir</a>
+                    </Button>
+                  </div>
+                )}
+                
+                <Button buttonStyle={{ color: 'error' }} onClick={async ()=>{
+                  await onTechnicalControlDelete(index, field.fileUrl);
+                }}>
+                  <FaTrash />
+                </Button>
               </div>
             )}
           </div>
