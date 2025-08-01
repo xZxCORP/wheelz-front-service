@@ -1,6 +1,10 @@
 import type { RouteObject } from 'react-router-dom';
 
 import { AdminRoot } from '../pages/admin/AdminRoot';
+import { BlogTablePage } from '../pages/admin/blog/BlogTablePage';
+import { CreateBlogPage } from '../pages/admin/blog/CreateBlogPage';
+import { EditBlogPage } from '../pages/admin/blog/EditBlogPage';
+import { ViewBlogPage } from '../pages/admin/blog/ViewBlogPage';
 import { ChainTablePage } from '../pages/admin/chain/ChainTablePage';
 import { ViewVehiclePage } from '../pages/admin/chain/ViewVehiclePage';
 import { CompaniesTablePage } from '../pages/admin/companies/CompaniesTablePage';
@@ -22,6 +26,7 @@ import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
 import { MainRoot } from '../pages/main/MainRoot';
 import { Profile } from '../pages/main/Profile';
+import { PublicBlogPage } from '../pages/main/PublicBlogPage';
 import { Report } from '../pages/main/Report';
 import { SharedReport } from '../pages/main/SharedReport';
 import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
@@ -39,6 +44,10 @@ export const routes: RouteObject[] = [
           {
             index: true,
             element: <UnauthenticatedRoute element={MainRoot} />,
+          },
+          {
+            path: '/blogs/:id',
+            element: <PublicBlogPage />,
           },
           {
             path: 'dashboard',
@@ -156,6 +165,22 @@ export const routes: RouteObject[] = [
           {
             path: 'companies/:id',
             element: <ViewCompanyPage />,
+          },
+          {
+            path: 'blogs',
+            element: <BlogTablePage />,
+          },
+          {
+            path: 'blogs/:id',
+            element: <ViewBlogPage />,
+          },
+          {
+            path: 'blogs/:id/edit',
+            element: <EditBlogPage />,
+          },
+          {
+            path: 'blogs/new',
+            element: <CreateBlogPage />,
           },
         ],
       },
