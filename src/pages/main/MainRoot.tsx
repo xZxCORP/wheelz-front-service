@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { LoginForm } from '../../components/main/auth/login/forms/LoginForm';
 import { RandomVehiclesBanner } from '../../components/main/home/RandomVehiclesBanner';
+import { ExplanationSection } from '../../components/shared/Explanation';
 import { FeaturesSection } from '../../components/shared/FeaturesSections';
 import { LandingMessage } from '../../components/shared/LandingMessage';
 
@@ -24,6 +25,7 @@ export const MainRoot = () => {
         </div>
       </div>
       <FeaturesSection />
+      <ExplanationSection />
     </>
   );
 };
