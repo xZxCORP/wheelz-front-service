@@ -6,7 +6,6 @@ import Paragraph from '@editorjs/paragraph';
 import Quote from '@editorjs/quote';
 import Delimiter from '@editorjs/delimiter';
 import EditorjsList from '@editorjs/list';
-import ImageTool from '@editorjs/image';
 
 type EditorFieldProps = {
   name: string;
@@ -35,15 +34,6 @@ export const EditorField = ({ name, value, onChange }: EditorFieldProps) => {
           config: {
             defaultStyle: 'unordered'
           },
-        },
-        image: {
-          class: ImageTool,
-          config: {
-            endpoints: {
-              byFile: `${import.meta.env.VITE_BASE_UPLOAD_SERVICE_URL}/upload`,
-              byUrl: 'fym',
-            },
-          }
         },
       },
       autofocus: true,
