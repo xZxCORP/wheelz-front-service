@@ -45,7 +45,7 @@ export const Profile = () => {
 
   if (!user) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center">
+      <div className="flex min-h-full flex-col items-center justify-center">
         <h1 className="text-2xl font-semibold">Vous n&apos;êtes pas connecté.</h1>
       </div>
     );
