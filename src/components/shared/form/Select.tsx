@@ -21,12 +21,12 @@ const SelectTrigger = React.forwardRef<
       'px-3 py-2',
       'text-sm',
 
-      'bg-white',
-      'border border-secondary-300',
-      'text-secondary-900',
+      'bg-background',
+      'border border-primary-300',
+      'text-primary-900',
 
       'focus:outline-none',
-      'focus:border-primary-500',
+      'focus:border-secondary-500',
       'focus:ring-2',
       'focus:ring-primary-500/20',
 
@@ -100,8 +100,8 @@ const SelectContent = React.forwardRef<
         'max-h-96',
 
         // Couleurs
-        'bg-white',
-        'border border-secondary-200',
+        'bg-background',
+        'border border-primary-200',
         'shadow-lg',
 
         // Animations

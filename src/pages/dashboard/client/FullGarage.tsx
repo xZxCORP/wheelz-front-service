@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { companyTsr } from '../../../clients/api/company.api';
 import { ErrorContainer } from '../../../components/shared/error/ErrorContainer';
 import { isApiResponse } from '../../../utils/errors';
+import { MaintenancesTable } from './MaintenancesTable';
 
 type PageParams = {
   id: string;
@@ -30,23 +31,14 @@ export const FullGarage = () => {
           <p>{garage?.body.data.vatNumber}</p>
         </div>
         <div className="m-5 flex max-w-fit justify-center space-x-1 rounded-lg bg-primary-300 px-2 py-1 text-center">
-          <h3 className="font-semibold">Siège social:</h3>
+          <h3 className="font-semibold">Adresse :</h3>
           <p>{garage?.body.data.headquartersAddress}</p>
-        </div>
-        <div className="m-5 flex max-w-fit justify-center space-x-1 rounded-lg bg-primary-300 px-2 py-1 text-center">
-          <h3 className="font-semibold">Adresse:</h3>
-          <p>24 rue du Chemin</p>
         </div>
       </div>
       <hr className="my-3 h-1 w-10/12 justify-self-center border-t" />
       <div className="w-10/12">
         <h2 className="m-2 text-center text-xl font-semibold text-secondary-500">Historique</h2>
-        <button className="flex w-full justify-start space-x-2 border hover:bg-primary-50">
-          <p>12 décembre 2025</p>
-          <p>Peugeot 208</p>
-          <p>12 241km</p>
-          <p></p>
-        </button>
+        <MaintenancesTable />
       </div>
     </div>
   );

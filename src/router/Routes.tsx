@@ -23,6 +23,7 @@ import { BaseLayout } from '../pages/layout/BaseLayout';
 import { MainRoot } from '../pages/main/MainRoot';
 import { Profile } from '../pages/main/Profile';
 import { Report } from '../pages/main/Report';
+import { SharedReport } from '../pages/main/SharedReport';
 import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
 import { DashboardRouter } from './DashboardRouter';
 import { ClientRoute, PrivateRoute, ProRoute, UnauthenticatedRoute } from './ProtectedRoutes';
@@ -96,6 +97,10 @@ export const routes: RouteObject[] = [
             // page with VehicleSearchForm
             path: 'search',
             element: <VehicleSearchPage />,
+          },
+          {
+            path: 'report/:vin',
+            element: <SharedReport />,
           },
         ],
       },

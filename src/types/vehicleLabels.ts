@@ -60,6 +60,7 @@ export const technicalControlLabels: Record<keyof Vehicle['technicalControls'][0
   resultRaw: 'Résultat brut',
   nature: 'Nature',
   km: 'Kilométrage',
+  fileUrl: 'URL du fichier',
 };
 
 export const sinisterInfosLabels: Record<keyof Vehicle['sinisterInfos'], string> = {

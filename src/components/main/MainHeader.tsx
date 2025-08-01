@@ -18,12 +18,12 @@ export const Header = () => {
   };
 
   return (
-    <header className="flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <header className="flex items-center justify-between border-b border-primary-200 bg-background px-4 py-3 shadow-sm sm:px-6 lg:px-8">
       <WheelzIcon />
       <div className="flex justify-start">
         <nav className="mx-auto hidden max-w-4xl grow justify-center space-x-4 lg:flex lg:space-x-6"></nav>
         <div className="ml-auto flex items-center lg:ml-0">
-          <div className="mr-4 hidden lg:flex">
+          <div className="mr-4">
             <AccountCell />
           </div>
         </div>

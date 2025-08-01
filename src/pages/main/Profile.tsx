@@ -45,7 +45,7 @@ export const Profile = () => {
 
   if (!user) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center">
+      <div className="flex min-h-full flex-col items-center justify-center">
         <h1 className="text-2xl font-semibold">Vous n&apos;êtes pas connecté.</h1>
       </div>
     );
@@ -65,7 +65,7 @@ export const Profile = () => {
 
   return (
     <Form {...form}>
-      <Card className="m-10 h-4/5 w-full rounded bg-primary-200">
+      <Card className="m-10 h-4/5 w-full rounded border border-primary-200 bg-background shadow-md">
         <CardHeader>
           <H2 className="text-neutral-600">
             Profil de {user.firstname} {user.lastname}

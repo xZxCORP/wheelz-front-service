@@ -15,9 +15,10 @@ import { LoginRegisterPickers } from '../auth/register/LoginRegisterPickers';
 interface Props {
   className?: string;
   links: RouterLink[];
+  bgColor?: string;
 }
 
-export const MainBurgerMenu = ({ className, links }: Props) => {
+export const MainBurgerMenu = ({ className, links, bgColor = 'bg-secondary-100' }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated } = AuthStore.use();
 
@@ -52,7 +53,8 @@ export const MainBurgerMenu = ({ className, links }: Props) => {
       <BurgerMenuButton onClick={toggleMenu} />
       <div
         className={clsx(
-          'fixed inset-0 z-30 bg-secondary-100',
+          'fixed inset-0 z-30',
+          bgColor,
           'transition-transform duration-300 ease-in-out',
           {
             'translate-x-0': isOpen,

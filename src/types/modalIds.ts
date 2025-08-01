@@ -9,6 +9,7 @@ export const MODAL_IDS = {
   LOGIN: 'login',
   FORCE_CREATE_TRANSACTION: 'force-create-transaction',
   FORCE_UPDATE_TRANSACTION: 'force-update-transaction',
+  HISTORY: 'history',
 } as const;
 
 export type ForceCreateTransactionProps = {
