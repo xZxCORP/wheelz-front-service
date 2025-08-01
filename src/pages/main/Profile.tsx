@@ -65,7 +65,7 @@ export const Profile = () => {
 
   return (
     <Form {...form}>
-      <Card className="m-10 h-4/5 w-full rounded bg-primary-200">
+      <Card className="m-10 h-4/5 w-full rounded border border-primary-200 bg-background shadow-md">
         <CardHeader>
           <H2 className="text-neutral-600">
             Profil de {user.firstname} {user.lastname}

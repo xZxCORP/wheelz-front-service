@@ -12,11 +12,12 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         className={clsx(
           'rounded-lg',
-          'border border-secondary-100',
-          'bg-white',
+          'border border-primary-200',
+          'bg-background',
           'p-6',
           'shadow-sm',
           'transition-shadow duration-200',
+          'hover:shadow-md',
           'w-fit',
           className
         )}

@@ -10,9 +10,9 @@ import { useGlobalLoadingStore } from '../../stores/useGlobalLoadingStore';
 export const BaseLayout = () => {
   const isLoading = useGlobalLoadingStore((state) => state.isLoading);
   return (
-    <div className="flex min-h-screen w-full flex-col overflow-hidden bg-primary-100">
+    <div className="flex min-h-screen w-full flex-col overflow-hidden bg-background">
       <Header />
-      <main className="flex-1 overflow-hidden">
+      <main className="flex-1 overflow-hidden bg-primary-50">
         <Outlet />
       </main>
 

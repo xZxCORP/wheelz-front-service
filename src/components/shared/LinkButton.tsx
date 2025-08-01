@@ -6,11 +6,12 @@ import { Button } from './button/Button';
 interface Props {
   link: RouterLink;
   onClick?: () => void;
-  variant?: 'solid' | 'ghost';
+  variant?: 'solid' | 'ghost' | 'outline';
 }
 
-export const LinkButton = ({ link, variant = 'solid', onClick }: Props) => {
+export const LinkButton = ({ link, variant = 'outline', onClick }: Props) => {
   const location = useLocation();
+  const isActive = location.pathname.includes(link.url ?? '#');
 
   return (
     <Button
@@ -18,10 +19,11 @@ export const LinkButton = ({ link, variant = 'solid', onClick }: Props) => {
       buttonStyle={{
         rounded: 'lg',
         size: 'lg',
+        color: isActive ? 'accent' : 'secondary',
       }}
       onClick={onClick}
       asChild
-      className={`w-full ${location.pathname.includes(link.url ?? '#') ? 'bg-primary-200' : 'bg-primary-100'}`}
+      className={`w-full ${isActive ? 'border-background bg-background text-primary-900' : 'border-background/30 text-background hover:border-background/60'}`}
     >
       <Link to={link.url ?? '#'}>{link.title}</Link>
     </Button>
