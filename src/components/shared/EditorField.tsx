@@ -47,7 +47,8 @@ export const EditorField = ({ name, value, onChange }: EditorFieldProps) => {
     return () => {
       editor.destroy();
     };
-  }, [onChange, value]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <div id={name} ref={holder} className="min-h-[200px] rounded border p-3" />;
 };

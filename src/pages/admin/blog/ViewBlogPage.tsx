@@ -34,8 +34,6 @@ export const ViewBlogPage = () => {
     { label: 'Date de création', value: blog?.createdAt.toLocaleString() },
   ];
 
-  // const contentRow = [{ label: 'Content', value: blog?.content }];
-
   return (
     data && (
       <div className="mx-10 flex w-full flex-col px-20">

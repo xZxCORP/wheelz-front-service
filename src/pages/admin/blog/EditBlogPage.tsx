@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 import { blogTsr } from '../../../clients/api/blog.api';
-import { BlogForm } from '../../../components/admin/BlogForm';
+import { BlogForm } from '../../../components/blog/components/BlogForm';
 import { ErrorContainer } from '../../../components/shared/error/ErrorContainer';
 import { AuthStore } from '../../../stores/useAuthStore';
 
@@ -47,6 +47,7 @@ export const EditBlogPage = () => {
       content: formData.content,
       publishedAt: String(formData.publishedAt),
       authorId: user!.id,
+      imageUrl: blog?.imageUrl || '',
     };
 
     updateBlogMutation.mutate({

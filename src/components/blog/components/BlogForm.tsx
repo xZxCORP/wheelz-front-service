@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { uploadTsr } from '../../clients/api/upload.api';
-import { EditorField } from './EditorField';
+import { uploadTsr } from '../../../clients/api/upload.api';
+import { EditorField } from '../../shared/EditorField';
 const deleteFile = async (fileUrl: string) => {
   const deleteResponse = await uploadTsr.upload.deleteFile.mutate({
     body: {
@@ -114,7 +114,7 @@ export const BlogForm = ({ defaultValues, onSubmit, type }: BlogFormProps) => {
 
       <div>
         <label>Image</label>
-        <input type="file" {...register('imageUrl')} onChange={(e) => fileInputChange(e)} />
+        <input type="file" onChange={(e) => fileInputChange(e)} />
       </div>
 
       <div>

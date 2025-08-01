@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import z from 'zod';
 
 import { blogTsr } from '../../../clients/api/blog.api';
-import { BlogForm } from '../../../components/admin/BlogForm';
+import { BlogForm } from '../../../components/blog/components/BlogForm';
 import { AuthStore } from '../../../stores/useAuthStore';
 
 const formSchema = z.object({
@@ -11,6 +11,7 @@ const formSchema = z.object({
   keywords: z.string().min(1),
   content: z.any(),
   publishedAt: z.string().optional(),
+  imageUrl: z.string(),
 });
 
 type FormSchema = z.infer<typeof formSchema>;
@@ -35,7 +36,7 @@ export const CreateBlogPage = () => {
       keywords: formData.keywords.split(' '),
       content: formData.content,
       publishedAt: String(formData.publishedAt),
-      imageUrl: 'test',
+      imageUrl: formData.imageUrl,
       authorId: user!.id,
     };
 
