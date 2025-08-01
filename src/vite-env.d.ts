@@ -6,8 +6,9 @@ interface ImportMetaEnv {
     readonly VITE_BASE_TRANSACTION_SERVICE_URL: string
     readonly VITE_BASE_CHAIN_SERVICE_URL: string
     readonly VITE_BASE_UPLOAD_SERVICE_URL: string
+    readonly VITE_BASE_BLOG_SERVICE_URL: string
   }
-  
+
   interface ImportMeta {
     readonly env: ImportMetaEnv
   }

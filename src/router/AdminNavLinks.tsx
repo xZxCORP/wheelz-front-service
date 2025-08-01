@@ -21,4 +21,8 @@ export const adminNavLinks: RouterLink[] = [
     title: 'Entreprises',
     url: '/admin/companies',
   },
+  {
+    title: 'Blog Post',
+    url: '/admin/blogs',
+  },
 ];
