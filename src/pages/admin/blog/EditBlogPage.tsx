@@ -1,14 +1,12 @@
 import { type BlogUpdate } from '@zcorp/wheelz-contracts';
 import { useParams } from 'react-router-dom';
-
 import { useNavigate } from 'react-router-dom';
-
 import { z } from 'zod';
 
 import { blogTsr } from '../../../clients/api/blog.api';
+import { BlogForm } from '../../../components/admin/BlogForm';
 import { ErrorContainer } from '../../../components/shared/error/ErrorContainer';
 import { AuthStore } from '../../../stores/useAuthStore';
-import { BlogForm } from '../../../components/admin/BlogForm';
 
 const formSchema = z.object({
   title: z.string().min(1),
@@ -24,10 +22,7 @@ export const EditBlogPage = () => {
   const { id } = useParams<PageParams>();
   const navigate = useNavigate();
 
-  const {
-    data: blogData,
-    isError,
-  } = blogTsr.contract.getOneBySlug.useQuery({
+  const { data: blogData, isError } = blogTsr.contract.getOneBySlug.useQuery({
     queryKey: ['blog_posts', id],
     queryData: { params: { id: id! } },
     enabled: !!id,
@@ -35,7 +30,7 @@ export const EditBlogPage = () => {
 
   const updateBlogMutation = blogTsr.contract.updateBlogPost.useMutation({
     onSuccess: (data) => {
-      navigate(`/admin/blogs/${data.body.data.slug}`)
+      navigate(`/admin/blogs/${data.body.data.slug}`);
     },
     onError: (error) => {
       console.error('Error when submitting :', error);
@@ -45,19 +40,17 @@ export const EditBlogPage = () => {
   const blog = blogData?.body.data;
   const { user } = AuthStore.use();
 
-
   const onSubmit = (formData: FormSchema) => {
-
     const payload: BlogUpdate = {
       title: formData.title,
       keywords: formData.keywords.split(' '),
       content: formData.content,
       publishedAt: String(formData.publishedAt),
-      authorId: user!.id
+      authorId: user!.id,
     };
 
     updateBlogMutation.mutate({
-      params: { id: String(blog?.id!) },
+      params: { id: String(blog?.id) },
       body: payload,
     });
   };
@@ -72,11 +65,12 @@ export const EditBlogPage = () => {
         title: blog.title,
         keywords: blog.keywords.join(' '),
         content: blog.content,
-        publishedAt: blog.publishedAt ? new Date(blog.publishedAt).toISOString().split('T')[0] : undefined
-
+        publishedAt: blog.publishedAt
+          ? new Date(blog.publishedAt).toISOString().split('T')[0]
+          : undefined,
       }}
       onSubmit={(formData) => onSubmit(formData)}
-      type='update'
+      type="update"
     />
   );
 };

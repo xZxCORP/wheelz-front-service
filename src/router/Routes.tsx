@@ -2,6 +2,7 @@ import type { RouteObject } from 'react-router-dom';
 
 import { AdminRoot } from '../pages/admin/AdminRoot';
 import { BlogTablePage } from '../pages/admin/blog/BlogTablePage';
+import { CreateBlogPage } from '../pages/admin/blog/CreateBlogPage';
 import { EditBlogPage } from '../pages/admin/blog/EditBlogPage';
 import { ViewBlogPage } from '../pages/admin/blog/ViewBlogPage';
 import { ChainTablePage } from '../pages/admin/chain/ChainTablePage';
@@ -25,12 +26,11 @@ import { AdminLayout } from '../pages/layout/AdminLayout';
 import { BaseLayout } from '../pages/layout/BaseLayout';
 import { MainRoot } from '../pages/main/MainRoot';
 import { Profile } from '../pages/main/Profile';
+import { PublicBlogPage } from '../pages/main/PublicBlogPage';
 import { Report } from '../pages/main/Report';
 import { VehicleSearchPage } from '../pages/main/VehicleSearchPage';
 import { DashboardRouter } from './DashboardRouter';
 import { ClientRoute, PrivateRoute, ProRoute, UnauthenticatedRoute } from './ProtectedRoutes';
-import { CreateBlogPage } from '../pages/admin/blog/CreateBlogPage';
-import { PublicBlogPage } from '../pages/main/PublicBlogPage';
 
 export const routes: RouteObject[] = [
   {
@@ -46,7 +46,7 @@ export const routes: RouteObject[] = [
           },
           {
             path: '/blogs/:id',
-            element: <PublicBlogPage />
+            element: <PublicBlogPage />,
           },
           {
             path: 'dashboard',
@@ -175,8 +175,8 @@ export const routes: RouteObject[] = [
           },
           {
             path: 'blogs/new',
-            element: <CreateBlogPage />
-          }
+            element: <CreateBlogPage />,
+          },
         ],
       },
     ],

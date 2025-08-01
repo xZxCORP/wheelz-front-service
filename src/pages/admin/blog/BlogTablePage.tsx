@@ -60,7 +60,7 @@ export const BlogTablePage = () => {
     data && (
       <div className="flex flex-col gap-2">
         <Button>
-          <Link to={"/admin/blogs/new"}>Créer un blog post</Link>
+          <Link to={'/admin/blogs/new'}>Créer un blog post</Link>
         </Button>
         <Table
           title="Blog posts"

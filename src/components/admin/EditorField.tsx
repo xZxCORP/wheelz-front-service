@@ -1,11 +1,10 @@
+import Delimiter from '@editorjs/delimiter';
 import EditorJS, { type BlockToolConstructable, type OutputData } from '@editorjs/editorjs';
-import { useEffect, useRef } from 'react';
-
 import Header from '@editorjs/header';
+import EditorjsList from '@editorjs/list';
 import Paragraph from '@editorjs/paragraph';
 import Quote from '@editorjs/quote';
-import Delimiter from '@editorjs/delimiter';
-import EditorjsList from '@editorjs/list';
+import { useEffect, useRef } from 'react';
 
 type EditorFieldProps = {
   name: string;
@@ -32,7 +31,7 @@ export const EditorField = ({ name, value, onChange }: EditorFieldProps) => {
           class: EditorjsList as unknown as BlockToolConstructable,
           inlineToolbar: true,
           config: {
-            defaultStyle: 'unordered'
+            defaultStyle: 'unordered',
           },
         },
       },
@@ -48,7 +47,7 @@ export const EditorField = ({ name, value, onChange }: EditorFieldProps) => {
     return () => {
       editor.destroy();
     };
-  }, []);
+  }, [onChange, value]);
 
   return <div id={name} ref={holder} className="min-h-[200px] rounded border p-3" />;
 };

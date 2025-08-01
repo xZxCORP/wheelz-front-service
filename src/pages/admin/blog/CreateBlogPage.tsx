@@ -1,9 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import z from "zod";
-import { blogTsr } from "../../../clients/api/blog.api";
-import { AuthStore } from "../../../stores/useAuthStore";
-import type { BlogCreate } from "@zcorp/wheelz-contracts";
-import { BlogForm } from "../../../components/admin/BlogForm";
+import type { BlogCreate } from '@zcorp/wheelz-contracts';
+import { useNavigate } from 'react-router-dom';
+import z from 'zod';
+
+import { blogTsr } from '../../../clients/api/blog.api';
+import { BlogForm } from '../../../components/admin/BlogForm';
+import { AuthStore } from '../../../stores/useAuthStore';
 
 const formSchema = z.object({
   title: z.string().min(1),
@@ -15,13 +16,11 @@ const formSchema = z.object({
 type FormSchema = z.infer<typeof formSchema>;
 
 export const CreateBlogPage = () => {
-
   const navigate = useNavigate();
-
 
   const createBlogMutation = blogTsr.contract.createBlogPost.useMutation({
     onSuccess: (data) => {
-      navigate(`/admin/blogs/${data.body.data.slug}`)
+      navigate(`/admin/blogs/${data.body.data.slug}`);
     },
     onError: (error) => {
       console.error('Error when submitting :', error);
@@ -31,14 +30,13 @@ export const CreateBlogPage = () => {
   const { user } = AuthStore.use();
 
   const onSubmit = (formData: FormSchema) => {
-
     const payload: BlogCreate = {
       title: formData.title,
       keywords: formData.keywords.split(' '),
       content: formData.content,
       publishedAt: String(formData.publishedAt),
       imageUrl: 'test',
-      authorId: user!.id
+      authorId: user!.id,
     };
 
     createBlogMutation.mutate({
@@ -46,10 +44,5 @@ export const CreateBlogPage = () => {
     });
   };
 
-  return (
-    <BlogForm
-      onSubmit={(formData) => onSubmit(formData)}
-      type="create"
-    />
-  );
+  return <BlogForm onSubmit={(formData) => onSubmit(formData)} type="create" />;
 };
