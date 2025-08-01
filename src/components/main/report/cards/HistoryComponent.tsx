@@ -47,25 +47,25 @@ export const HistoryComponent = ({ vehicle }: { vehicle: Vehicle }) => {
               ...vehicle.history.map((entry) => ({
                 date: entry.date,
                 type: `Historique : ${entry.type}`,
-                fileUrl: undefined
+                fileUrl: undefined,
               })),
               ...vehicle.technicalControls.map((control) => ({
                 date: control.date,
                 type: `Contrôle technique : ${control.nature} (${control.result}) - ${control.resultRaw}`,
-                fileUrl: control.fileUrl
+                fileUrl: control.fileUrl,
               })),
               vehicle.sinisterInfos.lastSinisterDate
                 ? {
                     date: vehicle.sinisterInfos.lastSinisterDate,
                     type: 'Sinistre : Dernier sinistre enregistré',
-                    fileUrl: undefined
+                    fileUrl: undefined,
                   }
                 : undefined,
               vehicle.sinisterInfos.lastResolutionDate
                 ? {
                     date: vehicle.sinisterInfos.lastResolutionDate,
                     type: 'Sinistre : Dernière résolution de sinistre',
-                    fileUrl: undefined
+                    fileUrl: undefined,
                   }
                 : undefined,
             ]
@@ -77,7 +77,7 @@ export const HistoryComponent = ({ vehicle }: { vehicle: Vehicle }) => {
                   className={`flex cursor-pointer items-start space-x-1 transition-all hover:translate-x-1 ${
                     index === 0 ? 'rounded-lg border border-secondary-500 bg-secondary-100 p-4' : ''
                   }`}
-                  onClick={() => entry.fileUrl ? getCurrentPdfFile(entry.fileUrl) : null}
+                  onClick={() => (entry.fileUrl ? getCurrentPdfFile(entry.fileUrl) : null)}
                 >
                   <div className={`text-gray-500 ${index === 0 ? 'text-lg ' : ''}`}>
                     <strong>Date :</strong> {entry.date}
@@ -92,11 +92,7 @@ export const HistoryComponent = ({ vehicle }: { vehicle: Vehicle }) => {
           <Modal isOpen={isOpen} onClose={handleCloseModal} title="Télécharger la facture">
             {currentPdfFile && (
               <div className="flex items-center space-x-2">
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  className="cursor-pointer"
-                >
+                <a target="_blank" rel="noreferrer" className="cursor-pointer">
                   <u className="text-secondary-500">{currentPdfFile}</u>
                 </a>
                 <Button>
