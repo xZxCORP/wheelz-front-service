@@ -1,15 +1,16 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { type EditorJSFormat } from '@zcorp/wheelz-contracts';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { EditorField } from './EditorField';
+import { uploadTsr } from '../../clients/api/upload.api';
 
 const formSchema = z.object({
   title: z.string().min(1),
   keywords: z.string().min(1),
   content: z.any(),
   publishedAt: z.string().optional(),
+  imageUrl: z.string(),
 });
 
 type FormSchema = z.infer<typeof formSchema>;
@@ -31,6 +32,47 @@ export const BlogForm = ({ defaultValues, onSubmit, type }: BlogFormProps) => {
     resolver: zodResolver(formSchema),
     defaultValues,
   });
+
+  const deleteFile = async (fileUrl: string) => {
+    const deleteResponse = await uploadTsr.upload.deleteFile.mutate({
+      body:{
+        url: fileUrl
+      }
+    })
+    return deleteResponse
+ }
+
+ const uploadFile = async (file: File) => {
+    return await uploadTsr.upload.uploadFile.mutate({
+      body:{
+        file
+      },
+      extraHeaders: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+ }
+
+  const fileInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(!e.target.files){
+      return;
+    }
+
+    const file = e.target.files[0];
+    if(!file){
+      return
+    }
+
+    if (defaultValues?.imageUrl) {
+      deleteFile(defaultValues.imageUrl);
+    }
+
+    const response = await uploadFile(file);
+
+    if(response.status===201){
+      setValue('imageUrl', response.body.url)
+    }
+  }
 
   useEffect(() => {
     if (defaultValues) {
@@ -70,6 +112,15 @@ export const BlogForm = ({ defaultValues, onSubmit, type }: BlogFormProps) => {
         {errors.publishedAt && (
           <p className="text-red-500">{errors.publishedAt.message}</p>
         )}
+      </div>
+
+      <div>
+        <label>Image</label>
+        <input
+          type="file"
+          {...register('imageUrl')}
+          onChange={(e) => fileInputChange(e)}
+        />
       </div>
 
       <div>

@@ -63,7 +63,7 @@ export const BlogTablePage = () => {
           <Link to={"/admin/blogs/new"}>Créer un blog post</Link>
         </Button>
         <Table
-          title="Utilisateurs"
+          title="Blog posts"
           data={data.body.items}
           meta={data.body.meta}
           columns={columns}
