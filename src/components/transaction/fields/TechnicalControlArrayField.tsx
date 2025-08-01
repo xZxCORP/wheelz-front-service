@@ -21,6 +21,10 @@ const deleteFile = async (fileUrl: string) => {
   return deleteResponse
 }
 
+const fileName = (fileUrl: string) => {
+  return fileUrl.split('/')[fileUrl.split('/').length - 1]
+}
+
 type TechnicalControlField = Vehicle['technicalControls'][number] & { id: string };
 
 type Props = {
@@ -75,10 +79,6 @@ export const TechnicalControlArrayField = ({ control, onlyView }: Props) => {
     if (fileUrl) {
       await onDeleteFile(fileUrl);
     }
-  }
-
-  const fileName = (fileUrl: string) => {
-    return fileUrl.split('/')[fileUrl.split('/').length - 1]
   }
 
   return (
