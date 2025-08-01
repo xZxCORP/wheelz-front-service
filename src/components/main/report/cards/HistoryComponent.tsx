@@ -24,7 +24,7 @@ export const HistoryComponent = ({ vehicle }: { vehicle: Vehicle }) => {
 
   return (
     <div>
-      <div className="mt-6 w-full rounded-lg border bg-white p-4 shadow-md">
+      <div className="mt-6 w-full rounded-lg border border-primary-200 bg-background p-4 shadow-md transition-shadow hover:shadow-lg">
         <h2 className="text-lg ">Historique</h2>
         <p className="mb-4 text-sm text-gray-600">Quel est l&apos;historique pour ce véhicule ?</p>
 
@@ -40,7 +40,7 @@ export const HistoryComponent = ({ vehicle }: { vehicle: Vehicle }) => {
           </div>
         </div>
         <h3 className="mb-4 text-xl font-semibold text-gray-800">Historique</h3>
-        <div className="rounded-lg border bg-white p-6 shadow-md">
+        <div className="rounded-lg border border-primary-200 bg-background p-6 shadow-md transition-shadow hover:shadow-lg">
           <ul className="space-y-4">
             {/* Première ligne spéciale pour le dernier événement */}
             {[

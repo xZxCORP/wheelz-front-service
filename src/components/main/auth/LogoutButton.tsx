@@ -10,9 +10,9 @@ export const LogoutButton = ({ variant = 'icon' }: Props) => {
   const { clearAuth } = AuthStore.use();
   return (
     <Button
-      buttonStyle={{ size: 'lg', color: 'secondary', rounded: 'lg' }}
+      buttonStyle={{ size: 'lg', color: 'primary', rounded: 'lg' }}
+      buttonVariant="ghost"
       onClick={clearAuth}
-      className="bg-transparent  text-white transition-all hover:scale-105"
     >
       {variant === 'text' && 'Se déconnecter'}
       {variant === 'icon' && <FaRightFromBracket />}

@@ -84,9 +84,11 @@ export const DetailsCard = ({ vehicle }: { vehicle: any }) => {
     key: 'details',
     content: (
       <div>
-        <div className="mt-6 w-full rounded-lg border bg-white p-4 shadow-md">
-          <p className="text-lg ">Spécifications</p>
-          <p className="mb-4 text-sm text-gray-600">Caractéristiques et équipements du véhicule</p>
+        <div className="mt-6 w-full rounded-lg border border-primary-200 bg-background p-4 shadow-md transition-shadow hover:shadow-lg">
+          <p className="text-lg font-semibold text-primary-900">Spécifications</p>
+          <p className="mb-4 text-sm text-primary-600">
+            Caractéristiques et équipements du véhicule
+          </p>
 
           {/* Note */}
           <div className="mb-4 flex items-start rounded-lg bg-gray-100 p-3">
@@ -101,13 +103,13 @@ export const DetailsCard = ({ vehicle }: { vehicle: any }) => {
             </div>
           </div>
 
-          <div className="rounded-lg border bg-white p-6 shadow-md">
+          <div className="rounded-lg border border-primary-200 bg-background p-6 shadow-md transition-shadow hover:shadow-lg">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               <div className="flex items-center space-x-4">
-                <GiCargoCrane className="text-2xl text-blue-500" />
+                <GiCargoCrane className="text-2xl text-info-600" />
                 <div>
-                  <h4 className="text-sm font-medium text-gray-600">Marque</h4>
-                  <p className="text-base text-gray-800">{vehicle.features.brand}</p>
+                  <h4 className="text-sm font-medium text-primary-600">Marque</h4>
+                  <p className="text-base text-primary-900">{vehicle.features.brand}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
