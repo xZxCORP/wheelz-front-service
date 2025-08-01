@@ -2,11 +2,11 @@ export const LandingMessage = () => {
   return (
     <div
       className="
-        text-center 
         mb-6 
+        rounded-lg 
       bg-gray-100
         p-4 
-        rounded-lg 
+        text-center 
         shadow-md 
         transition 
         duration-300 

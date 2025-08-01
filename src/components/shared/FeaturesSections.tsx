@@ -21,22 +21,22 @@ const features = [
 
 export const FeaturesSection = () => {
   return (
-    <section className="w-full bg-white py-12 px-6 shadow-inner">
-      <h3 className="text-3xl font-bold text-center mb-10 text-primary-900">
+    <section className="w-full bg-white px-6 py-12 shadow-inner">
+      <h3 className="mb-10 text-center text-3xl font-bold text-primary-900">
         Pourquoi choisir WheelZ ?
       </h3>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
         {features.map((feature, index) => (
           <div
             key={index}
-            className="p-6 bg-white rounded-xl shadow-md border border-gray-100 transform transition duration-300 ease-in-out hover:shadow-xl hover:scale-105 hover:border-green-500 hover:bg-green-50"
+            className="rounded-xl border border-gray-100 bg-white p-6 shadow-md transition duration-300 ease-in-out hover:scale-105 hover:border-green-500 hover:bg-green-50 hover:shadow-xl"
           >
-            <div className="flex items-center gap-2 mb-3">
-              <FaCheckCircle className="text-green-600 text-lg" />
+            <div className="mb-3 flex items-center gap-2">
+              <FaCheckCircle className="text-lg text-green-600" />
               <h4 className="text-lg font-bold text-green-800">{feature.title}</h4>
             </div>
-            <p className="text-gray-700 text-sm">{feature.desc}</p>
+            <p className="text-sm text-gray-700">{feature.desc}</p>
           </div>
         ))}
       </div>
