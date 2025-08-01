@@ -5,8 +5,6 @@ import { AuthStore } from "../../../stores/useAuthStore";
 import type { BlogCreate } from "@zcorp/wheelz-contracts";
 import { BlogForm } from "../../../components/admin/BlogForm";
 
-
-
 const formSchema = z.object({
   title: z.string().min(1),
   keywords: z.string().min(1),
@@ -31,7 +29,6 @@ export const CreateBlogPage = () => {
   });
 
   const { user } = AuthStore.use();
-
 
   const onSubmit = (formData: FormSchema) => {
 
